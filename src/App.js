@@ -3,6 +3,7 @@ import * as Web3 from "web3";
 //import { abi, networks } from "./contracts/SMARTCONTRACT.json";
 import { Alert, AlertContainer } from "react-bs-notifier";
 //import { BigNumber } from "bignumber.js";
+import { Dashboard } from "./components/Dashboard";
 const promisify = require("tiny-promisify");
 
 class App extends Component {
@@ -92,7 +93,7 @@ class App extends Component {
 		const { accounts, showAlert, alertContent } = this.state;
 		return (
 			<div className="App">
-				<header className="App-header">Welcome, {accounts.length ? accounts[0] : ""}</header>
+				{accounts.length ? <Dashboard ethAddress={accounts[0]} /> : <h1>Please login to Metamask</h1>}
 				<AlertContainer position="top-right">
 					{showAlert ? (
 						<Alert type="danger" headline="Oops!">
