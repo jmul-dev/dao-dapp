@@ -5,6 +5,7 @@ import { DoughnutChart } from "./widgets/DoughnutChart/DoughnutChart";
 import { LineChart } from "./widgets/LineChart/LineChart";
 import { CountUpWidget } from "./widgets/CountUpWidget/CountUpWidget";
 import { ListTAO } from "./widgets/ListTAO/ListTAO";
+import { RadarChart } from "./widgets/RadarChart/RadarChart";
 import { Palette, Highlight } from "./color.json";
 
 class Dashboard extends React.Component {
@@ -66,6 +67,32 @@ class Dashboard extends React.Component {
 			}
 		];
 
+		const radarChartData = {
+			labels: ["Logos", "Pathos", "Ethos", "Anti Logos", "Anti Pathos", "Anti Ethos"],
+			datasets: [
+				{
+					label: "Earning",
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+					data: [45, 80, 70, 33, 80, 82]
+				},
+				{
+					label: "Spending",
+					fillColor: "rgba(151,187,205,0.2)",
+					strokeColor: "rgba(151,187,205,1)",
+					pointColor: "rgba(151,187,205,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data: [54, 98, 70, 34, 87, 50]
+				}
+			]
+		};
+
 		return (
 			<Wrapper>
 				<div className="row">
@@ -87,6 +114,9 @@ class Dashboard extends React.Component {
 							<div className="row">
 								<div className="col-xs-7">
 									<ListTAO data={taoData} />
+								</div>
+								<div className="col-xs-5">
+									<RadarChart title={"Radar Chart"} data={radarChartData} />
 								</div>
 							</div>
 						</WidgetWrapper>
