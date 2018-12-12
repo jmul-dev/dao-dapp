@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
 	text-align: center;
-	padding: 15px;
-	background-color: #000000;
 	height: 300px;
 	color: #ffffff;
 `;

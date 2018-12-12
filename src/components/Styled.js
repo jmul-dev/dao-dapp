@@ -5,3 +5,8 @@ export const Wrapper = styled.div`
 	height: 100%;
 	background-color: #191919;
 `;
+
+export const WidgetWrapper = styled.div`
+	padding: 15px;
+	background-color: #000000;
+`;

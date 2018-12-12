@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-	padding: 15px;
 	background-color: ${(props) => props.backgroundColor || "#000000"};
 	color: #ffffff;
-	height: 100px;
+	height: 80px;
 `;
 
 export const Content = styled.div`

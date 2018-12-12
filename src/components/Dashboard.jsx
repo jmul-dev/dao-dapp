@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Wrapper } from "./Styled";
+import { Wrapper, WidgetWrapper } from "./Styled";
 import { Welcome } from "./widgets/Welcome/Welcome";
 import { DoughnutChart } from "./widgets/DoughnutChart/DoughnutChart";
 import { LineChart } from "./widgets/LineChart/LineChart";
 import { CountUpWidget } from "./widgets/CountUpWidget/CountUpWidget";
+import { ListTAO } from "./widgets/ListTAO/ListTAO";
 import { Palette, Highlight } from "./color.json";
 
 class Dashboard extends React.Component {
@@ -42,21 +43,53 @@ class Dashboard extends React.Component {
 			]
 		};
 
+		const taoData = [
+			{
+				id: "0x30406ad3a412d0569f066ec8cf9a770a079f104d",
+				name: "Increase inflationRate value",
+				position: "Advocate"
+			},
+			{
+				id: "0x16b15bc990e28277a0f29c5a22bea0f48ee6811b",
+				name: "Switch Primordial Thought's Advocate",
+				position: "Listener"
+			},
+			{
+				id: "0x1234ebfaf0457e553e70de5aa0db18918cc8526d",
+				name: "Create inflationBonus setting",
+				position: "Speaker"
+			},
+			{
+				id: "0x2f5730bbc12c87bf1ba0815663a297a822a43bfb",
+				name: "Pause Network Exchange",
+				position: "Advocate"
+			}
+		];
+
 		return (
 			<Wrapper>
 				<div className="row">
 					<div className="col-xs-4">
-						<Welcome nameId={this.props.nameId} />
-						<DoughnutChart title={"Current Staked Position"} data={doughnutChartData} />
-						<CountUpWidget title="Logos" value={1000} />
-						<CountUpWidget title="Pathos" value={34900} />
-						<CountUpWidget title="Ethos" value={373} />
-						<CountUpWidget title="Anti Logos" value={190} />
-						<CountUpWidget title="Anti Pathos" value={746} />
-						<CountUpWidget title="Anti Ethos" value={85} />
+						<WidgetWrapper>
+							<Welcome nameId={this.props.nameId} />
+							<DoughnutChart title={"Current Staked Position"} data={doughnutChartData} />
+							<CountUpWidget title="Logos" value={1000} />
+							<CountUpWidget title="Pathos" value={34900} />
+							<CountUpWidget title="Ethos" value={373} />
+							<CountUpWidget title="Anti Logos" value={190} />
+							<CountUpWidget title="Anti Pathos" value={746} />
+							<CountUpWidget title="Anti Ethos" value={85} />
+						</WidgetWrapper>
 					</div>
 					<div className="col-xs-8">
-						<LineChart title={"Line Chart"} data={lineChartData} />
+						<WidgetWrapper>
+							<LineChart title={"Line Chart"} data={lineChartData} />
+							<div className="row">
+								<div className="col-xs-7">
+									<ListTAO data={taoData} />
+								</div>
+							</div>
+						</WidgetWrapper>
 					</div>
 				</div>
 			</Wrapper>
