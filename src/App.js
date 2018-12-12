@@ -93,7 +93,7 @@ class App extends Component {
 		const { accounts, showAlert, alertContent } = this.state;
 		return (
 			<div className="App">
-				{accounts.length ? <Dashboard ethAddress={accounts[0]} /> : <h1>Please login to Metamask</h1>}
+				{accounts.length ? <Dashboard nameId={accounts[0]} /> : <h1>Please login to Metamask</h1>}
 				<AlertContainer position="top-right">
 					{showAlert ? (
 						<Alert type="danger" headline="Oops!">

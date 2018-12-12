@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Wrapper } from "./Styled";
+import { Welcome } from "./widgets/Welcome/Welcome";
 import { DoughnutChart } from "./widgets/DoughnutChart/DoughnutChart";
 import { CountUpWidget } from "./widgets/CountUpWidget/CountUpWidget";
 import { Palette, Highlight } from "./color.json";
@@ -18,30 +19,16 @@ class Dashboard extends React.Component {
 			<Wrapper>
 				<div className="row">
 					<div className="col-xs-4">
-						<CountUpWidget title="Logos" value={1000} backgroundColor={Palette[0]} />
-					</div>
-					<div className="col-xs-4">
-						<CountUpWidget title="Pathos" value={34900} backgroundColor={Palette[1]} />
-					</div>
-					<div className="col-xs-4">
-						<CountUpWidget title="Ethos" value={373} backgroundColor={Palette[2]} />
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-xs-4">
-						<CountUpWidget title="Anti Logos" value={190} backgroundColor={Palette[3]} />
-					</div>
-					<div className="col-xs-4">
-						<CountUpWidget title="Anti Pathos" value={746} backgroundColor={Palette[4]} />
-					</div>
-					<div className="col-xs-4">
-						<CountUpWidget title="Anti Ethos" value={85} backgroundColor={Palette[5]} />
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-xs-4">
+						<Welcome nameId={this.props.nameId} />
 						<DoughnutChart title={"Current Staked Position"} data={doughnutChartData} />
+						<CountUpWidget title="Logos" value={1000} />
+						<CountUpWidget title="Pathos" value={34900} />
+						<CountUpWidget title="Ethos" value={373} />
+						<CountUpWidget title="Anti Logos" value={190} />
+						<CountUpWidget title="Anti Pathos" value={746} />
+						<CountUpWidget title="Anti Ethos" value={85} />
 					</div>
+					<div className="col-xs-8" />
 				</div>
 			</Wrapper>
 		);

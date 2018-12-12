@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-	text-align: center;
 	padding: 15px;
-	background-color: #000000;
-	height: 300px;
+	background-color: ${(props) => props.backgroundColor || "#000000"};
 	color: #ffffff;
+	height: 100px;
 `;
 
 export const Content = styled.div`
@@ -16,9 +15,11 @@ export const Content = styled.div`
 	transform: translateY(-50%);
 `;
 
-export const Title = styled.div`
+export const Header = styled.div`
 	font-size: 1.2em;
 	font-weight: bold;
-	margin-bottom: 20px;
-	text-align: left;
+`;
+
+export const SmallHeader = styled.div`
+	font-size: 0.8em;
 `;
