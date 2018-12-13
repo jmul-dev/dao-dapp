@@ -10,6 +10,10 @@ export const Id = styled.div`
 	margin-bottom: 40px;
 `;
 
+export const Loading = styled.div`
+	text-align: left;
+`;
+
 export const IframeContainer = styled.div`
 	width: 800px;
 	margin: 0 auto;

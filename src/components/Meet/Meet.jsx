@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Wrapper, WidgetWrapper } from "../Styled";
-import { Name, Id, IframeContainer } from "./Styled";
+import { Name, Id, Loading, IframeContainer } from "./Styled";
 import { TAOData } from "../TAODetailsData.json";
 import { Link } from "react-router";
 import Iframe from "react-iframe";
@@ -11,7 +11,13 @@ class Meet extends React.Component {
 		this.state = {
 			loading: true
 		};
+		this.iframeLoaded = this.iframeLoaded.bind(this);
 	}
+
+	iframeLoaded() {
+		this.setState({ loading: false });
+	}
+
 	render() {
 		if (!this.props || !this.props.params) {
 			return null;
@@ -23,6 +29,7 @@ class Meet extends React.Component {
 					<Link to={"/tao/" + id}>Back to TAO Details</Link>
 					<Name>TAO - {TAOData[id]}</Name>
 					<Id>{id}</Id>
+					{this.state.loading ? <Loading>Loading ...</Loading> : null}
 					<IframeContainer>
 						<Iframe
 							url={"https://meet.paramation.com/" + id}
@@ -30,6 +37,7 @@ class Meet extends React.Component {
 							width="800"
 							allowFullScreen
 							allow="microphone; camera"
+							onLoad={this.iframeLoaded}
 						/>
 					</IframeContainer>
 				</WidgetWrapper>
