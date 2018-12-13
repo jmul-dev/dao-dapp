@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-	padding: 20px;
-	color: #ffffff;
+export const Name = styled.div`
+	font-size: 2em;
+	font-weight: bold;
+`;
+
+export const Id = styled.div`
+	font-size: 1em;
 `;
 
 export const WidgetWrapper = styled.div`

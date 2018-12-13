@@ -228,6 +228,7 @@
 				"children": [
 					{
 						"name": "Thought Currency",
+						"id": "0x85babA815548a3614a34f76aCcEb9Cc0AAc5F055",
 						"children": [
 							{ "name": "Logos", "id": "0x791da40D7F24C1c69C079392D80585Cb2b0eD340", "children": [] },
 							{ "name": "Ethos", "id": "0x6cE09b50858EaE728FBE1068705484Df168050Fb", "children": [] },
