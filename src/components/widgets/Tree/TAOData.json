@@ -1,174 +1,292 @@
 {
 	"TAOData": {
 		"name": "Primordial Thought of AO",
+		"id": "0xA78b89f035c276B47b27Ba70953323243494068F",
 		"children": [
 			{
 				"name": "Information",
+				"id": "0x062A28f52aF0071c1cC90664ecD69F35082fe732",
 				"children": [
 					{
 						"name": "Information Currency",
-						"children": [{ "name": "Inflation", "children": [] }, { "name": "Transaction", "children": [] }]
+						"id": "0x6d751Cc5E82c2c669cbfb50eda8d8a8A0Fa0af52",
+						"children": [
+							{ "name": "Inflation", "id": "0xA91f8Fb0cd01f7Af83b742748f799290d92c4d98", "children": [] },
+							{ "name": "Transaction", "id": "0xDA6B05A0D5ee31Dd9145CBd2FffB2612F26c39cB", "children": [] }
+						]
 					},
 					{
 						"name": "Creation",
-						"children": [{ "name": "TAO Information", "children": [] }, { "name": "Network Information", "children": [] }]
+						"id": "0xbC315fE320aCb09E6Bf29B0Cf89Be349C7810Af7",
+						"children": [
+							{ "name": "TAO Information", "id": "0xEc93Ff193Fd8e1DAC4A88722e62Ed56AC96888Ca", "children": [] },
+							{ "name": "Network Information", "id": "0x8759D2323f765f2A1690efd94EF279aB09047D87", "children": [] }
+						]
 					},
 					{
 						"name": "Dissemination",
+						"id": "0xee9DD5A10422Fb097a5628E66B919556150419Fe",
 						"children": [
-							{ "name": "TAO Information Dissemination", "children": [] },
-							{ "name": "Network Information Dissemination", "children": [] }
+							{ "name": "TAO Information Dissemination", "id": "0xdCD50345920db7AE39F9274aDcB13cc74173b14A", "children": [] },
+							{
+								"name": "Network Information Dissemination",
+								"id": "0x8291C827735973E170F056A5B48b7eC8f3bA337a",
+								"children": []
+							}
 						]
 					},
-					{ "name": "Mediation", "children": [{ "name": "Arbitration", "children": [] }] }
+					{
+						"name": "Mediation",
+						"id": "0x59DEfc2B857dCC84CC225cb9BBBA8740f8CC1b69",
+						"children": [{ "name": "Arbitration", "id": "0xc80E6b67A3088297c3088706Cdea00644708Aa10", "children": [] }]
+					}
 				]
 			},
 			{
 				"name": "Energy",
+				"id": "0x2945c2ad6a0c3246B12e4B9E48C2d2618Eb2817B",
 				"children": [
 					{
 						"name": "Resource",
-						"children": [{ "name": "Resource Type", "children": [{ "name": "Resource Type Value", "children": [] }] }]
+						"id": "0x4bf1fE907502cb3E3B49d55408edbcFf6dA87FBe",
+						"children": [
+							{
+								"name": "Resource Type",
+								"id": "0x5a5AB9f4d9f1672554c869b71529598a190B9DeD",
+								"children": [
+									{ "name": "Resource Type Value", "id": "0xC6Bb863c3b1f20CaC8F48a758ED18F3a83a084c4", "children": [] }
+								]
+							}
+						]
 					}
 				]
 			},
 			{
 				"name": "Time",
+				"id": "0x5c52aD575406CC02aaFb979F594A2faA47b130c7",
 				"children": [
 					{
 						"name": "Types of Time",
+						"id": "0xfcc7E93D715C07fD34439Ff50138EbB64eC3aD01",
 						"children": [
-							{ "name": "Human Time", "children": [] },
+							{ "name": "Human Time", "id": "0x1E01aa337624BC589FC67e84253f9D1e8Ae67fb4", "children": [] },
 							{
 								"name": "AO Time",
+								"id": "0xBFA9DF215e5b063dcF2EBa1bd4E412a8c4f4C605",
 								"children": [
 									{
 										"name": "AO Age",
-										"children": [{ "name": "AO Era", "children": [{ "name": "AO Epoch", "children": [] }] }]
+										"id": "0xfdc6d717561155F47a29373BA4c5eC6e36b6EDb1",
+										"children": [
+											{
+												"name": "AO Era",
+												"id": "0x5A7702EbC905cEc5d9a4CaCD13a6b794d03cAff9",
+												"children": [
+													{
+														"name": "AO Epoch",
+														"id": "0x3CE212A2bB1658064dA5a45A0b960f44cF00b7a6",
+														"children": []
+													}
+												]
+											}
+										]
 									}
 								]
 							},
-							{ "name": "Canonical Time", "children": [] },
-							{ "name": "Machine Time", "children": [] }
+							{ "name": "Canonical Time", "id": "0xB9f3000F359eEfF1577Df309c30b1f8983ceDF87", "children": [] },
+							{ "name": "Machine Time", "id": "0xccEdeb06fa02B5F58b73F3b289fF71AdA5609F9E", "children": [] }
 						]
 					},
 					{
 						"name": "Timeline",
+						"id": "0x9AfFe74b8146e2E8E4a4338DbAA6811cb7dc2dAc",
 						"children": [
-							{ "name": "Human Time", "children": [] },
-							{ "name": "AO Time", "children": [] },
-							{ "name": "Canonical Time", "children": [] },
-							{ "name": "Machine Time", "children": [] }
+							{ "name": "Human Time", "id": "0x69f0D73575d3F87fA0eA8F53FC17D0807654a646", "children": [] },
+							{ "name": "AO Time", "id": "0xa72F211d54254Fa4d7842F05DdA77385F0A7Cb7f", "children": [] },
+							{ "name": "Canonical Time", "id": "0x80D635A08c38eb5f9937EE974EdAE75177356FD6", "children": [] },
+							{ "name": "Machine Time", "id": "0x27a13a47398ab1A169df0be58Ea39355aF861Fd4", "children": [] }
 						]
 					},
-					{ "name": "Time Currency", "children": [] }
+					{ "name": "Time Currency", "id": "0x29185f5fe10e57dD5ef9065De015f1CF87E4F1c7", "children": [] }
 				]
 			},
 			{
 				"name": "TAO",
+				"id": "0x539082d1Ce3Fc438a520874916e854a7430799aa",
 				"children": [
 					{
 						"name": "Constitution",
+						"id": "0x833fAaEEfbb05B562e22a6D458D465415A0cB70A",
 						"children": [
-							{ "name": "Rights", "children": [] },
-							{ "name": "Liberties", "children": [] },
-							{ "name": "Objectives", "children": [] }
+							{ "name": "Rights", "id": "0x658c49D39b3be62F7b41B6850b14fe2086DBF51c", "children": [] },
+							{ "name": "Liberties", "id": "0xeea2e5A1dE1D047ead2b291dc6EfC2BFBAe81844", "children": [] },
+							{ "name": "Objectives", "id": "0xDFbb315Ba518356FFDE74fB4e7E6a1E6D624B7eC", "children": [] }
 						]
 					},
 					{
 						"name": "Work",
+						"id": "0xEb2Bc5BB30Fb30bB93BDE3146b9879AE24f66A70",
 						"children": [
 							{
 								"name": "Projects",
+								"id": "0x2157aEcd023C2c15A4071d0a953b4cE0Ad4C7425",
 								"children": [
 									{
 										"name": "Application Projects",
+										"id": "0xbef851695Cd50aC0fa9211945950E2c096ec0C6E",
 										"children": [
-											{ "name": "Ingress", "children": [] },
-											{ "name": "Aaron's Rod", "children": [] },
-											{ "name": "PlacePass", "children": [] }
+											{ "name": "Ingress", "id": "0xCAEdF2A2583c8b1763b509CD2d3Cf219b69CcB90", "children": [] },
+											{ "name": "Aaron's Rod", "id": "0xa018Cf49fCed9c9BAfC150852B937697FA36840f", "children": [] },
+											{ "name": "PlacePass", "id": "0x4DbabBFc0DFad8E6c01f6D17Ed5F22ad281109b3", "children": [] }
 										]
 									},
 									{
 										"name": "Module Projects",
+										"id": "0xAE8F4f8D04850c785669fC6ffF64463dE4b8bdBf",
 										"children": [
-											{ "name": "Server-less WebRTC Handshakes", "children": [] },
+											{
+												"name": "Server-less WebRTC Handshakes",
+												"id": "0x3476E32d86e25fC0608b9a08Cc7Eb16B6Ef0518D",
+												"children": []
+											},
 											{
 												"name": "AO Integrated Development Environment",
-												"children": [{ "name": "AO Version Control", "children": [] }]
+												"id": "0xB69e60712C4B1362569e45697e86f374655c1344",
+												"children": [
+													{
+														"name": "AO Version Control",
+														"id": "0x8443788D21a83F7417Dfb5552A202Dc7710f9F64",
+														"children": []
+													}
+												]
 											}
 										]
 									},
 									{
 										"name": "Human Projects",
+										"id": "0xD0C4C5D9Fbb3Bb6d986698d2CF08475579C20C32",
 										"children": [
-											{ "name": "Cooperative Insurance DAO", "children": [] },
-											{ "name": "AO Citizenship", "children": [{ "name": "AO Social Safety Net", "children": [] }] }
+											{
+												"name": "Cooperative Insurance DAO",
+												"id": "0xa6c039f5D23688Fb2e6DB8D64632b170055520E2",
+												"children": []
+											},
+											{
+												"name": "AO Citizenship",
+												"id": "0xd591EAE6390F9542f47d1AfE57d91454B513747d",
+												"children": [
+													{
+														"name": "AO Social Safety Net",
+														"id": "0x481e6Ef2A9ae610fecc0150C9e8B43328767A111",
+														"children": []
+													}
+												]
+											}
 										]
 									},
 									{
 										"name": "Humanity Projects",
-										"children": [{ "name": "Environmental Data Collection Economy", "children": [] }]
+										"id": "0x7c9e26303271fE5d7B6d3Bca11c245E1676711ee",
+										"children": [
+											{
+												"name": "Environmental Data Collection Economy",
+												"id": "0x7CB324BfEe832B86A642E66343dF9C2182Ff17C6",
+												"children": []
+											}
+										]
 									},
-									{ "name": "TAO Projects", "children": [{ "name": "Research Commission Mechanism", "children": [] }] }
+									{
+										"name": "TAO Projects",
+										"id": "0xD0c9a50E30a6f18bdA51FeA3C45835dF37c8a563",
+										"children": [
+											{
+												"name": "Research Commission Mechanism",
+												"id": "0xDFb0e46bE3C424B70D3e0E76D7641F644D2eF087",
+												"children": []
+											}
+										]
+									}
 								]
 							},
 							{
 								"name": "Work Resources",
-								"children": [{ "name": "Work Names", "children": [] }, { "name": "Work Currencies", "children": [] }]
+								"id": "0x548436Ec8bFF6795740208B2CBBBea3fBA1eB764",
+								"children": [
+									{ "name": "Work Names", "id": "0x18A8e840918b2BAB93079CA5705e0222394B9AD2", "children": [] },
+									{ "name": "Work Currencies", "id": "0xafC3ad764826DA0DBcB4fE54bca4Fd15f28F5934", "children": [] }
+								]
 							},
-							{ "name": "Discuss", "children": [] }
+							{ "name": "Discuss", "id": "0xB22d0CDe3FA42Ee56ea851341404fc64405DDffd", "children": [] }
 						]
 					},
-					{ "name": "Decide", "children": [] }
+					{ "name": "Decide", "id": "0x85Ae1daa226B97c630b1A4EA4Cc4C1E77786Aa68", "children": [] }
 				]
 			},
 			{
 				"name": "Thought",
+				"id": "0xBFa2aA0f6529639052708C9d8463bBf26c52c5dB",
 				"children": [
 					{
 						"name": "Thought Currency",
 						"children": [
-							{ "name": "Logos", "children": [] },
-							{ "name": "Ethos", "children": [] },
-							{ "name": "Pathos", "children": [] }
+							{ "name": "Logos", "id": "0x791da40D7F24C1c69C079392D80585Cb2b0eD340", "children": [] },
+							{ "name": "Ethos", "id": "0x6cE09b50858EaE728FBE1068705484Df168050Fb", "children": [] },
+							{ "name": "Pathos", "id": "0x67De4269DE1636e2372CAFe3d8983A5d0aAf5254", "children": [] }
 						]
 					}
 				]
 			},
 			{
 				"name": "Name",
+				"id": "0xf48D00713B79830e9CD632fBa8f15Ea0Fbe61284",
 				"children": [
 					{
 						"name": "Word",
+						"id": "0xb69763daCC0CFD69C728Bfc88a8B469b3d529564",
 						"children": [
-							{ "name": "Meaning", "children": [{ "name": "Function", "children": [{ "name": "Form", "children": [] }] }] },
+							{
+								"name": "Meaning",
+								"id": "0xA1443BBD3222cdF623332823e7b5D44A250DD594",
+								"children": [
+									{
+										"name": "Function",
+										"id": "0x13d438ABE38eA6C9E5dbe757f561C7F71057D620",
+										"children": [{ "name": "Form", "id": "0xc8583cE9f4fE7333d8b0838075A888c6Bd67926B", "children": [] }]
+									}
+								]
+							},
 							{
 								"name": "Language",
-								"children": [{ "name": "Syntax", "children": [] }, { "name": "Classification", "children": [] }]
+								"id": "0x5E735fF34fc65eC77cA1A7d3f52AEc7c988786c3",
+								"children": [
+									{ "name": "Syntax", "id": "0x448fC4E3dd1dF781032E6847E576Ced1517b49FE", "children": [] },
+									{ "name": "Classification", "id": "0xD49dEcC273BA685a316fBe819a28B1D969FF0f14", "children": [] }
+								]
 							},
 							{
 								"name": "Word Primitives",
+								"id": "0x3FDFBf88B5A25Db82055994bF323472003345718",
 								"children": [
-									{ "name": "Is", "children": [] },
-									{ "name": "Is Not", "children": [] },
-									{ "name": "If", "children": [] },
-									{ "name": "Then", "children": [] },
-									{ "name": "Cause", "children": [] },
-									{ "name": "Will", "children": [] },
-									{ "name": "This", "children": [] },
-									{ "name": "That", "children": [] },
+									{ "name": "Is", "id": "0x9e2C0911890716275deFFe4ABA5d1395e65e5e9d", "children": [] },
+									{ "name": "Is Not", "id": "0xfF9393FaB15Babb21027eadce3534D43eE05F5c2", "children": [] },
+									{ "name": "If", "id": "0xF7aA7B176d1B1EDe07be1be5B2D2e6f9ad6b1249", "children": [] },
+									{ "name": "Then", "id": "0xfd7Dd75042Cd05Add626B2b107f08AA899F44F88", "children": [] },
+									{ "name": "Cause", "id": "0x985e5036cC5B2020542C5325DB525f81bed7C3b4", "children": [] },
+									{ "name": "Will", "id": "0xeAdC0dA039030bFCF37EAe0B99b776B0b3FfE974", "children": [] },
+									{ "name": "This", "id": "0x42445BF338c26BE1D3698d896654aC83ec048193", "children": [] },
+									{ "name": "That", "id": "0x5FC1A4eb09746362A3e534bd71A4D29393684815", "children": [] },
 									{
 										"name": "Eye",
+										"id": "0xA0a785d2086C14175DB0DCf8D538EcEc051B8cDD",
 										"children": [
-											{ "name": "Me", "children": [] },
-											{ "name": "I", "children": [] },
-											{ "name": "Us", "children": [] },
-											{ "name": "Saya", "children": [] },
-											{ "name": "Je", "children": [] },
-											{ "name": "Ana", "children": [] },
-											{ "name": "Mi", "children": [] },
-											{ "name": "Ya", "children": [] }
+											{ "name": "Me", "id": "0xEE0e7c9E4840df1Ef6ab51B40d355A35a34ABCc8", "children": [] },
+											{ "name": "I", "id": "0x304fa2f453334D373954Dc078f4a0778d2Cba5D9", "children": [] },
+											{ "name": "Us", "id": "0x16e7fBcB6373B6b579d1B06EF2120B9D60A2C95f", "children": [] },
+											{ "name": "Saya", "id": "0xA03DeA578431497Ba7D809ed74B0b00C2d96bE57", "children": [] },
+											{ "name": "Je", "id": "0xC9b30F5c696E0f4281e2AA19A9bcA97F0a8f8101", "children": [] },
+											{ "name": "Ana", "id": "0xA590f2Ed045A369fA3530859378a52741b97Ab66", "children": [] },
+											{ "name": "Mi", "id": "0x399822114e019ab4A78621D0Ca28520F5fC9E385", "children": [] },
+											{ "name": "Ya", "id": "0x72a212C8956c24F13ef5b291eeCD5d616368d3a3", "children": [] }
 										]
 									}
 								]
@@ -177,24 +295,30 @@
 					},
 					{
 						"name": "Identity",
+						"id": "0x1403a44527fd497571C898E0fE65FDf3808766a3",
 						"children": [
-							{ "name": "Human Name", "children": [] },
-							{ "name": "TAO Name", "children": [] },
-							{ "name": "Time Name", "children": [] },
-							{ "name": "Energy Name", "children": [] },
-							{ "name": "Information Name", "children": [] },
-							{ "name": "Machine Name", "children": [] }
+							{ "name": "Human Name", "id": "0x0a43d19BD7824aee77B7E4Bacfd4D9d9c7660E34", "children": [] },
+							{ "name": "TAO Name", "id": "0xc0Fd5BA8d95EFAc62DC5D56B3D660F489B2941a5", "children": [] },
+							{ "name": "Time Name", "id": "0xF9bdfC8c81a678C3b12d1f9e270Ba5e074A2E3b6", "children": [] },
+							{ "name": "Energy Name", "id": "0x3722b82230B8Ea8cd4BEd0815bD56bA8d114807A", "children": [] },
+							{ "name": "Information Name", "id": "0xE634726EF3cCA871E39bD0c71fc031A82ae18780", "children": [] },
+							{ "name": "Machine Name", "id": "0x5F5512cD6469E68151Ecba5202E258DE4C91348D", "children": [] }
 						]
 					},
 					{
 						"name": "Truth",
+						"id": "0xa85C1aB3751b597406c4351291363E88A4932A19",
 						"children": [
-							{ "name": "Authenticity", "children": [] },
-							{ "name": "Validation", "children": [] },
-							{ "name": "Canonical Truth", "children": [] }
+							{ "name": "Authenticity", "id": "0xA50dE458C103eEdf14c7D7e97efba9D6cad68aB3", "children": [] },
+							{ "name": "Validation", "id": "0x8276030325BC3443E56A5cD3b025Ce7700BF66DA", "children": [] },
+							{ "name": "Canonical Truth", "id": "0xF927215A3E85b613E3A7FA3EA51724b08Ea12553", "children": [] }
 						]
 					},
-					{ "name": "Free", "children": [{ "name": "Freedom", "children": [] }] }
+					{
+						"name": "Free",
+						"id": "0xe2d8E0DB39C615CD4593470DA121100910dA330D",
+						"children": [{ "name": "Freedom", "id": "0x6f061591E2c0051D2ad597FFd6eEbbB28036ef1D", "children": [] }]
+					}
 				]
 			}
 		]

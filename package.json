@@ -11,6 +11,7 @@
 		"react-chartjs": "^1.2.0",
 		"react-countup": "^4.0.0",
 		"react-dom": "^16.6.3",
+		"react-router": "^3.2.1",
 		"react-scripts": "2.1.1",
 		"styled-components": "^4.1.1",
 		"tiny-promisify": "^1.0.0",

@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import { TAOData } from "./TAOData.json";
 import { Neon, NeonStroke } from "../../color.json";
 import { Button } from "./Styled";
+import { browserHistory } from "react-router";
 
 class Tree extends React.Component {
 	constructor(props) {
@@ -108,7 +109,8 @@ class Tree extends React.Component {
 			.attr("r", 8.5)
 			.attr("fill", "#191919")
 			.style("stroke", Neon[2])
-			.style("stroke-width", "2px");
+			.style("stroke-width", "2px")
+			.style("cursor", "pointer");
 
 		allNodes
 			.append("text")
@@ -120,10 +122,15 @@ class Tree extends React.Component {
 				return d.children ? "end" : "start";
 			})
 			.style("font-size", "0.8em")
+			.style("cursor", "pointer")
 			.attr("fill", "#FFFFFF")
 			.text((d) => {
 				return d.name;
 			});
+
+		allNodes.on("click", (d, i) => {
+			browserHistory.push("/tao/" + d.id);
+		});
 	}
 
 	drawClusterTree() {
