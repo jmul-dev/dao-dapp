@@ -7,6 +7,7 @@ export const Name = styled.div`
 
 export const Id = styled.div`
 	font-size: 1em;
+	margin-bottom: 40px;
 `;
 
 export const WidgetWrapper = styled.div`
