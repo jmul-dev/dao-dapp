@@ -6,8 +6,7 @@ import { Link } from "react-router";
 import Editor from "react-medium-editor";
 import * as loremIpsum from "lorem-ipsum";
 import "./MediumEditorDefaultTheme.css";
-import videoCallLogo from "./videoCall.png";
-import openIdeLogo from "./openIde.png";
+import { videoCallLogo, openIdeLogo } from "./Logo.json";
 
 class TAODetails extends React.Component {
 	constructor(props) {
