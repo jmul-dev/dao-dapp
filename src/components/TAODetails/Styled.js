@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router";
 
 export const Name = styled.div`
 	font-size: 2em;
@@ -10,8 +11,28 @@ export const Id = styled.div`
 	margin-bottom: 40px;
 `;
 
-export const WidgetWrapper = styled.div`
-	padding: 15px;
-	background-color: #000000;
-	margin-bottom: 20px;
+export const Right = styled.div`
+	text-align: right;
+`;
+
+export const InlineDiv = styled.div`
+	display: inline-block;
+	text-align: center;
+	margin-left: 10px;
+`;
+
+export const Img = styled.img`
+	max-height: 20px;
+	max-width: 100px;
+	margin-bottom: 5px;
+`;
+
+export const StyledLink = styled(Link)`
+	color: #ffffff;
+	font-size: 0.9em;
+
+	:hover {
+		text-decoration: none;
+		color: #555555;
+	}
 `;
