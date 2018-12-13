@@ -2,6 +2,7 @@ import * as React from "react";
 import * as d3 from "d3";
 import { TAOData } from "./TAOData.json";
 import { Neon, NeonStroke } from "../../color.json";
+import { Button } from "./Styled";
 
 class Tree extends React.Component {
 	constructor(props) {
@@ -33,7 +34,7 @@ class Tree extends React.Component {
 
 	createTree() {
 		const { height, width } = this.props;
-		const { diameter, duration, widthPadding } = this.state;
+		const { diameter, widthPadding } = this.state;
 		const tree = d3.layout.tree().size([height, width - widthPadding]);
 		this.setState({ tree });
 
@@ -138,7 +139,7 @@ class Tree extends React.Component {
 			.data(links)
 			.transition()
 			.duration(duration)
-			.style("stroke", NeonStroke[3])
+			.style("stroke", NeonStroke[2])
 			.attr("d", diagonal); //get the new cluster path
 
 		allNodes
@@ -153,7 +154,7 @@ class Tree extends React.Component {
 			.select("circle")
 			.transition()
 			.duration(duration)
-			.style("stroke", Neon[3]);
+			.style("stroke", Neon[2]);
 	}
 
 	drawRadialTree() {
@@ -258,22 +259,20 @@ class Tree extends React.Component {
 		return (
 			<div>
 				<form>
-					<label>
-						<input type="radio" name="mode" value="radialtree" onChange={this.drawRadialTree} />
-						TAO
-					</label>
-					<label>
-						<input type="radio" name="mode" value="radialcluster" onChange={this.drawRadialCluster} />
-						Thought
-					</label>
-					<label>
-						<input type="radio" name="mode" value="tree" onChange={this.drawTree} />
-						Order
-					</label>
-					<label>
-						<input type="radio" name="mode" value="cluster" defaultChecked onChange={this.drawClusterTree} />
-						ForeThought
-					</label>
+					<div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
+						<Button type="button" className="btn btn-default" onClick={this.drawRadialTree}>
+							TAO
+						</Button>
+						<Button type="button" className="btn btn-default" onClick={this.drawRadialCluster}>
+							Thought
+						</Button>
+						<Button type="button" className="btn btn-default" onClick={this.drawTree}>
+							Order
+						</Button>
+						<Button type="button" className="btn btn-default" onClick={this.drawClusterTree}>
+							ForeThought
+						</Button>
+					</div>
 				</form>
 				<svg ref={(node) => (this.node = node)} width={width} height={height} />
 			</div>
