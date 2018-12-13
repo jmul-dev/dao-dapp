@@ -1,0 +1,17 @@
+label {
+	font: 12px sans-serif;
+	color: #ffffff;
+}
+.node circle {
+	fill: #fff;
+	stroke: steelblue;
+	stroke-width: 2px;
+}
+.node {
+	font: 10px sans-serif;
+}
+.link {
+	fill: none;
+	stroke: tan;
+	stroke-width: 2px;
+}

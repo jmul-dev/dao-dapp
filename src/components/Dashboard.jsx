@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Wrapper, WidgetWrapper } from "./Styled";
+import { Tree } from "./widgets/Tree/Tree";
 import { Welcome } from "./widgets/Welcome/Welcome";
 import { DoughnutChart } from "./widgets/DoughnutChart/DoughnutChart";
 import { LineChart } from "./widgets/LineChart/LineChart";
@@ -95,6 +96,9 @@ class Dashboard extends React.Component {
 
 		return (
 			<Wrapper>
+				<WidgetWrapper>
+					<Tree width={1200} height={800} />
+				</WidgetWrapper>
 				<div className="row">
 					<div className="col-xs-4">
 						<WidgetWrapper>

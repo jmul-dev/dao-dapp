@@ -1,0 +1,202 @@
+{
+	"TAOData": {
+		"name": "Primordial Thought of AO",
+		"children": [
+			{
+				"name": "Information",
+				"children": [
+					{
+						"name": "Information Currency",
+						"children": [{ "name": "Inflation", "children": [] }, { "name": "Transaction", "children": [] }]
+					},
+					{
+						"name": "Creation",
+						"children": [{ "name": "TAO Information", "children": [] }, { "name": "Network Information", "children": [] }]
+					},
+					{
+						"name": "Dissemination",
+						"children": [
+							{ "name": "TAO Information Dissemination", "children": [] },
+							{ "name": "Network Information Dissemination", "children": [] }
+						]
+					},
+					{ "name": "Mediation", "children": [{ "name": "Arbitration", "children": [] }] }
+				]
+			},
+			{
+				"name": "Energy",
+				"children": [
+					{
+						"name": "Resource",
+						"children": [{ "name": "Resource Type", "children": [{ "name": "Resource Type Value", "children": [] }] }]
+					}
+				]
+			},
+			{
+				"name": "Time",
+				"children": [
+					{
+						"name": "Types of Time",
+						"children": [
+							{ "name": "Human Time", "children": [] },
+							{
+								"name": "AO Time",
+								"children": [
+									{
+										"name": "AO Age",
+										"children": [{ "name": "AO Era", "children": [{ "name": "AO Epoch", "children": [] }] }]
+									}
+								]
+							},
+							{ "name": "Canonical Time", "children": [] },
+							{ "name": "Machine Time", "children": [] }
+						]
+					},
+					{
+						"name": "Timeline",
+						"children": [
+							{ "name": "Human Time", "children": [] },
+							{ "name": "AO Time", "children": [] },
+							{ "name": "Canonical Time", "children": [] },
+							{ "name": "Machine Time", "children": [] }
+						]
+					},
+					{ "name": "Time Currency", "children": [] }
+				]
+			},
+			{
+				"name": "TAO",
+				"children": [
+					{
+						"name": "Constitution",
+						"children": [
+							{ "name": "Rights", "children": [] },
+							{ "name": "Liberties", "children": [] },
+							{ "name": "Objectives", "children": [] }
+						]
+					},
+					{
+						"name": "Work",
+						"children": [
+							{
+								"name": "Projects",
+								"children": [
+									{
+										"name": "Application Projects",
+										"children": [
+											{ "name": "Ingress", "children": [] },
+											{ "name": "Aaron's Rod", "children": [] },
+											{ "name": "PlacePass", "children": [] }
+										]
+									},
+									{
+										"name": "Module Projects",
+										"children": [
+											{ "name": "Server-less WebRTC Handshakes", "children": [] },
+											{
+												"name": "AO Integrated Development Environment",
+												"children": [{ "name": "AO Version Control", "children": [] }]
+											}
+										]
+									},
+									{
+										"name": "Human Projects",
+										"children": [
+											{ "name": "Cooperative Insurance DAO", "children": [] },
+											{ "name": "AO Citizenship", "children": [{ "name": "AO Social Safety Net", "children": [] }] }
+										]
+									},
+									{
+										"name": "Humanity Projects",
+										"children": [{ "name": "Environmental Data Collection Economy", "children": [] }]
+									},
+									{ "name": "TAO Projects", "children": [{ "name": "Research Commission Mechanism", "children": [] }] }
+								]
+							},
+							{
+								"name": "Work Resources",
+								"children": [{ "name": "Work Names", "children": [] }, { "name": "Work Currencies", "children": [] }]
+							},
+							{ "name": "Discuss", "children": [] }
+						]
+					},
+					{ "name": "Decide", "children": [] }
+				]
+			},
+			{
+				"name": "Thought",
+				"children": [
+					{
+						"name": "Thought Currency",
+						"children": [
+							{ "name": "Logos", "children": [] },
+							{ "name": "Ethos", "children": [] },
+							{ "name": "Pathos", "children": [] }
+						]
+					}
+				]
+			},
+			{
+				"name": "Name",
+				"children": [
+					{
+						"name": "Word",
+						"children": [
+							{ "name": "Meaning", "children": [{ "name": "Function", "children": [{ "name": "Form", "children": [] }] }] },
+							{
+								"name": "Language",
+								"children": [{ "name": "Syntax", "children": [] }, { "name": "Classification", "children": [] }]
+							},
+							{
+								"name": "Word Primitives",
+								"children": [
+									{ "name": "Is", "children": [] },
+									{ "name": "Is Not", "children": [] },
+									{ "name": "If", "children": [] },
+									{ "name": "Then", "children": [] },
+									{ "name": "Cause", "children": [] },
+									{ "name": "Will", "children": [] },
+									{ "name": "This", "children": [] },
+									{ "name": "That", "children": [] },
+									{
+										"name": "Eye",
+										"children": [
+											{ "name": "Me", "children": [] },
+											{ "name": "I", "children": [] },
+											{ "name": "Us", "children": [] },
+											{ "name": "Saya", "children": [] },
+											{ "name": "Je", "children": [] },
+											{ "name": "Ana", "children": [] },
+											{ "name": "Mi", "children": [] },
+											{ "name": "Ya", "children": [] }
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"name": "Identity",
+						"children": [
+							{ "name": "Human Name", "children": [] },
+							{ "name": "TAO Name", "children": [] },
+							{ "name": "Time Name", "children": [] },
+							{ "name": "Energy Name", "children": [] },
+							{ "name": "Information Name", "children": [] },
+							{ "name": "Machine Name", "children": [] }
+						]
+					},
+					{
+						"name": "Truth",
+						"children": [
+							{ "name": "Authenticity", "children": [] },
+							{ "name": "Validation", "children": [] },
+							{ "name": "Canonical Truth", "children": [] }
+						]
+					},
+					{ "name": "Free", "children": [{ "name": "Freedom", "children": [] }] }
+				]
+			}
+		]
+	}
+}
