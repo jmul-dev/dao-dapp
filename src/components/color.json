@@ -1,4 +1,6 @@
 {
 	"Palette": ["#E94B3C", "#00A591", "#6B5B95", "#BC70A4", "#343148", "#EFC050", "#FF6F61", "#4F84C4"],
-	"Highlight": ["#E8776D", "#65A39A", "#858093", "#BAA0B1", "#AEAFB7", "#EDDBB1", "#FFBBB5", "#7A9BC1"]
+	"Highlight": ["#E8776D", "#65A39A", "#858093", "#BAA0B1", "#AEAFB7", "#EDDBB1", "#FFBBB5", "#7A9BC1"],
+	"Neon": ["#FF3300", "#00FF66", "#099FFF", "#FF0099"],
+	"NeonStroke": ["#FC8D62", "#66C2A5", "#8DA0CB", "#E78AC3"]
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as d3 from "d3";
 import { TAOData } from "./TAOData.json";
-import "./Tree.css";
+import { Neon, NeonStroke } from "../../color.json";
 
 class Tree extends React.Component {
 	constructor(props) {
@@ -83,7 +83,7 @@ class Tree extends React.Component {
 			.enter()
 			.append("path")
 			.attr("class", "link")
-			.style("stroke", "#8da0cb")
+			.style("stroke", NeonStroke[2])
 			.attr("d", diagonal);
 		if (!this.state.allLinks) {
 			this.setState({ allLinks });
@@ -105,7 +105,9 @@ class Tree extends React.Component {
 		allNodes
 			.append("circle")
 			.attr("r", 8.5)
-			.style("stroke", "#e41a1c");
+			.attr("fill", "#191919")
+			.style("stroke", Neon[2])
+			.style("stroke-width", "2px");
 
 		allNodes
 			.append("text")
@@ -116,6 +118,7 @@ class Tree extends React.Component {
 			.style("text-anchor", (d) => {
 				return d.children ? "end" : "start";
 			})
+			.style("font-size", "0.8em")
 			.attr("fill", "#FFFFFF")
 			.text((d) => {
 				return d.name;
@@ -135,7 +138,7 @@ class Tree extends React.Component {
 			.data(links)
 			.transition()
 			.duration(duration)
-			.style("stroke", "#8da0cb")
+			.style("stroke", NeonStroke[3])
 			.attr("d", diagonal); //get the new cluster path
 
 		allNodes
@@ -150,7 +153,7 @@ class Tree extends React.Component {
 			.select("circle")
 			.transition()
 			.duration(duration)
-			.style("stroke", "#e41a1c");
+			.style("stroke", Neon[3]);
 	}
 
 	drawRadialTree() {
@@ -169,7 +172,7 @@ class Tree extends React.Component {
 			.data(links)
 			.transition()
 			.duration(duration)
-			.style("stroke", "#fc8d62")
+			.style("stroke", NeonStroke[0])
 			.attr("d", radialDiagonal); //get the new radial path
 
 		allNodes
@@ -184,7 +187,7 @@ class Tree extends React.Component {
 			.select("circle")
 			.transition()
 			.duration(duration)
-			.style("stroke", "#984ea3");
+			.style("stroke", Neon[0]);
 	}
 
 	drawRadialCluster() {
@@ -201,7 +204,7 @@ class Tree extends React.Component {
 			.data(links)
 			.transition()
 			.duration(duration)
-			.style("stroke", "#66c2a5")
+			.style("stroke", NeonStroke[1])
 			.attr("d", radialDiagonal); //get the new radial path
 
 		allNodes
@@ -216,7 +219,7 @@ class Tree extends React.Component {
 			.select("circle")
 			.transition()
 			.duration(duration)
-			.style("stroke", "#4daf4a");
+			.style("stroke", Neon[1]);
 	}
 
 	drawTree() {
@@ -232,7 +235,7 @@ class Tree extends React.Component {
 			.data(links)
 			.transition()
 			.duration(duration)
-			.style("stroke", "#e78ac3")
+			.style("stroke", NeonStroke[3])
 			.attr("d", diagonal); // get the new tree path
 
 		allNodes
@@ -247,7 +250,7 @@ class Tree extends React.Component {
 			.select("circle")
 			.transition()
 			.duration(duration)
-			.style("stroke", "#377eb8");
+			.style("stroke", Neon[3]);
 	}
 
 	render() {
@@ -269,7 +272,7 @@ class Tree extends React.Component {
 					</label>
 					<label>
 						<input type="radio" name="mode" value="cluster" defaultChecked onChange={this.drawClusterTree} />
-						ForThought
+						ForeThought
 					</label>
 				</form>
 				<svg ref={(node) => (this.node = node)} width={width} height={height} />
