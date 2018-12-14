@@ -29,7 +29,7 @@ class Meet extends React.Component {
 					<Link to={"/tao/" + id}>Back to TAO Details</Link>
 					<Name>TAO - {TAOData[id]}</Name>
 					<Id>{id}</Id>
-					{this.state.loading ? <Loading>Loading ...</Loading> : null}
+					{this.state.loading ? <Loading>Loading video chat module ... this will take a moment ...</Loading> : null}
 					<IframeContainer>
 						<Iframe
 							url={"https://meet.paramation.com/" + id}
