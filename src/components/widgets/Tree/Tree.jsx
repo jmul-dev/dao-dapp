@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import { TAOData } from "./TAOData.json";
 import { Neon, NeonStroke } from "../../color.json";
 import { Button } from "./Styled";
-import { browserHistory } from "react-router";
+import { hashHistory } from "react-router";
 
 class Tree extends React.Component {
 	constructor(props) {
@@ -129,7 +129,7 @@ class Tree extends React.Component {
 			});
 
 		allNodes.on("click", (d, i) => {
-			browserHistory.push("/tao/" + d.id);
+			hashHistory.push("/tao/" + d.id);
 		});
 	}
 
