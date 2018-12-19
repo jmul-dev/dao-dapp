@@ -4,6 +4,7 @@ import * as Web3 from "web3";
 import { Alert, AlertContainer } from "react-bs-notifier";
 //import { BigNumber } from "bignumber.js";
 import { Dashboard } from "./components/Dashboard";
+import { Login } from "./components/Login";
 const promisify = require("tiny-promisify");
 
 class App extends Component {
@@ -93,10 +94,17 @@ class App extends Component {
 		const { accounts, showAlert, alertContent } = this.state;
 		return (
 			<div className="App">
-				{accounts.length ? <Dashboard nameId={accounts[0]} /> : <h1>Please login to Metamask</h1>}
+				{accounts.length ? <Dashboard nameId={accounts[0]} /> : <Login />}
 				<AlertContainer position="top-right">
 					{showAlert ? (
-						<Alert type="danger" headline="Oops!">
+						<Alert
+							type="danger"
+							headline="Oops!"
+							onDismiss={() => {
+								this.setState({ showAlert: false });
+							}}
+							timeout={1500}
+						>
 							{alertContent}
 						</Alert>
 					) : null}

@@ -10,3 +10,12 @@ export const WidgetWrapper = styled.div`
 	background-color: #000000;
 	margin-bottom: 20px;
 `;
+
+export const Title = styled.div`
+	font-size: 4em;
+	margin-bottom: 5px;
+`;
+
+export const Content = styled.div`
+	font-size: 1.2em;
+`;
