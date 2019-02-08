@@ -5,12 +5,11 @@ import { syncHistoryWithStore } from "react-router-redux";
 
 // Router
 import { AppContainer } from "../components/App/";
-import { Login } from "../components/Login";
 import { TAODetails } from "../components/TAODetails/TAODetails";
 import { Meet } from "../components/Meet/Meet";
 import { Ide } from "../components/Ide/Ide";
 
-import { web3Connected, setAccounts, setNetworkId } from "./actions";
+import { web3Connected, setAccounts, setNetworkId, setNameFactory } from "./actions";
 import { web3Errors } from "../common/errors";
 
 // Contracts
@@ -43,8 +42,8 @@ class AppRouter extends React.Component {
 			const accounts = await this.getAccounts(web3);
 			dispatch(setAccounts(accounts));
 
-			// TODO!!!
-			const contracts = this.instantiateContracts(web3);
+			const nameFactory = this.instantiateContract(web3, networkId, NameFactoryABI, NameFactoryNetworks);
+			dispatch(setNameFactory(nameFactory));
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}
@@ -86,8 +85,9 @@ class AppRouter extends React.Component {
 		return accounts;
 	}
 
-	instantiateContracts(web3) {
-		//	const nameFactory = web3.eth.contract(abi).at(networks[this.state.networkId].address);
+	instantiateContract(web3, networkId, abi, networks) {
+		const contract = web3.eth.contract(abi).at(networks[networkId].address);
+		return contract;
 	}
 
 	render() {

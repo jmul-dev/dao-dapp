@@ -20,3 +20,10 @@ export const setNetworkId = (networkId) => {
 		networkId: networkId
 	};
 };
+
+export const setNameFactory = (nameFactory) => {
+	return {
+		type: actionsEnums.SET_NAME_FACTORY,
+		nameFactory: nameFactory
+	};
+};
