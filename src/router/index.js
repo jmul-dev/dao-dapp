@@ -9,11 +9,12 @@ import { TAODetails } from "../components/TAODetails/TAODetails";
 import { Meet } from "../components/Meet/Meet";
 import { Ide } from "../components/Ide/Ide";
 
-import { web3Connected, setAccounts, setNetworkId, setNameFactory } from "./actions";
+import { web3Connected, setAccounts, setNetworkId, setNameFactory, setNameTAOLookup } from "./actions";
 import { web3Errors } from "../common/errors";
 
 // Contracts
 import { abi as NameFactoryABI, networks as NameFactoryNetworks } from "../contracts/NameFactory.json";
+import { abi as NameTAOLookupABI, networks as NameTAOLookupNetworks } from "../contracts/NameTAOLookup.json";
 
 import { setError } from "../widgets/Toast/actions";
 
@@ -44,6 +45,9 @@ class AppRouter extends React.Component {
 
 			const nameFactory = this.instantiateContract(web3, networkId, NameFactoryABI, NameFactoryNetworks);
 			dispatch(setNameFactory(nameFactory));
+
+			const nameTAOLookup = this.instantiateContract(web3, networkId, NameTAOLookupABI, NameTAOLookupNetworks);
+			dispatch(setNameTAOLookup(nameTAOLookup));
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}

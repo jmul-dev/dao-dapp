@@ -27,3 +27,10 @@ export const setNameFactory = (nameFactory) => {
 		nameFactory: nameFactory
 	};
 };
+
+export const setNameTAOLookup = (nameTAOLookup) => {
+	return {
+		type: actionsEnums.SET_NAME_TAO_LOOKUP,
+		nameTAOLookup: nameTAOLookup
+	};
+};
