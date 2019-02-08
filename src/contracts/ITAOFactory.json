@@ -1,0 +1,267 @@
+{
+	"contractName": "ITAOFactory",
+	"abi": [
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "_taoId",
+					"type": "address"
+				}
+			],
+			"name": "incrementNonce",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	],
+	"bytecode": "0x",
+	"deployedBytecode": "0x",
+	"sourceMap": "",
+	"deployedSourceMap": "",
+	"source": "pragma solidity ^0.4.24;\n\ninterface ITAOFactory {\n\tfunction incrementNonce(address _taoId) external returns (uint256);\n}\n",
+	"sourcePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOFactory.sol",
+	"ast": {
+		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOFactory.sol",
+		"exportedSymbols": {
+			"ITAOFactory": [22103]
+		},
+		"id": 22104,
+		"nodeType": "SourceUnit",
+		"nodes": [
+			{
+				"id": 22095,
+				"literals": ["solidity", "^", "0.4", ".24"],
+				"nodeType": "PragmaDirective",
+				"src": "0:24:56"
+			},
+			{
+				"baseContracts": [],
+				"contractDependencies": [],
+				"contractKind": "interface",
+				"documentation": null,
+				"fullyImplemented": false,
+				"id": 22103,
+				"linearizedBaseContracts": [22103],
+				"name": "ITAOFactory",
+				"nodeType": "ContractDefinition",
+				"nodes": [
+					{
+						"body": null,
+						"documentation": null,
+						"id": 22102,
+						"implemented": false,
+						"isConstructor": false,
+						"isDeclaredConst": false,
+						"modifiers": [],
+						"name": "incrementNonce",
+						"nodeType": "FunctionDefinition",
+						"parameters": {
+							"id": 22098,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22097,
+									"name": "_taoId",
+									"nodeType": "VariableDeclaration",
+									"scope": 22102,
+									"src": "75:14:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 22096,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "75:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "74:16:56"
+						},
+						"payable": false,
+						"returnParameters": {
+							"id": 22101,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22100,
+									"name": "",
+									"nodeType": "VariableDeclaration",
+									"scope": 22102,
+									"src": "109:7:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 22099,
+										"name": "uint256",
+										"nodeType": "ElementaryTypeName",
+										"src": "109:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "108:9:56"
+						},
+						"scope": 22103,
+						"src": "51:67:56",
+						"stateMutability": "nonpayable",
+						"superFunction": null,
+						"visibility": "external"
+					}
+				],
+				"scope": 22104,
+				"src": "26:94:56"
+			}
+		],
+		"src": "0:121:56"
+	},
+	"legacyAST": {
+		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOFactory.sol",
+		"exportedSymbols": {
+			"ITAOFactory": [22103]
+		},
+		"id": 22104,
+		"nodeType": "SourceUnit",
+		"nodes": [
+			{
+				"id": 22095,
+				"literals": ["solidity", "^", "0.4", ".24"],
+				"nodeType": "PragmaDirective",
+				"src": "0:24:56"
+			},
+			{
+				"baseContracts": [],
+				"contractDependencies": [],
+				"contractKind": "interface",
+				"documentation": null,
+				"fullyImplemented": false,
+				"id": 22103,
+				"linearizedBaseContracts": [22103],
+				"name": "ITAOFactory",
+				"nodeType": "ContractDefinition",
+				"nodes": [
+					{
+						"body": null,
+						"documentation": null,
+						"id": 22102,
+						"implemented": false,
+						"isConstructor": false,
+						"isDeclaredConst": false,
+						"modifiers": [],
+						"name": "incrementNonce",
+						"nodeType": "FunctionDefinition",
+						"parameters": {
+							"id": 22098,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22097,
+									"name": "_taoId",
+									"nodeType": "VariableDeclaration",
+									"scope": 22102,
+									"src": "75:14:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 22096,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "75:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "74:16:56"
+						},
+						"payable": false,
+						"returnParameters": {
+							"id": 22101,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22100,
+									"name": "",
+									"nodeType": "VariableDeclaration",
+									"scope": 22102,
+									"src": "109:7:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 22099,
+										"name": "uint256",
+										"nodeType": "ElementaryTypeName",
+										"src": "109:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "108:9:56"
+						},
+						"scope": 22103,
+						"src": "51:67:56",
+						"stateMutability": "nonpayable",
+						"superFunction": null,
+						"visibility": "external"
+					}
+				],
+				"scope": 22104,
+				"src": "26:94:56"
+			}
+		],
+		"src": "0:121:56"
+	},
+	"compiler": {
+		"name": "solc",
+		"version": "0.4.24+commit.e67f0147.Emscripten.clang"
+	},
+	"networks": {},
+	"schemaVersion": "2.0.1",
+	"updatedAt": "2019-02-07T11:32:36.001Z"
+}

@@ -1,0 +1,376 @@
+{
+	"contractName": "tokenRecipient",
+	"abi": [
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "_from",
+					"type": "address"
+				},
+				{
+					"name": "_value",
+					"type": "uint256"
+				},
+				{
+					"name": "_token",
+					"type": "address"
+				},
+				{
+					"name": "_extraData",
+					"type": "bytes"
+				}
+			],
+			"name": "receiveApproval",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	],
+	"bytecode": "0x",
+	"deployedBytecode": "0x",
+	"sourceMap": "",
+	"deployedSourceMap": "",
+	"source": "pragma solidity ^0.4.24;\n\ninterface tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) external; }\n",
+	"sourcePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/tokenRecipient.sol",
+	"ast": {
+		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/tokenRecipient.sol",
+		"exportedSymbols": {
+			"tokenRecipient": [34724]
+		},
+		"id": 34725,
+		"nodeType": "SourceUnit",
+		"nodes": [
+			{
+				"id": 34712,
+				"literals": ["solidity", "^", "0.4", ".24"],
+				"nodeType": "PragmaDirective",
+				"src": "0:24:103"
+			},
+			{
+				"baseContracts": [],
+				"contractDependencies": [],
+				"contractKind": "interface",
+				"documentation": null,
+				"fullyImplemented": false,
+				"id": 34724,
+				"linearizedBaseContracts": [34724],
+				"name": "tokenRecipient",
+				"nodeType": "ContractDefinition",
+				"nodes": [
+					{
+						"body": null,
+						"documentation": null,
+						"id": 34723,
+						"implemented": false,
+						"isConstructor": false,
+						"isDeclaredConst": false,
+						"modifiers": [],
+						"name": "receiveApproval",
+						"nodeType": "FunctionDefinition",
+						"parameters": {
+							"id": 34721,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 34714,
+									"name": "_from",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "78:13:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 34713,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "78:7:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 34716,
+									"name": "_value",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "93:14:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 34715,
+										"name": "uint256",
+										"nodeType": "ElementaryTypeName",
+										"src": "93:7:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 34718,
+									"name": "_token",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "109:14:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 34717,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "109:7:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 34720,
+									"name": "_extraData",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "125:16:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_bytes_calldata_ptr",
+										"typeString": "bytes"
+									},
+									"typeName": {
+										"id": 34719,
+										"name": "bytes",
+										"nodeType": "ElementaryTypeName",
+										"src": "125:5:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_bytes_storage_ptr",
+											"typeString": "bytes"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "77:65:103"
+						},
+						"payable": false,
+						"returnParameters": {
+							"id": 34722,
+							"nodeType": "ParameterList",
+							"parameters": [],
+							"src": "151:0:103"
+						},
+						"scope": 34724,
+						"src": "53:99:103",
+						"stateMutability": "nonpayable",
+						"superFunction": null,
+						"visibility": "external"
+					}
+				],
+				"scope": 34725,
+				"src": "26:128:103"
+			}
+		],
+		"src": "0:155:103"
+	},
+	"legacyAST": {
+		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/tokenRecipient.sol",
+		"exportedSymbols": {
+			"tokenRecipient": [34724]
+		},
+		"id": 34725,
+		"nodeType": "SourceUnit",
+		"nodes": [
+			{
+				"id": 34712,
+				"literals": ["solidity", "^", "0.4", ".24"],
+				"nodeType": "PragmaDirective",
+				"src": "0:24:103"
+			},
+			{
+				"baseContracts": [],
+				"contractDependencies": [],
+				"contractKind": "interface",
+				"documentation": null,
+				"fullyImplemented": false,
+				"id": 34724,
+				"linearizedBaseContracts": [34724],
+				"name": "tokenRecipient",
+				"nodeType": "ContractDefinition",
+				"nodes": [
+					{
+						"body": null,
+						"documentation": null,
+						"id": 34723,
+						"implemented": false,
+						"isConstructor": false,
+						"isDeclaredConst": false,
+						"modifiers": [],
+						"name": "receiveApproval",
+						"nodeType": "FunctionDefinition",
+						"parameters": {
+							"id": 34721,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 34714,
+									"name": "_from",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "78:13:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 34713,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "78:7:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 34716,
+									"name": "_value",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "93:14:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 34715,
+										"name": "uint256",
+										"nodeType": "ElementaryTypeName",
+										"src": "93:7:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 34718,
+									"name": "_token",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "109:14:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 34717,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "109:7:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 34720,
+									"name": "_extraData",
+									"nodeType": "VariableDeclaration",
+									"scope": 34723,
+									"src": "125:16:103",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_bytes_calldata_ptr",
+										"typeString": "bytes"
+									},
+									"typeName": {
+										"id": 34719,
+										"name": "bytes",
+										"nodeType": "ElementaryTypeName",
+										"src": "125:5:103",
+										"typeDescriptions": {
+											"typeIdentifier": "t_bytes_storage_ptr",
+											"typeString": "bytes"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "77:65:103"
+						},
+						"payable": false,
+						"returnParameters": {
+							"id": 34722,
+							"nodeType": "ParameterList",
+							"parameters": [],
+							"src": "151:0:103"
+						},
+						"scope": 34724,
+						"src": "53:99:103",
+						"stateMutability": "nonpayable",
+						"superFunction": null,
+						"visibility": "external"
+					}
+				],
+				"scope": 34725,
+				"src": "26:128:103"
+			}
+		],
+		"src": "0:155:103"
+	},
+	"compiler": {
+		"name": "solc",
+		"version": "0.4.24+commit.e67f0147.Emscripten.clang"
+	},
+	"networks": {},
+	"schemaVersion": "2.0.1",
+	"updatedAt": "2019-02-07T11:32:36.083Z"
+}
