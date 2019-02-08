@@ -1,6 +1,8 @@
 import * as React from "react";
 
 import { Wrapper, ImgContainer } from "./styledComponents";
+import { SignupContainer } from "../Signup/";
+import { Dashboard } from "../Dashboard";
 import { ToastContainer } from "../../widgets/Toast/";
 import { EMPTY_ADDRESS } from "../../common/constants";
 
@@ -42,7 +44,7 @@ class App extends React.Component {
 	}
 
 	async checkAccount(web3, accounts) {
-		if (!web3 || !accounts) {
+		if (!web3 || !accounts.length) {
 			return;
 		}
 
@@ -71,9 +73,9 @@ class App extends React.Component {
 						<img src={process.env.PUBLIC_URL + "/images/img_0.png"} alt={"AO Logo"} />
 					</ImgContainer>
 				) : !this.props.nameId ? (
-					<div>No name</div>
+					<SignupContainer />
 				) : (
-					<div>has name</div>
+					<Dashboard nameId={this.props.nameId} />
 				)}
 				{this.props.children}
 				<ToastContainer />
