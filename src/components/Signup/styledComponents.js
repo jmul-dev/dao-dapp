@@ -18,3 +18,15 @@ export const Error = styled.div`
 	font-weight: bold;
 	color: #ff0000;
 `;
+
+export const StyledButton = styled.button`
+	background: rgba(0, 204, 71, 1);
+	color: #ffffff;
+	border: none;
+	padding: 8px 16px;
+	min-width: 88px;
+	font-size: 1em;
+	min-height: 36px;
+	line-height: 1.4em;
+	font-weight: 500;
+`;
