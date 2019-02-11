@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, StyledForm, StyledButton, Error } from "./styledComponents";
+import { Wrapper, Title, FieldContainer, FieldName, FieldValue } from "./styledComponents";
 
 class NameProfile extends React.Component {
 	render() {
@@ -7,7 +7,13 @@ class NameProfile extends React.Component {
 		if (!nameInfo) {
 			return null;
 		}
-		return <Wrapper>Name: {nameInfo.name}</Wrapper>;
+		return (
+			<Wrapper>
+				<Title>Profile</Title>
+				<FieldName>Name</FieldName>
+				<FieldValue>{nameInfo.name}</FieldValue>
+			</Wrapper>
+		);
 	}
 }
 
