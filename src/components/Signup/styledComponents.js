@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Form from "react-jsonschema-form";
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+	padding: 40px;
+`;
 
 export const Title = styled.div`
 	font-size: 4em;

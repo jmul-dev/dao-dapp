@@ -21,6 +21,13 @@ export const setNetworkId = (networkId) => {
 	};
 };
 
+export const setNameAccountRecovery = (nameAccountRecovery) => {
+	return {
+		type: actionsEnums.SET_NAME_ACCOUNT_RECOVERY,
+		nameAccountRecovery: nameAccountRecovery
+	};
+};
+
 export const setNameFactory = (nameFactory) => {
 	return {
 		type: actionsEnums.SET_NAME_FACTORY,
@@ -28,9 +35,51 @@ export const setNameFactory = (nameFactory) => {
 	};
 };
 
+export const setNamePublicKey = (namePublicKey) => {
+	return {
+		type: actionsEnums.SET_NAME_PUBLIC_KEY,
+		namePublicKey: namePublicKey
+	};
+};
+
 export const setNameTAOLookup = (nameTAOLookup) => {
 	return {
 		type: actionsEnums.SET_NAME_TAO_LOOKUP,
 		nameTAOLookup: nameTAOLookup
+	};
+};
+
+export const setNameTAOPosition = (nameTAOPosition) => {
+	return {
+		type: actionsEnums.SET_NAME_TAO_POSITION,
+		nameTAOPosition: nameTAOPosition
+	};
+};
+
+export const setNameTAOVault = (nameTAOVault) => {
+	return {
+		type: actionsEnums.SET_NAME_TAO_VAULT,
+		nameTAOVault: nameTAOVault
+	};
+};
+
+export const setEthos = (ethos) => {
+	return {
+		type: actionsEnums.SET_ETHOS,
+		ethos: ethos
+	};
+};
+
+export const setPathos = (pathos) => {
+	return {
+		type: actionsEnums.SET_PATHOS,
+		pathos: pathos
+	};
+};
+
+export const setLogos = (logos) => {
+	return {
+		type: actionsEnums.SET_LOGOS,
+		logos: logos
 	};
 };

@@ -11,6 +11,7 @@ import { Palette, Highlight } from "./color.json";
 
 class Dashboard extends React.Component {
 	render() {
+		console.log("here");
 		const doughnutChartData = [
 			{ value: 20, color: Palette[0], highlight: Highlight[0], label: "TAO Name#1 - Position" },
 			{ value: 30, color: Palette[1], highlight: Highlight[1], label: "TAO Name#2 - Position" },

@@ -1,9 +1,8 @@
 import * as React from "react";
-
-import { Wrapper, ImgContainer } from "./styledComponents";
+import { ImgContainer } from "./styledComponents";
+import { PageLayout } from "../../layouts/PageLayout/";
 import { SignupContainer } from "../Signup/";
 import { Dashboard } from "../Dashboard";
-import { ToastContainer } from "../../widgets/Toast/";
 import { EMPTY_ADDRESS } from "../../common/constants";
 
 const promisify = require("tiny-promisify");
@@ -67,7 +66,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<Wrapper>
+			<PageLayout>
 				{!this.state.getNameIdCalled ? (
 					<ImgContainer>
 						<img src={process.env.PUBLIC_URL + "/images/img_0.png"} alt={"AO Logo"} />
@@ -77,9 +76,7 @@ class App extends React.Component {
 				) : (
 					<Dashboard nameId={this.props.nameId} />
 				)}
-				{this.props.children}
-				<ToastContainer />
-			</Wrapper>
+			</PageLayout>
 		);
 	}
 }

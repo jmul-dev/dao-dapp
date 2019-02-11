@@ -9,12 +9,32 @@ import { TAODetails } from "../components/TAODetails/TAODetails";
 import { Meet } from "../components/Meet/Meet";
 import { Ide } from "../components/Ide/Ide";
 
-import { web3Connected, setAccounts, setNetworkId, setNameFactory, setNameTAOLookup } from "./actions";
+import {
+	web3Connected,
+	setAccounts,
+	setNetworkId,
+	setNameAccountRecovery,
+	setNameFactory,
+	setNamePublicKey,
+	setNameTAOLookup,
+	setNameTAOPosition,
+	setNameTAOVault,
+	setEthos,
+	setPathos,
+	setLogos
+} from "./actions";
 import { web3Errors } from "../common/errors";
 
 // Contracts
-import { abi as NameFactoryABI, networks as NameFactoryNetworks } from "../contracts/NameFactory.json";
-import { abi as NameTAOLookupABI, networks as NameTAOLookupNetworks } from "../contracts/NameTAOLookup.json";
+import NameAccountRecovery from "../contracts/NameAccountRecovery.json";
+import NameFactory from "../contracts/NameFactory.json";
+import NamePublicKey from "../contracts/NamePublicKey.json";
+import NameTAOLookup from "../contracts/NameTAOLookup.json";
+import NameTAOPosition from "../contracts/NameTAOPosition.json";
+import NameTAOVault from "../contracts/NameTAOVault.json";
+import Ethos from "../contracts/Ethos.json";
+import Pathos from "../contracts/Pathos.json";
+import Logos from "../contracts/Logos.json";
 
 import { setError } from "../widgets/Toast/actions";
 
@@ -43,11 +63,32 @@ class AppRouter extends React.Component {
 			const accounts = await this.getAccounts(web3);
 			dispatch(setAccounts(accounts));
 
-			const nameFactory = this.instantiateContract(web3, networkId, NameFactoryABI, NameFactoryNetworks);
+			const nameAccountRecovery = this.instantiateContract(web3, networkId, NameAccountRecovery.abi, NameAccountRecovery.networks);
+			dispatch(setNameAccountRecovery(nameAccountRecovery));
+
+			const nameFactory = this.instantiateContract(web3, networkId, NameFactory.abi, NameFactory.networks);
 			dispatch(setNameFactory(nameFactory));
 
-			const nameTAOLookup = this.instantiateContract(web3, networkId, NameTAOLookupABI, NameTAOLookupNetworks);
+			const namePublicKey = this.instantiateContract(web3, networkId, NamePublicKey.abi, NamePublicKey.networks);
+			dispatch(setNamePublicKey(namePublicKey));
+
+			const nameTAOLookup = this.instantiateContract(web3, networkId, NameTAOLookup.abi, NameTAOLookup.networks);
 			dispatch(setNameTAOLookup(nameTAOLookup));
+
+			const nameTAOPosition = this.instantiateContract(web3, networkId, NameTAOPosition.abi, NameTAOPosition.networks);
+			dispatch(setNameTAOPosition(nameTAOPosition));
+
+			const nameTAOVault = this.instantiateContract(web3, networkId, NameTAOVault.abi, NameTAOVault.networks);
+			dispatch(setNameTAOVault(nameTAOVault));
+
+			const ethos = this.instantiateContract(web3, networkId, Ethos.abi, Ethos.networks);
+			dispatch(setEthos(ethos));
+
+			const pathos = this.instantiateContract(web3, networkId, Pathos.abi, Pathos.networks);
+			dispatch(setPathos(pathos));
+
+			const logos = this.instantiateContract(web3, networkId, Logos.abi, Logos.networks);
+			dispatch(setLogos(logos));
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}

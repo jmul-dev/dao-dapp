@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-	padding: 20px;
-	color: #ffffff;
-`;
-
 export const ImgContainer = styled.div`
 	width: 300px;
 	height: 150px;
