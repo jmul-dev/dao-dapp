@@ -6,7 +6,7 @@ import { setError } from "../../widgets/Toast/actions";
 
 const promisify = require("tiny-promisify");
 
-class Signup extends React.Component {
+class CreateNameForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { error: false, errorMessage: "", formLoading: false };
@@ -62,4 +62,4 @@ class Signup extends React.Component {
 	}
 }
 
-export { Signup };
+export { CreateNameForm };

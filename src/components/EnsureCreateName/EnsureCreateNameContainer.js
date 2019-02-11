@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
-import { Signup } from "./Signup";
+import { EnsureCreateName } from "./EnsureCreateName";
 import { setNameId } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
 		accounts: state.web3Reducer.accounts,
 		nameFactory: state.contractReducer.nameFactory,
-		nameTAOLookup: state.contractReducer.nameTAOLookup
+		nameId: state.taoReducer.nameId
 	};
 };
 
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export const SignupContainer = connect(
+export const EnsureCreateNameContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Signup);
+)(EnsureCreateName);

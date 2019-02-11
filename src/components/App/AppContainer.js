@@ -1,20 +1,17 @@
 import { connect } from "react-redux";
 import { App } from "./App";
-import { detectMobileBrowser, setNameId } from "./actions";
+import { detectMobileBrowser } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
 		web3: state.web3Reducer.web3,
-		accounts: state.web3Reducer.accounts,
-		nameFactory: state.contractReducer.nameFactory,
-		nameId: state.taoReducer.nameId
+		accounts: state.web3Reducer.accounts
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		detectMobileBrowser: (isMobileBrowser) => dispatch(detectMobileBrowser(isMobileBrowser)),
-		setNameId: (nameId) => dispatch(setNameId(nameId))
+		detectMobileBrowser: (isMobileBrowser) => dispatch(detectMobileBrowser(isMobileBrowser))
 	};
 };
 
