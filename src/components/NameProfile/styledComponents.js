@@ -10,15 +10,23 @@ export const Title = styled.div`
 	margin-bottom: 40px;
 `;
 
+export const TitleMargin = styled(Title)`
+	margin-top: 40px;
+`;
+
 export const FieldContainer = styled.div`
-	margin-bottom: 5px;
+	margin-bottom: 3px;
 `;
 
 export const FieldName = styled.div`
-	font-size: 1em;
+	display: inline-block;
+	font-size: 0.875em;
 	font-weight: 500;
+	margin-right: 10px;
 `;
 
 export const FieldValue = styled.div`
-	font-size: 1em;
+	display: inline-block;
+	font-size: 0.875em;
+	color: #888888;
 `;

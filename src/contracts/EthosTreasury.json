@@ -573,7 +573,7 @@
 				"id": 21119,
 				"nodeType": "ImportDirective",
 				"scope": 21135,
-				"sourceUnit": 31522,
+				"sourceUnit": 31547,
 				"src": "26:35:35",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -587,10 +587,10 @@
 							"id": 21120,
 							"name": "TAOCurrencyTreasury",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 31521,
+							"referencedDeclaration": 31546,
 							"src": "251:19:35",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31521",
+								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31546",
 								"typeString": "contract TAOCurrencyTreasury"
 							}
 						},
@@ -599,12 +599,12 @@
 						"src": "251:19:35"
 					}
 				],
-				"contractDependencies": [22093, 31521, 33784],
+				"contractDependencies": [22093, 31546, 33809],
 				"contractKind": "contract",
 				"documentation": "@title EthosTreasury\n * The purpose of this contract is to list all of the valid denominations of Ethos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 21134,
-				"linearizedBaseContracts": [21134, 31521, 22093, 33784],
+				"linearizedBaseContracts": [21134, 31546, 22093, 33809],
 				"name": "EthosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -657,10 +657,10 @@
 									"name": "TAOCurrencyTreasury",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 31521,
+									"referencedDeclaration": 31546,
 									"src": "390:19:35",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31521_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31546_$",
 										"typeString": "type(contract TAOCurrencyTreasury)"
 									}
 								},
@@ -769,7 +769,7 @@
 				"id": 21119,
 				"nodeType": "ImportDirective",
 				"scope": 21135,
-				"sourceUnit": 31522,
+				"sourceUnit": 31547,
 				"src": "26:35:35",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -783,10 +783,10 @@
 							"id": 21120,
 							"name": "TAOCurrencyTreasury",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 31521,
+							"referencedDeclaration": 31546,
 							"src": "251:19:35",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31521",
+								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31546",
 								"typeString": "contract TAOCurrencyTreasury"
 							}
 						},
@@ -795,12 +795,12 @@
 						"src": "251:19:35"
 					}
 				],
-				"contractDependencies": [22093, 31521, 33784],
+				"contractDependencies": [22093, 31546, 33809],
 				"contractKind": "contract",
 				"documentation": "@title EthosTreasury\n * The purpose of this contract is to list all of the valid denominations of Ethos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 21134,
-				"linearizedBaseContracts": [21134, 31521, 22093, 33784],
+				"linearizedBaseContracts": [21134, 31546, 22093, 33809],
 				"name": "EthosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -853,10 +853,10 @@
 									"name": "TAOCurrencyTreasury",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 31521,
+									"referencedDeclaration": 31546,
 									"src": "390:19:35",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31521_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31546_$",
 										"typeString": "type(contract TAOCurrencyTreasury)"
 									}
 								},
@@ -960,5 +960,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-07T11:33:45.288Z"
+	"updatedAt": "2019-02-11T10:27:03.057Z"
 }

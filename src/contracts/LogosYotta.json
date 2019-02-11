@@ -341,7 +341,7 @@
 				"id": 22995,
 				"nodeType": "ImportDirective",
 				"scope": 23022,
-				"sourceUnit": 30419,
+				"sourceUnit": 30444,
 				"src": "26:27:67",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -355,10 +355,10 @@
 							"id": 22996,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30418,
+							"referencedDeclaration": 30443,
 							"src": "78:11:67",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30418",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30443",
 								"typeString": "contract TAOCurrency"
 							}
 						},
@@ -367,12 +367,12 @@
 						"src": "78:11:67"
 					}
 				],
-				"contractDependencies": [30418, 33784],
+				"contractDependencies": [30443, 33809],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 23021,
-				"linearizedBaseContracts": [23021, 30418, 33784],
+				"linearizedBaseContracts": [23021, 30443, 33809],
 				"name": "LogosYotta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -396,7 +396,7 @@
 											"name": "powerOfTen",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30044,
+											"referencedDeclaration": 30069,
 											"src": "274:10:67",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint256",
@@ -447,7 +447,7 @@
 											"name": "decimals",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30042,
+											"referencedDeclaration": 30067,
 											"src": "293:8:67",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -541,10 +541,10 @@
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30418,
+									"referencedDeclaration": 30443,
 									"src": "210:11:67",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30418_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30443_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -679,7 +679,7 @@
 				"id": 22995,
 				"nodeType": "ImportDirective",
 				"scope": 23022,
-				"sourceUnit": 30419,
+				"sourceUnit": 30444,
 				"src": "26:27:67",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -693,10 +693,10 @@
 							"id": 22996,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30418,
+							"referencedDeclaration": 30443,
 							"src": "78:11:67",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30418",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30443",
 								"typeString": "contract TAOCurrency"
 							}
 						},
@@ -705,12 +705,12 @@
 						"src": "78:11:67"
 					}
 				],
-				"contractDependencies": [30418, 33784],
+				"contractDependencies": [30443, 33809],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 23021,
-				"linearizedBaseContracts": [23021, 30418, 33784],
+				"linearizedBaseContracts": [23021, 30443, 33809],
 				"name": "LogosYotta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -734,7 +734,7 @@
 											"name": "powerOfTen",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30044,
+											"referencedDeclaration": 30069,
 											"src": "274:10:67",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint256",
@@ -785,7 +785,7 @@
 											"name": "decimals",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30042,
+											"referencedDeclaration": 30067,
 											"src": "293:8:67",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -879,10 +879,10 @@
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30418,
+									"referencedDeclaration": 30443,
 									"src": "210:11:67",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30418_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30443_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -1012,5 +1012,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-07T11:33:45.274Z"
+	"updatedAt": "2019-02-11T10:27:03.012Z"
 }

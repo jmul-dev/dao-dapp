@@ -3,7 +3,9 @@ import { NameProfile } from "./NameProfile";
 
 const mapStateToProps = (state) => {
 	return {
-		nameInfo: state.taoReducer.nameInfo
+		nameId: state.taoReducer.nameId,
+		nameTAOLookup: state.contractReducer.nameTAOLookup,
+		nameTAOPosition: state.contractReducer.nameTAOPosition
 	};
 };
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Wrapper, Title, StyledForm, StyledButton, Error } from "./styledComponents";
 import { schema } from "./schema";
-import { waitForTransactionReceipt } from "../../reducers/contractReducer";
+//import { waitForTransactionReceipt } from "../../reducers/contractReducer";
 import { setError } from "../../widgets/Toast/actions";
 
 const promisify = require("tiny-promisify");
@@ -38,10 +38,12 @@ class CreateNameForm extends React.Component {
 						eventListener.stopWatching();
 					}
 				});
+				/*
 				waitForTransactionReceipt(transactionHash).then(() => {
 					this.setState({ formLoading: false });
 					eventListener.stopWatching();
 				});
+				*/
 			}
 		});
 	}

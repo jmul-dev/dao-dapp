@@ -230,7 +230,7 @@
 				"id": 23110,
 				"nodeType": "ImportDirective",
 				"scope": 23145,
-				"sourceUnit": 28939,
+				"sourceUnit": 28964,
 				"src": "26:19:70",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -244,10 +244,10 @@
 							"id": 23111,
 							"name": "TAO",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 28938,
+							"referencedDeclaration": 28963,
 							"src": "86:3:70",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAO_$28938",
+								"typeIdentifier": "t_contract$_TAO_$28963",
 								"typeString": "contract TAO"
 							}
 						},
@@ -256,12 +256,12 @@
 						"src": "86:3:70"
 					}
 				],
-				"contractDependencies": [28938],
+				"contractDependencies": [28963],
 				"contractKind": "contract",
 				"documentation": "@title Name",
 				"fullyImplemented": true,
 				"id": 23144,
-				"linearizedBaseContracts": [23144, 28938],
+				"linearizedBaseContracts": [23144, 28963],
 				"name": "Name",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -285,7 +285,7 @@
 											"name": "typeId",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 28823,
+											"referencedDeclaration": 28848,
 											"src": "389:6:70",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -431,10 +431,10 @@
 									"name": "TAO",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 28938,
+									"referencedDeclaration": 28963,
 									"src": "277:3:70",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAO_$28938_$",
+										"typeIdentifier": "t_type$_t_contract$_TAO_$28963_$",
 										"typeString": "type(contract TAO)"
 									}
 								},
@@ -673,7 +673,7 @@
 				"id": 23110,
 				"nodeType": "ImportDirective",
 				"scope": 23145,
-				"sourceUnit": 28939,
+				"sourceUnit": 28964,
 				"src": "26:19:70",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -687,10 +687,10 @@
 							"id": 23111,
 							"name": "TAO",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 28938,
+							"referencedDeclaration": 28963,
 							"src": "86:3:70",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAO_$28938",
+								"typeIdentifier": "t_contract$_TAO_$28963",
 								"typeString": "contract TAO"
 							}
 						},
@@ -699,12 +699,12 @@
 						"src": "86:3:70"
 					}
 				],
-				"contractDependencies": [28938],
+				"contractDependencies": [28963],
 				"contractKind": "contract",
 				"documentation": "@title Name",
 				"fullyImplemented": true,
 				"id": 23144,
-				"linearizedBaseContracts": [23144, 28938],
+				"linearizedBaseContracts": [23144, 28963],
 				"name": "Name",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -728,7 +728,7 @@
 											"name": "typeId",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 28823,
+											"referencedDeclaration": 28848,
 											"src": "389:6:70",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -874,10 +874,10 @@
 									"name": "TAO",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 28938,
+									"referencedDeclaration": 28963,
 									"src": "277:3:70",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAO_$28938_$",
+										"typeIdentifier": "t_type$_t_contract$_TAO_$28963_$",
 										"typeString": "type(contract TAO)"
 									}
 								},
@@ -1102,5 +1102,5 @@
 	},
 	"networks": {},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-07T11:32:36.004Z"
+	"updatedAt": "2019-02-11T10:25:53.772Z"
 }
