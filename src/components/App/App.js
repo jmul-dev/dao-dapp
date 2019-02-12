@@ -23,7 +23,7 @@ class App extends React.Component {
 		this.props.detectMobileBrowser(this.isMobileDevice());
 
 		const intervalId = setInterval(async () => {
-			await this.checkAccount(this.props.web3, this.props.accounts);
+			await this.checkAccount(this.props.web3, this.props.networkId, this.props.accounts);
 		}, 1000);
 		this.setState({ intervalId });
 
@@ -35,13 +35,17 @@ class App extends React.Component {
 	}
 
 	async componentDidUpdate(prevProps) {
-		if (this.props.nameFactory !== prevProps.nameFactory || this.props.nameId !== prevProps.nameId) {
+		if (
+			this.props.nameFactory !== prevProps.nameFactory ||
+			this.props.networkId !== prevProps.networkId ||
+			this.props.nameId !== prevProps.nameId
+		) {
 			this.getNameId(this.props.nameFactory, this.props.accounts);
 		}
 	}
 
-	async checkAccount(web3, accounts) {
-		if (!web3 || !accounts || (accounts && !accounts.length)) {
+	async checkAccount(web3, networkId, accounts) {
+		if (!web3 || !networkId || !accounts) {
 			return;
 		}
 
