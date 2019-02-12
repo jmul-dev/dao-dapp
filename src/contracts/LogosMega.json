@@ -341,7 +341,7 @@
 				"id": 22861,
 				"nodeType": "ImportDirective",
 				"scope": 22888,
-				"sourceUnit": 30444,
+				"sourceUnit": 30475,
 				"src": "26:27:62",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -355,10 +355,10 @@
 							"id": 22862,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30443,
+							"referencedDeclaration": 30474,
 							"src": "77:11:62",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30443",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30474",
 								"typeString": "contract TAOCurrency"
 							}
 						},
@@ -367,12 +367,12 @@
 						"src": "77:11:62"
 					}
 				],
-				"contractDependencies": [30443, 33809],
+				"contractDependencies": [30474, 33840],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 22887,
-				"linearizedBaseContracts": [22887, 30443, 33809],
+				"linearizedBaseContracts": [22887, 30474, 33840],
 				"name": "LogosMega",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -396,7 +396,7 @@
 											"name": "powerOfTen",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30069,
+											"referencedDeclaration": 30100,
 											"src": "273:10:62",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint256",
@@ -447,7 +447,7 @@
 											"name": "decimals",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30067,
+											"referencedDeclaration": 30098,
 											"src": "291:8:62",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -541,10 +541,10 @@
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30443,
+									"referencedDeclaration": 30474,
 									"src": "209:11:62",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30443_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30474_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -679,7 +679,7 @@
 				"id": 22861,
 				"nodeType": "ImportDirective",
 				"scope": 22888,
-				"sourceUnit": 30444,
+				"sourceUnit": 30475,
 				"src": "26:27:62",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -693,10 +693,10 @@
 							"id": 22862,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30443,
+							"referencedDeclaration": 30474,
 							"src": "77:11:62",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30443",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30474",
 								"typeString": "contract TAOCurrency"
 							}
 						},
@@ -705,12 +705,12 @@
 						"src": "77:11:62"
 					}
 				],
-				"contractDependencies": [30443, 33809],
+				"contractDependencies": [30474, 33840],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 22887,
-				"linearizedBaseContracts": [22887, 30443, 33809],
+				"linearizedBaseContracts": [22887, 30474, 33840],
 				"name": "LogosMega",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -734,7 +734,7 @@
 											"name": "powerOfTen",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30069,
+											"referencedDeclaration": 30100,
 											"src": "273:10:62",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint256",
@@ -785,7 +785,7 @@
 											"name": "decimals",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30067,
+											"referencedDeclaration": 30098,
 											"src": "291:8:62",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -879,10 +879,10 @@
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30443,
+									"referencedDeclaration": 30474,
 									"src": "209:11:62",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30443_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30474_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -1012,5 +1012,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-11T10:27:02.975Z"
+	"updatedAt": "2019-02-12T13:00:57.118Z"
 }

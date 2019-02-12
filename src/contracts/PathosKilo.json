@@ -324,13 +324,13 @@
 	"ast": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/PathosKilo.sol",
 		"exportedSymbols": {
-			"PathosKilo": [28539]
+			"PathosKilo": [28570]
 		},
-		"id": 28540,
+		"id": 28571,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 28512,
+				"id": 28543,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:80"
@@ -338,10 +338,10 @@
 			{
 				"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/TAOCurrency.sol",
 				"file": "./TAOCurrency.sol",
-				"id": 28513,
+				"id": 28544,
 				"nodeType": "ImportDirective",
-				"scope": 28540,
-				"sourceUnit": 30444,
+				"scope": 28571,
+				"sourceUnit": 30475,
 				"src": "26:27:80",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -352,51 +352,51 @@
 						"arguments": null,
 						"baseName": {
 							"contractScope": null,
-							"id": 28514,
+							"id": 28545,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30443,
+							"referencedDeclaration": 30474,
 							"src": "78:11:80",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30443",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30474",
 								"typeString": "contract TAOCurrency"
 							}
 						},
-						"id": 28515,
+						"id": 28546,
 						"nodeType": "InheritanceSpecifier",
 						"src": "78:11:80"
 					}
 				],
-				"contractDependencies": [30443, 33809],
+				"contractDependencies": [30474, 33840],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
-				"id": 28539,
-				"linearizedBaseContracts": [28539, 30443, 33809],
+				"id": 28570,
+				"linearizedBaseContracts": [28570, 30474, 33840],
 				"name": "PathosKilo",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": {
-							"id": 28537,
+							"id": 28568,
 							"nodeType": "Block",
 							"src": "270:38:80",
 							"statements": [
 								{
 									"expression": {
 										"argumentTypes": null,
-										"id": 28531,
+										"id": 28562,
 										"isConstant": false,
 										"isLValue": false,
 										"isPure": false,
 										"lValueRequested": false,
 										"leftHandSide": {
 											"argumentTypes": null,
-											"id": 28529,
+											"id": 28560,
 											"name": "powerOfTen",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30069,
+											"referencedDeclaration": 30100,
 											"src": "274:10:80",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint256",
@@ -408,7 +408,7 @@
 										"rightHandSide": {
 											"argumentTypes": null,
 											"hexValue": "33",
-											"id": 28530,
+											"id": 28561,
 											"isConstant": false,
 											"isLValue": false,
 											"isPure": true,
@@ -429,25 +429,25 @@
 											"typeString": "uint256"
 										}
 									},
-									"id": 28532,
+									"id": 28563,
 									"nodeType": "ExpressionStatement",
 									"src": "274:14:80"
 								},
 								{
 									"expression": {
 										"argumentTypes": null,
-										"id": 28535,
+										"id": 28566,
 										"isConstant": false,
 										"isLValue": false,
 										"isPure": false,
 										"lValueRequested": false,
 										"leftHandSide": {
 											"argumentTypes": null,
-											"id": 28533,
+											"id": 28564,
 											"name": "decimals",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30067,
+											"referencedDeclaration": 30098,
 											"src": "292:8:80",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -459,7 +459,7 @@
 										"rightHandSide": {
 											"argumentTypes": null,
 											"hexValue": "33",
-											"id": 28534,
+											"id": 28565,
 											"isConstant": false,
 											"isLValue": false,
 											"isPure": true,
@@ -480,14 +480,14 @@
 											"typeString": "uint8"
 										}
 									},
-									"id": 28536,
+									"id": 28567,
 									"nodeType": "ExpressionStatement",
 									"src": "292:12:80"
 								}
 							]
 						},
 						"documentation": "@dev Constructor function",
-						"id": 28538,
+						"id": 28569,
 						"implemented": true,
 						"isConstructor": true,
 						"isDeclaredConst": false,
@@ -496,11 +496,11 @@
 								"arguments": [
 									{
 										"argumentTypes": null,
-										"id": 28524,
+										"id": 28555,
 										"name": "_name",
 										"nodeType": "Identifier",
 										"overloadedDeclarations": [],
-										"referencedDeclaration": 28517,
+										"referencedDeclaration": 28548,
 										"src": "222:5:80",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_memory_ptr",
@@ -509,11 +509,11 @@
 									},
 									{
 										"argumentTypes": null,
-										"id": 28525,
+										"id": 28556,
 										"name": "_symbol",
 										"nodeType": "Identifier",
 										"overloadedDeclarations": [],
-										"referencedDeclaration": 28519,
+										"referencedDeclaration": 28550,
 										"src": "229:7:80",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_memory_ptr",
@@ -522,11 +522,11 @@
 									},
 									{
 										"argumentTypes": null,
-										"id": 28526,
+										"id": 28557,
 										"name": "_nameTAOPositionAddress",
 										"nodeType": "Identifier",
 										"overloadedDeclarations": [],
-										"referencedDeclaration": 28521,
+										"referencedDeclaration": 28552,
 										"src": "238:23:80",
 										"typeDescriptions": {
 											"typeIdentifier": "t_address",
@@ -534,17 +534,17 @@
 										}
 									}
 								],
-								"id": 28527,
+								"id": 28558,
 								"modifierName": {
 									"argumentTypes": null,
-									"id": 28523,
+									"id": 28554,
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30443,
+									"referencedDeclaration": 30474,
 									"src": "210:11:80",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30443_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30474_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -555,15 +555,15 @@
 						"name": "",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 28522,
+							"id": 28553,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 28517,
+									"id": 28548,
 									"name": "_name",
 									"nodeType": "VariableDeclaration",
-									"scope": 28538,
+									"scope": 28569,
 									"src": "145:12:80",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -572,7 +572,7 @@
 										"typeString": "string"
 									},
 									"typeName": {
-										"id": 28516,
+										"id": 28547,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
 										"src": "145:6:80",
@@ -586,10 +586,10 @@
 								},
 								{
 									"constant": false,
-									"id": 28519,
+									"id": 28550,
 									"name": "_symbol",
 									"nodeType": "VariableDeclaration",
-									"scope": 28538,
+									"scope": 28569,
 									"src": "159:14:80",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -598,7 +598,7 @@
 										"typeString": "string"
 									},
 									"typeName": {
-										"id": 28518,
+										"id": 28549,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
 										"src": "159:6:80",
@@ -612,10 +612,10 @@
 								},
 								{
 									"constant": false,
-									"id": 28521,
+									"id": 28552,
 									"name": "_nameTAOPositionAddress",
 									"nodeType": "VariableDeclaration",
-									"scope": 28538,
+									"scope": 28569,
 									"src": "175:31:80",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -624,7 +624,7 @@
 										"typeString": "address"
 									},
 									"typeName": {
-										"id": 28520,
+										"id": 28551,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
 										"src": "175:7:80",
@@ -641,19 +641,19 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 28528,
+							"id": 28559,
 							"nodeType": "ParameterList",
 							"parameters": [],
 							"src": "270:0:80"
 						},
-						"scope": 28539,
+						"scope": 28570,
 						"src": "133:175:80",
 						"stateMutability": "nonpayable",
 						"superFunction": null,
 						"visibility": "public"
 					}
 				],
-				"scope": 28540,
+				"scope": 28571,
 				"src": "55:255:80"
 			}
 		],
@@ -662,13 +662,13 @@
 	"legacyAST": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/PathosKilo.sol",
 		"exportedSymbols": {
-			"PathosKilo": [28539]
+			"PathosKilo": [28570]
 		},
-		"id": 28540,
+		"id": 28571,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 28512,
+				"id": 28543,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:80"
@@ -676,10 +676,10 @@
 			{
 				"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/TAOCurrency.sol",
 				"file": "./TAOCurrency.sol",
-				"id": 28513,
+				"id": 28544,
 				"nodeType": "ImportDirective",
-				"scope": 28540,
-				"sourceUnit": 30444,
+				"scope": 28571,
+				"sourceUnit": 30475,
 				"src": "26:27:80",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -690,51 +690,51 @@
 						"arguments": null,
 						"baseName": {
 							"contractScope": null,
-							"id": 28514,
+							"id": 28545,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30443,
+							"referencedDeclaration": 30474,
 							"src": "78:11:80",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30443",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30474",
 								"typeString": "contract TAOCurrency"
 							}
 						},
-						"id": 28515,
+						"id": 28546,
 						"nodeType": "InheritanceSpecifier",
 						"src": "78:11:80"
 					}
 				],
-				"contractDependencies": [30443, 33809],
+				"contractDependencies": [30474, 33840],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
-				"id": 28539,
-				"linearizedBaseContracts": [28539, 30443, 33809],
+				"id": 28570,
+				"linearizedBaseContracts": [28570, 30474, 33840],
 				"name": "PathosKilo",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": {
-							"id": 28537,
+							"id": 28568,
 							"nodeType": "Block",
 							"src": "270:38:80",
 							"statements": [
 								{
 									"expression": {
 										"argumentTypes": null,
-										"id": 28531,
+										"id": 28562,
 										"isConstant": false,
 										"isLValue": false,
 										"isPure": false,
 										"lValueRequested": false,
 										"leftHandSide": {
 											"argumentTypes": null,
-											"id": 28529,
+											"id": 28560,
 											"name": "powerOfTen",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30069,
+											"referencedDeclaration": 30100,
 											"src": "274:10:80",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint256",
@@ -746,7 +746,7 @@
 										"rightHandSide": {
 											"argumentTypes": null,
 											"hexValue": "33",
-											"id": 28530,
+											"id": 28561,
 											"isConstant": false,
 											"isLValue": false,
 											"isPure": true,
@@ -767,25 +767,25 @@
 											"typeString": "uint256"
 										}
 									},
-									"id": 28532,
+									"id": 28563,
 									"nodeType": "ExpressionStatement",
 									"src": "274:14:80"
 								},
 								{
 									"expression": {
 										"argumentTypes": null,
-										"id": 28535,
+										"id": 28566,
 										"isConstant": false,
 										"isLValue": false,
 										"isPure": false,
 										"lValueRequested": false,
 										"leftHandSide": {
 											"argumentTypes": null,
-											"id": 28533,
+											"id": 28564,
 											"name": "decimals",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 30067,
+											"referencedDeclaration": 30098,
 											"src": "292:8:80",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint8",
@@ -797,7 +797,7 @@
 										"rightHandSide": {
 											"argumentTypes": null,
 											"hexValue": "33",
-											"id": 28534,
+											"id": 28565,
 											"isConstant": false,
 											"isLValue": false,
 											"isPure": true,
@@ -818,14 +818,14 @@
 											"typeString": "uint8"
 										}
 									},
-									"id": 28536,
+									"id": 28567,
 									"nodeType": "ExpressionStatement",
 									"src": "292:12:80"
 								}
 							]
 						},
 						"documentation": "@dev Constructor function",
-						"id": 28538,
+						"id": 28569,
 						"implemented": true,
 						"isConstructor": true,
 						"isDeclaredConst": false,
@@ -834,11 +834,11 @@
 								"arguments": [
 									{
 										"argumentTypes": null,
-										"id": 28524,
+										"id": 28555,
 										"name": "_name",
 										"nodeType": "Identifier",
 										"overloadedDeclarations": [],
-										"referencedDeclaration": 28517,
+										"referencedDeclaration": 28548,
 										"src": "222:5:80",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_memory_ptr",
@@ -847,11 +847,11 @@
 									},
 									{
 										"argumentTypes": null,
-										"id": 28525,
+										"id": 28556,
 										"name": "_symbol",
 										"nodeType": "Identifier",
 										"overloadedDeclarations": [],
-										"referencedDeclaration": 28519,
+										"referencedDeclaration": 28550,
 										"src": "229:7:80",
 										"typeDescriptions": {
 											"typeIdentifier": "t_string_memory_ptr",
@@ -860,11 +860,11 @@
 									},
 									{
 										"argumentTypes": null,
-										"id": 28526,
+										"id": 28557,
 										"name": "_nameTAOPositionAddress",
 										"nodeType": "Identifier",
 										"overloadedDeclarations": [],
-										"referencedDeclaration": 28521,
+										"referencedDeclaration": 28552,
 										"src": "238:23:80",
 										"typeDescriptions": {
 											"typeIdentifier": "t_address",
@@ -872,17 +872,17 @@
 										}
 									}
 								],
-								"id": 28527,
+								"id": 28558,
 								"modifierName": {
 									"argumentTypes": null,
-									"id": 28523,
+									"id": 28554,
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30443,
+									"referencedDeclaration": 30474,
 									"src": "210:11:80",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30443_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30474_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -893,15 +893,15 @@
 						"name": "",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 28522,
+							"id": 28553,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 28517,
+									"id": 28548,
 									"name": "_name",
 									"nodeType": "VariableDeclaration",
-									"scope": 28538,
+									"scope": 28569,
 									"src": "145:12:80",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -910,7 +910,7 @@
 										"typeString": "string"
 									},
 									"typeName": {
-										"id": 28516,
+										"id": 28547,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
 										"src": "145:6:80",
@@ -924,10 +924,10 @@
 								},
 								{
 									"constant": false,
-									"id": 28519,
+									"id": 28550,
 									"name": "_symbol",
 									"nodeType": "VariableDeclaration",
-									"scope": 28538,
+									"scope": 28569,
 									"src": "159:14:80",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -936,7 +936,7 @@
 										"typeString": "string"
 									},
 									"typeName": {
-										"id": 28518,
+										"id": 28549,
 										"name": "string",
 										"nodeType": "ElementaryTypeName",
 										"src": "159:6:80",
@@ -950,10 +950,10 @@
 								},
 								{
 									"constant": false,
-									"id": 28521,
+									"id": 28552,
 									"name": "_nameTAOPositionAddress",
 									"nodeType": "VariableDeclaration",
-									"scope": 28538,
+									"scope": 28569,
 									"src": "175:31:80",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -962,7 +962,7 @@
 										"typeString": "address"
 									},
 									"typeName": {
-										"id": 28520,
+										"id": 28551,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
 										"src": "175:7:80",
@@ -979,19 +979,19 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 28528,
+							"id": 28559,
 							"nodeType": "ParameterList",
 							"parameters": [],
 							"src": "270:0:80"
 						},
-						"scope": 28539,
+						"scope": 28570,
 						"src": "133:175:80",
 						"stateMutability": "nonpayable",
 						"superFunction": null,
 						"visibility": "public"
 					}
 				],
-				"scope": 28540,
+				"scope": 28571,
 				"src": "55:255:80"
 			}
 		],
@@ -1012,5 +1012,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-11T10:27:03.059Z"
+	"updatedAt": "2019-02-12T13:00:57.162Z"
 }
