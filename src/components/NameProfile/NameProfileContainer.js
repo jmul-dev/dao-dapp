@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
 		nameId: state.taoReducer.nameId,
 		nameTAOLookup: state.contractReducer.nameTAOLookup,
 		nameTAOPosition: state.contractReducer.nameTAOPosition,
-		namePublicKey: state.contractReducer.namePublicKey
+		namePublicKey: state.contractReducer.namePublicKey,
+		aoion: state.contractReducer.aoion
 	};
 };
 

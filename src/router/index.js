@@ -23,7 +23,8 @@ import {
 	setNameTAOVault,
 	setEthos,
 	setPathos,
-	setLogos
+	setLogos,
+	setAOIon
 } from "./actions";
 import { web3Errors } from "common/errors";
 
@@ -37,6 +38,7 @@ import NameTAOVault from "contracts/NameTAOVault.json";
 import Ethos from "contracts/Ethos.json";
 import Pathos from "contracts/Pathos.json";
 import Logos from "contracts/Logos.json";
+import AOIon from "contracts/AOIon.json";
 
 import { setError } from "widgets/Toast/actions";
 
@@ -91,6 +93,9 @@ class AppRouter extends React.Component {
 
 			const logos = this.instantiateContract(web3, networkId, Logos.abi, Logos.networks);
 			dispatch(setLogos(logos));
+
+			const aoion = this.instantiateContract(web3, networkId, AOIon.abi, AOIon.networks);
+			dispatch(setAOIon(aoion));
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}

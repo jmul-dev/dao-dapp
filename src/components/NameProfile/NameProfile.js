@@ -10,6 +10,7 @@ import {
 	OwnerContent,
 	PublicKeyContainer,
 	PublicKeyValue,
+	PublicKeyBalance,
 	PublicKeyAction,
 	StyledButton,
 	StyledButtonSmall
@@ -18,6 +19,7 @@ import { AddPublicKeyContainer } from "./AddPublicKey/";
 import { waitForTransactionReceipt } from "reducers/contractReducer";
 import { EMPTY_ADDRESS } from "common/constants";
 import { setError } from "widgets/Toast/actions";
+import { asyncForEach } from "utils/";
 
 const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
@@ -31,6 +33,7 @@ class NameProfile extends React.Component {
 			position: null,
 			defaultPublicKey: null,
 			publicKeys: null,
+			publicKeysBalance: {},
 			showAddKeyForm: false,
 			processingTransaction: false,
 			publicKeyInProcess: null
@@ -91,24 +94,37 @@ class NameProfile extends React.Component {
 
 	async getNamePublicKey() {
 		const { id } = this.props.params;
-		const { namePublicKey } = this.props;
-		if (!namePublicKey || !id) {
+		const { namePublicKey, aoion } = this.props;
+		if (!namePublicKey || !aoion || !id) {
 			return;
 		}
 		const defaultPublicKey = await promisify(namePublicKey.getDefaultKey)(id);
 		const totalPublicKeys = await promisify(namePublicKey.getTotalPublicKeysCount)(id);
 		const _publicKeys = await promisify(namePublicKey.getKeys)(id, 0, totalPublicKeys.toNumber());
 		const publicKeys = _publicKeys.filter((_publicKey) => _publicKey !== EMPTY_ADDRESS);
-		this.setState({ defaultPublicKey, publicKeys });
+		const publicKeysBalance = {};
+		await asyncForEach(publicKeys, async (publicKey) => {
+			const networkBalance = await promisify(aoion.balanceOf)(publicKey);
+			const primordialBalance = await promisify(aoion.primordialBalanceOf)(publicKey);
+			publicKeysBalance[publicKey] = { networkBalance, primordialBalance };
+		});
+		this.setState({ defaultPublicKey, publicKeys, publicKeysBalance });
 	}
 
 	toggleAddKeyForm() {
 		this.setState({ showAddKeyForm: !this.state.showAddKeyForm });
 	}
 
-	appendPublicKey(publicKey) {
+	async appendPublicKey(publicKey) {
+		const { aoion } = this.props;
+		if (!aoion) {
+			return;
+		}
+		const networkBalance = await promisify(aoion.balanceOf)(publicKey);
+		const primordialBalance = await promisify(aoion.primordialBalanceOf)(publicKey);
 		this.state.publicKeys.push(publicKey);
-		this.setState({ publicKeys: this.state.publicKeys });
+		this.state.publicKeysBalance[publicKey] = { networkBalance, primordialBalance };
+		this.setState({ publicKeys: this.state.publicKeys, publicKeysBalance: this.state.publicKeysBalance });
 	}
 
 	async setDefaultPublicKey(publicKey) {
@@ -186,6 +202,7 @@ class NameProfile extends React.Component {
 			position,
 			defaultPublicKey,
 			publicKeys,
+			publicKeysBalance,
 			showAddKeyForm,
 			processingTransaction,
 			publicKeyInProcess
@@ -201,6 +218,8 @@ class NameProfile extends React.Component {
 				publicKeysContent = publicKeys.map((publicKey) => (
 					<PublicKeyContainer key={publicKey} className={publicKey === defaultPublicKey && "default"}>
 						<PublicKeyValue>{publicKey}</PublicKeyValue>
+						<PublicKeyBalance>{publicKeysBalance[publicKey].networkBalance.toNumber()} AO</PublicKeyBalance>
+						<PublicKeyBalance>{publicKeysBalance[publicKey].primordialBalance.toNumber()} AO+</PublicKeyBalance>
 						<PublicKeyAction>
 							{publicKey === defaultPublicKey
 								? "(default)"

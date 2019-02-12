@@ -11,6 +11,7 @@ class ContractReducerState {
 		this.ethos = null;
 		this.pathos = null;
 		this.logos = null;
+		this.aoion = null;
 	}
 }
 
@@ -77,6 +78,13 @@ const handleSetLogos = (state, action) => {
 	};
 };
 
+const handleSetAOIon = (state, action) => {
+	return {
+		...state,
+		aoion: action.aoion
+	};
+};
+
 export const waitForTransactionReceipt = (transactionHash) => {
 	return new Promise((resolve, reject) => {
 		const intervalId = setInterval(() => {
@@ -117,6 +125,8 @@ export const contractReducer = (state = new ContractReducerState(), action) => {
 			return handleSetPathos(state, action);
 		case actionsEnums.SET_LOGOS:
 			return handleSetLogos(state, action);
+		case actionsEnums.SET_AOION:
+			return handleSetAOIon(state, action);
 		default:
 			return state;
 	}

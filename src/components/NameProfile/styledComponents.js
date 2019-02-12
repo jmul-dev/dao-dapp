@@ -57,6 +57,13 @@ export const PublicKeyValue = styled.div`
 	width: 370px;
 `;
 
+export const PublicKeyBalance = styled.div`
+	display: inline-block;
+	text-align: right;
+	width: 100px;
+	margin-right: 20px;
+`;
+
 export const PublicKeyAction = styled.div`
 	display: inline-block;
 `;
