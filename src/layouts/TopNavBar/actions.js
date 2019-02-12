@@ -6,3 +6,10 @@ export const setNameInfo = (nameInfo) => {
 		nameInfo
 	};
 };
+
+export const setTAOCurrencyBalances = (balances) => {
+	return {
+		type: actionsEnums.SET_TAO_CURRENCY_BALANCES,
+		balances
+	};
+};

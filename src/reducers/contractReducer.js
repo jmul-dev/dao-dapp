@@ -8,6 +8,9 @@ class ContractReducerState {
 		this.nameTAOLookup = null;
 		this.nameTAOPosition = null;
 		this.nameTAOVault = null;
+		this.ethos = null;
+		this.pathos = null;
+		this.logos = null;
 	}
 }
 
