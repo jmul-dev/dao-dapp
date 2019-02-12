@@ -79,13 +79,13 @@ const handleSetLogos = (state, action) => {
 
 export const waitForTransactionReceipt = (transactionHash) => {
 	return new Promise((resolve, reject) => {
-		const filter = window.web3.eth.filter("latest");
-		filter.watch((error, result) => {
+		const intervalId = setInterval(() => {
 			window.web3.eth.getTransactionReceipt(transactionHash, (err, receipt) => {
 				if (err) {
+					clearInterval(intervalId);
 					reject(err);
 				} else if (receipt) {
-					filter.stopWatching();
+					clearInterval(intervalId);
 					if (receipt.status === "0x0") {
 						reject(new Error("Transaction failed"));
 					} else {
@@ -93,7 +93,7 @@ export const waitForTransactionReceipt = (transactionHash) => {
 					}
 				}
 			});
-		});
+		}, 1000);
 	});
 };
 

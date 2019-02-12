@@ -9,7 +9,7 @@ export const CurrencyName = styled.span`
 	font-size: 0.875em;
 	font-weight: 500;
 	text-align: center;
-	margin: 0 12px 0 20px;
+	margin: 0 10px 0 25px;
 
 	&.ethos {
 		color: rgb(9, 159, 255);
@@ -29,7 +29,7 @@ export const CurrencyValue = styled.span`
 
 export const Avatar = styled.img`
 	width: 20px;
-	margin: 0 10px 0 20px;
+	margin: 0 10px 0 25px;
 `;
 
 export const StyledLink = styled(Link)`
