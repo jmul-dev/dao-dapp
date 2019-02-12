@@ -64,7 +64,7 @@ class TopNavBar extends React.Component {
 		const { nameId, nameInfo, taoCurrencyBalances } = this.props;
 		if (!nameId || !nameInfo || !taoCurrencyBalances) return null;
 		return (
-			<Navbar bg="dark" variant="dark">
+			<Navbar bg="dark" variant="dark" sticky="top">
 				<Navbar.Brand>
 					<StyledLink to="/">
 						<TAOLogo src={process.env.PUBLIC_URL + "/images/img_0.png"} alt={"AO Logo"} />
