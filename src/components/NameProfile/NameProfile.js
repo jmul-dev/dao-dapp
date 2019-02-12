@@ -17,7 +17,9 @@ import {
 import { AddPublicKeyContainer } from "./AddPublicKey/";
 import { waitForTransactionReceipt } from "reducers/contractReducer";
 import { EMPTY_ADDRESS } from "common/constants";
+import { setError } from "widgets/Toast/actions";
 
+const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
 
 class NameProfile extends React.Component {
@@ -31,9 +33,7 @@ class NameProfile extends React.Component {
 			publicKeys: null,
 			showAddKeyForm: false,
 			processingTransaction: false,
-			publicKeyInProcess: null,
-			error: false,
-			errorMessage: ""
+			publicKeyInProcess: null
 		};
 		this.toggleAddKeyForm = this.toggleAddKeyForm.bind(this);
 		this.appendPublicKey = this.appendPublicKey.bind(this);
@@ -112,11 +112,47 @@ class NameProfile extends React.Component {
 	}
 
 	async setDefaultPublicKey(publicKey) {
-		const { id } = this.props.params;
-		const { namePublicKey } = this.props;
-		if (!namePublicKey || !id) {
+		const { web3, accounts, nameId, namePublicKey } = this.props;
+		if (!web3 || !accounts || !nameId || !namePublicKey) {
 			return;
 		}
+		const signHash = EthCrypto.hash.keccak256([
+			{
+				type: "address",
+				value: namePublicKey.address
+			},
+			{
+				type: "address",
+				value: nameId
+			},
+			{
+				type: "address",
+				value: publicKey
+			}
+		]);
+		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey });
+		web3.eth.sign(accounts[0], signHash, async (err, signature) => {
+			if (err) {
+				this.setState({ processingTransaction: false, publicKeyInProcess: null });
+			} else {
+				const vrs = EthCrypto.vrs.fromString(signature);
+				namePublicKey.setDefaultKey(nameId, publicKey, vrs.v, vrs.r, vrs.s, { from: accounts[0] }, (err, transactionHash) => {
+					if (err) {
+						this.setState({ processingTransaction: false, publicKeyInProcess: null });
+						setError(err);
+					} else {
+						waitForTransactionReceipt(transactionHash)
+							.then(() => {
+								this.setState({ processingTransaction: false, publicKeyInProcess: null, defaultPublicKey: publicKey });
+							})
+							.catch((err) => {
+								this.setState({ processingTransaction: false, publicKeyInProcess: null });
+								setError(err);
+							});
+					}
+				});
+			}
+		});
 	}
 
 	async removePublicKey(publicKey) {
@@ -127,7 +163,8 @@ class NameProfile extends React.Component {
 		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey });
 		namePublicKey.removeKey(nameId, publicKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
-				this.setState({ error: true, errorMessage: err, processingTransaction: false, publicKeyInProcess: null });
+				this.setState({ processingTransaction: false, publicKeyInProcess: null });
+				setError(err);
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
@@ -135,7 +172,8 @@ class NameProfile extends React.Component {
 						this.setState({ processingTransaction: false, publicKeyInProcess: null, publicKeys });
 					})
 					.catch((err) => {
-						this.setState({ error: true, errorMessage: err.message, processingTransaction: false, publicKeyInProcess: null });
+						this.setState({ processingTransaction: false, publicKeyInProcess: null });
+						setError(err);
 					});
 			}
 		});

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { PageLayout } from "../../layouts/PageLayout/";
-import { EMPTY_ADDRESS } from "../../common/constants";
+import { PageLayout } from "layouts/PageLayout/";
+import { EMPTY_ADDRESS } from "common/constants";
 import { ImgContainer } from "./styledComponents";
 
 const promisify = require("tiny-promisify");
