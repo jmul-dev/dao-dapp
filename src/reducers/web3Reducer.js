@@ -1,4 +1,4 @@
-import { actionsEnums } from "../common/actionsEnums";
+import { actionsEnums } from "common/actionsEnums";
 
 class Web3ReducerState {
 	constructor() {

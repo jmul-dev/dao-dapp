@@ -4,12 +4,12 @@ import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 
 // Router
-import { AppContainer } from "../components/App/";
-import { EnsureCreateNameContainer } from "../components/EnsureCreateName/";
-import { NameProfileContainer } from "../components/NameProfile/";
-import { TAODetails } from "../components/TAODetails/TAODetails";
-import { Meet } from "../components/Meet/Meet";
-import { Ide } from "../components/Ide/Ide";
+import { AppContainer } from "components/App/";
+import { EnsureCreateNameContainer } from "components/EnsureCreateName/";
+import { NameProfileContainer } from "components/NameProfile/";
+import { TAODetails } from "components/TAODetails/TAODetails";
+import { Meet } from "components/Meet/Meet";
+import { Ide } from "components/Ide/Ide";
 
 import {
 	web3Connected,
@@ -25,20 +25,20 @@ import {
 	setPathos,
 	setLogos
 } from "./actions";
-import { web3Errors } from "../common/errors";
+import { web3Errors } from "common/errors";
 
 // Contracts
-import NameAccountRecovery from "../contracts/NameAccountRecovery.json";
-import NameFactory from "../contracts/NameFactory.json";
-import NamePublicKey from "../contracts/NamePublicKey.json";
-import NameTAOLookup from "../contracts/NameTAOLookup.json";
-import NameTAOPosition from "../contracts/NameTAOPosition.json";
-import NameTAOVault from "../contracts/NameTAOVault.json";
-import Ethos from "../contracts/Ethos.json";
-import Pathos from "../contracts/Pathos.json";
-import Logos from "../contracts/Logos.json";
+import NameAccountRecovery from "contracts/NameAccountRecovery.json";
+import NameFactory from "contracts/NameFactory.json";
+import NamePublicKey from "contracts/NamePublicKey.json";
+import NameTAOLookup from "contracts/NameTAOLookup.json";
+import NameTAOPosition from "contracts/NameTAOPosition.json";
+import NameTAOVault from "contracts/NameTAOVault.json";
+import Ethos from "contracts/Ethos.json";
+import Pathos from "contracts/Pathos.json";
+import Logos from "contracts/Logos.json";
 
-import { setError } from "../widgets/Toast/actions";
+import { setError } from "widgets/Toast/actions";
 
 const promisify = require("tiny-promisify");
 

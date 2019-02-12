@@ -1,4 +1,4 @@
-import { actionsEnums } from "../common/actionsEnums";
+import { actionsEnums } from "common/actionsEnums";
 
 class ToastReducerState {
 	constructor() {
