@@ -12,10 +12,12 @@ import {
 	PublicKeyValue,
 	PublicKeyBalance,
 	PublicKeyAction,
-	StyledButton,
-	StyledButtonSmall
+	NonDefaultKeyAction,
+	StyledButtonSmall,
+	IconContainer
 } from "./styledComponents";
 import { AddPublicKeyContainer } from "./AddPublicKey/";
+import { TransferIonContainer } from "./TransferIon/";
 import { waitForTransactionReceipt } from "reducers/contractReducer";
 import { EMPTY_ADDRESS } from "common/constants";
 import { setError } from "widgets/Toast/actions";
@@ -35,13 +37,16 @@ class NameProfile extends React.Component {
 			publicKeys: null,
 			publicKeysBalance: {},
 			showAddKeyForm: false,
+			showTransferIonForm: false,
 			processingTransaction: false,
 			publicKeyInProcess: null
 		};
 		this.toggleAddKeyForm = this.toggleAddKeyForm.bind(this);
+		this.toggleTransferIonForm = this.toggleTransferIonForm.bind(this);
 		this.appendPublicKey = this.appendPublicKey.bind(this);
 		this.setDefaultPublicKey = this.setDefaultPublicKey.bind(this);
 		this.removePublicKey = this.removePublicKey.bind(this);
+		this.refreshPublicKeyBalance = this.refreshPublicKeyBalance.bind(this);
 	}
 
 	async componentDidMount() {
@@ -113,6 +118,10 @@ class NameProfile extends React.Component {
 
 	toggleAddKeyForm() {
 		this.setState({ showAddKeyForm: !this.state.showAddKeyForm });
+	}
+
+	toggleTransferIonForm() {
+		this.setState({ showTransferIonForm: !this.state.showTransferIonForm });
 	}
 
 	async appendPublicKey(publicKey) {
@@ -195,6 +204,17 @@ class NameProfile extends React.Component {
 		});
 	}
 
+	async refreshPublicKeyBalance(publicKey) {
+		const { aoion } = this.props;
+		if (!aoion) {
+			return;
+		}
+		const networkBalance = await promisify(aoion.balanceOf)(publicKey);
+		const primordialBalance = await promisify(aoion.primordialBalanceOf)(publicKey);
+		this.state.publicKeysBalance[publicKey] = { networkBalance, primordialBalance };
+		this.setState({ publicKeysBalance: this.state.publicKeysBalance });
+	}
+
 	render() {
 		const {
 			isOwner,
@@ -204,6 +224,7 @@ class NameProfile extends React.Component {
 			publicKeys,
 			publicKeysBalance,
 			showAddKeyForm,
+			showTransferIonForm,
 			processingTransaction,
 			publicKeyInProcess
 		} = this.state;
@@ -227,7 +248,7 @@ class NameProfile extends React.Component {
 										processingTransaction && publicKey === publicKeyInProcess ? (
 											"Loading..."
 										) : (
-											<div key={publicKey}>
+											<NonDefaultKeyAction key={publicKey}>
 												<StyledButtonSmall
 													onClick={() => this.setDefaultPublicKey(publicKey)}
 													disabled={processingTransaction}
@@ -241,7 +262,7 @@ class NameProfile extends React.Component {
 												>
 													Remove
 												</StyledButtonSmall>
-											</div>
+											</NonDefaultKeyAction>
 										)
 								  ]}
 						</PublicKeyAction>
@@ -254,14 +275,38 @@ class NameProfile extends React.Component {
 					<FieldContainer>
 						<FieldValue>{publicKeysContent}</FieldValue>
 					</FieldContainer>
-					{!showAddKeyForm && (
-						<StyledButton onClick={this.toggleAddKeyForm} disabled={processingTransaction}>
-							Add Public Key
-						</StyledButton>
+					{!showAddKeyForm && !showTransferIonForm && (
+						<div>
+							<IconContainer onClick={this.toggleAddKeyForm} disabled={processingTransaction}>
+								<img src={process.env.PUBLIC_URL + "/images/add.png"} alt={"Add Public Key"} />
+								<div>Add Public Key</div>
+							</IconContainer>
+							{publicKeys && publicKeys.length > 1 && (
+								<IconContainer onClick={this.toggleTransferIonForm} disabled={processingTransaction}>
+									<img src={process.env.PUBLIC_URL + "/images/transfer.png"} alt={"Transfer Ion"} />
+									<div>Transfer Ion</div>
+								</IconContainer>
+							)}
+						</div>
 					)}
-					{showAddKeyForm && (
-						<AddPublicKeyContainer toggleAddKeyForm={this.toggleAddKeyForm} appendPublicKey={this.appendPublicKey} />
-					)}
+					{showAddKeyForm || showTransferIonForm
+						? [
+								showAddKeyForm ? (
+									<AddPublicKeyContainer
+										toggleAddKeyForm={this.toggleAddKeyForm}
+										appendPublicKey={this.appendPublicKey}
+										key={"Add Public Key"}
+									/>
+								) : (
+									<TransferIonContainer
+										toggleTransferIonForm={this.toggleTransferIonForm}
+										publicKeys={publicKeys}
+										refreshPublicKeyBalance={this.refreshPublicKeyBalance}
+										key={"Transfer Ion"}
+									/>
+								)
+						  ]
+						: null}
 				</OwnerContent>
 			);
 		}

@@ -68,6 +68,10 @@ export const PublicKeyAction = styled.div`
 	display: inline-block;
 `;
 
+export const NonDefaultKeyAction = styled.div`
+	display: inline-block;
+`;
+
 export const StyledButton = styled.button`
 	background: rgba(0, 204, 71, 1);
 	color: #ffffff;
@@ -80,6 +84,11 @@ export const StyledButton = styled.button`
 	font-weight: 500;
 	margin: 10px 0;
 	cursor: pointer;
+
+	&.transfer {
+		background: #ffbe01;
+		margin-left: 10px;
+	}
 `;
 
 export const StyledButtonSmall = styled(StyledButton)`
@@ -91,5 +100,25 @@ export const StyledButtonSmall = styled(StyledButton)`
 
 	&.remove {
 		background: #d34343;
+	}
+`;
+
+export const IconContainer = styled.div`
+	display: inline-block;
+	cursor: pointer;
+	text-align: center;
+	font-size: 0.8em;
+	margin-right: 20px;
+
+	> img {
+		max-height: 20px;
+	}
+
+	> div {
+		margin-top: 5px;
+	}
+
+	:hover {
+		opacity: 0.7;
 	}
 `;

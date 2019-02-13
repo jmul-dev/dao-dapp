@@ -2,7 +2,6 @@ import * as React from "react";
 import { Wrapper, Title, StyledForm, StyledButton, Error } from "./styledComponents";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "reducers/contractReducer";
-import { setError } from "widgets/Toast/actions";
 
 const promisify = require("tiny-promisify");
 
@@ -27,18 +26,16 @@ class CreateNameForm extends React.Component {
 		}
 		nameFactory.createName(formData.username, "", "", "", "", { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
-				this.setState({ formLoading: false });
-				setError(err);
+				this.setState({ error: true, errorMessage: err, formLoading: false });
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
-						this.setState({ formLoading: false });
+						this.setState({ error: false, errorMessage: "", formLoading: false });
 						const nameId = await promisify(nameFactory.ethAddressToNameId)(accounts[0]);
 						this.props.setNameId(nameId);
 					})
 					.catch((err) => {
-						this.setState({ formLoading: false });
-						setError(err);
+						this.setState({ error: true, errorMessage: err, formLoading: false });
 					});
 			}
 		});
