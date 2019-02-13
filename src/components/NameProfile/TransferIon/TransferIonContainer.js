@@ -4,7 +4,7 @@ import { TransferIon } from "./TransferIon";
 const mapStateToProps = (state) => {
 	return {
 		accounts: state.web3Reducer.accounts,
-		nameId: state.taoReducer.nameId,
+		nameId: state.nameReducer.nameId,
 		aoion: state.contractReducer.aoion
 	};
 };

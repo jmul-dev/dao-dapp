@@ -90,3 +90,10 @@ export const setAOIon = (aoion) => {
 		aoion
 	};
 };
+
+export const setNames = (names) => {
+	return {
+		type: actionsEnums.SET_NAMES,
+		names
+	};
+};

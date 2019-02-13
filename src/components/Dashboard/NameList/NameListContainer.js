@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
-import { EnsureCreateName } from "./EnsureCreateName";
+import { NameList } from "./NameList";
 
 const mapStateToProps = (state) => {
 	return {
-		nameId: state.nameReducer.nameId
+		names: state.taoReducer.names
 	};
 };
 
@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export const EnsureCreateNameContainer = connect(
+export const NameListContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EnsureCreateName);
+)(NameList);

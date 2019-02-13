@@ -24,7 +24,8 @@ import {
 	setEthos,
 	setPathos,
 	setLogos,
-	setAOIon
+	setAOIon,
+	setNames
 } from "./actions";
 import { web3Errors } from "common/errors";
 
@@ -41,6 +42,8 @@ import Logos from "contracts/Logos.json";
 import AOIon from "contracts/AOIon.json";
 
 import { setError } from "widgets/Toast/actions";
+
+import { getTransactionReceipt } from "utils/";
 
 const promisify = require("tiny-promisify");
 
@@ -96,6 +99,8 @@ class AppRouter extends React.Component {
 
 			const aoion = this.instantiateContract(web3, networkId, AOIon.abi, AOIon.networks);
 			dispatch(setAOIon(aoion));
+
+			this.watchNameFactoryEvent(web3, networkId, nameFactory);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}
@@ -140,6 +145,25 @@ class AppRouter extends React.Component {
 	instantiateContract(web3, networkId, abi, networks) {
 		const contract = web3.eth.contract(abi).at(networks[networkId].address);
 		return contract;
+	}
+
+	async watchNameFactoryEvent(web3, networkId, nameFactory) {
+		const dispatch = this.props.store.dispatch;
+
+		try {
+			const receipt = await getTransactionReceipt(NameFactory.networks[networkId].transactionHash);
+			nameFactory.allEvents({ fromBlock: receipt.blockNumber, toBlock: "latest" }).get((err, logs) => {
+				if (!err) {
+					const names = [];
+					logs.map((log) => {
+						names.push({ nameId: log.args.nameId, name: log.args.name });
+					});
+					dispatch(setNames(names));
+				}
+			});
+		} catch (e) {
+			console.log("error", e);
+		}
 	}
 
 	render() {

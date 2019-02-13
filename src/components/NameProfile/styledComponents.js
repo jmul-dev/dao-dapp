@@ -108,7 +108,7 @@ export const IconContainer = styled.div`
 	cursor: pointer;
 	text-align: center;
 	font-size: 0.8em;
-	margin-right: 20px;
+	margin: 10px 20px 0 0;
 
 	> img {
 		max-height: 20px;

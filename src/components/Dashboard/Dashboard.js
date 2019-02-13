@@ -1,12 +1,14 @@
 import * as React from "react";
-import { Wrapper, WidgetWrapper } from "./Styled";
-import { Tree } from "./widgets/Tree/Tree";
-import { Welcome } from "./widgets/Welcome/Welcome";
-import { DoughnutChart } from "./widgets/DoughnutChart/DoughnutChart";
-import { LineChart } from "./widgets/LineChart/LineChart";
-import { CountUpWidget } from "./widgets/CountUpWidget/CountUpWidget";
-import { ListTAO } from "./widgets/ListTAO/ListTAO";
-import { RadarChart } from "./widgets/RadarChart/RadarChart";
+import { NameListContainer } from "./NameList/";
+
+import { Wrapper, WidgetWrapper } from "../Styled";
+import { Tree } from "widgets/Tree/Tree";
+import { Welcome } from "widgets/Welcome/Welcome";
+import { DoughnutChart } from "widgets/DoughnutChart/DoughnutChart";
+import { LineChart } from "widgets/LineChart/LineChart";
+import { CountUpWidget } from "widgets/CountUpWidget/CountUpWidget";
+import { ListTAO } from "widgets/ListTAO/ListTAO";
+import { RadarChart } from "widgets/RadarChart/RadarChart";
 import { Palette, Highlight } from "./color.json";
 
 class Dashboard extends React.Component {
@@ -96,6 +98,7 @@ class Dashboard extends React.Component {
 
 		return (
 			<Wrapper>
+				<NameListContainer />
 				<WidgetWrapper>
 					<Tree width={1200} height={800} />
 				</WidgetWrapper>

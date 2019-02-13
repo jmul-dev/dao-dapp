@@ -24,6 +24,7 @@
 		"react-router": "^3.2.1",
 		"react-router-redux": "^4.0.8",
 		"react-scripts": "2.1.1",
+		"react-table": "^6.9.2",
 		"redux": "^4.0.1",
 		"single-line-string": "^0.0.2",
 		"styled-components": "^4.1.1",

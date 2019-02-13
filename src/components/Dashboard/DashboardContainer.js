@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
-import { EnsureCreateName } from "./EnsureCreateName";
+import { Dashboard } from "./Dashboard";
 
 const mapStateToProps = (state) => {
 	return {
-		nameId: state.nameReducer.nameId
+		nameId: state.nameReducer.nameId,
+		names: state.taoReducer.names
 	};
 };
 
@@ -11,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export const EnsureCreateNameContainer = connect(
+export const DashboardContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EnsureCreateName);
+)(Dashboard);

@@ -4,9 +4,9 @@ import { setNameInfo, setTAOCurrencyBalances } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
-		nameId: state.taoReducer.nameId,
-		nameInfo: state.taoReducer.nameInfo,
-		taoCurrencyBalances: state.taoReducer.taoCurrencyBalances,
+		nameId: state.nameReducer.nameId,
+		nameInfo: state.nameReducer.nameInfo,
+		taoCurrencyBalances: state.nameReducer.taoCurrencyBalances,
 		nameTAOLookup: state.contractReducer.nameTAOLookup,
 		ethos: state.contractReducer.ethos,
 		pathos: state.contractReducer.pathos,

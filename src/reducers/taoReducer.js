@@ -2,41 +2,38 @@ import { actionsEnums } from "common/actionsEnums";
 
 class TAOReducerState {
 	constructor() {
-		this.nameId = null;
-		this.nameInfo = null;
-		this.taoCurrencyBalances = null;
+		this.names = [];
 	}
 }
 
-const handleSetNameId = (state, action) => {
+const handleSetNames = (state, action) => {
 	return {
 		...state,
-		nameId: action.nameId
+		names: action.names
 	};
 };
 
-const handleSetNameInfo = (state, action) => {
+const handleAppendName = (state, action) => {
+	const { names } = state;
+	if (!names.find((name) => name.nameId === action.name.nameId)) {
+		const _name = {
+			nameId: action.name.nameId,
+			name: action.name.name
+		};
+		names.push(_name);
+	}
 	return {
 		...state,
-		nameInfo: action.nameInfo
-	};
-};
-
-const handleSetTAOCurrencyBalances = (state, action) => {
-	return {
-		...state,
-		taoCurrencyBalances: action.balances
+		names
 	};
 };
 
 export const taoReducer = (state = new TAOReducerState(), action) => {
 	switch (action.type) {
-		case actionsEnums.SET_NAME_ID:
-			return handleSetNameId(state, action);
-		case actionsEnums.SET_NAME_INFO:
-			return handleSetNameInfo(state, action);
-		case actionsEnums.SET_TAO_CURRENCY_BALANCES:
-			return handleSetTAOCurrencyBalances(state, action);
+		case actionsEnums.SET_NAMES:
+			return handleSetNames(state, action);
+		case actionsEnums.APPEND_NAME:
+			return handleAppendName(state, action);
 		default:
 			return state;
 	}

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Wrapper, WidgetWrapper } from "../Styled";
 import { Name, Id, Right, InlineDiv, StyledLink, Img } from "./Styled";
-import { TAOData } from "../TAODetailsData.json";
+import { TAOData } from "components/TAODetailsData.json";
 import { Link } from "react-router";
 import Editor from "react-medium-editor";
 import * as loremIpsum from "lorem-ipsum";

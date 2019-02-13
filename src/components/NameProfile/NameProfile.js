@@ -39,7 +39,9 @@ class NameProfile extends React.Component {
 			showAddKeyForm: false,
 			showTransferIonForm: false,
 			processingTransaction: false,
-			publicKeyInProcess: null
+			publicKeyInProcess: null,
+			isListener: false,
+			isSpeaker: false
 		};
 		this.toggleAddKeyForm = this.toggleAddKeyForm.bind(this);
 		this.toggleTransferIonForm = this.toggleTransferIonForm.bind(this);
@@ -56,6 +58,8 @@ class NameProfile extends React.Component {
 		if (this.props.params.id === this.props.nameId) {
 			this.setState({ isOwner: true });
 			await this.getNamePublicKey();
+		} else {
+			await this.checkListenerSpeaker();
 		}
 	}
 
@@ -114,6 +118,17 @@ class NameProfile extends React.Component {
 			publicKeysBalance[publicKey] = { networkBalance, primordialBalance };
 		});
 		this.setState({ defaultPublicKey, publicKeys, publicKeysBalance });
+	}
+
+	async checkListenerSpeaker() {
+		const { id } = this.props.params.id;
+		const { nameTAOPosition, nameId } = this.props;
+		if (!id || !nameTAOPosition || !nameId) {
+			return;
+		}
+
+		const _position = await promisify(nameTAOPosition.getPositionById)(nameId);
+		this.setState({ isListener: _position[3] === id, isSpeaker: _position[5] === id });
 	}
 
 	toggleAddKeyForm() {
@@ -226,13 +241,17 @@ class NameProfile extends React.Component {
 			showAddKeyForm,
 			showTransferIonForm,
 			processingTransaction,
-			publicKeyInProcess
+			publicKeyInProcess,
+			isListener,
+			isSpeaker
 		} = this.state;
 		if (!nameInfo || !position) {
 			return null;
 		}
 
-		let ownerFeatures = null,
+		let setListenerContent = null,
+			setSpeakerContent = null,
+			ownerFeatures = null,
 			publicKeysContent = null;
 		if (isOwner) {
 			if (publicKeys) {
@@ -309,6 +328,23 @@ class NameProfile extends React.Component {
 						: null}
 				</OwnerContent>
 			);
+		} else {
+			if (!isListener) {
+				setListenerContent = (
+					<IconContainer disabled={processingTransaction}>
+						<img src={process.env.PUBLIC_URL + "/images/listener.png"} alt={"Set as Listener"} />
+						<div>Set as Listener</div>
+					</IconContainer>
+				);
+			}
+			if (!isSpeaker) {
+				setSpeakerContent = (
+					<IconContainer disabled={processingTransaction}>
+						<img src={process.env.PUBLIC_URL + "/images/speaker.png"} alt={"Set as Speaker"} />
+						<div>Set as Speaker</div>
+					</IconContainer>
+				);
+			}
 		}
 		return (
 			<Wrapper>
@@ -316,10 +352,13 @@ class NameProfile extends React.Component {
 				<FieldContainer>
 					<FieldName>Name</FieldName>
 					<FieldValue>
-						<StyledLink to={`/profile/${nameInfo.nameId}`}>
-							{nameInfo.name} ({nameInfo.nameId})
-						</StyledLink>
+						{nameInfo.name} ({nameInfo.nameId}) {!isOwner && isListener && "(Your Listener)"}{" "}
+						{!isOwner && isSpeaker && "(Your Speaker)"}
 					</FieldValue>
+					<div>
+						{setListenerContent}
+						{setSpeakerContent}
+					</div>
 				</FieldContainer>
 				<TitleMargin>Position</TitleMargin>
 				<FieldContainer>
