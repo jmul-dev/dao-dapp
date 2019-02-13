@@ -7,27 +7,21 @@ const promisify = require("tiny-promisify");
 
 class TopNavBar extends React.Component {
 	async componentDidMount() {
-		await this.getNameInfo();
-		await this.getTAOCurrencyBalances();
+		const { nameId } = this.props;
+		await this.getNameInfo(nameId);
+		await this.getTAOCurrencyBalances(nameId);
 	}
 
 	async componentDidUpdate(prevProps) {
-		if (this.props.nameTAOLookup !== prevProps.nameTAOLookup || this.props.nameId !== prevProps.nameId) {
-			await this.getNameInfo();
-		}
-
-		if (
-			this.props.ethos !== prevProps.ethos ||
-			this.props.pathos !== prevProps.pathos ||
-			this.props.logos !== prevProps.logos ||
-			this.props.nameId !== prevProps.nameId
-		) {
-			await this.getTAOCurrencyBalances();
+		if (this.props.nameId !== prevProps.nameId) {
+			const { nameId } = this.props;
+			await this.getNameInfo(nameId);
+			await this.getTAOCurrencyBalances(nameId);
 		}
 	}
 
-	async getNameInfo() {
-		const { nameTAOLookup, nameId, setNameInfo } = this.props;
+	async getNameInfo(nameId) {
+		const { nameTAOLookup, setNameInfo } = this.props;
 		if (!nameTAOLookup || !nameId) {
 			return;
 		}
@@ -43,8 +37,8 @@ class TopNavBar extends React.Component {
 		setNameInfo(nameInfo);
 	}
 
-	async getTAOCurrencyBalances() {
-		const { ethos, pathos, logos, nameId, setTAOCurrencyBalances } = this.props;
+	async getTAOCurrencyBalances(nameId) {
+		const { ethos, pathos, logos, setTAOCurrencyBalances } = this.props;
 		if (!ethos || !pathos || !logos || !nameId) {
 			return;
 		}

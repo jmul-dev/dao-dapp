@@ -46,25 +46,42 @@ class NameProfile extends React.Component {
 		this.toggleAddKeyForm = this.toggleAddKeyForm.bind(this);
 		this.toggleTransferIonForm = this.toggleTransferIonForm.bind(this);
 		this.appendPublicKey = this.appendPublicKey.bind(this);
-		this.setDefaultPublicKey = this.setDefaultPublicKey.bind(this);
-		this.removePublicKey = this.removePublicKey.bind(this);
 		this.refreshPublicKeyBalance = this.refreshPublicKeyBalance.bind(this);
 	}
 
 	async componentDidMount() {
-		await this.getNameInfo();
-		await this.getNamePosition();
+		const { id } = this.props.params;
+		await this.getNameInfo(id);
+		await this.getNamePosition(id);
+
 		// Owner features only
-		if (this.props.params.id === this.props.nameId) {
+		if (id === this.props.nameId) {
 			this.setState({ isOwner: true });
-			await this.getNamePublicKey();
+			await this.getNamePublicKey(id);
 		} else {
-			await this.checkListenerSpeaker();
+			await this.checkListenerSpeaker(id);
 		}
 	}
 
-	async getNameInfo() {
-		const { id } = this.props.params;
+	async componentDidUpdate(prevProps) {
+		if (this.props.params.id !== prevProps.params.id) {
+			this.setState({ isOwner: false });
+
+			const { id } = this.props.params;
+			await this.getNameInfo(id);
+			await this.getNamePosition(id);
+
+			// Owner features only
+			if (id === this.props.nameId) {
+				this.setState({ isOwner: true });
+				await this.getNamePublicKey(id);
+			} else {
+				await this.checkListenerSpeaker(id);
+			}
+		}
+	}
+
+	async getNameInfo(id) {
 		const { nameTAOLookup } = this.props;
 		if (!nameTAOLookup || !id) {
 			return;
@@ -82,8 +99,7 @@ class NameProfile extends React.Component {
 		this.setState({ nameInfo });
 	}
 
-	async getNamePosition() {
-		const { id } = this.props.params;
+	async getNamePosition(id) {
 		const { nameTAOPosition } = this.props;
 		if (!nameTAOPosition || !id) {
 			return;
@@ -101,8 +117,7 @@ class NameProfile extends React.Component {
 		this.setState({ position });
 	}
 
-	async getNamePublicKey() {
-		const { id } = this.props.params;
+	async getNamePublicKey(id) {
 		const { namePublicKey, aoion } = this.props;
 		if (!namePublicKey || !aoion || !id) {
 			return;
@@ -120,8 +135,7 @@ class NameProfile extends React.Component {
 		this.setState({ defaultPublicKey, publicKeys, publicKeysBalance });
 	}
 
-	async checkListenerSpeaker() {
-		const { id } = this.props.params.id;
+	async checkListenerSpeaker(id) {
 		const { nameTAOPosition, nameId } = this.props;
 		if (!id || !nameTAOPosition || !nameId) {
 			return;
@@ -230,6 +244,54 @@ class NameProfile extends React.Component {
 		this.setState({ publicKeysBalance: this.state.publicKeysBalance });
 	}
 
+	async setListener(id) {
+		const { accounts, nameId, nameTAOPosition } = this.props;
+		if (!accounts || !nameId || !nameTAOPosition || !id) {
+			return;
+		}
+
+		this.setState({ processingTransaction: true });
+		nameTAOPosition.setListener(nameId, id, { from: accounts[0] }, (err, transactionHash) => {
+			if (err) {
+				this.setState({ processingTransaction: false });
+				setError(err);
+			} else {
+				waitForTransactionReceipt(transactionHash)
+					.then(() => {
+						this.setState({ processingTransaction: false, isListener: true });
+					})
+					.catch((err) => {
+						this.setState({ processingTransaction: false });
+						setError(err);
+					});
+			}
+		});
+	}
+
+	async setSpeaker(id) {
+		const { accounts, nameId, nameTAOPosition } = this.props;
+		if (!accounts || !nameId || !nameTAOPosition || !id) {
+			return;
+		}
+
+		this.setState({ processingTransaction: true });
+		nameTAOPosition.setSpeaker(nameId, id, { from: accounts[0] }, (err, transactionHash) => {
+			if (err) {
+				this.setState({ processingTransaction: false });
+				setError(err);
+			} else {
+				waitForTransactionReceipt(transactionHash)
+					.then(() => {
+						this.setState({ processingTransaction: false, isSpeaker: true });
+					})
+					.catch((err) => {
+						this.setState({ processingTransaction: false });
+						setError(err);
+					});
+			}
+		});
+	}
+
 	render() {
 		const {
 			isOwner,
@@ -331,7 +393,7 @@ class NameProfile extends React.Component {
 		} else {
 			if (!isListener) {
 				setListenerContent = (
-					<IconContainer disabled={processingTransaction}>
+					<IconContainer onClick={() => this.setListener(nameInfo.nameId)} disabled={processingTransaction}>
 						<img src={process.env.PUBLIC_URL + "/images/listener.png"} alt={"Set as Listener"} />
 						<div>Set as Listener</div>
 					</IconContainer>
@@ -339,7 +401,7 @@ class NameProfile extends React.Component {
 			}
 			if (!isSpeaker) {
 				setSpeakerContent = (
-					<IconContainer disabled={processingTransaction}>
+					<IconContainer onClick={() => this.setSpeaker(nameInfo.nameId)} disabled={processingTransaction}>
 						<img src={process.env.PUBLIC_URL + "/images/speaker.png"} alt={"Set as Speaker"} />
 						<div>Set as Speaker</div>
 					</IconContainer>

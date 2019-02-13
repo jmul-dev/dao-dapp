@@ -155,7 +155,7 @@ class AppRouter extends React.Component {
 			nameFactory.allEvents({ fromBlock: receipt.blockNumber, toBlock: "latest" }).get((err, logs) => {
 				if (!err) {
 					const names = [];
-					logs.map((log) => {
+					logs.forEach((log) => {
 						names.push({ nameId: log.args.nameId, name: log.args.name });
 					});
 					dispatch(setNames(names));
