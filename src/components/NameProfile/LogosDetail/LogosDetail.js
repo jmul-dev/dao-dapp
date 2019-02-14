@@ -13,6 +13,7 @@ class LogosDetail extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isOwner: false,
 			balanceOf: new BigNumber(0),
 			positionFromOthers: new BigNumber(0),
 			totalAdvocatedTAOLogos: new BigNumber(0),
@@ -21,13 +22,28 @@ class LogosDetail extends React.Component {
 			availableToPositionAmount: new BigNumber(0),
 			showPositionLogosForm: false
 		};
+		this.initialState = this.state;
 		this.togglePositionLogosForm = this.togglePositionLogosForm.bind(this);
 		this.refreshPositionLogos = this.refreshPositionLogos.bind(this);
 	}
 
 	async componentDidMount() {
-		const { logos, nameId } = this.props;
-		await this.getLogosBalance(logos, nameId);
+		const { logos, id, nameId } = this.props;
+		if (id === nameId) {
+			this.setState({ isOwner: true });
+			await this.getLogosBalance(logos, nameId);
+		}
+	}
+
+	async componentDidUpdate(prevProps) {
+		if (this.props.id !== prevProps.id) {
+			this.setState(this.initialState);
+			const { logos, id, nameId } = this.props;
+			if (id === nameId) {
+				this.setState({ isOwner: true });
+				await this.getLogosBalance(logos, nameId);
+			}
+		}
 	}
 
 	async getLogosBalance(logos, nameId) {
@@ -72,6 +88,7 @@ class LogosDetail extends React.Component {
 
 	render() {
 		const {
+			isOwner,
 			balanceOf,
 			positionFromOthers,
 			totalAdvocatedTAOLogos,
@@ -80,6 +97,10 @@ class LogosDetail extends React.Component {
 			availableToPositionAmount,
 			showPositionLogosForm
 		} = this.state;
+
+		if (!isOwner) {
+			return null;
+		}
 
 		let showSumLogosChart = false,
 			sumLogosData = [];
