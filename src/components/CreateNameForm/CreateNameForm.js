@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Wrapper, Title, SchemaForm, Error, Button } from "components/";
 import { schema } from "./schema";
-import { waitForTransactionReceipt } from "reducers/contractReducer";
+import { waitForTransactionReceipt } from "utils/web3";
 
 const promisify = require("tiny-promisify");
 

@@ -44,7 +44,7 @@ import AOIon from "contracts/AOIon.json";
 
 import { setError } from "widgets/Toast/actions";
 
-import { getTransactionReceipt } from "utils/";
+import { getTransactionReceipt } from "utils/web3";
 
 const promisify = require("tiny-promisify");
 

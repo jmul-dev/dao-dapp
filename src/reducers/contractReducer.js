@@ -85,26 +85,6 @@ const handleSetAOIon = (state, action) => {
 	};
 };
 
-export const waitForTransactionReceipt = (transactionHash) => {
-	return new Promise((resolve, reject) => {
-		const intervalId = setInterval(() => {
-			window.web3.eth.getTransactionReceipt(transactionHash, (err, receipt) => {
-				if (err) {
-					clearInterval(intervalId);
-					reject(err);
-				} else if (receipt) {
-					clearInterval(intervalId);
-					if (receipt.status === "0x0") {
-						reject(new Error("Transaction failed"));
-					} else {
-						resolve();
-					}
-				}
-			});
-		}, 1000);
-	});
-};
-
 export const contractReducer = (state = new ContractReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_NAME_ACCOUNT_RECOVERY:

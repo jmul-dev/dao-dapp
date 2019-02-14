@@ -13,7 +13,7 @@ import {
 } from "./styledComponents";
 import { AddPublicKeyContainer } from "./AddPublicKey/";
 import { TransferIonContainer } from "./TransferIon/";
-import { waitForTransactionReceipt } from "reducers/contractReducer";
+import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
 import { setError } from "widgets/Toast/actions";
 import { asyncForEach } from "utils/";
