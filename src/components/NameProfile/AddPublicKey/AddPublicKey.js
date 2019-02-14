@@ -62,7 +62,7 @@ class AddPublicKey extends React.Component {
 	render() {
 		const { error, errorMessage, formLoading } = this.state;
 		return (
-			<Wrapper>
+			<Wrapper className="margin-top-30">
 				<SchemaForm schema={schema} showErrorList={false} validate={this.validate} onSubmit={this.handleSubmit}>
 					<Button type="submit" disabled={formLoading}>
 						{formLoading ? "Loading..." : "Add"}

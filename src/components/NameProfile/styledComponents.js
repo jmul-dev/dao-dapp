@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-	padding: 40px;
-`;
-
 export const FieldContainer = styled.div`
 	margin-bottom: 3px;
 `;

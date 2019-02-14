@@ -2,7 +2,20 @@ import styled from "styled-components";
 import Form from "react-jsonschema-form";
 import { Link } from "react-router";
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+	&.margin-top-30 {
+		margin-top: 30px;
+	}
+	&.padding-40 {
+		padding: 40px;
+	}
+	&.padding-20 {
+		padding: 20px;
+	}
+	&.dark-bg {
+		background-color: #000000;
+	}
+`;
 
 export const Title = styled.div`
 	font-size: 1.5em;
@@ -78,7 +91,7 @@ export const Icon = styled.div`
 	cursor: pointer;
 	text-align: center;
 	font-size: 0.8em;
-	margin: 10px 20px 0 0;
+	margin: 30px 20px 0 0;
 
 	> img {
 		max-height: 20px;

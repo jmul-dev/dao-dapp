@@ -100,7 +100,7 @@ class TransferIon extends React.Component {
 		const { error, errorMessage, formLoading } = this.state;
 		schema.definitions.publicKeys.enum = this.props.publicKeys;
 		return (
-			<Wrapper>
+			<Wrapper className="margin-top-30">
 				<SchemaForm schema={schema} showErrorList={false} onSubmit={this.handleSubmit}>
 					<Button type="submit" disabled={formLoading}>
 						{formLoading ? "Loading..." : "Transfer"}

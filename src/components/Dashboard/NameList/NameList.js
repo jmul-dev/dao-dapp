@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Title, Ahref } from "components/";
-import { Wrapper } from "./styledComponents";
+import { Wrapper, Title, Ahref } from "components/";
 import ReactTable from "react-table";
 import "./react-table.css";
 
@@ -24,7 +23,7 @@ class NameList extends React.Component {
 		];
 
 		return (
-			<Wrapper>
+			<Wrapper className="dark-bg padding-20">
 				<Title>List of Names</Title>
 				<ReactTable data={names} columns={columns} defaultPageSize={5} />
 			</Wrapper>

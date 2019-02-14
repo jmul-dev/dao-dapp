@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Title, Ahref, Button, Icon } from "components/";
+import { Wrapper, Title, Ahref, Button, Icon } from "components/";
 import {
-	Wrapper,
 	FieldContainer,
 	FieldName,
 	FieldValue,
@@ -407,7 +406,7 @@ class NameProfile extends React.Component {
 			}
 		}
 		return (
-			<Wrapper>
+			<Wrapper className="padding-40">
 				<Title>Profile</Title>
 				<FieldContainer>
 					<FieldName>Name</FieldName>

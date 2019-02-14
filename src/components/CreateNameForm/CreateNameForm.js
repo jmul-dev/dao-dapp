@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Title, SchemaForm, Error, Button } from "components/";
-import { Wrapper } from "./styledComponents";
+import { Wrapper, Title, SchemaForm, Error, Button } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "reducers/contractReducer";
 
@@ -45,7 +44,7 @@ class CreateNameForm extends React.Component {
 	render() {
 		const { error, errorMessage, formLoading } = this.state;
 		return (
-			<Wrapper>
+			<Wrapper className="padding-40">
 				<Title className="big">Choose a Username</Title>
 				<SchemaForm schema={schema} showErrorList={false} onSubmit={this.handleSubmit}>
 					<Button type="submit" disabled={formLoading}>
