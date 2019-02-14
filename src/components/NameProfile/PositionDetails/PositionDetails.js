@@ -3,7 +3,7 @@ import { Wrapper, Title, Ahref, FieldContainer, FieldName, FieldValue } from "co
 
 const promisify = require("tiny-promisify");
 
-class PositionDetail extends React.Component {
+class PositionDetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -79,4 +79,4 @@ class PositionDetail extends React.Component {
 	}
 }
 
-export { PositionDetail };
+export { PositionDetails };

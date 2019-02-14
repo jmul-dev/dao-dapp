@@ -9,7 +9,7 @@ import "css/animate.min.css";
 
 const promisify = require("tiny-promisify");
 
-class LogosDetail extends React.Component {
+class LogosDetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -125,7 +125,7 @@ class LogosDetail extends React.Component {
 
 		return (
 			<Wrapper>
-				<Title className="margin-top">Logos Detail</Title>
+				<Title className="margin-top">Logos Details</Title>
 				<ChartContainer>
 					<DetailsContainer>
 						<FieldContainer>
@@ -178,4 +178,4 @@ class LogosDetail extends React.Component {
 	}
 }
 
-export { LogosDetail };
+export { LogosDetails };

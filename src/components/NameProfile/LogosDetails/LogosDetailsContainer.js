@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
-import { PositionDetail } from "./PositionDetail";
+import { LogosDetails } from "./LogosDetails";
 
 const mapStateToProps = (state) => {
 	return {
-		nameTAOPosition: state.contractReducer.nameTAOPosition
+		nameId: state.nameReducer.nameId,
+		logos: state.contractReducer.logos
 	};
 };
 
@@ -11,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export const PositionDetailContainer = connect(
+export const LogosDetailsContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(PositionDetail);
+)(LogosDetails);
