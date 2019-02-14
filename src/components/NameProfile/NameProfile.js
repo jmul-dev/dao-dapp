@@ -43,6 +43,7 @@ class NameProfile extends React.Component {
 			isListener: false,
 			isSpeaker: false
 		};
+		this.initialState = this.state;
 		this.toggleAddKeyForm = this.toggleAddKeyForm.bind(this);
 		this.toggleTransferIonForm = this.toggleTransferIonForm.bind(this);
 		this.appendPublicKey = this.appendPublicKey.bind(this);
@@ -65,7 +66,7 @@ class NameProfile extends React.Component {
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.params.id !== prevProps.params.id) {
-			this.setState({ isOwner: false });
+			this.setState(this.initialState);
 
 			const { id } = this.props.params;
 			await this.getNameInfo(id);

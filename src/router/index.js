@@ -25,7 +25,8 @@ import {
 	setPathos,
 	setLogos,
 	setAOIon,
-	setNames
+	setNames,
+	appendName
 } from "./actions";
 import { web3Errors } from "common/errors";
 
@@ -152,13 +153,19 @@ class AppRouter extends React.Component {
 
 		try {
 			const receipt = await getTransactionReceipt(NameFactory.networks[networkId].transactionHash);
-			nameFactory.allEvents({ fromBlock: receipt.blockNumber, toBlock: "latest" }).get((err, logs) => {
+			var createNameEvent = nameFactory.CreateName({}, { fromBlock: receipt.blockNumber, toBlock: "latest" });
+			createNameEvent.get((err, logs) => {
 				if (!err) {
 					const names = [];
 					logs.forEach((log) => {
 						names.push({ nameId: log.args.nameId, name: log.args.name });
 					});
 					dispatch(setNames(names));
+				}
+			});
+			createNameEvent.watch((err, log) => {
+				if (!err) {
+					dispatch(appendName({ nameId: log.args.nameId, name: log.args.name }));
 				}
 			});
 		} catch (e) {

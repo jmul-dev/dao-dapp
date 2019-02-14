@@ -97,3 +97,10 @@ export const setNames = (names) => {
 		names
 	};
 };
+
+export const appendName = (name) => {
+	return {
+		type: actionsEnums.APPEND_NAME,
+		name
+	};
+};
