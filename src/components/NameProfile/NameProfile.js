@@ -353,12 +353,12 @@ class NameProfile extends React.Component {
 					</FieldContainer>
 					{!showAddKeyForm && !showTransferIonForm && (
 						<div>
-							<Icon onClick={this.toggleAddKeyForm} disabled={processingTransaction}>
+							<Icon className="animated bounceIn" onClick={this.toggleAddKeyForm} disabled={processingTransaction}>
 								<img src={process.env.PUBLIC_URL + "/images/add.png"} alt={"Add Public Key"} />
 								<div>Add Public Key</div>
 							</Icon>
 							{publicKeys && publicKeys.length > 1 && (
-								<Icon onClick={this.toggleTransferIonForm} disabled={processingTransaction}>
+								<Icon className="animated bounceIn" onClick={this.toggleTransferIonForm} disabled={processingTransaction}>
 									<img src={process.env.PUBLIC_URL + "/images/transfer.png"} alt={"Transfer Ion"} />
 									<div>Transfer Ion</div>
 								</Icon>
@@ -388,7 +388,7 @@ class NameProfile extends React.Component {
 		} else {
 			if (!isListener) {
 				setListenerContent = (
-					<Icon onClick={() => this.setListener(nameInfo.nameId)} disabled={processingTransaction}>
+					<Icon className="animated bounceIn" onClick={() => this.setListener(nameInfo.nameId)} disabled={processingTransaction}>
 						<img src={process.env.PUBLIC_URL + "/images/listener.png"} alt={"Set as Listener"} />
 						<div>Set as Listener</div>
 					</Icon>
@@ -396,7 +396,7 @@ class NameProfile extends React.Component {
 			}
 			if (!isSpeaker) {
 				setSpeakerContent = (
-					<Icon onClick={() => this.setSpeaker(nameInfo.nameId)} disabled={processingTransaction}>
+					<Icon className="animated bounceIn" onClick={() => this.setSpeaker(nameInfo.nameId)} disabled={processingTransaction}>
 						<img src={process.env.PUBLIC_URL + "/images/speaker.png"} alt={"Set as Speaker"} />
 						<div>Set as Speaker</div>
 					</Icon>
@@ -442,7 +442,7 @@ class NameProfile extends React.Component {
 						</Ahref>
 					</FieldValue>
 				</FieldContainer>
-				<LogosDetailContainer id={this.props.params.id} />
+				{isOwner && <LogosDetailContainer />}
 				{isOwner && ownerFeatures}
 			</Wrapper>
 		);

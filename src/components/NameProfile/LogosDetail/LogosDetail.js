@@ -1,9 +1,11 @@
 import * as React from "react";
-import { Wrapper, Title, FieldContainer, FieldName, FieldValue } from "components/";
+import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { ChartContainer, DetailsContainer } from "./styledComponents";
+import { PositionLogosFormContainer } from "./PositionLogosForm/";
 import { DoughnutChart } from "widgets/DoughnutChart/";
 import { Palette, Highlight } from "css/color.json";
 import { BigNumber } from "bignumber.js";
+import "css/animate.min.css";
 
 const promisify = require("tiny-promisify");
 
@@ -16,32 +18,53 @@ class LogosDetail extends React.Component {
 			totalAdvocatedTAOLogos: new BigNumber(0),
 			sumBalanceOf: new BigNumber(0),
 			totalPositionOnOthers: new BigNumber(0),
-			availableToPositionAmount: new BigNumber(0)
+			availableToPositionAmount: new BigNumber(0),
+			showPositionLogosForm: false
 		};
+		this.togglePositionLogosForm = this.togglePositionLogosForm.bind(this);
+		this.refreshPositionLogos = this.refreshPositionLogos.bind(this);
 	}
 
 	async componentDidMount() {
-		const { logos, id } = this.props;
-		await this.getLogosBalance(logos, id);
+		const { logos, nameId } = this.props;
+		await this.getLogosBalance(logos, nameId);
 	}
 
-	async getLogosBalance(logos, id) {
-		if (!logos || !id) {
+	async getLogosBalance(logos, nameId) {
+		if (!logos || !nameId) {
 			return;
 		}
 
-		const balanceOf = await promisify(logos.balanceOf)(id);
-		const positionFromOthers = await promisify(logos.positionFromOthers)(id);
-		const totalAdvocatedTAOLogos = await promisify(logos.totalAdvocatedTAOLogos)(id);
-		const sumBalanceOf = await promisify(logos.sumBalanceOf)(id);
-		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(id);
-		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(id);
+		const balanceOf = await promisify(logos.balanceOf)(nameId);
+		const positionFromOthers = await promisify(logos.positionFromOthers)(nameId);
+		const totalAdvocatedTAOLogos = await promisify(logos.totalAdvocatedTAOLogos)(nameId);
+		const sumBalanceOf = await promisify(logos.sumBalanceOf)(nameId);
+		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(nameId);
+		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(nameId);
 
 		this.setState({
 			balanceOf,
 			positionFromOthers,
 			totalAdvocatedTAOLogos,
 			sumBalanceOf,
+			totalPositionOnOthers,
+			availableToPositionAmount
+		});
+	}
+
+	togglePositionLogosForm() {
+		this.setState({ showPositionLogosForm: !this.state.showPositionLogosForm });
+	}
+
+	async refreshPositionLogos() {
+		const { logos, nameId } = this.props;
+		if (!logos || !nameId) {
+			return;
+		}
+
+		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(nameId);
+		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(nameId);
+		this.setState({
 			totalPositionOnOthers,
 			availableToPositionAmount
 		});
@@ -54,7 +77,8 @@ class LogosDetail extends React.Component {
 			totalAdvocatedTAOLogos,
 			sumBalanceOf,
 			totalPositionOnOthers,
-			availableToPositionAmount
+			availableToPositionAmount,
+			showPositionLogosForm
 		} = this.state;
 
 		let showSumLogosChart = false,
@@ -63,7 +87,7 @@ class LogosDetail extends React.Component {
 			showSumLogosChart = true;
 			sumLogosData = [
 				{ value: balanceOf.toNumber(), color: Palette[0], highlight: Highlight[0], label: "Owned Balance" },
-				{ value: positionFromOthers.toNumber(), color: Palette[1], highlight: Highlight[1], label: "Position by Others" },
+				{ value: positionFromOthers.toNumber(), color: Palette[1], highlight: Highlight[1], label: "Position from Others" },
 				{ value: totalAdvocatedTAOLogos.toNumber(), color: Palette[2], highlight: Highlight[2], label: "Total Advocated TAOs" }
 			];
 		}
@@ -92,7 +116,7 @@ class LogosDetail extends React.Component {
 							<FieldValue>{balanceOf.toNumber()}</FieldValue>
 						</FieldContainer>
 						<FieldContainer>
-							<FieldName>Positioned by Others</FieldName>
+							<FieldName>Position from Others</FieldName>
 							<FieldValue>{positionFromOthers.toNumber()}</FieldValue>
 						</FieldContainer>
 						<FieldContainer>
@@ -112,8 +136,21 @@ class LogosDetail extends React.Component {
 							<FieldName>Total Position on Others</FieldName>
 							<FieldValue>{totalPositionOnOthers.toNumber()}</FieldValue>
 						</FieldContainer>
+						{availableToPositionAmount.gt(0) && !showPositionLogosForm && (
+							<Icon className="animated bounceIn margin-top-10" onClick={this.togglePositionLogosForm}>
+								<img src={process.env.PUBLIC_URL + "/images/position.png"} alt={"Position Logos on Other Name"} />
+								<div>Position on Other</div>
+							</Icon>
+						)}
 					</DetailsContainer>
-					{showPositionChart && <DoughnutChart data={positionData} height={200} />}
+					{!showPositionLogosForm ? (
+						<div>{showPositionChart && <DoughnutChart data={positionData} height={200} />}</div>
+					) : (
+						<PositionLogosFormContainer
+							togglePositionLogosForm={this.togglePositionLogosForm}
+							refreshPositionLogos={this.refreshPositionLogos}
+						/>
+					)}
 				</ChartContainer>
 			</Wrapper>
 		);

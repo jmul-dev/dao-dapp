@@ -7,5 +7,5 @@ export const ChartContainer = styled.div`
 `;
 
 export const DetailsContainer = styled.div`
-	height: 70px;
+	height: 100px;
 `;

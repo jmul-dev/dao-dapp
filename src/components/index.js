@@ -108,8 +108,12 @@ export const Icon = styled.div`
 	font-size: 0.8em;
 	margin: 30px 20px 0 0;
 
+	&.margin-top-10 {
+		margin-top: 10px;
+	}
+
 	> img {
-		max-height: 20px;
+		max-height: 25px;
 	}
 
 	> div {
