@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Form from "react-jsonschema-form";
 import { Link } from "react-router";
+import ReactTable from "react-table";
+import "css/react-table.css";
 
 export const Wrapper = styled.div`
 	&.margin-top-30 {
@@ -14,6 +16,9 @@ export const Wrapper = styled.div`
 	}
 	&.dark-bg {
 		background-color: #000000;
+	}
+	&.margin-bottom-40 {
+		margin-bottom: 40px;
 	}
 `;
 
@@ -34,11 +39,21 @@ export const Title = styled.div`
 
 export const SchemaForm = styled(Form)`
 	width: 50%;
+	font-size: 0.875em;
+
+	.form-group {
+		margin-bottom: 0.75em;
+	}
+
+	.form-control {
+		height: calc(2em + 2px);
+		font-size: 1em;
+	}
 `;
 
 export const Error = styled.div`
 	margin-top: 10px;
-	font-size: 1em;
+	font-size: 0.875em;
 	font-weight: 500;
 	color: #ff0000;
 `;
@@ -103,5 +118,13 @@ export const Icon = styled.div`
 
 	:hover {
 		opacity: 0.7;
+	}
+`;
+
+export const Table = styled(ReactTable)`
+	font-size: 0.875em;
+
+	button {
+		color: #ffffff !important;
 	}
 `;

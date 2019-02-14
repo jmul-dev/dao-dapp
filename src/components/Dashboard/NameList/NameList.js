@@ -1,7 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, Ahref } from "components/";
-import ReactTable from "react-table";
-import "./react-table.css";
+import { Wrapper, Title, Ahref, Table } from "components/";
 
 class NameList extends React.Component {
 	render() {
@@ -12,7 +10,7 @@ class NameList extends React.Component {
 
 		const columns = [
 			{
-				Header: "Name ID",
+				Header: "ID",
 				accessor: "nameId",
 				Cell: (props) => <Ahref to={`/profile/${props.value}`}>{props.value}</Ahref>
 			},
@@ -23,9 +21,9 @@ class NameList extends React.Component {
 		];
 
 		return (
-			<Wrapper className="dark-bg padding-20">
+			<Wrapper className="dark-bg padding-20 margin-bottom-40">
 				<Title>List of Names</Title>
-				<ReactTable data={names} columns={columns} defaultPageSize={5} />
+				<Table data={names} columns={columns} defaultPageSize={5} filterable={true} />
 			</Wrapper>
 		);
 	}
