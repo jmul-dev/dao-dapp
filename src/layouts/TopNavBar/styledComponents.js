@@ -32,7 +32,7 @@ export const Avatar = styled.img`
 	margin: 0 10px 0 25px;
 `;
 
-export const StyledLink = styled(Link)`
+export const Ahref = styled(Link)`
 	font-size: 0.875em;
 	:hover {
 		text-decoration: none;

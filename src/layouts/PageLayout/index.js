@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Wrapper, Content } from "./styledComponents";
+import { Wrapper } from "components/";
+import { Content } from "./styledComponents";
 import { TopNavBarContainer } from "../TopNavBar/";
 import { ToastContainer } from "widgets/Toast/";
 

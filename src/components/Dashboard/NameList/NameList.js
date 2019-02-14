@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Wrapper, Title, StyledLink } from "./styledComponents";
+import { Title, Ahref } from "components/";
+import { Wrapper } from "./styledComponents";
 import ReactTable from "react-table";
 import "./react-table.css";
 
@@ -14,7 +15,7 @@ class NameList extends React.Component {
 			{
 				Header: "Name ID",
 				accessor: "nameId",
-				Cell: (props) => <StyledLink to={`/profile/${props.value}`}>{props.value}</StyledLink>
+				Cell: (props) => <Ahref to={`/profile/${props.value}`}>{props.value}</Ahref>
 			},
 			{
 				Header: "Name",

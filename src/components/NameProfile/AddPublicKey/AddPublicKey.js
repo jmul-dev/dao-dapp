@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, StyledForm, StyledButton, CancelButton, Error } from "./styledComponents";
+import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "reducers/contractReducer";
 
@@ -63,14 +63,14 @@ class AddPublicKey extends React.Component {
 		const { error, errorMessage, formLoading } = this.state;
 		return (
 			<Wrapper>
-				<StyledForm schema={schema} showErrorList={false} validate={this.validate} onSubmit={this.handleSubmit}>
-					<StyledButton type="submit" disabled={formLoading}>
+				<SchemaForm schema={schema} showErrorList={false} validate={this.validate} onSubmit={this.handleSubmit}>
+					<Button type="submit" disabled={formLoading}>
 						{formLoading ? "Loading..." : "Add"}
-					</StyledButton>
-					<CancelButton type="button" disabled={formLoading} onClick={this.cancelAdd}>
+					</Button>
+					<Button className="no-bg margin-left" type="button" disabled={formLoading} onClick={this.cancelAdd}>
 						Cancel
-					</CancelButton>
-				</StyledForm>
+					</Button>
+				</SchemaForm>
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);

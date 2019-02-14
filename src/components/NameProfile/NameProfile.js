@@ -1,20 +1,16 @@
 import * as React from "react";
+import { Title, Ahref, Button, Icon } from "components/";
 import {
 	Wrapper,
-	Title,
-	TitleMargin,
 	FieldContainer,
 	FieldName,
 	FieldValue,
-	StyledLink,
 	OwnerContent,
 	PublicKeyContainer,
 	PublicKeyValue,
 	PublicKeyBalance,
 	PublicKeyAction,
-	NonDefaultKeyAction,
-	StyledButtonSmall,
-	IconContainer
+	NonDefaultKeyAction
 } from "./styledComponents";
 import { AddPublicKeyContainer } from "./AddPublicKey/";
 import { TransferIonContainer } from "./TransferIon/";
@@ -331,19 +327,20 @@ class NameProfile extends React.Component {
 											"Loading..."
 										) : (
 											<NonDefaultKeyAction key={publicKey}>
-												<StyledButtonSmall
+												<Button
+													className="small"
 													onClick={() => this.setDefaultPublicKey(publicKey)}
 													disabled={processingTransaction}
 												>
 													Set Default
-												</StyledButtonSmall>
-												<StyledButtonSmall
-													className="remove"
+												</Button>
+												<Button
+													className="small red margin-left"
 													onClick={() => this.removePublicKey(publicKey)}
 													disabled={processingTransaction}
 												>
 													Remove
-												</StyledButtonSmall>
+												</Button>
 											</NonDefaultKeyAction>
 										)
 								  ]}
@@ -353,21 +350,21 @@ class NameProfile extends React.Component {
 			}
 			ownerFeatures = (
 				<OwnerContent>
-					<TitleMargin>Public Keys</TitleMargin>
+					<Title className="margin-top">Public Keys</Title>
 					<FieldContainer>
 						<FieldValue>{publicKeysContent}</FieldValue>
 					</FieldContainer>
 					{!showAddKeyForm && !showTransferIonForm && (
 						<div>
-							<IconContainer onClick={this.toggleAddKeyForm} disabled={processingTransaction}>
+							<Icon onClick={this.toggleAddKeyForm} disabled={processingTransaction}>
 								<img src={process.env.PUBLIC_URL + "/images/add.png"} alt={"Add Public Key"} />
 								<div>Add Public Key</div>
-							</IconContainer>
+							</Icon>
 							{publicKeys && publicKeys.length > 1 && (
-								<IconContainer onClick={this.toggleTransferIonForm} disabled={processingTransaction}>
+								<Icon onClick={this.toggleTransferIonForm} disabled={processingTransaction}>
 									<img src={process.env.PUBLIC_URL + "/images/transfer.png"} alt={"Transfer Ion"} />
 									<div>Transfer Ion</div>
-								</IconContainer>
+								</Icon>
 							)}
 						</div>
 					)}
@@ -394,18 +391,18 @@ class NameProfile extends React.Component {
 		} else {
 			if (!isListener) {
 				setListenerContent = (
-					<IconContainer onClick={() => this.setListener(nameInfo.nameId)} disabled={processingTransaction}>
+					<Icon onClick={() => this.setListener(nameInfo.nameId)} disabled={processingTransaction}>
 						<img src={process.env.PUBLIC_URL + "/images/listener.png"} alt={"Set as Listener"} />
 						<div>Set as Listener</div>
-					</IconContainer>
+					</Icon>
 				);
 			}
 			if (!isSpeaker) {
 				setSpeakerContent = (
-					<IconContainer onClick={() => this.setSpeaker(nameInfo.nameId)} disabled={processingTransaction}>
+					<Icon onClick={() => this.setSpeaker(nameInfo.nameId)} disabled={processingTransaction}>
 						<img src={process.env.PUBLIC_URL + "/images/speaker.png"} alt={"Set as Speaker"} />
 						<div>Set as Speaker</div>
-					</IconContainer>
+					</Icon>
 				);
 			}
 		}
@@ -423,29 +420,29 @@ class NameProfile extends React.Component {
 						{setSpeakerContent}
 					</div>
 				</FieldContainer>
-				<TitleMargin>Position</TitleMargin>
+				<Title className="margin-top">Position</Title>
 				<FieldContainer>
 					<FieldName>Advocate</FieldName>
 					<FieldValue>
-						<StyledLink to={`/profile/${position.advocateId}`}>
+						<Ahref to={`/profile/${position.advocateId}`}>
 							{position.advocateName} ({position.advocateId})
-						</StyledLink>
+						</Ahref>
 					</FieldValue>
 				</FieldContainer>
 				<FieldContainer>
 					<FieldName>Listener</FieldName>
 					<FieldValue>
-						<StyledLink to={`/profile/${position.listenerId}`}>
+						<Ahref to={`/profile/${position.listenerId}`}>
 							{position.listenerName} ({position.listenerId})
-						</StyledLink>
+						</Ahref>
 					</FieldValue>
 				</FieldContainer>
 				<FieldContainer>
 					<FieldName>Speaker</FieldName>
 					<FieldValue>
-						<StyledLink to={`/profile/${position.speakerId}`}>
+						<Ahref to={`/profile/${position.speakerId}`}>
 							{position.speakerName} ({position.speakerId})
-						</StyledLink>
+						</Ahref>
 					</FieldValue>
 				</FieldContainer>
 				{isOwner && ownerFeatures}

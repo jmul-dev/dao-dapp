@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper } from "./styledComponents";
+import { Wrapper } from "components/";
 import { CreateNameFormContainer } from "../CreateNameForm/";
 import { DashboardContainer } from "../Dashboard/";
 

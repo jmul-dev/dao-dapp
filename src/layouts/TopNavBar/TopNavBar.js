@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Navbar } from "react-bootstrap";
-import { TAOLogo, CurrencyName, CurrencyValue, Avatar, StyledLink } from "./styledComponents";
+import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref } from "./styledComponents";
 import "./style.css";
 
 const promisify = require("tiny-promisify");
@@ -60,9 +60,9 @@ class TopNavBar extends React.Component {
 		return (
 			<Navbar bg="dark" variant="dark" sticky="top">
 				<Navbar.Brand>
-					<StyledLink to="/">
+					<Ahref to="/">
 						<TAOLogo src={process.env.PUBLIC_URL + "/images/img_0.png"} alt={"AO Logo"} />
-					</StyledLink>
+					</Ahref>
 				</Navbar.Brand>
 				<Navbar.Toggle />
 				<Navbar.Collapse className="justify-content-end">
@@ -79,10 +79,10 @@ class TopNavBar extends React.Component {
 						<CurrencyValue>{taoCurrencyBalances.logos.toNumber()}</CurrencyValue>
 					</Navbar.Text>
 					<Navbar.Text>
-						<StyledLink to={`/profile/${nameId}`}>
+						<Ahref to={`/profile/${nameId}`}>
 							<Avatar src={process.env.PUBLIC_URL + "/images/user_avatar.png"} alt={nameInfo.name + " Avatar"} />
 							{nameInfo.name}
-						</StyledLink>
+						</Ahref>
 					</Navbar.Text>
 				</Navbar.Collapse>
 			</Navbar>
