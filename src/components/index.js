@@ -127,4 +127,8 @@ export const Table = styled(ReactTable)`
 	button {
 		color: #ffffff !important;
 	}
+
+	&.width-70 {
+		width: 70%;
+	}
 `;
