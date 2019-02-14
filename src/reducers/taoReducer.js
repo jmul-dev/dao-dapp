@@ -14,17 +14,17 @@ const handleSetNames = (state, action) => {
 };
 
 const handleAppendName = (state, action) => {
-	const { names } = state;
-	if (!names.find((name) => name.nameId === action.name.nameId)) {
+	const _names = state.names.slice();
+	if (!_names.find((name) => name.nameId === action.name.nameId)) {
 		const _name = {
 			nameId: action.name.nameId,
 			name: action.name.name
 		};
-		names.push(_name);
+		_names.push(_name);
 	}
 	return {
 		...state,
-		names
+		names: _names
 	};
 };
 
