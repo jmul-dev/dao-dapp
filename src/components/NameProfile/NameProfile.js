@@ -1,9 +1,6 @@
 import * as React from "react";
-import { Wrapper, Title, Ahref, Button, Icon } from "components/";
+import { Wrapper, Title, Ahref, Button, Icon, FieldContainer, FieldName, FieldValue } from "components/";
 import {
-	FieldContainer,
-	FieldName,
-	FieldValue,
 	OwnerContent,
 	PublicKeyContainer,
 	PublicKeyValue,
@@ -13,6 +10,7 @@ import {
 } from "./styledComponents";
 import { AddPublicKeyContainer } from "./AddPublicKey/";
 import { TransferIonContainer } from "./TransferIon/";
+import { LogosDetailContainer } from "./LogosDetail/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
 import { setError } from "widgets/Toast/actions";
@@ -444,6 +442,7 @@ class NameProfile extends React.Component {
 						</Ahref>
 					</FieldValue>
 				</FieldContainer>
+				<LogosDetailContainer id={this.props.params.id} />
 				{isOwner && ownerFeatures}
 			</Wrapper>
 		);

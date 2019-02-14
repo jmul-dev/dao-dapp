@@ -1,22 +1,5 @@
 import styled from "styled-components";
 
-export const FieldContainer = styled.div`
-	margin-bottom: 3px;
-`;
-
-export const FieldName = styled.div`
-	display: inline-block;
-	font-size: 0.875em;
-	font-weight: 500;
-	margin-right: 10px;
-`;
-
-export const FieldValue = styled.div`
-	display: inline-block;
-	font-size: 0.875em;
-	color: #888888;
-`;
-
 export const OwnerContent = styled.div``;
 
 export const PublicKeyContainer = styled.div`

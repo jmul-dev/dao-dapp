@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as d3 from "d3";
 import { TAOData } from "./TAOData.json";
-import { Neon, NeonStroke } from "components/Dashboard/color.json";
+import { Neon, NeonStroke } from "css/color.json";
 import { Button } from "./Styled";
 import { hashHistory } from "react-router";
 

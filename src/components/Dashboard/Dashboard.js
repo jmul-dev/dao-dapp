@@ -4,12 +4,12 @@ import { NameListContainer } from "./NameList/";
 import { Wrapper, WidgetWrapper } from "../Styled";
 import { Tree } from "widgets/Tree/Tree";
 import { Welcome } from "widgets/Welcome/Welcome";
-import { DoughnutChart } from "widgets/DoughnutChart/DoughnutChart";
+import { DoughnutChart } from "widgets/DoughnutChart/";
 import { LineChart } from "widgets/LineChart/LineChart";
 import { CountUpWidget } from "widgets/CountUpWidget/CountUpWidget";
 import { ListTAO } from "widgets/ListTAO/ListTAO";
 import { RadarChart } from "widgets/RadarChart/RadarChart";
-import { Palette, Highlight } from "./color.json";
+import { Palette, Highlight } from "css/color.json";
 
 class Dashboard extends React.Component {
 	render() {
@@ -106,7 +106,7 @@ class Dashboard extends React.Component {
 					<div className="col-xs-4">
 						<WidgetWrapper>
 							<Welcome nameId={this.props.nameId} />
-							<DoughnutChart title={"Current Staked Position"} data={doughnutChartData} />
+							<DoughnutChart title={"Current Staked Position"} data={doughnutChartData} height={200} />
 							<CountUpWidget title="Logos" value={1000} />
 							<CountUpWidget title="Pathos" value={34900} />
 							<CountUpWidget title="Ethos" value={373} />
