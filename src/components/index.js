@@ -41,6 +41,10 @@ export const SchemaForm = styled(Form)`
 	width: 50%;
 	font-size: 0.875em;
 
+	&.full {
+		width: 100%;
+	}
+
 	.form-group {
 		margin-bottom: 0.75em;
 	}
