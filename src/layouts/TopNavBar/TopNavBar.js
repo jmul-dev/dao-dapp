@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Navbar } from "react-bootstrap";
 import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage } from "./styledComponents";
-import { encodeParams } from "utils/";
+import { get, encodeParams } from "utils/";
 import "./style.css";
 
 const promisify = require("tiny-promisify");
@@ -45,15 +45,12 @@ class TopNavBar extends React.Component {
 		if (!nameId) {
 			return;
 		}
-		fetch(`https://localhost/api/get-profile-image?${encodeParams({ nameId })}`)
-			.then((response) => {
-				return response.json();
-			})
-			.then((resp) => {
-				if (resp.profileImage) {
-					setProfileImage(resp.profileImage);
-				}
-			});
+		try {
+			const response = await get(`https://localhost/api/get-profile-image?${encodeParams({ nameId })}`);
+			if (response.profileImage) {
+				setProfileImage(response.profileImage);
+			}
+		} catch (e) {}
 	}
 
 	async getTAOCurrencyBalances(nameId) {

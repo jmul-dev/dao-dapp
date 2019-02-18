@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
+import { post } from "utils/";
 
 class UploadProfileImageForm extends React.Component {
 	constructor(props) {
@@ -37,23 +38,19 @@ class UploadProfileImageForm extends React.Component {
 		}
 		this.setState({ formLoading: true });
 
-		fetch("https://localhost/api/upload-profile-image", {
-			method: "POST",
-			body: JSON.stringify({ nameId, imageString: formData.imageFile }),
-			headers: { "Content-Type": "application/json" }
-		})
-			.then((response) => {
-				return response.json();
-			})
-			.then((resp) => {
-				if (!resp.error) {
-					this.props.refreshProfileImage(formData.imageFile);
-					this.props.toggleUploadProfileImageForm();
-					this.props.setProfileImage(formData.imageFile);
-				} else {
-					this.setState({ error: true, errorMessage: resp.errorMessage, formLoading: false });
-				}
-			});
+		try {
+			const response = await post(`https://localhost/api/upload-profile-image`, { nameId, imageString: formData.imageFile });
+			this.setState({ formLoading: false });
+			if (!response.error && !response.errorMessage) {
+				this.props.refreshProfileImage(formData.imageFile);
+				this.props.toggleUploadProfileImageForm();
+				this.props.setProfileImage(formData.imageFile);
+			} else {
+				this.setState({ error: true, errorMessage: response.errorMessage });
+			}
+		} catch (e) {
+			this.setState({ error: true, errorMessage: e, formLoading: false });
+		}
 	}
 
 	cancelUpload() {
