@@ -14,6 +14,7 @@ export const Img = styled.img`
 
 export const BackgroundImage = styled.div`
 	background-size: cover;
+	background-position: center;
 	width: 100px;
 	height: 100px;
 	background-color: #ffffff;

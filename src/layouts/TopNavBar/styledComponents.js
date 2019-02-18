@@ -41,6 +41,7 @@ export const Ahref = styled(Link)`
 
 export const BackgroundImage = styled.div`
 	background-size: cover;
+	background-position: center;
 	width: 32px;
 	height: 32px;
 	background-color: #ffffff;
