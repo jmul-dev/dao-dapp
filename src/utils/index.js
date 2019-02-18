@@ -3,3 +3,9 @@ export const asyncForEach = async (array, callback) => {
 		await callback(array[index], index, array);
 	}
 };
+
+export const encodeParams = (params) => {
+	return Object.keys(params)
+		.map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(params[k]))
+		.join("&");
+};

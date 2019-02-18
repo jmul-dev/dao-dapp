@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { UploadProfileImageForm } from "./UploadProfileImageForm";
+import { setProfileImage } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
@@ -8,7 +9,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		setProfileImage: (profileImage) => dispatch(setProfileImage(profileImage))
+	};
 };
 
 export const UploadProfileImageFormContainer = connect(

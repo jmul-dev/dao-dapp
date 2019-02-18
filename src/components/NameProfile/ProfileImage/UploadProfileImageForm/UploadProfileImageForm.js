@@ -35,29 +35,25 @@ class UploadProfileImageForm extends React.Component {
 		if (!nameId || !formData) {
 			return;
 		}
-		this.props.refreshProfileImage(formData.imageFile);
-		this.props.toggleUploadProfileImageForm();
-		/*
-		const isKeyExist = await promisify(namePublicKey.isKeyExist)(nameId, formData.publicKey);
-		if (isKeyExist) {
-			this.setState({ error: true, errorMessage: "Public key already exist", formLoading: false });
-			return;
-		}
-		namePublicKey.addKey(nameId, formData.publicKey, { from: accounts[0] }, (err, transactionHash) => {
-			if (err) {
-				this.setState({ error: true, errorMessage: err, formLoading: false });
-			} else {
-				waitForTransactionReceipt(transactionHash)
-					.then(() => {
-						this.setState({ error: false, errorMessage: "", formLoading: false });
-						this.props.appendPublicKey(formData.publicKey);
-					})
-					.catch((err) => {
-						this.setState({ error: true, errorMessage: err.message, formLoading: false });
-					});
-			}
-		});
-		*/
+		this.setState({ formLoading: true });
+
+		fetch("https://localhost/api/upload-profile-image", {
+			method: "POST",
+			body: JSON.stringify({ nameId, imageString: formData.imageFile }),
+			headers: { "Content-Type": "application/json" }
+		})
+			.then((response) => {
+				return response.json();
+			})
+			.then((resp) => {
+				if (!resp.error) {
+					this.props.refreshProfileImage(formData.imageFile);
+					this.props.toggleUploadProfileImageForm();
+					this.props.setProfileImage(formData.imageFile);
+				} else {
+					this.setState({ error: true, errorMessage: resp.errorMessage, formLoading: false });
+				}
+			});
 	}
 
 	cancelUpload() {

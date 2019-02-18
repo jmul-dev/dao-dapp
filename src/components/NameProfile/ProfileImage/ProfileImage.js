@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, Icon } from "components/";
 import { OwnerContent, ImgContainer, Img, BackgroundImage } from "./styledComponents";
 import { UploadProfileImageFormContainer } from "./UploadProfileImageForm/";
+import { encodeParams } from "utils/";
 
 class ProfileImage extends React.Component {
 	constructor(props) {
@@ -38,7 +39,15 @@ class ProfileImage extends React.Component {
 	}
 
 	async getProfileImage(id) {
-		return;
+		fetch(`https://localhost/api/get-profile-image?${encodeParams({ nameId: id })}`)
+			.then((response) => {
+				return response.json();
+			})
+			.then((resp) => {
+				if (resp.profileImage) {
+					this.setState({ profileImage: resp.profileImage });
+				}
+			});
 	}
 
 	toggleUploadProfileImageForm() {

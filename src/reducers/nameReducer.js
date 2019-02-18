@@ -4,6 +4,7 @@ class NameReducerState {
 	constructor() {
 		this.nameId = null;
 		this.nameInfo = null;
+		this.profileImage = null;
 		this.taoCurrencyBalances = null;
 	}
 }
@@ -22,6 +23,13 @@ const handleSetNameInfo = (state, action) => {
 	};
 };
 
+const handleSetProfileImage = (state, action) => {
+	return {
+		...state,
+		profileImage: action.profileImage
+	};
+};
+
 const handleSetTAOCurrencyBalances = (state, action) => {
 	return {
 		...state,
@@ -35,6 +43,8 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleSetNameId(state, action);
 		case actionsEnums.SET_NAME_INFO:
 			return handleSetNameInfo(state, action);
+		case actionsEnums.SET_PROFILE_IMAGE:
+			return handleSetProfileImage(state, action);
 		case actionsEnums.SET_TAO_CURRENCY_BALANCES:
 			return handleSetTAOCurrencyBalances(state, action);
 		default:

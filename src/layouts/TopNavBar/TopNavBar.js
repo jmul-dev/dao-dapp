@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Navbar } from "react-bootstrap";
-import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref } from "./styledComponents";
+import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage } from "./styledComponents";
+import { encodeParams } from "utils/";
 import "./style.css";
 
 const promisify = require("tiny-promisify");
@@ -9,6 +10,7 @@ class TopNavBar extends React.Component {
 	async componentDidMount() {
 		const { nameId } = this.props;
 		await this.getNameInfo(nameId);
+		await this.getProfileImage(nameId);
 		await this.getTAOCurrencyBalances(nameId);
 	}
 
@@ -16,6 +18,7 @@ class TopNavBar extends React.Component {
 		if (this.props.nameId !== prevProps.nameId) {
 			const { nameId } = this.props;
 			await this.getNameInfo(nameId);
+			await this.getProfileImage(nameId);
 			await this.getTAOCurrencyBalances(nameId);
 		}
 	}
@@ -37,6 +40,22 @@ class TopNavBar extends React.Component {
 		setNameInfo(nameInfo);
 	}
 
+	async getProfileImage(nameId) {
+		const { setProfileImage } = this.props;
+		if (!nameId) {
+			return;
+		}
+		fetch(`https://localhost/api/get-profile-image?${encodeParams({ nameId })}`)
+			.then((response) => {
+				return response.json();
+			})
+			.then((resp) => {
+				if (resp.profileImage) {
+					setProfileImage(resp.profileImage);
+				}
+			});
+	}
+
 	async getTAOCurrencyBalances(nameId) {
 		const { ethos, pathos, logos, setTAOCurrencyBalances } = this.props;
 		if (!ethos || !pathos || !logos || !nameId) {
@@ -55,7 +74,7 @@ class TopNavBar extends React.Component {
 	}
 
 	render() {
-		const { nameId, nameInfo, taoCurrencyBalances } = this.props;
+		const { nameId, nameInfo, taoCurrencyBalances, profileImage } = this.props;
 		if (!nameId || !nameInfo || !taoCurrencyBalances) return null;
 		return (
 			<Navbar bg="dark" variant="dark" sticky="top">
@@ -80,8 +99,17 @@ class TopNavBar extends React.Component {
 					</Navbar.Text>
 					<Navbar.Text>
 						<Ahref to={`/profile/${nameId}`}>
-							<Avatar src={process.env.PUBLIC_URL + "/images/user_avatar.png"} alt={nameInfo.name + " Avatar"} />
-							{nameInfo.name}
+							{profileImage ? (
+								<div>
+									<BackgroundImage style={{ backgroundImage: `url(${profileImage})` }} />
+									{nameInfo.name}
+								</div>
+							) : (
+								<div>
+									<Avatar src={process.env.PUBLIC_URL + "/images/user_avatar.png"} alt={nameInfo.name + " Avatar"} />
+									{nameInfo.name}
+								</div>
+							)}
 						</Ahref>
 					</Navbar.Text>
 				</Navbar.Collapse>

@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 import { TopNavBar } from "./TopNavBar";
-import { setNameInfo, setTAOCurrencyBalances } from "./actions";
+import { setNameInfo, setProfileImage, setTAOCurrencyBalances } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
 		nameId: state.nameReducer.nameId,
 		nameInfo: state.nameReducer.nameInfo,
+		profileImage: state.nameReducer.profileImage,
 		taoCurrencyBalances: state.nameReducer.taoCurrencyBalances,
 		nameTAOLookup: state.contractReducer.nameTAOLookup,
 		ethos: state.contractReducer.ethos,
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		setNameInfo: (nameInfo) => dispatch(setNameInfo(nameInfo)),
+		setProfileImage: (profileImage) => dispatch(setProfileImage(profileImage)),
 		setTAOCurrencyBalances: (balances) => dispatch(setTAOCurrencyBalances(balances))
 	};
 };

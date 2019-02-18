@@ -38,3 +38,15 @@ export const Ahref = styled(Link)`
 		text-decoration: none;
 	}
 `;
+
+export const BackgroundImage = styled.div`
+	background-size: cover;
+	width: 32px;
+	height: 32px;
+	background-color: #ffffff;
+	margin: 0 auto;
+	border-radius: 50%;
+	margin: 0 10px 0 25px;
+	display: inline-block;
+	vertical-align: middle;
+`;
