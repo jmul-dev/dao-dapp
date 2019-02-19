@@ -3,6 +3,7 @@ import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 
+const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
 
 class AddPublicKey extends React.Component {
@@ -29,8 +30,8 @@ class AddPublicKey extends React.Component {
 
 	async handleSubmit(data) {
 		const { formData } = data;
-		const { namePublicKey, accounts, nameId } = this.props;
-		if (!namePublicKey || !accounts || !nameId || !formData) {
+		const { namePublicKey, nameFactory, accounts, nameId } = this.props;
+		if (!namePublicKey || !nameFactory || !accounts || !nameId || !formData) {
 			return;
 		}
 		this.setState({ formLoading: true });
@@ -39,20 +40,63 @@ class AddPublicKey extends React.Component {
 			this.setState({ error: true, errorMessage: "Public key already exist", formLoading: false });
 			return;
 		}
-		namePublicKey.addKey(nameId, formData.publicKey, { from: accounts[0] }, (err, transactionHash) => {
-			if (err) {
-				this.setState({ error: true, errorMessage: err, formLoading: false });
-			} else {
-				waitForTransactionReceipt(transactionHash)
-					.then(() => {
-						this.setState({ error: false, errorMessage: "", formLoading: false });
-						this.props.appendPublicKey(formData.publicKey);
-					})
-					.catch((err) => {
-						this.setState({ error: true, errorMessage: err.message, formLoading: false });
-					});
+
+		try {
+			const _publicKey = EthCrypto.publicKeyByPrivateKey(formData.privateKey);
+			if (EthCrypto.publicKey.toAddress(_publicKey) !== formData.publicKey) {
+				this.setState({ error: true, errorMessage: "Incorrect private key", formLoading: false });
+				return;
 			}
-		});
+		} catch (e) {
+			this.setState({ error: true, errorMessage: "Invalid private key value", formLoading: false });
+			return;
+		}
+
+		const nonce = await promisify(nameFactory.nonces)(nameId);
+		const signHash = EthCrypto.hash.keccak256([
+			{
+				type: "address",
+				value: namePublicKey.address
+			},
+			{
+				type: "address",
+				value: nameId
+			},
+			{
+				type: "address",
+				value: formData.publicKey
+			},
+			{
+				type: "uint256",
+				value: nonce.plus(1).toNumber()
+			}
+		]);
+		const signature = EthCrypto.sign(formData.privateKey, signHash);
+		const vrs = EthCrypto.vrs.fromString(signature);
+
+		namePublicKey.addKey(
+			nameId,
+			formData.publicKey,
+			nonce.plus(1).toNumber(),
+			vrs.v,
+			vrs.r,
+			vrs.s,
+			{ from: accounts[0] },
+			(err, transactionHash) => {
+				if (err) {
+					this.setState({ error: true, errorMessage: err, formLoading: false });
+				} else {
+					waitForTransactionReceipt(transactionHash)
+						.then(() => {
+							this.setState({ error: false, errorMessage: "", formLoading: false });
+							this.props.appendPublicKey(formData.publicKey);
+						})
+						.catch((err) => {
+							this.setState({ error: true, errorMessage: err.message, formLoading: false });
+						});
+				}
+			}
+		);
 	}
 
 	cancelAdd() {
