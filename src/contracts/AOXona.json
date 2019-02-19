@@ -1020,12 +1020,12 @@
 						"src": "77:14:24"
 					}
 				],
-				"contractDependencies": [8277, 33840],
+				"contractDependencies": [8277, 33923],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 20712,
-				"linearizedBaseContracts": [20712, 8277, 33840],
+				"linearizedBaseContracts": [20712, 8277, 33923],
 				"name": "AOXona",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1436,12 +1436,12 @@
 						"src": "77:14:24"
 					}
 				],
-				"contractDependencies": [8277, 33840],
+				"contractDependencies": [8277, 33923],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 20712,
-				"linearizedBaseContracts": [20712, 8277, 33840],
+				"linearizedBaseContracts": [20712, 8277, 33923],
 				"name": "AOXona",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1821,5 +1821,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-12T13:00:57.245Z"
+	"updatedAt": "2019-02-19T08:13:52.295Z"
 }

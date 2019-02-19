@@ -2,6 +2,25 @@
 	"contractName": "ITAOFactory",
 	"abi": [
 		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "_taoId",
+					"type": "address"
+				}
+			],
+			"name": "nonces",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
 			"constant": false,
 			"inputs": [
 				{
@@ -25,18 +44,18 @@
 	"deployedBytecode": "0x",
 	"sourceMap": "",
 	"deployedSourceMap": "",
-	"source": "pragma solidity ^0.4.24;\n\ninterface ITAOFactory {\n\tfunction incrementNonce(address _taoId) external returns (uint256);\n}\n",
+	"source": "pragma solidity ^0.4.24;\n\ninterface ITAOFactory {\n\tfunction nonces(address _taoId) external view returns (uint256);\n\tfunction incrementNonce(address _taoId) external returns (uint256);\n}\n",
 	"sourcePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOFactory.sol",
 	"ast": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOFactory.sol",
 		"exportedSymbols": {
-			"ITAOFactory": [22103]
+			"ITAOFactory": [22117]
 		},
-		"id": 22104,
+		"id": 22118,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 22095,
+				"id": 22102,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:56"
@@ -47,32 +66,32 @@
 				"contractKind": "interface",
 				"documentation": null,
 				"fullyImplemented": false,
-				"id": 22103,
-				"linearizedBaseContracts": [22103],
+				"id": 22117,
+				"linearizedBaseContracts": [22117],
 				"name": "ITAOFactory",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22102,
+						"id": 22109,
 						"implemented": false,
 						"isConstructor": false,
-						"isDeclaredConst": false,
+						"isDeclaredConst": true,
 						"modifiers": [],
-						"name": "incrementNonce",
+						"name": "nonces",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22098,
+							"id": 22105,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22097,
+									"id": 22104,
 									"name": "_taoId",
 									"nodeType": "VariableDeclaration",
-									"scope": 22102,
-									"src": "75:14:56",
+									"scope": 22109,
+									"src": "67:14:56",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -80,10 +99,10 @@
 										"typeString": "address"
 									},
 									"typeName": {
-										"id": 22096,
+										"id": 22103,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
-										"src": "75:7:56",
+										"src": "67:7:56",
 										"typeDescriptions": {
 											"typeIdentifier": "t_address",
 											"typeString": "address"
@@ -93,20 +112,20 @@
 									"visibility": "internal"
 								}
 							],
-							"src": "74:16:56"
+							"src": "66:16:56"
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22101,
+							"id": 22108,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22100,
+									"id": 22107,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22102,
-									"src": "109:7:56",
+									"scope": 22109,
+									"src": "106:7:56",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -114,10 +133,10 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22099,
+										"id": 22106,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
-										"src": "109:7:56",
+										"src": "106:7:56",
 										"typeDescriptions": {
 											"typeIdentifier": "t_uint256",
 											"typeString": "uint256"
@@ -127,31 +146,114 @@
 									"visibility": "internal"
 								}
 							],
-							"src": "108:9:56"
+							"src": "105:9:56"
 						},
-						"scope": 22103,
-						"src": "51:67:56",
+						"scope": 22117,
+						"src": "51:64:56",
+						"stateMutability": "view",
+						"superFunction": null,
+						"visibility": "external"
+					},
+					{
+						"body": null,
+						"documentation": null,
+						"id": 22116,
+						"implemented": false,
+						"isConstructor": false,
+						"isDeclaredConst": false,
+						"modifiers": [],
+						"name": "incrementNonce",
+						"nodeType": "FunctionDefinition",
+						"parameters": {
+							"id": 22112,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22111,
+									"name": "_taoId",
+									"nodeType": "VariableDeclaration",
+									"scope": 22116,
+									"src": "141:14:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 22110,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "141:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "140:16:56"
+						},
+						"payable": false,
+						"returnParameters": {
+							"id": 22115,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22114,
+									"name": "",
+									"nodeType": "VariableDeclaration",
+									"scope": 22116,
+									"src": "175:7:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 22113,
+										"name": "uint256",
+										"nodeType": "ElementaryTypeName",
+										"src": "175:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "174:9:56"
+						},
+						"scope": 22117,
+						"src": "117:67:56",
 						"stateMutability": "nonpayable",
 						"superFunction": null,
 						"visibility": "external"
 					}
 				],
-				"scope": 22104,
-				"src": "26:94:56"
+				"scope": 22118,
+				"src": "26:160:56"
 			}
 		],
-		"src": "0:121:56"
+		"src": "0:187:56"
 	},
 	"legacyAST": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOFactory.sol",
 		"exportedSymbols": {
-			"ITAOFactory": [22103]
+			"ITAOFactory": [22117]
 		},
-		"id": 22104,
+		"id": 22118,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 22095,
+				"id": 22102,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:56"
@@ -162,32 +264,32 @@
 				"contractKind": "interface",
 				"documentation": null,
 				"fullyImplemented": false,
-				"id": 22103,
-				"linearizedBaseContracts": [22103],
+				"id": 22117,
+				"linearizedBaseContracts": [22117],
 				"name": "ITAOFactory",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22102,
+						"id": 22109,
 						"implemented": false,
 						"isConstructor": false,
-						"isDeclaredConst": false,
+						"isDeclaredConst": true,
 						"modifiers": [],
-						"name": "incrementNonce",
+						"name": "nonces",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22098,
+							"id": 22105,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22097,
+									"id": 22104,
 									"name": "_taoId",
 									"nodeType": "VariableDeclaration",
-									"scope": 22102,
-									"src": "75:14:56",
+									"scope": 22109,
+									"src": "67:14:56",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -195,10 +297,10 @@
 										"typeString": "address"
 									},
 									"typeName": {
-										"id": 22096,
+										"id": 22103,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
-										"src": "75:7:56",
+										"src": "67:7:56",
 										"typeDescriptions": {
 											"typeIdentifier": "t_address",
 											"typeString": "address"
@@ -208,20 +310,20 @@
 									"visibility": "internal"
 								}
 							],
-							"src": "74:16:56"
+							"src": "66:16:56"
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22101,
+							"id": 22108,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22100,
+									"id": 22107,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22102,
-									"src": "109:7:56",
+									"scope": 22109,
+									"src": "106:7:56",
 									"stateVariable": false,
 									"storageLocation": "default",
 									"typeDescriptions": {
@@ -229,10 +331,10 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22099,
+										"id": 22106,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
-										"src": "109:7:56",
+										"src": "106:7:56",
 										"typeDescriptions": {
 											"typeIdentifier": "t_uint256",
 											"typeString": "uint256"
@@ -242,20 +344,103 @@
 									"visibility": "internal"
 								}
 							],
-							"src": "108:9:56"
+							"src": "105:9:56"
 						},
-						"scope": 22103,
-						"src": "51:67:56",
+						"scope": 22117,
+						"src": "51:64:56",
+						"stateMutability": "view",
+						"superFunction": null,
+						"visibility": "external"
+					},
+					{
+						"body": null,
+						"documentation": null,
+						"id": 22116,
+						"implemented": false,
+						"isConstructor": false,
+						"isDeclaredConst": false,
+						"modifiers": [],
+						"name": "incrementNonce",
+						"nodeType": "FunctionDefinition",
+						"parameters": {
+							"id": 22112,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22111,
+									"name": "_taoId",
+									"nodeType": "VariableDeclaration",
+									"scope": 22116,
+									"src": "141:14:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 22110,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "141:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "140:16:56"
+						},
+						"payable": false,
+						"returnParameters": {
+							"id": 22115,
+							"nodeType": "ParameterList",
+							"parameters": [
+								{
+									"constant": false,
+									"id": 22114,
+									"name": "",
+									"nodeType": "VariableDeclaration",
+									"scope": 22116,
+									"src": "175:7:56",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 22113,
+										"name": "uint256",
+										"nodeType": "ElementaryTypeName",
+										"src": "175:7:56",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"value": null,
+									"visibility": "internal"
+								}
+							],
+							"src": "174:9:56"
+						},
+						"scope": 22117,
+						"src": "117:67:56",
 						"stateMutability": "nonpayable",
 						"superFunction": null,
 						"visibility": "external"
 					}
 				],
-				"scope": 22104,
-				"src": "26:94:56"
+				"scope": 22118,
+				"src": "26:160:56"
 			}
 		],
-		"src": "0:121:56"
+		"src": "0:187:56"
 	},
 	"compiler": {
 		"name": "solc",
@@ -263,5 +448,5 @@
 	},
 	"networks": {},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-12T12:59:40.005Z"
+	"updatedAt": "2019-02-19T08:12:36.635Z"
 }

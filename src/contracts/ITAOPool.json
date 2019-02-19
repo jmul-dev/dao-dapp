@@ -38,13 +38,13 @@
 	"ast": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOPool.sol",
 		"exportedSymbols": {
-			"ITAOPool": [22117]
+			"ITAOPool": [22131]
 		},
-		"id": 22118,
+		"id": 22132,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 22105,
+				"id": 22119,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:57"
@@ -55,15 +55,15 @@
 				"contractKind": "interface",
 				"documentation": null,
 				"fullyImplemented": false,
-				"id": 22117,
-				"linearizedBaseContracts": [22117],
+				"id": 22131,
+				"linearizedBaseContracts": [22131],
 				"name": "ITAOPool",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22116,
+						"id": 22130,
 						"implemented": false,
 						"isConstructor": false,
 						"isDeclaredConst": false,
@@ -71,15 +71,15 @@
 						"name": "createPool",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22112,
+							"id": 22126,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22107,
+									"id": 22121,
 									"name": "_taoId",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "68:14:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -88,7 +88,7 @@
 										"typeString": "address"
 									},
 									"typeName": {
-										"id": 22106,
+										"id": 22120,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
 										"src": "68:7:57",
@@ -102,10 +102,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22109,
+									"id": 22123,
 									"name": "_ethosCapStatus",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "84:20:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -114,7 +114,7 @@
 										"typeString": "bool"
 									},
 									"typeName": {
-										"id": 22108,
+										"id": 22122,
 										"name": "bool",
 										"nodeType": "ElementaryTypeName",
 										"src": "84:4:57",
@@ -128,10 +128,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22111,
+									"id": 22125,
 									"name": "_ethosCapAmount",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "106:23:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -140,7 +140,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22110,
+										"id": 22124,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "106:7:57",
@@ -157,15 +157,15 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22115,
+							"id": 22129,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22114,
+									"id": 22128,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "149:4:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -174,7 +174,7 @@
 										"typeString": "bool"
 									},
 									"typeName": {
-										"id": 22113,
+										"id": 22127,
 										"name": "bool",
 										"nodeType": "ElementaryTypeName",
 										"src": "149:4:57",
@@ -189,14 +189,14 @@
 							],
 							"src": "148:6:57"
 						},
-						"scope": 22117,
+						"scope": 22131,
 						"src": "48:107:57",
 						"stateMutability": "nonpayable",
 						"superFunction": null,
 						"visibility": "external"
 					}
 				],
-				"scope": 22118,
+				"scope": 22132,
 				"src": "26:131:57"
 			}
 		],
@@ -205,13 +205,13 @@
 	"legacyAST": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOPool.sol",
 		"exportedSymbols": {
-			"ITAOPool": [22117]
+			"ITAOPool": [22131]
 		},
-		"id": 22118,
+		"id": 22132,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 22105,
+				"id": 22119,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:57"
@@ -222,15 +222,15 @@
 				"contractKind": "interface",
 				"documentation": null,
 				"fullyImplemented": false,
-				"id": 22117,
-				"linearizedBaseContracts": [22117],
+				"id": 22131,
+				"linearizedBaseContracts": [22131],
 				"name": "ITAOPool",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22116,
+						"id": 22130,
 						"implemented": false,
 						"isConstructor": false,
 						"isDeclaredConst": false,
@@ -238,15 +238,15 @@
 						"name": "createPool",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22112,
+							"id": 22126,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22107,
+									"id": 22121,
 									"name": "_taoId",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "68:14:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -255,7 +255,7 @@
 										"typeString": "address"
 									},
 									"typeName": {
-										"id": 22106,
+										"id": 22120,
 										"name": "address",
 										"nodeType": "ElementaryTypeName",
 										"src": "68:7:57",
@@ -269,10 +269,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22109,
+									"id": 22123,
 									"name": "_ethosCapStatus",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "84:20:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -281,7 +281,7 @@
 										"typeString": "bool"
 									},
 									"typeName": {
-										"id": 22108,
+										"id": 22122,
 										"name": "bool",
 										"nodeType": "ElementaryTypeName",
 										"src": "84:4:57",
@@ -295,10 +295,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22111,
+									"id": 22125,
 									"name": "_ethosCapAmount",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "106:23:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -307,7 +307,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22110,
+										"id": 22124,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "106:7:57",
@@ -324,15 +324,15 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22115,
+							"id": 22129,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22114,
+									"id": 22128,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22116,
+									"scope": 22130,
 									"src": "149:4:57",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -341,7 +341,7 @@
 										"typeString": "bool"
 									},
 									"typeName": {
-										"id": 22113,
+										"id": 22127,
 										"name": "bool",
 										"nodeType": "ElementaryTypeName",
 										"src": "149:4:57",
@@ -356,14 +356,14 @@
 							],
 							"src": "148:6:57"
 						},
-						"scope": 22117,
+						"scope": 22131,
 						"src": "48:107:57",
 						"stateMutability": "nonpayable",
 						"superFunction": null,
 						"visibility": "external"
 					}
 				],
-				"scope": 22118,
+				"scope": 22132,
 				"src": "26:131:57"
 			}
 		],
@@ -375,5 +375,5 @@
 	},
 	"networks": {},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-12T12:59:40.005Z"
+	"updatedAt": "2019-02-19T08:12:36.635Z"
 }

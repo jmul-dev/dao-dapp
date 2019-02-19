@@ -57,13 +57,13 @@
 	"ast": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
 		"exportedSymbols": {
-			"ITAOCurrencyTreasury": [22093]
+			"ITAOCurrencyTreasury": [22100]
 		},
-		"id": 22094,
+		"id": 22101,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 22074,
+				"id": 22081,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:55"
@@ -74,15 +74,15 @@
 				"contractKind": "interface",
 				"documentation": null,
 				"fullyImplemented": false,
-				"id": 22093,
-				"linearizedBaseContracts": [22093],
+				"id": 22100,
+				"linearizedBaseContracts": [22100],
 				"name": "ITAOCurrencyTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22085,
+						"id": 22092,
 						"implemented": false,
 						"isConstructor": false,
 						"isDeclaredConst": true,
@@ -90,15 +90,15 @@
 						"name": "toBase",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22081,
+							"id": 22088,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22076,
+									"id": 22083,
 									"name": "integerAmount",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "76:21:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -107,7 +107,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22075,
+										"id": 22082,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "76:7:55",
@@ -121,10 +121,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22078,
+									"id": 22085,
 									"name": "fractionAmount",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "99:22:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -133,7 +133,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22077,
+										"id": 22084,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "99:7:55",
@@ -147,10 +147,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22080,
+									"id": 22087,
 									"name": "denominationName",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "123:23:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -159,7 +159,7 @@
 										"typeString": "bytes8"
 									},
 									"typeName": {
-										"id": 22079,
+										"id": 22086,
 										"name": "bytes8",
 										"nodeType": "ElementaryTypeName",
 										"src": "123:6:55",
@@ -176,15 +176,15 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22084,
+							"id": 22091,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22083,
+									"id": 22090,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "171:7:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -193,7 +193,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22082,
+										"id": 22089,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "171:7:55",
@@ -208,7 +208,7 @@
 							],
 							"src": "170:9:55"
 						},
-						"scope": 22093,
+						"scope": 22100,
 						"src": "60:120:55",
 						"stateMutability": "view",
 						"superFunction": null,
@@ -217,7 +217,7 @@
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22092,
+						"id": 22099,
 						"implemented": false,
 						"isConstructor": false,
 						"isDeclaredConst": true,
@@ -225,15 +225,15 @@
 						"name": "isDenominationExist",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22088,
+							"id": 22095,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22087,
+									"id": 22094,
 									"name": "denominationName",
 									"nodeType": "VariableDeclaration",
-									"scope": 22092,
+									"scope": 22099,
 									"src": "211:23:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -242,7 +242,7 @@
 										"typeString": "bytes8"
 									},
 									"typeName": {
-										"id": 22086,
+										"id": 22093,
 										"name": "bytes8",
 										"nodeType": "ElementaryTypeName",
 										"src": "211:6:55",
@@ -259,15 +259,15 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22091,
+							"id": 22098,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22090,
+									"id": 22097,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22092,
+									"scope": 22099,
 									"src": "259:4:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -276,7 +276,7 @@
 										"typeString": "bool"
 									},
 									"typeName": {
-										"id": 22089,
+										"id": 22096,
 										"name": "bool",
 										"nodeType": "ElementaryTypeName",
 										"src": "259:4:55",
@@ -291,14 +291,14 @@
 							],
 							"src": "258:6:55"
 						},
-						"scope": 22093,
+						"scope": 22100,
 						"src": "182:83:55",
 						"stateMutability": "view",
 						"superFunction": null,
 						"visibility": "external"
 					}
 				],
-				"scope": 22094,
+				"scope": 22101,
 				"src": "26:241:55"
 			}
 		],
@@ -307,13 +307,13 @@
 	"legacyAST": {
 		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
 		"exportedSymbols": {
-			"ITAOCurrencyTreasury": [22093]
+			"ITAOCurrencyTreasury": [22100]
 		},
-		"id": 22094,
+		"id": 22101,
 		"nodeType": "SourceUnit",
 		"nodes": [
 			{
-				"id": 22074,
+				"id": 22081,
 				"literals": ["solidity", "^", "0.4", ".24"],
 				"nodeType": "PragmaDirective",
 				"src": "0:24:55"
@@ -324,15 +324,15 @@
 				"contractKind": "interface",
 				"documentation": null,
 				"fullyImplemented": false,
-				"id": 22093,
-				"linearizedBaseContracts": [22093],
+				"id": 22100,
+				"linearizedBaseContracts": [22100],
 				"name": "ITAOCurrencyTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22085,
+						"id": 22092,
 						"implemented": false,
 						"isConstructor": false,
 						"isDeclaredConst": true,
@@ -340,15 +340,15 @@
 						"name": "toBase",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22081,
+							"id": 22088,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22076,
+									"id": 22083,
 									"name": "integerAmount",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "76:21:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -357,7 +357,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22075,
+										"id": 22082,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "76:7:55",
@@ -371,10 +371,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22078,
+									"id": 22085,
 									"name": "fractionAmount",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "99:22:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -383,7 +383,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22077,
+										"id": 22084,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "99:7:55",
@@ -397,10 +397,10 @@
 								},
 								{
 									"constant": false,
-									"id": 22080,
+									"id": 22087,
 									"name": "denominationName",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "123:23:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -409,7 +409,7 @@
 										"typeString": "bytes8"
 									},
 									"typeName": {
-										"id": 22079,
+										"id": 22086,
 										"name": "bytes8",
 										"nodeType": "ElementaryTypeName",
 										"src": "123:6:55",
@@ -426,15 +426,15 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22084,
+							"id": 22091,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22083,
+									"id": 22090,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22085,
+									"scope": 22092,
 									"src": "171:7:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -443,7 +443,7 @@
 										"typeString": "uint256"
 									},
 									"typeName": {
-										"id": 22082,
+										"id": 22089,
 										"name": "uint256",
 										"nodeType": "ElementaryTypeName",
 										"src": "171:7:55",
@@ -458,7 +458,7 @@
 							],
 							"src": "170:9:55"
 						},
-						"scope": 22093,
+						"scope": 22100,
 						"src": "60:120:55",
 						"stateMutability": "view",
 						"superFunction": null,
@@ -467,7 +467,7 @@
 					{
 						"body": null,
 						"documentation": null,
-						"id": 22092,
+						"id": 22099,
 						"implemented": false,
 						"isConstructor": false,
 						"isDeclaredConst": true,
@@ -475,15 +475,15 @@
 						"name": "isDenominationExist",
 						"nodeType": "FunctionDefinition",
 						"parameters": {
-							"id": 22088,
+							"id": 22095,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22087,
+									"id": 22094,
 									"name": "denominationName",
 									"nodeType": "VariableDeclaration",
-									"scope": 22092,
+									"scope": 22099,
 									"src": "211:23:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -492,7 +492,7 @@
 										"typeString": "bytes8"
 									},
 									"typeName": {
-										"id": 22086,
+										"id": 22093,
 										"name": "bytes8",
 										"nodeType": "ElementaryTypeName",
 										"src": "211:6:55",
@@ -509,15 +509,15 @@
 						},
 						"payable": false,
 						"returnParameters": {
-							"id": 22091,
+							"id": 22098,
 							"nodeType": "ParameterList",
 							"parameters": [
 								{
 									"constant": false,
-									"id": 22090,
+									"id": 22097,
 									"name": "",
 									"nodeType": "VariableDeclaration",
-									"scope": 22092,
+									"scope": 22099,
 									"src": "259:4:55",
 									"stateVariable": false,
 									"storageLocation": "default",
@@ -526,7 +526,7 @@
 										"typeString": "bool"
 									},
 									"typeName": {
-										"id": 22089,
+										"id": 22096,
 										"name": "bool",
 										"nodeType": "ElementaryTypeName",
 										"src": "259:4:55",
@@ -541,14 +541,14 @@
 							],
 							"src": "258:6:55"
 						},
-						"scope": 22093,
+						"scope": 22100,
 						"src": "182:83:55",
 						"stateMutability": "view",
 						"superFunction": null,
 						"visibility": "external"
 					}
 				],
-				"scope": 22094,
+				"scope": 22101,
 				"src": "26:241:55"
 			}
 		],
@@ -560,5 +560,5 @@
 	},
 	"networks": {},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-12T12:59:40.005Z"
+	"updatedAt": "2019-02-19T08:12:36.635Z"
 }
