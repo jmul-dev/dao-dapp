@@ -8,10 +8,10 @@ const mapStateToProps = (state) => {
 		nameInfo: state.nameReducer.nameInfo,
 		profileImage: state.nameReducer.profileImage,
 		taoCurrencyBalances: state.nameReducer.taoCurrencyBalances,
-		nameTAOLookup: state.contractReducer.nameTAOLookup,
-		ethos: state.contractReducer.ethos,
-		pathos: state.contractReducer.pathos,
-		logos: state.contractReducer.logos
+		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup,
+		ethos: state.contractReducer.contracts.ethos,
+		pathos: state.contractReducer.contracts.pathos,
+		logos: state.contractReducer.contracts.logos
 	};
 };
 

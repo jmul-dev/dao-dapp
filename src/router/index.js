@@ -7,27 +7,12 @@ import { syncHistoryWithStore } from "react-router-redux";
 import { AppContainer } from "components/App/";
 import { EnsureCreateNameContainer } from "components/EnsureCreateName/";
 import { NameProfileContainer } from "components/NameProfile/";
+import { CreateTAOContainer } from "components/CreateTAO/";
 import { TAODetails } from "components/TAODetails/TAODetails";
 import { Meet } from "components/Meet/Meet";
 import { Ide } from "components/Ide/Ide";
 
-import {
-	web3Connected,
-	setAccounts,
-	setNetworkId,
-	setNameAccountRecovery,
-	setNameFactory,
-	setNamePublicKey,
-	setNameTAOLookup,
-	setNameTAOPosition,
-	setNameTAOVault,
-	setEthos,
-	setPathos,
-	setLogos,
-	setAOIon,
-	setNames,
-	appendName
-} from "./actions";
+import { web3Connected, setAccounts, setNetworkId, setContracts, setNames, appendName } from "./actions";
 import { web3Errors } from "common/errors";
 
 // Contracts
@@ -41,6 +26,10 @@ import Ethos from "contracts/Ethos.json";
 import Pathos from "contracts/Pathos.json";
 import Logos from "contracts/Logos.json";
 import AOIon from "contracts/AOIon.json";
+import TAOAncestry from "contracts/TAOAncestry.json";
+import TAOFactory from "contracts/TAOFactory.json";
+import TAOPool from "contracts/TAOPool.json";
+import AOSetting from "contracts/AOSetting.json";
 
 import { setError } from "widgets/Toast/actions";
 
@@ -71,37 +60,24 @@ class AppRouter extends React.Component {
 			const accounts = await this.getAccounts(web3);
 			dispatch(setAccounts(accounts));
 
-			const nameAccountRecovery = this.instantiateContract(web3, networkId, NameAccountRecovery.abi, NameAccountRecovery.networks);
-			dispatch(setNameAccountRecovery(nameAccountRecovery));
-
-			const nameFactory = this.instantiateContract(web3, networkId, NameFactory.abi, NameFactory.networks);
-			dispatch(setNameFactory(nameFactory));
-
-			const namePublicKey = this.instantiateContract(web3, networkId, NamePublicKey.abi, NamePublicKey.networks);
-			dispatch(setNamePublicKey(namePublicKey));
-
-			const nameTAOLookup = this.instantiateContract(web3, networkId, NameTAOLookup.abi, NameTAOLookup.networks);
-			dispatch(setNameTAOLookup(nameTAOLookup));
-
-			const nameTAOPosition = this.instantiateContract(web3, networkId, NameTAOPosition.abi, NameTAOPosition.networks);
-			dispatch(setNameTAOPosition(nameTAOPosition));
-
-			const nameTAOVault = this.instantiateContract(web3, networkId, NameTAOVault.abi, NameTAOVault.networks);
-			dispatch(setNameTAOVault(nameTAOVault));
-
-			const ethos = this.instantiateContract(web3, networkId, Ethos.abi, Ethos.networks);
-			dispatch(setEthos(ethos));
-
-			const pathos = this.instantiateContract(web3, networkId, Pathos.abi, Pathos.networks);
-			dispatch(setPathos(pathos));
-
-			const logos = this.instantiateContract(web3, networkId, Logos.abi, Logos.networks);
-			dispatch(setLogos(logos));
-
-			const aoion = this.instantiateContract(web3, networkId, AOIon.abi, AOIon.networks);
-			dispatch(setAOIon(aoion));
-
-			this.watchNameFactoryEvent(web3, networkId, nameFactory);
+			const contracts = {
+				nameAccountRecovery: this.instantiateContract(web3, networkId, NameAccountRecovery.abi, NameAccountRecovery.networks),
+				nameFactory: this.instantiateContract(web3, networkId, NameFactory.abi, NameFactory.networks),
+				namePublicKey: this.instantiateContract(web3, networkId, NamePublicKey.abi, NamePublicKey.networks),
+				nameTAOLookup: this.instantiateContract(web3, networkId, NameTAOLookup.abi, NameTAOLookup.networks),
+				nameTAOPosition: this.instantiateContract(web3, networkId, NameTAOPosition.abi, NameTAOPosition.networks),
+				nameTAOVault: this.instantiateContract(web3, networkId, NameTAOVault.abi, NameTAOVault.networks),
+				ethos: this.instantiateContract(web3, networkId, Ethos.abi, Ethos.networks),
+				pathos: this.instantiateContract(web3, networkId, Pathos.abi, Pathos.networks),
+				logos: this.instantiateContract(web3, networkId, Logos.abi, Logos.networks),
+				aoion: this.instantiateContract(web3, networkId, AOIon.abi, AOIon.networks),
+				taoAncestry: this.instantiateContract(web3, networkId, TAOAncestry.abi, TAOAncestry.networks),
+				taoFactory: this.instantiateContract(web3, networkId, TAOFactory.abi, TAOFactory.networks),
+				taoPool: this.instantiateContract(web3, networkId, TAOPool.abi, TAOPool.networks),
+				aoSetting: this.instantiateContract(web3, networkId, AOSetting.abi, AOSetting.networks)
+			};
+			dispatch(setContracts(contracts));
+			this.watchNameFactoryEvent(web3, networkId, contracts.nameFactory);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}
@@ -181,6 +157,7 @@ class AppRouter extends React.Component {
 				<Route path="/" component={AppContainer}>
 					<IndexRoute component={EnsureCreateNameContainer} />
 					<Route path="/profile/:id" component={NameProfileContainer} />
+					<Route path="/create-tao" component={CreateTAOContainer} />
 					<Route path="/tao/:id" component={TAODetails} />
 					<Route path="/meet/:id" component={Meet} />
 					<Route path="/ide/:id" component={Ide} />

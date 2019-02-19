@@ -3,7 +3,7 @@ import { PositionDetails } from "./PositionDetails";
 
 const mapStateToProps = (state) => {
 	return {
-		nameTAOPosition: state.contractReducer.nameTAOPosition
+		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition
 	};
 };
 
