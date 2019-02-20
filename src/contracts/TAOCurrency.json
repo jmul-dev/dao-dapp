@@ -363,7 +363,7 @@
 				"id": 30158,
 				"nodeType": "ImportDirective",
 				"scope": 30546,
-				"sourceUnit": 33923,
+				"sourceUnit": 33903,
 				"src": "77:21:92",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -377,10 +377,10 @@
 							"id": 30159,
 							"name": "TheAO",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 33922,
+							"referencedDeclaration": 33902,
 							"src": "154:5:92",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TheAO_$33922",
+								"typeIdentifier": "t_contract$_TheAO_$33902",
 								"typeString": "contract TheAO"
 							}
 						},
@@ -389,12 +389,12 @@
 						"src": "154:5:92"
 					}
 				],
-				"contractDependencies": [33922],
+				"contractDependencies": [33902],
 				"contractKind": "contract",
 				"documentation": "@title TAOCurrency",
 				"fullyImplemented": true,
 				"id": 30545,
-				"linearizedBaseContracts": [30545, 33922],
+				"linearizedBaseContracts": [30545, 33902],
 				"name": "TAOCurrency",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1148,7 +1148,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34877,
+															"referencedDeclaration": 34857,
 															"src": "1579:3:92",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -1175,7 +1175,7 @@
 														"name": "theAO",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33839,
+														"referencedDeclaration": 33819,
 														"src": "1591:5:92",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -1188,7 +1188,7 @@
 														"name": "nameTAOPositionAddress",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33841,
+														"referencedDeclaration": 33821,
 														"src": "1598:22:92",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -1263,8 +1263,8 @@
 											"id": 30223,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "1552:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1479,8 +1479,8 @@
 											"id": 30239,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "1725:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1661,8 +1661,8 @@
 											"id": 30260,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "2006:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1701,7 +1701,7 @@
 											"name": "theAO",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33839,
+											"referencedDeclaration": 33819,
 											"src": "2040:5:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -1806,7 +1806,7 @@
 						"scope": 30545,
 						"src": "1942:116:92",
 						"stateMutability": "nonpayable",
-						"superFunction": 33892,
+						"superFunction": 33872,
 						"visibility": "public"
 					},
 					{
@@ -1918,8 +1918,8 @@
 											"id": 30282,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "2313:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -1960,7 +1960,7 @@
 												"name": "whitelist",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 33845,
+												"referencedDeclaration": 33825,
 												"src": "2349:9:92",
 												"typeDescriptions": {
 													"typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
@@ -2116,7 +2116,7 @@
 						"scope": 30545,
 						"src": "2235:150:92",
 						"stateMutability": "nonpayable",
-						"superFunction": 33921,
+						"superFunction": 33901,
 						"visibility": "public"
 					},
 					{
@@ -2228,8 +2228,8 @@
 											"id": 30304,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "2601:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2268,7 +2268,7 @@
 											"name": "nameTAOPositionAddress",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33841,
+											"referencedDeclaration": 33821,
 											"src": "2652:22:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -2511,7 +2511,7 @@
 									"name": "inWhitelist",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 33867,
+									"referencedDeclaration": 33847,
 									"src": "3061:11:92",
 									"typeDescriptions": {
 										"typeIdentifier": "t_modifier$__$",
@@ -2833,7 +2833,7 @@
 									"name": "inWhitelist",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 33867,
+									"referencedDeclaration": 33847,
 									"src": "3458:11:92",
 									"typeDescriptions": {
 										"typeIdentifier": "t_modifier$__$",
@@ -3071,8 +3071,8 @@
 											"id": 30381,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "3896:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3459,7 +3459,7 @@
 									"name": "inWhitelist",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 33867,
+									"referencedDeclaration": 33847,
 									"src": "3838:11:92",
 									"typeDescriptions": {
 										"typeIdentifier": "t_modifier$__$",
@@ -3713,8 +3713,8 @@
 											"id": 30424,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "4502:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3826,8 +3826,8 @@
 											"id": 30432,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "4594:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4018,8 +4018,8 @@
 											"id": 30440,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "4672:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4756,7 +4756,7 @@
 											"name": "assert",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 34866,
+											"referencedDeclaration": 34846,
 											"src": "5034:6:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_assert_pure$_t_bool_$returns$__$",
@@ -5173,7 +5173,7 @@
 												"name": "this",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 34942,
+												"referencedDeclaration": 34922,
 												"src": "5486:4:92",
 												"typeDescriptions": {
 													"typeIdentifier": "t_contract$_TAOCurrency_$30545",
@@ -5248,7 +5248,7 @@
 												"name": "this",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 34942,
+												"referencedDeclaration": 34922,
 												"src": "5523:4:92",
 												"typeDescriptions": {
 													"typeIdentifier": "t_contract$_TAOCurrency_$30545",
@@ -5457,7 +5457,7 @@
 				"id": 30158,
 				"nodeType": "ImportDirective",
 				"scope": 30546,
-				"sourceUnit": 33923,
+				"sourceUnit": 33903,
 				"src": "77:21:92",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -5471,10 +5471,10 @@
 							"id": 30159,
 							"name": "TheAO",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 33922,
+							"referencedDeclaration": 33902,
 							"src": "154:5:92",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TheAO_$33922",
+								"typeIdentifier": "t_contract$_TheAO_$33902",
 								"typeString": "contract TheAO"
 							}
 						},
@@ -5483,12 +5483,12 @@
 						"src": "154:5:92"
 					}
 				],
-				"contractDependencies": [33922],
+				"contractDependencies": [33902],
 				"contractKind": "contract",
 				"documentation": "@title TAOCurrency",
 				"fullyImplemented": true,
 				"id": 30545,
-				"linearizedBaseContracts": [30545, 33922],
+				"linearizedBaseContracts": [30545, 33902],
 				"name": "TAOCurrency",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -6242,7 +6242,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34877,
+															"referencedDeclaration": 34857,
 															"src": "1579:3:92",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -6269,7 +6269,7 @@
 														"name": "theAO",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33839,
+														"referencedDeclaration": 33819,
 														"src": "1591:5:92",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -6282,7 +6282,7 @@
 														"name": "nameTAOPositionAddress",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33841,
+														"referencedDeclaration": 33821,
 														"src": "1598:22:92",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -6357,8 +6357,8 @@
 											"id": 30223,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "1552:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -6573,8 +6573,8 @@
 											"id": 30239,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "1725:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -6755,8 +6755,8 @@
 											"id": 30260,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "2006:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -6795,7 +6795,7 @@
 											"name": "theAO",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33839,
+											"referencedDeclaration": 33819,
 											"src": "2040:5:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -6900,7 +6900,7 @@
 						"scope": 30545,
 						"src": "1942:116:92",
 						"stateMutability": "nonpayable",
-						"superFunction": 33892,
+						"superFunction": 33872,
 						"visibility": "public"
 					},
 					{
@@ -7012,8 +7012,8 @@
 											"id": 30282,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "2313:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -7054,7 +7054,7 @@
 												"name": "whitelist",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 33845,
+												"referencedDeclaration": 33825,
 												"src": "2349:9:92",
 												"typeDescriptions": {
 													"typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
@@ -7210,7 +7210,7 @@
 						"scope": 30545,
 						"src": "2235:150:92",
 						"stateMutability": "nonpayable",
-						"superFunction": 33921,
+						"superFunction": 33901,
 						"visibility": "public"
 					},
 					{
@@ -7322,8 +7322,8 @@
 											"id": 30304,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "2601:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -7362,7 +7362,7 @@
 											"name": "nameTAOPositionAddress",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33841,
+											"referencedDeclaration": 33821,
 											"src": "2652:22:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -7605,7 +7605,7 @@
 									"name": "inWhitelist",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 33867,
+									"referencedDeclaration": 33847,
 									"src": "3061:11:92",
 									"typeDescriptions": {
 										"typeIdentifier": "t_modifier$__$",
@@ -7927,7 +7927,7 @@
 									"name": "inWhitelist",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 33867,
+									"referencedDeclaration": 33847,
 									"src": "3458:11:92",
 									"typeDescriptions": {
 										"typeIdentifier": "t_modifier$__$",
@@ -8165,8 +8165,8 @@
 											"id": 30381,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "3896:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -8553,7 +8553,7 @@
 									"name": "inWhitelist",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 33867,
+									"referencedDeclaration": 33847,
 									"src": "3838:11:92",
 									"typeDescriptions": {
 										"typeIdentifier": "t_modifier$__$",
@@ -8807,8 +8807,8 @@
 											"id": 30424,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "4502:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -8920,8 +8920,8 @@
 											"id": 30432,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "4594:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -9112,8 +9112,8 @@
 											"id": 30440,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34880, 34881],
-											"referencedDeclaration": 34880,
+											"overloadedDeclarations": [34860, 34861],
+											"referencedDeclaration": 34860,
 											"src": "4672:7:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -9850,7 +9850,7 @@
 											"name": "assert",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 34866,
+											"referencedDeclaration": 34846,
 											"src": "5034:6:92",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_assert_pure$_t_bool_$returns$__$",
@@ -10267,7 +10267,7 @@
 												"name": "this",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 34942,
+												"referencedDeclaration": 34922,
 												"src": "5486:4:92",
 												"typeDescriptions": {
 													"typeIdentifier": "t_contract$_TAOCurrency_$30545",
@@ -10342,7 +10342,7 @@
 												"name": "this",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 34942,
+												"referencedDeclaration": 34922,
 												"src": "5523:4:92",
 												"typeDescriptions": {
 													"typeIdentifier": "t_contract$_TAOCurrency_$30545",
@@ -10515,5 +10515,5 @@
 	},
 	"networks": {},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T03:01:43.950Z"
+	"updatedAt": "2019-02-20T07:36:02.482Z"
 }

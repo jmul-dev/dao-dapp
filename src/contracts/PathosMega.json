@@ -367,12 +367,12 @@
 						"src": "78:11:81"
 					}
 				],
-				"contractDependencies": [30545, 33922],
+				"contractDependencies": [30545, 33902],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 28670,
-				"linearizedBaseContracts": [28670, 30545, 33922],
+				"linearizedBaseContracts": [28670, 30545, 33902],
 				"name": "PathosMega",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -705,12 +705,12 @@
 						"src": "78:11:81"
 					}
 				],
-				"contractDependencies": [30545, 33922],
+				"contractDependencies": [30545, 33902],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 28670,
-				"linearizedBaseContracts": [28670, 30545, 33922],
+				"linearizedBaseContracts": [28670, 30545, 33902],
 				"name": "PathosMega",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1012,5 +1012,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T03:03:11.483Z"
+	"updatedAt": "2019-02-20T07:37:58.704Z"
 }

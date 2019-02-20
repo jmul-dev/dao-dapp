@@ -367,12 +367,12 @@
 						"src": "77:11:60"
 					}
 				],
-				"contractDependencies": [30545, 33922],
+				"contractDependencies": [30545, 33902],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 22843,
-				"linearizedBaseContracts": [22843, 30545, 33922],
+				"linearizedBaseContracts": [22843, 30545, 33902],
 				"name": "LogosGiga",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -705,12 +705,12 @@
 						"src": "77:11:60"
 					}
 				],
-				"contractDependencies": [30545, 33922],
+				"contractDependencies": [30545, 33902],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 22843,
-				"linearizedBaseContracts": [22843, 30545, 33922],
+				"linearizedBaseContracts": [22843, 30545, 33902],
 				"name": "LogosGiga",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1012,5 +1012,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T03:03:11.384Z"
+	"updatedAt": "2019-02-20T07:37:58.655Z"
 }

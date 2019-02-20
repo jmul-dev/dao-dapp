@@ -367,12 +367,12 @@
 						"src": "78:11:38"
 					}
 				],
-				"contractDependencies": [30545, 33922],
+				"contractDependencies": [30545, 33902],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 21221,
-				"linearizedBaseContracts": [21221, 30545, 33922],
+				"linearizedBaseContracts": [21221, 30545, 33902],
 				"name": "EthosZetta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -705,12 +705,12 @@
 						"src": "78:11:38"
 					}
 				],
-				"contractDependencies": [30545, 33922],
+				"contractDependencies": [30545, 33902],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 21221,
-				"linearizedBaseContracts": [21221, 30545, 33922],
+				"linearizedBaseContracts": [21221, 30545, 33902],
 				"name": "EthosZetta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1012,5 +1012,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T03:03:11.470Z"
+	"updatedAt": "2019-02-20T07:37:58.694Z"
 }

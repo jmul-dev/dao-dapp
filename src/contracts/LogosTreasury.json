@@ -599,12 +599,12 @@
 						"src": "251:19:65"
 					}
 				],
-				"contractDependencies": [22100, 31648, 33922],
+				"contractDependencies": [22100, 31648, 33902],
 				"contractKind": "contract",
 				"documentation": "@title LogosTreasury\n * The purpose of this contract is to list all of the valid denominations of Logos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 22977,
-				"linearizedBaseContracts": [22977, 31648, 22100, 33922],
+				"linearizedBaseContracts": [22977, 31648, 22100, 33902],
 				"name": "LogosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -795,12 +795,12 @@
 						"src": "251:19:65"
 					}
 				],
-				"contractDependencies": [22100, 31648, 33922],
+				"contractDependencies": [22100, 31648, 33902],
 				"contractKind": "contract",
 				"documentation": "@title LogosTreasury\n * The purpose of this contract is to list all of the valid denominations of Logos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 22977,
-				"linearizedBaseContracts": [22977, 31648, 22100, 33922],
+				"linearizedBaseContracts": [22977, 31648, 22100, 33902],
 				"name": "LogosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -960,5 +960,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T03:03:11.461Z"
+	"updatedAt": "2019-02-20T07:37:58.678Z"
 }
