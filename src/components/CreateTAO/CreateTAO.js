@@ -4,6 +4,7 @@ import { FieldWrapper, Label, Select, MinLogos } from "./styledComponents";
 import { schema } from "./schema";
 import { getTransactionReceipt, waitForTransactionReceipt } from "utils/web3";
 import { abi as TAOFactoryABI } from "contracts/TAOFactory.json";
+import { post } from "utils/";
 
 const promisify = require("tiny-promisify");
 const abiDecoder = require("abi-decoder");
@@ -124,19 +125,32 @@ class CreateTAO extends React.Component {
 				} else {
 					waitForTransactionReceipt(transactionHash)
 						.then(async () => {
-							this.setState({
-								error: false,
-								errorMessage: "",
-								formLoading: false,
-								formData: this.formData,
-								taoDescription: ""
-							});
 							const receipt = await getTransactionReceipt(transactionHash);
 							const logs = abiDecoder.decodeLogs(receipt.logs);
 							const createTAOEvent = logs.filter((log) => log && log.name === "CreateTAO");
 							const taoIdArgs = createTAOEvent[0].events.filter((e) => e.name === "taoId");
 							const taoId = taoIdArgs[0].value;
-							this.props.setSuccess("Success!", `TAO # ${taoId} has been created`);
+
+							try {
+								const response = await post(`https://localhost/api/set-tao-description`, {
+									taoId,
+									description: taoDescription
+								});
+								if (!response.error && !response.errorMessage) {
+									this.setState({
+										error: false,
+										errorMessage: "",
+										formLoading: false,
+										formData: this.formData,
+										taoDescription: ""
+									});
+									this.props.setSuccess("Success!", `TAO # ${taoId} has been created`);
+								} else {
+									this.setState({ error: true, errorMessage: response.errorMessage, formLoading: false });
+								}
+							} catch (e) {
+								this.setState({ error: true, errorMessage: e.message, formLoading: false });
+							}
 						})
 						.catch((err) => {
 							this.setState({ error: true, errorMessage: err.message, formLoading: false });
