@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Navbar } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { Ahref as Link, Icon } from "components/";
 import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage } from "./styledComponents";
 import { get, encodeParams } from "utils/";
 import "./style.css";
@@ -76,11 +77,19 @@ class TopNavBar extends React.Component {
 		return (
 			<Navbar bg="dark" variant="dark" sticky="top">
 				<Navbar.Brand>
-					<Ahref to="/">
+					<Link to="/">
 						<TAOLogo src={process.env.PUBLIC_URL + "/images/img_0.png"} alt={"AO Logo"} />
-					</Ahref>
+					</Link>
 				</Navbar.Brand>
 				<Navbar.Toggle />
+				<Nav className="mr-auto">
+					<Ahref to="/create-tao">
+						<Icon className="animated bounceIn navbar">
+							<img src={process.env.PUBLIC_URL + "/images/create_tao.png"} alt={"Create TAO"} />
+							<div>Create TAO</div>
+						</Icon>
+					</Ahref>
+				</Nav>
 				<Navbar.Collapse className="justify-content-end">
 					<Navbar.Text>
 						<CurrencyName className="ethos">Ethos</CurrencyName>

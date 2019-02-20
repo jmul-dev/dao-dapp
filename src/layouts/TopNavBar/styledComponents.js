@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router";
 
 export const TAOLogo = styled.img`
-	height: 25px;
+	height: 26px;
 `;
 
 export const CurrencyName = styled.span`

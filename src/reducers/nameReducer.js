@@ -6,6 +6,7 @@ class NameReducerState {
 		this.nameInfo = null;
 		this.profileImage = null;
 		this.taoCurrencyBalances = null;
+		this.taos = [];
 	}
 }
 
@@ -37,6 +38,28 @@ const handleSetTAOCurrencyBalances = (state, action) => {
 	};
 };
 
+const handleSetNameTAOs = (state, action) => {
+	return {
+		...state,
+		taos: action.taos
+	};
+};
+
+const handleAppendNameTAO = (state, action) => {
+	const _taos = state.taos.slice();
+	if (!_taos.find((tao) => tao.taoId === action.tao.taoId)) {
+		const _tao = {
+			taoId: action.tao.taoId,
+			tao: action.tao.tao
+		};
+		_taos.push(_tao);
+	}
+	return {
+		...state,
+		taos: _taos
+	};
+};
+
 export const nameReducer = (state = new NameReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_NAME_ID:
@@ -47,6 +70,10 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleSetProfileImage(state, action);
 		case actionsEnums.SET_TAO_CURRENCY_BALANCES:
 			return handleSetTAOCurrencyBalances(state, action);
+		case actionsEnums.SET_NAME_TAOS:
+			return handleSetNameTAOs(state, action);
+		case actionsEnums.APPEND_NAME_TAO:
+			return handleAppendNameTAO(state, action);
 		default:
 			return state;
 	}

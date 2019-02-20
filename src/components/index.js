@@ -2,7 +2,10 @@ import styled from "styled-components";
 import Form from "react-jsonschema-form";
 import { Link } from "react-router";
 import ReactTable from "react-table";
+import Editor from "react-medium-editor";
+
 import "css/react-table.css";
+import "css/medium-editor.css";
 
 export const Wrapper = styled.div`
 	&.margin-top-30 {
@@ -103,6 +106,10 @@ export const Ahref = styled(Link)`
 		text-decoration: none;
 		color: #666666;
 	}
+
+	&.margin-left-20 {
+		margin-left: 20px;
+	}
 `;
 
 export const Icon = styled.div`
@@ -111,6 +118,20 @@ export const Icon = styled.div`
 	text-align: center;
 	font-size: 0.8em;
 	margin: 30px 20px 0 0;
+
+	&.navbar {
+		font-size: 0.1em;
+		color: #ffffff;
+		margin: 0;
+
+		> img {
+			max-height: 15px;
+		}
+
+		> div {
+			margin-top: 2px;
+		}
+	}
 
 	&.margin-top-10 {
 		margin-top: 10px;
@@ -156,4 +177,17 @@ export const FieldValue = styled.div`
 	display: inline-block;
 	font-size: 0.875em;
 	color: #888888;
+`;
+
+export const MediumEditor = styled(Editor)`
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 4px;
+	color: #495057;
+	background-color: #ffffff;
+	padding: 10px;
+	min-height: 100px;
+
+	&.margin-bottom-20 {
+		margin-bottom: 20px;
+	}
 `;

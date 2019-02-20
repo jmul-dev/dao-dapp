@@ -41,3 +41,38 @@ export const appendName = (name) => {
 		name
 	};
 };
+
+export const setTAOs = (taos) => {
+	return {
+		type: actionsEnums.SET_TAOS,
+		taos
+	};
+};
+
+export const appendTAO = (tao) => {
+	return {
+		type: actionsEnums.APPEND_TAO,
+		tao
+	};
+};
+
+export const setSettingTAOId = (settingTAOId) => {
+	return {
+		type: actionsEnums.SET_SETTING_TAO_ID,
+		settingTAOId
+	};
+};
+
+export const setNameTAOs = (taos) => {
+	return {
+		type: actionsEnums.SET_NAME_TAOS,
+		taos
+	};
+};
+
+export const appendNameTAO = (tao) => {
+	return {
+		type: actionsEnums.APPEND_NAME_TAO,
+		tao
+	};
+};

@@ -12,7 +12,19 @@ import { TAODetails } from "components/TAODetails/TAODetails";
 import { Meet } from "components/Meet/Meet";
 import { Ide } from "components/Ide/Ide";
 
-import { web3Connected, setAccounts, setNetworkId, setContracts, setNames, appendName } from "./actions";
+import {
+	web3Connected,
+	setAccounts,
+	setNetworkId,
+	setContracts,
+	setNames,
+	appendName,
+	setTAOs,
+	appendTAO,
+	setSettingTAOId,
+	setNameTAOs,
+	appendNameTAO
+} from "./actions";
 import { web3Errors } from "common/errors";
 
 // Contracts
@@ -34,6 +46,9 @@ import AOSetting from "contracts/AOSetting.json";
 import { setError } from "widgets/Toast/actions";
 
 import { getTransactionReceipt } from "utils/web3";
+import { asyncForEach } from "utils/";
+
+import { EMPTY_ADDRESS } from "common/constants";
 
 const promisify = require("tiny-promisify");
 
@@ -77,7 +92,17 @@ class AppRouter extends React.Component {
 				aoSetting: this.instantiateContract(web3, networkId, AOSetting.abi, AOSetting.networks)
 			};
 			dispatch(setContracts(contracts));
+
+			const settingTAOId = await promisify(contracts.taoFactory.settingTAOId)();
+			dispatch(setSettingTAOId(settingTAOId));
+
 			this.watchNameFactoryEvent(web3, networkId, contracts.nameFactory);
+
+			let nameId = EMPTY_ADDRESS;
+			if (accounts.length) {
+				nameId = await promisify(contracts.nameFactory.ethAddressToNameId)(accounts[0]);
+			}
+			this.watchTAOFactoryEvent(web3, networkId, contracts.taoFactory, contracts.taoAncestry, nameId);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}
@@ -142,6 +167,50 @@ class AppRouter extends React.Component {
 			createNameEvent.watch((err, log) => {
 				if (!err) {
 					dispatch(appendName({ nameId: log.args.nameId, name: log.args.name }));
+				}
+			});
+		} catch (e) {
+			console.log("error", e);
+		}
+	}
+
+	async watchTAOFactoryEvent(web3, networkId, taoFactory, taoAncestry, nameId) {
+		const dispatch = this.props.store.dispatch;
+
+		try {
+			const receipt = await getTransactionReceipt(TAOFactory.networks[networkId].transactionHash);
+			var createTAOEvent = taoFactory.CreateTAO({}, { fromBlock: receipt.blockNumber, toBlock: "latest" });
+			createTAOEvent.get(async (err, logs) => {
+				if (!err) {
+					const taos = [];
+					const nameTAOs = [];
+
+					await asyncForEach(logs, async (log) => {
+						// If parent is a TAO
+						let isChild = true;
+						if (log.args.parentTypeId.toNumber() === 0) {
+							isChild = await promisify(taoAncestry.isChild)(log.args.parent, log.args.taoId);
+						}
+						taos.push({ ...log.args, isChild });
+						if (log.args.advocateId === nameId) {
+							nameTAOs.push({ ...log.args, isChild });
+						}
+					});
+					dispatch(setTAOs(taos));
+					dispatch(setNameTAOs(nameTAOs));
+				}
+			});
+			createTAOEvent.watch(async (err, log) => {
+				if (!err) {
+					// If parent is a TAO
+					let isChild = false;
+					if (log.args.parentTypeId.toNumber() === 0) {
+						isChild = await promisify(taoAncestry.isChild)(log.args.parent, log.args.taoId);
+					}
+					dispatch(appendTAO({ ...log.args, isChild }));
+					if (log.args.advocateId === nameId) {
+						dispatch(appendNameTAO({ ...log.args, isChild }));
+					}
 				}
 			});
 		} catch (e) {
