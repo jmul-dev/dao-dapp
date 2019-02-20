@@ -49,7 +49,7 @@ class UploadProfileImageForm extends React.Component {
 				this.setState({ error: true, errorMessage: response.errorMessage });
 			}
 		} catch (e) {
-			this.setState({ error: true, errorMessage: e, formLoading: false });
+			this.setState({ error: true, errorMessage: e.message, formLoading: false });
 		}
 	}
 
