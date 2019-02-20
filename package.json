@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@babel/runtime": "^7.3.1",
+		"abi-decoder": "^1.2.0",
 		"bignumber.js": "^8.0.1",
 		"bootstrap": "^4.2.1",
 		"chart.js": "^1.1.1",
