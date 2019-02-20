@@ -1020,12 +1020,12 @@
 						"src": "78:14:25"
 					}
 				],
-				"contractDependencies": [8277, 33923],
+				"contractDependencies": [8277, 33922],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 20747,
-				"linearizedBaseContracts": [20747, 8277, 33923],
+				"linearizedBaseContracts": [20747, 8277, 33922],
 				"name": "AOYotta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1436,12 +1436,12 @@
 						"src": "78:14:25"
 					}
 				],
-				"contractDependencies": [8277, 33923],
+				"contractDependencies": [8277, 33922],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 20747,
-				"linearizedBaseContracts": [20747, 8277, 33923],
+				"linearizedBaseContracts": [20747, 8277, 33922],
 				"name": "AOYotta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1821,5 +1821,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-19T08:13:52.285Z"
+	"updatedAt": "2019-02-20T03:03:11.684Z"
 }

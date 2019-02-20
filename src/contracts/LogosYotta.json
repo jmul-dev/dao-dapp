@@ -367,12 +367,12 @@
 						"src": "78:11:67"
 					}
 				],
-				"contractDependencies": [30545, 33923],
+				"contractDependencies": [30545, 33922],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 23035,
-				"linearizedBaseContracts": [23035, 30545, 33923],
+				"linearizedBaseContracts": [23035, 30545, 33922],
 				"name": "LogosYotta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -705,12 +705,12 @@
 						"src": "78:11:67"
 					}
 				],
-				"contractDependencies": [30545, 33923],
+				"contractDependencies": [30545, 33922],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 23035,
-				"linearizedBaseContracts": [23035, 30545, 33923],
+				"linearizedBaseContracts": [23035, 30545, 33922],
 				"name": "LogosYotta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1012,5 +1012,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-19T08:13:51.975Z"
+	"updatedAt": "2019-02-20T03:03:11.419Z"
 }
