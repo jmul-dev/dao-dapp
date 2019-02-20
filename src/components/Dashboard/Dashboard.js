@@ -1,8 +1,8 @@
 import * as React from "react";
 import { NameListContainer } from "./NameList/";
+import { TAOListContainer } from "./TAOList/";
 
 import { Wrapper, WidgetWrapper } from "../Styled";
-import { Tree } from "widgets/Tree/Tree";
 import { Welcome } from "widgets/Welcome/Welcome";
 import { DoughnutChart } from "widgets/DoughnutChart/";
 import { LineChart } from "widgets/LineChart/LineChart";
@@ -11,7 +11,30 @@ import { ListTAO } from "widgets/ListTAO/ListTAO";
 import { RadarChart } from "widgets/RadarChart/RadarChart";
 import { Palette, Highlight } from "css/color.json";
 
+import { buildTAOTreeData } from "utils/";
+
 class Dashboard extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			taoTreeData: null
+		};
+	}
+
+	componentDidMount() {
+		if (this.props.taos) {
+			const taoTreeData = buildTAOTreeData(this.props.taos);
+			this.setState({ taoTreeData });
+		}
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.taos !== prevProps.taos) {
+			const taoTreeData = buildTAOTreeData(this.props.taos);
+			this.setState({ taoTreeData });
+		}
+	}
+
 	render() {
 		const doughnutChartData = [
 			{ value: 20, color: Palette[0], highlight: Highlight[0], label: "TAO Name#1 - Position" },
@@ -96,12 +119,13 @@ class Dashboard extends React.Component {
 			]
 		};
 
+		const { taoTreeData } = this.state;
 		return (
 			<Wrapper>
-				<NameListContainer />
 				<WidgetWrapper>
-					<Tree width={1200} height={800} />
+					<TAOListContainer taoData={taoTreeData} width={1200} height={800} />
 				</WidgetWrapper>
+				<NameListContainer />
 				<div className="row">
 					<div className="col-xs-4">
 						<WidgetWrapper>

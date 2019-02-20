@@ -40,11 +40,7 @@ const handleAppendName = (state, action) => {
 const handleAppendTAO = (state, action) => {
 	const _taos = state.taos.slice();
 	if (!_taos.find((tao) => tao.taoId === action.tao.taoId)) {
-		const _tao = {
-			taoId: action.tao.taoId,
-			tao: action.tao.tao
-		};
-		_taos.push(_tao);
+		_taos.push(action.tao);
 	}
 	return {
 		...state,

@@ -43,3 +43,42 @@ export const post = (url, data) => {
 			});
 	});
 };
+
+export const buildTAOTreeData = (taos) => {
+	if (!taos.length) {
+		return [];
+	}
+
+	const taosCopy = [];
+	taos.forEach((tao) => {
+		taosCopy.push({ name: tao.name, id: tao.taoId, parentId: tao.parent, isChild: tao.isChild, children: [] });
+	});
+
+	const treeData = taosCopy.reduce((r, a) => {
+		const getParent = (s, b) => {
+			return b.id === a.parentId && b.isChild ? b : b.children && b.children.reduce(getParent, s);
+		};
+
+		let index = 0,
+			node;
+		if (a.isChild) {
+			node = r.reduce(getParent, {});
+		}
+		if (node && Object.keys(node).length) {
+			node.children = node.children || [];
+			node.children.push(a);
+		} else {
+			while (index < r.length) {
+				if (r[index].parentId === a.id && a.isChild) {
+					a.children = (a.children || []).concat(r.splice(index, 1));
+				} else {
+					index++;
+				}
+			}
+			r.push(a);
+		}
+		return r;
+	}, []);
+
+	return treeData[0];
+};
