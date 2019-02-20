@@ -1816,10 +1816,10 @@
 			"links": {
 				"AOLibrary": "0x9aa905cd2c62d2078c2048ba892ce90ada4bfe0b"
 			},
-			"address": "0x57f28c7c41561eb1cdbc3bc78faf1cafc2eed839",
-			"transactionHash": "0xe70d018d16557abbf80735ea9ce395661916472afb8f0e961088198cd4260a1b"
+			"address": "0x2df342c029c508cc68d5be9f88183191ad778c0e",
+			"transactionHash": "0x79119b4a8fe561828625971e9bbf44e79b25f3662186d662600c75841fa0d1ee"
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T07:37:58.864Z"
+	"updatedAt": "2019-02-20T14:29:15.206Z"
 }

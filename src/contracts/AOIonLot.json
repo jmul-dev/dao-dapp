@@ -19544,10 +19544,10 @@
 			"links": {
 				"AOLibrary": "0x9aa905cd2c62d2078c2048ba892ce90ada4bfe0b"
 			},
-			"address": "0x629d7298b850bbe80be2906452415c7a22c65561",
-			"transactionHash": "0x441b434a18982f17420954046de28573e2b1d607b1102fe034ca8fe3944f0857"
+			"address": "0x588e9f6f3ec347dd69a51f8309bc3a68e53c2de6",
+			"transactionHash": "0x7c80548082818a099b5fef6cb6efa9813e523fe2eb9a84b098baf05bcf6e8a7a"
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T07:37:58.907Z"
+	"updatedAt": "2019-02-20T14:29:15.490Z"
 }

@@ -21948,7 +21948,101 @@
 	},
 	"networks": {
 		"1985": {
-			"events": {},
+			"events": {
+				"0x432764b4ba5e42a85ef0b766607df8550deee8129d8f51fe368dc3b1eb684a6f": {
+					"anonymous": false,
+					"inputs": [
+						{
+							"indexed": true,
+							"name": "taoId",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "childMinLogos",
+							"type": "uint256"
+						},
+						{
+							"indexed": false,
+							"name": "nonce",
+							"type": "uint256"
+						}
+					],
+					"name": "UpdateChildMinLogos",
+					"type": "event"
+				},
+				"0x3790c0aa7ff099fb5603238f2b93e519e2582ffeace7e797aed3ca3d6ab3840a": {
+					"anonymous": false,
+					"inputs": [
+						{
+							"indexed": true,
+							"name": "taoId",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "childId",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "approved",
+							"type": "bool"
+						},
+						{
+							"indexed": false,
+							"name": "connected",
+							"type": "bool"
+						}
+					],
+					"name": "AddChild",
+					"type": "event"
+				},
+				"0x5db0d15bc12737227196a1c7dcb252055cb9410a5327241c9b5a8dd16bd18b47": {
+					"anonymous": false,
+					"inputs": [
+						{
+							"indexed": true,
+							"name": "taoId",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "childId",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "nonce",
+							"type": "uint256"
+						}
+					],
+					"name": "ApproveChild",
+					"type": "event"
+				},
+				"0xe49573fa5a8d30004e75a17796315ffbd219d0073774ffb3576d7ed50a1d3c7e": {
+					"anonymous": false,
+					"inputs": [
+						{
+							"indexed": true,
+							"name": "taoId",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "childId",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "nonce",
+							"type": "uint256"
+						}
+					],
+					"name": "RemoveChild",
+					"type": "event"
+				}
+			},
 			"links": {
 				"AOLibrary": "0x9aa905cd2c62d2078c2048ba892ce90ada4bfe0b"
 			},
@@ -21957,5 +22051,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T07:37:58.569Z"
+	"updatedAt": "2019-02-20T14:29:15.012Z"
 }
