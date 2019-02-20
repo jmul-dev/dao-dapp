@@ -11,7 +11,6 @@ class Toast extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.message !== prevProps.message || this.props.headline !== prevProps.headline) {
-			console.log("toast here");
 			this.setState({ visible: true });
 
 			if (!this.props.persisted) {
