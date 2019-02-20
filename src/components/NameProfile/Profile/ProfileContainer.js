@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { Profile } from "./Profile";
+import { setError } from "widgets/Toast/actions";
 
 const mapStateToProps = (state) => {
 	return {
@@ -11,7 +12,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		setError: (headline, message, persisted) => dispatch(setError(headline, message, persisted))
+	};
 };
 
 export const ProfileContainer = connect(

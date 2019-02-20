@@ -33,7 +33,7 @@ class PositionLogosForm extends React.Component {
 		}
 		logos.positionFrom(nameId, formData.recipient, formData.amount, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
-				this.setState({ error: true, errorMessage: err, formLoading: false });
+				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {

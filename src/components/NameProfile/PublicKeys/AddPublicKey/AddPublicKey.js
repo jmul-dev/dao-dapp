@@ -84,7 +84,7 @@ class AddPublicKey extends React.Component {
 			{ from: accounts[0] },
 			(err, transactionHash) => {
 				if (err) {
-					this.setState({ error: true, errorMessage: err, formLoading: false });
+					this.setState({ error: true, errorMessage: err.message, formLoading: false });
 				} else {
 					waitForTransactionReceipt(transactionHash)
 						.then(() => {

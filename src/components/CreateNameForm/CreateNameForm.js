@@ -26,7 +26,7 @@ class CreateNameForm extends React.Component {
 		}
 		nameFactory.createName(formData.username, "", "", "", "", { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
-				this.setState({ error: true, errorMessage: err, formLoading: false });
+				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
@@ -35,7 +35,7 @@ class CreateNameForm extends React.Component {
 						this.props.setNameId(nameId);
 					})
 					.catch((err) => {
-						this.setState({ error: true, errorMessage: err, formLoading: false });
+						this.setState({ error: true, errorMessage: err.message, formLoading: false });
 					});
 			}
 		});

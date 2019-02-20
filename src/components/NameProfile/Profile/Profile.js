@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { waitForTransactionReceipt } from "utils/web3";
-import { setError } from "widgets/Toast/actions";
 
 const promisify = require("tiny-promisify");
 
@@ -78,7 +77,7 @@ class Profile extends React.Component {
 		nameTAOPosition.setListener(nameId, id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false });
-				setError(err);
+				this.props.setError("Error", err.message, false);
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
@@ -86,7 +85,7 @@ class Profile extends React.Component {
 					})
 					.catch((err) => {
 						this.setState({ processingTransaction: false });
-						setError(err);
+						this.props.setError("Error", err.message, false);
 					});
 			}
 		});
@@ -102,7 +101,7 @@ class Profile extends React.Component {
 		nameTAOPosition.setSpeaker(nameId, id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false });
-				setError(err);
+				this.props.setError("Error", err.message, false);
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
@@ -110,7 +109,7 @@ class Profile extends React.Component {
 					})
 					.catch((err) => {
 						this.setState({ processingTransaction: false });
-						setError(err);
+						this.props.setError("Error", err.message, false);
 					});
 			}
 		});

@@ -12,7 +12,6 @@ import { AddPublicKeyContainer } from "./AddPublicKey/";
 import { TransferIonContainer } from "./TransferIon/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
-import { setError } from "widgets/Toast/actions";
 import { asyncForEach } from "utils/";
 
 const EthCrypto = require("eth-crypto");
@@ -127,7 +126,7 @@ class PublicKeys extends React.Component {
 				namePublicKey.setDefaultKey(nameId, publicKey, vrs.v, vrs.r, vrs.s, { from: accounts[0] }, (err, transactionHash) => {
 					if (err) {
 						this.setState({ processingTransaction: false, publicKeyInProcess: null });
-						setError(err);
+						this.props.setError("Error", err.message, false);
 					} else {
 						waitForTransactionReceipt(transactionHash)
 							.then(() => {
@@ -135,7 +134,7 @@ class PublicKeys extends React.Component {
 							})
 							.catch((err) => {
 								this.setState({ processingTransaction: false, publicKeyInProcess: null });
-								setError(err);
+								this.props.setError("Error", err.message, false);
 							});
 					}
 				});
@@ -152,7 +151,7 @@ class PublicKeys extends React.Component {
 		namePublicKey.removeKey(nameId, publicKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false, publicKeyInProcess: null });
-				setError(err);
+				this.props.setError("Error", err.message, false);
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
@@ -161,7 +160,7 @@ class PublicKeys extends React.Component {
 					})
 					.catch((err) => {
 						this.setState({ processingTransaction: false, publicKeyInProcess: null });
-						setError(err);
+						this.props.setError("Error", err.message, false);
 					});
 			}
 		});
