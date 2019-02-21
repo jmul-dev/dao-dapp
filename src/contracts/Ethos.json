@@ -341,7 +341,7 @@
 				"id": 20924,
 				"nodeType": "ImportDirective",
 				"scope": 20943,
-				"sourceUnit": 30546,
+				"sourceUnit": 30592,
 				"src": "26:27:28",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -355,10 +355,10 @@
 							"id": 20925,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30545,
+							"referencedDeclaration": 30591,
 							"src": "73:11:28",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30545",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30591",
 								"typeString": "contract TAOCurrency"
 							}
 						},
@@ -367,12 +367,12 @@
 						"src": "73:11:28"
 					}
 				],
-				"contractDependencies": [30545, 33902],
+				"contractDependencies": [30591, 33948],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 20942,
-				"linearizedBaseContracts": [20942, 30545, 33902],
+				"linearizedBaseContracts": [20942, 30591, 33948],
 				"name": "Ethos",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -438,10 +438,10 @@
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30545,
+									"referencedDeclaration": 30591,
 									"src": "205:11:28",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30545_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30591_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -576,7 +576,7 @@
 				"id": 20924,
 				"nodeType": "ImportDirective",
 				"scope": 20943,
-				"sourceUnit": 30546,
+				"sourceUnit": 30592,
 				"src": "26:27:28",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -590,10 +590,10 @@
 							"id": 20925,
 							"name": "TAOCurrency",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 30545,
+							"referencedDeclaration": 30591,
 							"src": "73:11:28",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrency_$30545",
+								"typeIdentifier": "t_contract$_TAOCurrency_$30591",
 								"typeString": "contract TAOCurrency"
 							}
 						},
@@ -602,12 +602,12 @@
 						"src": "73:11:28"
 					}
 				],
-				"contractDependencies": [30545, 33902],
+				"contractDependencies": [30591, 33948],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 20942,
-				"linearizedBaseContracts": [20942, 30545, 33902],
+				"linearizedBaseContracts": [20942, 30591, 33948],
 				"name": "Ethos",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -673,10 +673,10 @@
 									"name": "TAOCurrency",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 30545,
+									"referencedDeclaration": 30591,
 									"src": "205:11:28",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30545_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrency_$30591_$",
 										"typeString": "type(contract TAOCurrency)"
 									}
 								},
@@ -797,7 +797,47 @@
 	},
 	"networks": {
 		"1985": {
-			"events": {},
+			"events": {
+				"0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+					"anonymous": false,
+					"inputs": [
+						{
+							"indexed": true,
+							"name": "from",
+							"type": "address"
+						},
+						{
+							"indexed": true,
+							"name": "to",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "value",
+							"type": "uint256"
+						}
+					],
+					"name": "Transfer",
+					"type": "event"
+				},
+				"0xcc16f5dbb4873280815c1ee09dbd06736cffcc184412cf7a71a0fdb75d397ca5": {
+					"anonymous": false,
+					"inputs": [
+						{
+							"indexed": true,
+							"name": "from",
+							"type": "address"
+						},
+						{
+							"indexed": false,
+							"name": "value",
+							"type": "uint256"
+						}
+					],
+					"name": "Burn",
+					"type": "event"
+				}
+			},
 			"links": {
 				"AOLibrary": "0x9aa905cd2c62d2078c2048ba892ce90ada4bfe0b"
 			},
@@ -806,5 +846,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T14:29:15.001Z"
+	"updatedAt": "2019-02-21T15:27:08.765Z"
 }

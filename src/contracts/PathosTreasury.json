@@ -573,7 +573,7 @@
 				"id": 28731,
 				"nodeType": "ImportDirective",
 				"scope": 28747,
-				"sourceUnit": 31649,
+				"sourceUnit": 31695,
 				"src": "26:35:84",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -587,10 +587,10 @@
 							"id": 28732,
 							"name": "TAOCurrencyTreasury",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 31648,
+							"referencedDeclaration": 31694,
 							"src": "254:19:84",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31648",
+								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31694",
 								"typeString": "contract TAOCurrencyTreasury"
 							}
 						},
@@ -599,12 +599,12 @@
 						"src": "254:19:84"
 					}
 				],
-				"contractDependencies": [22100, 31648, 33902],
+				"contractDependencies": [22100, 31694, 33948],
 				"contractKind": "contract",
 				"documentation": "@title PathosTreasury\n * The purpose of this contract is to list all of the valid denominations of Pathos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 28746,
-				"linearizedBaseContracts": [28746, 31648, 22100, 33902],
+				"linearizedBaseContracts": [28746, 31694, 22100, 33948],
 				"name": "PathosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -657,10 +657,10 @@
 									"name": "TAOCurrencyTreasury",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 31648,
+									"referencedDeclaration": 31694,
 									"src": "393:19:84",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31648_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31694_$",
 										"typeString": "type(contract TAOCurrencyTreasury)"
 									}
 								},
@@ -769,7 +769,7 @@
 				"id": 28731,
 				"nodeType": "ImportDirective",
 				"scope": 28747,
-				"sourceUnit": 31649,
+				"sourceUnit": 31695,
 				"src": "26:35:84",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -783,10 +783,10 @@
 							"id": 28732,
 							"name": "TAOCurrencyTreasury",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 31648,
+							"referencedDeclaration": 31694,
 							"src": "254:19:84",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31648",
+								"typeIdentifier": "t_contract$_TAOCurrencyTreasury_$31694",
 								"typeString": "contract TAOCurrencyTreasury"
 							}
 						},
@@ -795,12 +795,12 @@
 						"src": "254:19:84"
 					}
 				],
-				"contractDependencies": [22100, 31648, 33902],
+				"contractDependencies": [22100, 31694, 33948],
 				"contractKind": "contract",
 				"documentation": "@title PathosTreasury\n * The purpose of this contract is to list all of the valid denominations of Pathos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 28746,
-				"linearizedBaseContracts": [28746, 31648, 22100, 33902],
+				"linearizedBaseContracts": [28746, 31694, 22100, 33948],
 				"name": "PathosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -853,10 +853,10 @@
 									"name": "TAOCurrencyTreasury",
 									"nodeType": "Identifier",
 									"overloadedDeclarations": [],
-									"referencedDeclaration": 31648,
+									"referencedDeclaration": 31694,
 									"src": "393:19:84",
 									"typeDescriptions": {
-										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31648_$",
+										"typeIdentifier": "t_type$_t_contract$_TAOCurrencyTreasury_$31694_$",
 										"typeString": "type(contract TAOCurrencyTreasury)"
 									}
 								},
@@ -960,5 +960,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-20T14:29:15.098Z"
+	"updatedAt": "2019-02-21T15:27:08.817Z"
 }
