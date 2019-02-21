@@ -9,7 +9,7 @@ import { EnsureCreateNameContainer } from "components/EnsureCreateName/";
 import { NameProfileContainer } from "components/NameProfile/";
 import { NameListContainer } from "components/NameList/";
 import { CreateTAOContainer } from "components/CreateTAO/";
-import { TAODetails } from "components/TAODetails/TAODetails";
+import { TAODetailsContainer } from "components/TAODetails/";
 import { Meet } from "components/Meet/Meet";
 import { Ide } from "components/Ide/Ide";
 
@@ -229,7 +229,7 @@ class AppRouter extends React.Component {
 					<Route path="/profile/:id" component={NameProfileContainer} />
 					<Route path="/names" component={NameListContainer} />
 					<Route path="/create-tao" component={CreateTAOContainer} />
-					<Route path="/tao/:id" component={TAODetails} />
+					<Route path="/tao/:id" component={TAODetailsContainer} />
 					<Route path="/meet/:id" component={Meet} />
 					<Route path="/ide/:id" component={Ide} />
 				</Route>

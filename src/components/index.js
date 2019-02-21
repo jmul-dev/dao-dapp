@@ -8,6 +8,8 @@ import "css/react-table.css";
 import "css/medium-editor.css";
 
 export const Wrapper = styled.div`
+	font-size: 1em;
+
 	&.margin-top-30 {
 		margin-top: 30px;
 	}
@@ -36,14 +38,27 @@ export const Title = styled.div`
 	font-weight: 500;
 	margin-bottom: 40px;
 
+	&.medium {
+		font-size: 2.5em;
+	}
 	&.big {
 		font-size: 4em;
 		margin-bottom: 5px;
 	}
-
+	&.margin-bottom-0 {
+		margin-bottom: 0;
+	}
 	&.margin-top {
 		margin-top: 40px;
 	}
+	&.margin-top-20 {
+		margin-top: 20px;
+	}
+`;
+
+export const Header = styled.div`
+	font-size: 0.875em;
+	margin: 10px 0;
 `;
 
 export const SchemaForm = styled(Form)`
@@ -115,6 +130,12 @@ export const Ahref = styled(Link)`
 
 	&.margin-left-20 {
 		margin-left: 20px;
+	}
+	&.small {
+		font-size: 0.875em;
+	}
+	&.white {
+		color: #ffffff;
 	}
 `;
 
