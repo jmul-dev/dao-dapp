@@ -7,6 +7,7 @@ import { syncHistoryWithStore } from "react-router-redux";
 import { AppContainer } from "components/App/";
 import { EnsureCreateNameContainer } from "components/EnsureCreateName/";
 import { NameProfileContainer } from "components/NameProfile/";
+import { NameListContainer } from "components/NameList/";
 import { CreateTAOContainer } from "components/CreateTAO/";
 import { TAODetails } from "components/TAODetails/TAODetails";
 import { Meet } from "components/Meet/Meet";
@@ -226,6 +227,7 @@ class AppRouter extends React.Component {
 				<Route path="/" component={AppContainer}>
 					<IndexRoute component={EnsureCreateNameContainer} />
 					<Route path="/profile/:id" component={NameProfileContainer} />
+					<Route path="/names" component={NameListContainer} />
 					<Route path="/create-tao" component={CreateTAOContainer} />
 					<Route path="/tao/:id" component={TAODetails} />
 					<Route path="/meet/:id" component={Meet} />

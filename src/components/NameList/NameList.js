@@ -21,9 +21,9 @@ class NameList extends React.Component {
 		];
 
 		return (
-			<Wrapper className="dark-bg padding-20 margin-bottom-40">
-				<Title>List of Names</Title>
-				<Table className="width-70" data={names} columns={columns} defaultPageSize={5} filterable={true} />
+			<Wrapper className="padding-40">
+				<Title>View Names</Title>
+				<Table data={names} columns={columns} defaultPageSize={10} filterable={true} />
 			</Wrapper>
 		);
 	}

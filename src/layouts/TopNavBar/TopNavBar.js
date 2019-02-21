@@ -83,6 +83,18 @@ class TopNavBar extends React.Component {
 				</Navbar.Brand>
 				<Navbar.Toggle />
 				<Nav className="mr-auto">
+					<Ahref to="/">
+						<Icon className="animated bounceIn navbar">
+							<img src={process.env.PUBLIC_URL + "/images/view_taos_plot.png"} alt={"View TAOs Plot"} />
+							<div>View All TAOs</div>
+						</Icon>
+					</Ahref>
+					<Ahref to="/names">
+						<Icon className="animated bounceIn navbar">
+							<img src={process.env.PUBLIC_URL + "/images/view_names.png"} alt={"View Names"} />
+							<div>View Names</div>
+						</Icon>
+					</Ahref>
 					<Ahref to="/create-tao">
 						<Icon className="animated bounceIn navbar">
 							<img src={process.env.PUBLIC_URL + "/images/create_tao.png"} alt={"Create TAO"} />

@@ -175,7 +175,7 @@ class CreateTAO extends React.Component {
 
 		return (
 			<Wrapper className="padding-40">
-				<Title>Create a TAO</Title>
+				<Title>Create TAO</Title>
 				<FieldWrapper>
 					<Label>Which parent Name/TAO are you creating this new TAO from?*</Label>
 					<Select className="form-control" onChange={this.handleParentChange}>
