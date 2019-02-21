@@ -10,8 +10,8 @@ import { NameProfileContainer } from "components/NameProfile/";
 import { NameListContainer } from "components/NameList/";
 import { CreateTAOContainer } from "components/CreateTAO/";
 import { TAODetailsContainer } from "components/TAODetails/";
-import { Meet } from "components/Meet/Meet";
-import { Ide } from "components/Ide/Ide";
+import { MeetContainer } from "components/Meet/";
+import { IdeContainer } from "components/Ide/";
 
 import {
 	web3Connected,
@@ -232,8 +232,8 @@ class AppRouter extends React.Component {
 					<Route path="/names" component={NameListContainer} />
 					<Route path="/create-tao" component={CreateTAOContainer} />
 					<Route path="/tao/:id" component={TAODetailsContainer} />
-					<Route path="/meet/:id" component={Meet} />
-					<Route path="/ide/:id" component={Ide} />
+					<Route path="/meet/:id" component={MeetContainer} />
+					<Route path="/ide/:id" component={IdeContainer} />
 				</Route>
 			</Router>
 		);

@@ -16,7 +16,6 @@ class TAODetails extends React.Component {
 			ancestry: null
 		};
 		this.initialState = this.state;
-		this.handleEditorChange = this.handleEditorChange.bind(this);
 	}
 
 	async componentDidMount() {
@@ -106,10 +105,6 @@ class TAODetails extends React.Component {
 		this.setState({ ancestry });
 	}
 
-	handleEditorChange(taoDescription) {
-		this.setState({ taoDescription });
-	}
-
 	render() {
 		const { id } = this.props.params;
 		const { taoInfo, taoDescription, position, ancestry } = this.state;
@@ -123,7 +118,7 @@ class TAODetails extends React.Component {
 					Back to Dashboard
 				</Ahref>
 				<TAOName id={id} name={taoInfo.name} />
-				<MediumEditor text={taoDescription} onChange={this.handleEditorChange} />
+				<MediumEditor text={taoDescription} />
 				<PositionDetails position={position} />
 			</Wrapper>
 		);
