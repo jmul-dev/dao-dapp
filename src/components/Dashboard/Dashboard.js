@@ -1,8 +1,8 @@
 import * as React from "react";
+import { Wrapper } from "components/";
 import { NameListContainer } from "./NameList/";
 import { TAOListContainer } from "./TAOList/";
 
-import { Wrapper, WidgetWrapper } from "../Styled";
 import { Welcome } from "widgets/Welcome/Welcome";
 import { DoughnutChart } from "widgets/DoughnutChart/";
 import { LineChart } from "widgets/LineChart/LineChart";
@@ -122,13 +122,13 @@ class Dashboard extends React.Component {
 		const { taoTreeData } = this.state;
 		return (
 			<Wrapper>
-				<WidgetWrapper>
-					<TAOListContainer taoData={taoTreeData} width={1200} height={800} />
-				</WidgetWrapper>
+				<Wrapper className="dark-bg padding-20 margin-bottom-20 center">
+					<TAOListContainer taoData={taoTreeData} width={1200} height={700} />
+				</Wrapper>
 				<NameListContainer />
 				<div className="row">
 					<div className="col-xs-4">
-						<WidgetWrapper>
+						<Wrapper className="dark-bg padding-20 margin-bottom-20 center">
 							<Welcome nameId={this.props.nameId} />
 							<DoughnutChart title={"Current Staked Position"} data={doughnutChartData} height={200} />
 							<CountUpWidget title="Logos" value={1000} />
@@ -137,10 +137,10 @@ class Dashboard extends React.Component {
 							<CountUpWidget title="Anti Logos" value={190} />
 							<CountUpWidget title="Anti Pathos" value={746} />
 							<CountUpWidget title="Anti Ethos" value={85} />
-						</WidgetWrapper>
+						</Wrapper>
 					</div>
 					<div className="col-xs-8">
-						<WidgetWrapper>
+						<Wrapper className="dark-bg padding-20 margin-bottom-20 center">
 							<LineChart title={"Line Chart"} data={lineChartData} />
 							<div className="row">
 								<div className="col-xs-7">
@@ -150,7 +150,7 @@ class Dashboard extends React.Component {
 									<RadarChart title={"Radar Chart"} data={radarChartData} />
 								</div>
 							</div>
-						</WidgetWrapper>
+						</Wrapper>
 					</div>
 				</div>
 			</Wrapper>

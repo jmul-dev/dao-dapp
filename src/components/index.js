@@ -11,6 +11,12 @@ export const Wrapper = styled.div`
 	&.margin-top-30 {
 		margin-top: 30px;
 	}
+	&.margin-bottom-20 {
+		margin-bottom: 20px;
+	}
+	&.margin-bottom-40 {
+		margin-bottom: 40px;
+	}
 	&.padding-40 {
 		padding: 40px;
 	}
@@ -20,8 +26,8 @@ export const Wrapper = styled.div`
 	&.dark-bg {
 		background-color: #000000;
 	}
-	&.margin-bottom-40 {
-		margin-bottom: 40px;
+	&.center {
+		text-align: center;
 	}
 `;
 

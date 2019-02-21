@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import { Neon, NeonStroke } from "css/color.json";
 import { Button } from "./styledComponents";
 import { hashHistory } from "react-router";
-import { buildTAOTreeData } from "utils/";
 
 class TAOList extends React.Component {
 	constructor(props) {
@@ -14,9 +13,9 @@ class TAOList extends React.Component {
 		this.drawRadialCluster = this.drawRadialCluster.bind(this);
 		this.drawTree = this.drawTree.bind(this);
 		this.state = {
-			diameter: 800,
-			duration: 2000,
-			widthPadding: 200,
+			diameter: 400,
+			duration: 1500,
+			widthPadding: 100,
 			tree: null,
 			cluster: null,
 			diagonal: null,
@@ -38,8 +37,7 @@ class TAOList extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		if (this.props.taoData !== prevProps.taoData) {
-			const svg = d3
-				.select("svg")
+			d3.select("svg")
 				.selectAll("*")
 				.remove();
 			this.setState(this.initialState);

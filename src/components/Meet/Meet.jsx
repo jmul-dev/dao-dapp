@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, WidgetWrapper } from "../Styled";
+import { Wrapper } from "components/";
 import { Name, Id, Loading, IframeContainer } from "./Styled";
 import { TAOData } from "components/TAODetailsData.json";
 import { Link } from "react-router";
@@ -25,7 +25,7 @@ class Meet extends React.Component {
 		const { id } = this.props.params;
 		return (
 			<Wrapper>
-				<WidgetWrapper>
+				<Wrapper className="dark-bg padding-20 margin-bottom-20 center">
 					<Link to={"/tao/" + id}>Back to TAO Details</Link>
 					<Name>TAO - {TAOData[id]}</Name>
 					<Id>{id}</Id>
@@ -40,7 +40,7 @@ class Meet extends React.Component {
 							onLoad={this.iframeLoaded}
 						/>
 					</IframeContainer>
-				</WidgetWrapper>
+				</Wrapper>
 			</Wrapper>
 		);
 	}
