@@ -231,7 +231,7 @@ class AppRouter extends React.Component {
 					<IndexRoute component={EnsureCreateNameContainer} />
 					<Route path="/profile/:id" component={NameProfileContainer} />
 					<Route path="/names" component={NameListContainer} />
-					<Route path="/create-tao" component={CreateTAOContainer} />
+					<Route path="/create-tao(/:id)" component={CreateTAOContainer} />
 					<Route path="/tao/:id" component={TAODetailsContainer} />
 					<Route path="/meet/:id" component={MeetContainer} />
 					<Route path="/ide/:id" component={IdeContainer} />

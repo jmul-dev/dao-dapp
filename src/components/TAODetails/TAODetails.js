@@ -113,6 +113,8 @@ class TAODetails extends React.Component {
 			parentId: _ancestry[0],
 			parentIsTAO: false,
 			parentName: "",
+			isChild: true,
+			isNotApprovedChild: false,
 			childMinLogos: _ancestry[1],
 			totalChildren: _ancestry[2]
 		};
@@ -120,6 +122,10 @@ class TAODetails extends React.Component {
 		const _taoInfo = await promisify(nameTAOLookup.getById)(ancestry.parentId);
 		ancestry.parentIsTAO = _taoInfo[2].eq(0);
 		ancestry.parentName = _taoInfo[0];
+		if (ancestry.parentIsTAO) {
+			ancestry.isChild = await promisify(taoAncestry.isChild)(ancestry.parentId, id);
+			ancestry.isNotApprovedChild = await promisify(taoAncestry.isNotApprovedChild)(ancestry.parentId, id);
+		}
 		this.setState({ ancestry });
 	}
 

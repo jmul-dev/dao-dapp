@@ -22,3 +22,7 @@ export const MinLogos = styled.div`
 	font-size: 2em;
 	font-weight: 500;
 `;
+
+export const SelectedParent = styled.div`
+	font-size: 1em;
+`;

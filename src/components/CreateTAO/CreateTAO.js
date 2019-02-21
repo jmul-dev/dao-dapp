@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Wrapper, Title, SchemaForm, Error, MediumEditor, Button, Ahref } from "components/";
-import { FieldWrapper, Label, Select, MinLogos } from "./styledComponents";
+import { FieldWrapper, Label, Select, MinLogos, SelectedParent } from "./styledComponents";
 import { schema } from "./schema";
 import { getTransactionReceipt, waitForTransactionReceipt } from "utils/web3";
 import { abi as TAOFactoryABI } from "contracts/TAOFactory.json";
@@ -38,23 +38,30 @@ class CreateTAO extends React.Component {
 	}
 
 	async componentDidMount() {
-		if (this.props.nameId) {
+		await this.getCreateChildTAOMinLogos();
+		if (this.props.params.id) {
+			this.setState({ parentId: this.props.params.id });
+		} else {
 			this.setState({ parentId: this.props.nameId });
 		}
-		await this.getCreateChildTAOMinLogos();
+		this.setParentMinLogos(this.state.parentId);
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (
 			this.props.aoSetting !== prevProps.aoSetting ||
 			this.props.settingTAOId !== prevProps.settingTAOId ||
-			this.props.nameId !== prevProps.nameId
+			this.props.nameId !== prevProps.nameId ||
+			this.props.params.id !== prevProps.params.id
 		) {
 			this.setState(this.initialState);
-			if (this.props.nameId) {
+			await this.getCreateChildTAOMinLogos();
+			if (this.props.params.id) {
+				this.setState({ parentId: this.props.params.id });
+			} else {
 				this.setState({ parentId: this.props.nameId });
 			}
-			await this.getCreateChildTAOMinLogos();
+			this.setParentMinLogos(this.state.parentId);
 		}
 	}
 
@@ -64,21 +71,25 @@ class CreateTAO extends React.Component {
 			return;
 		}
 		const [createChildTAOMinLogos] = await promisify(aoSetting.getSettingValuesByTAOName)(settingTAOId, "createChildTAOMinLogos");
-		this.setState({ createChildTAOMinLogos, parentMinLogos: createChildTAOMinLogos });
+		this.setState({ createChildTAOMinLogos });
 	}
 
 	async handleParentChange(event) {
 		event.persist();
+		await this.setParentMinLogos(event.target.value);
+	}
+
+	async setParentMinLogos(parentId) {
 		const { nameId, taoAncestry } = this.props;
-		if (!nameId || !taoAncestry) {
+		if (!taoAncestry || !nameId || !parentId) {
 			return;
 		}
 		const { createChildTAOMinLogos } = this.state;
-		if (event.target.value === nameId) {
-			this.setState({ parentId: event.target.value, parentIsName: true, parentMinLogos: createChildTAOMinLogos });
+		if (parentId === nameId) {
+			this.setState({ parentId, parentIsName: true, parentMinLogos: createChildTAOMinLogos });
 		} else {
-			const [, minLogos] = await promisify(taoAncestry.getAncestryById)(event.target.value);
-			this.setState({ parentId: event.target.value, parentIsName: false, parentMinLogos: minLogos });
+			const [, minLogos] = await promisify(taoAncestry.getAncestryById)(parentId);
+			this.setState({ parentId, parentIsName: false, parentMinLogos: minLogos });
 		}
 	}
 
@@ -166,27 +177,58 @@ class CreateTAO extends React.Component {
 		if (!nameId || !nameInfo || !taos || !taoCurrencyBalances || !parentMinLogos) {
 			return null;
 		}
-
+		const { id } = this.props.params;
 		const taoOptions = taos.map((tao) => (
 			<option key={tao.taoId} value={tao.taoId}>
 				{tao.name} ({tao.taoId})
 			</option>
 		));
 
+		let selectedParent = null;
+		if (id) {
+			if (id === nameId) {
+				selectedParent = (
+					<div>
+						<Label>Parent Name</Label>
+						<SelectedParent>
+							Yourself - {nameInfo.name} ({nameId})
+						</SelectedParent>
+					</div>
+				);
+			} else if (taos) {
+				const selectedTAO = taos.filter((tao) => tao.taoId === id);
+				if (selectedTAO.length) {
+					selectedParent = (
+						<div>
+							<Label>Parent TAO</Label>
+							<SelectedParent>
+								{selectedTAO[0].name} ({selectedTAO[0].taoId})
+							</SelectedParent>
+						</div>
+					);
+				}
+			}
+		}
+
 		return (
 			<Wrapper className="padding-40">
 				<Title>Create TAO</Title>
 				<FieldWrapper>
-					<Label>Which parent Name/TAO are you creating this new TAO from?*</Label>
-					<Select className="form-control" onChange={this.handleParentChange}>
-						<optgroup label="Name">
-							<option key={nameId} value={nameId}>
-								Yourself - {nameInfo.name} ({nameId})
-							</option>
-							)
-						</optgroup>
-						<optgroup label="TAO">{taoOptions}</optgroup>
-					</Select>
+					{!id ? (
+						<div>
+							<Label>Which parent Name/TAO are you creating this new TAO from?*</Label>
+							<Select className="form-control" onChange={this.handleParentChange}>
+								<optgroup label="Name">
+									<option key={nameId} value={nameId}>
+										Yourself - {nameInfo.name} ({nameId})
+									</option>
+								</optgroup>
+								<optgroup label="TAO">{taoOptions}</optgroup>
+							</Select>
+						</div>
+					) : (
+						<div>{selectedParent}</div>
+					)}
 				</FieldWrapper>
 				<FieldWrapper>
 					{parentId === nameId ? "Global" : "Parent TAO's"} minimum required Logos to create TAO:

@@ -8,7 +8,6 @@ class AncestryDetails extends React.Component {
 			return null;
 		}
 
-		console.log(ancestry);
 		return (
 			<Wrapper>
 				<Title className="margin-top">Ancestry</Title>
@@ -20,6 +19,21 @@ class AncestryDetails extends React.Component {
 						</Ahref>
 					</FieldValue>
 				</FieldContainer>
+				{ancestry.isNotApprovedChild ? (
+					<FieldContainer>
+						<FieldName className="small">Parent has approved as child TAO</FieldName>
+						<FieldValue>No</FieldValue>
+					</FieldContainer>
+				) : (
+					[
+						!ancestry.isChild && (
+							<FieldContainer>
+								<FieldName className="small">Parent has removed as child TAO</FieldName>
+								<FieldValue>Yes</FieldValue>
+							</FieldContainer>
+						)
+					]
+				)}
 				<FieldContainer>
 					<FieldName className="small">Min. Required Logos to Create a Child TAO</FieldName>
 					<FieldValue>{ancestry.childMinLogos.toNumber()}</FieldValue>
