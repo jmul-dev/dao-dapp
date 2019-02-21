@@ -43,6 +43,7 @@ import TAOAncestry from "contracts/TAOAncestry.json";
 import TAOFactory from "contracts/TAOFactory.json";
 import TAOPool from "contracts/TAOPool.json";
 import AOSetting from "contracts/AOSetting.json";
+import AOLibrary from "contracts/AOLibrary.json";
 
 import { setError } from "widgets/Toast/actions";
 
@@ -90,7 +91,8 @@ class AppRouter extends React.Component {
 				taoAncestry: this.instantiateContract(web3, networkId, TAOAncestry.abi, TAOAncestry.networks),
 				taoFactory: this.instantiateContract(web3, networkId, TAOFactory.abi, TAOFactory.networks),
 				taoPool: this.instantiateContract(web3, networkId, TAOPool.abi, TAOPool.networks),
-				aoSetting: this.instantiateContract(web3, networkId, AOSetting.abi, AOSetting.networks)
+				aoSetting: this.instantiateContract(web3, networkId, AOSetting.abi, AOSetting.networks),
+				aoLibrary: this.instantiateContract(web3, networkId, AOLibrary.abi, AOLibrary.networks)
 			};
 			dispatch(setContracts(contracts));
 

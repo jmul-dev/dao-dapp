@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Wrapper, Ahref, MediumEditor } from "components/";
 import { TAOName } from "./TAOName/";
+import { PositionDetails } from "./PositionDetails/";
 import { get, encodeParams } from "utils/";
 
 const promisify = require("tiny-promisify");
@@ -11,7 +12,8 @@ class TAODetails extends React.Component {
 		this.state = {
 			taoInfo: null,
 			taoDescription: null,
-			position: null
+			position: null,
+			ancestry: null
 		};
 		this.initialState = this.state;
 		this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -21,6 +23,7 @@ class TAODetails extends React.Component {
 		await this.getTAOInfo(this.props.params.id);
 		await this.getTAODescription(this.props.params.id);
 		await this.getTAOPosition(this.props.params.id);
+		await this.getTAOAncestry(this.props.params.id);
 	}
 
 	async componentDidUpdate(prevProps) {
@@ -29,6 +32,7 @@ class TAODetails extends React.Component {
 			await this.getTAOInfo(this.props.params.id);
 			await this.getTAODescription(this.props.params.id);
 			await this.getTAOPosition(this.props.params.id);
+			await this.getTAOAncestry(this.props.params.id);
 		}
 	}
 
@@ -58,21 +62,48 @@ class TAODetails extends React.Component {
 	}
 
 	async getTAOPosition(id) {
-		const { nameTAOPosition } = this.props;
-		if (!nameTAOPosition || !id) {
+		const { nameTAOPosition, aoLibrary } = this.props;
+		if (!nameTAOPosition || !aoLibrary || !id) {
 			return;
 		}
 
 		const _position = await promisify(nameTAOPosition.getPositionById)(id);
 		const position = {
-			advocateName: _position[0],
-			advocateId: _position[1],
-			listenerName: _position[2],
-			listenerId: _position[3],
-			speakerName: _position[4],
-			speakerId: _position[5]
+			advocate: {
+				name: _position[0],
+				id: _position[1],
+				isTAO: false
+			},
+			listener: {
+				name: _position[2],
+				id: _position[3],
+				isTAO: false
+			},
+			speaker: {
+				name: _position[4],
+				id: _position[5],
+				isTAO: false
+			}
 		};
+		position.advocate.isTAO = await promisify(aoLibrary.isTAO)(position.advocate.id);
+		position.listener.isTAO = await promisify(aoLibrary.isTAO)(position.listener.id);
+		position.speaker.isTAO = await promisify(aoLibrary.isTAO)(position.speaker.id);
 		this.setState({ position });
+	}
+
+	async getTAOAncestry(id) {
+		const { taoAncestry } = this.props;
+		if (!taoAncestry || !id) {
+			return;
+		}
+
+		const _ancestry = await promisify(taoAncestry.getAncestryById)(id);
+		const ancestry = {
+			parentId: _ancestry[0],
+			childMinLogos: _ancestry[1],
+			totalChildren: _ancestry[2]
+		};
+		this.setState({ ancestry });
 	}
 
 	handleEditorChange(taoDescription) {
@@ -81,8 +112,8 @@ class TAODetails extends React.Component {
 
 	render() {
 		const { id } = this.props.params;
-		const { taoInfo, taoDescription, position } = this.state;
-		if (!taoInfo || !taoDescription || !position) {
+		const { taoInfo, taoDescription, position, ancestry } = this.state;
+		if (!taoInfo || !taoDescription || !position || !ancestry) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 
@@ -93,6 +124,7 @@ class TAODetails extends React.Component {
 				</Ahref>
 				<TAOName id={id} name={taoInfo.name} />
 				<MediumEditor text={taoDescription} onChange={this.handleEditorChange} />
+				<PositionDetails position={position} />
 			</Wrapper>
 		);
 	}
