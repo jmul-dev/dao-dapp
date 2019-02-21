@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Alert, AlertContainer } from "react-bs-notifier";
+import "./style.css";
 
 class Toast extends React.Component {
 	constructor(props) {
