@@ -21,7 +21,6 @@ class PublicKeys extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOwner: false,
 			defaultPublicKey: null,
 			publicKeys: null,
 			publicKeysBalance: {},
@@ -38,25 +37,16 @@ class PublicKeys extends React.Component {
 	}
 
 	async componentDidMount() {
-		const { id, nameId } = this.props;
-
-		// Owner features only
-		if (id === nameId) {
-			this.setState({ isOwner: true });
-			await this.getNamePublicKey(id);
-		}
+		const { id } = this.props;
+		await this.getNamePublicKey(id);
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.id !== prevProps.id) {
 			this.setState(this.initialState);
 
-			const { id, nameId } = this.props;
-			// Owner features only
-			if (id === nameId) {
-				this.setState({ isOwner: true });
-				await this.getNamePublicKey(id);
-			}
+			const { id } = this.props;
+			await this.getNamePublicKey(id);
 		}
 	}
 
@@ -99,8 +89,8 @@ class PublicKeys extends React.Component {
 	}
 
 	async setDefaultPublicKey(publicKey) {
-		const { web3, accounts, nameId, namePublicKey } = this.props;
-		if (!web3 || !accounts || !nameId || !namePublicKey) {
+		const { web3, accounts, id, namePublicKey } = this.props;
+		if (!web3 || !accounts || !id || !namePublicKey) {
 			return;
 		}
 		const signHash = EthCrypto.hash.keccak256([
@@ -110,7 +100,7 @@ class PublicKeys extends React.Component {
 			},
 			{
 				type: "address",
-				value: nameId
+				value: id
 			},
 			{
 				type: "address",
@@ -123,7 +113,7 @@ class PublicKeys extends React.Component {
 				this.setState({ processingTransaction: false, publicKeyInProcess: null });
 			} else {
 				const vrs = EthCrypto.vrs.fromString(signature);
-				namePublicKey.setDefaultKey(nameId, publicKey, vrs.v, vrs.r, vrs.s, { from: accounts[0] }, (err, transactionHash) => {
+				namePublicKey.setDefaultKey(id, publicKey, vrs.v, vrs.r, vrs.s, { from: accounts[0] }, (err, transactionHash) => {
 					if (err) {
 						this.setState({ processingTransaction: false, publicKeyInProcess: null });
 						this.props.setError("Error", err.message, false);
@@ -143,12 +133,12 @@ class PublicKeys extends React.Component {
 	}
 
 	async removePublicKey(publicKey) {
-		const { nameId, namePublicKey, accounts } = this.props;
-		if (!namePublicKey || !nameId || !accounts) {
+		const { id, namePublicKey, accounts } = this.props;
+		if (!namePublicKey || !id || !accounts) {
 			return;
 		}
 		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey });
-		namePublicKey.removeKey(nameId, publicKey, { from: accounts[0] }, (err, transactionHash) => {
+		namePublicKey.removeKey(id, publicKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false, publicKeyInProcess: null });
 				this.props.setError("Error", err.message, false);
@@ -179,7 +169,6 @@ class PublicKeys extends React.Component {
 
 	render() {
 		const {
-			isOwner,
 			defaultPublicKey,
 			publicKeys,
 			publicKeysBalance,
@@ -188,10 +177,6 @@ class PublicKeys extends React.Component {
 			processingTransaction,
 			publicKeyInProcess
 		} = this.state;
-
-		if (!isOwner) {
-			return null;
-		}
 
 		let ownerFeatures = null,
 			publicKeysContent = null;

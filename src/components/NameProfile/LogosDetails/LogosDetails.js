@@ -13,7 +13,6 @@ class LogosDetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isOwner: false,
 			balanceOf: new BigNumber(0),
 			positionFromOthers: new BigNumber(0),
 			totalAdvocatedTAOLogos: new BigNumber(0),
@@ -28,35 +27,29 @@ class LogosDetails extends React.Component {
 	}
 
 	async componentDidMount() {
-		const { logos, id, nameId } = this.props;
-		if (id === nameId) {
-			this.setState({ isOwner: true });
-			await this.getLogosBalance(logos, nameId);
-		}
+		const { logos, id } = this.props;
+		await this.getLogosBalance(logos, id);
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.id !== prevProps.id) {
 			this.setState(this.initialState);
-			const { logos, id, nameId } = this.props;
-			if (id === nameId) {
-				this.setState({ isOwner: true });
-				await this.getLogosBalance(logos, nameId);
-			}
+			const { logos, id } = this.props;
+			await this.getLogosBalance(logos, id);
 		}
 	}
 
-	async getLogosBalance(logos, nameId) {
-		if (!logos || !nameId) {
+	async getLogosBalance(logos, id) {
+		if (!logos || !id) {
 			return;
 		}
 
-		const balanceOf = await promisify(logos.balanceOf)(nameId);
-		const positionFromOthers = await promisify(logos.positionFromOthers)(nameId);
-		const totalAdvocatedTAOLogos = await promisify(logos.totalAdvocatedTAOLogos)(nameId);
-		const sumBalanceOf = await promisify(logos.sumBalanceOf)(nameId);
-		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(nameId);
-		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(nameId);
+		const balanceOf = await promisify(logos.balanceOf)(id);
+		const positionFromOthers = await promisify(logos.positionFromOthers)(id);
+		const totalAdvocatedTAOLogos = await promisify(logos.totalAdvocatedTAOLogos)(id);
+		const sumBalanceOf = await promisify(logos.sumBalanceOf)(id);
+		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(id);
+		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(id);
 
 		this.setState({
 			balanceOf,
@@ -73,13 +66,13 @@ class LogosDetails extends React.Component {
 	}
 
 	async refreshPositionLogos() {
-		const { logos, nameId } = this.props;
-		if (!logos || !nameId) {
+		const { logos, id } = this.props;
+		if (!logos || !id) {
 			return;
 		}
 
-		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(nameId);
-		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(nameId);
+		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(id);
+		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(id);
 		this.setState({
 			totalPositionOnOthers,
 			availableToPositionAmount
@@ -88,7 +81,6 @@ class LogosDetails extends React.Component {
 
 	render() {
 		const {
-			isOwner,
 			balanceOf,
 			positionFromOthers,
 			totalAdvocatedTAOLogos,
@@ -97,10 +89,6 @@ class LogosDetails extends React.Component {
 			availableToPositionAmount,
 			showPositionLogosForm
 		} = this.state;
-
-		if (!isOwner) {
-			return null;
-		}
 
 		let showSumLogosChart = false,
 			sumLogosData = [];

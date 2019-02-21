@@ -3,7 +3,6 @@ import { LogosDetails } from "./LogosDetails";
 
 const mapStateToProps = (state) => {
 	return {
-		nameId: state.nameReducer.nameId,
 		logos: state.contractReducer.contracts.logos
 	};
 };
