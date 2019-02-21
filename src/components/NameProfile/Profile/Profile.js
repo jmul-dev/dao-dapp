@@ -24,7 +24,8 @@ class Profile extends React.Component {
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
-						this.setState({ processingTransaction: false, isListener: true });
+						this.props.setListener();
+						this.setState({ processingTransaction: false });
 					})
 					.catch((err) => {
 						this.setState({ processingTransaction: false });
@@ -48,7 +49,8 @@ class Profile extends React.Component {
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
-						this.setState({ processingTransaction: false, isSpeaker: true });
+						this.props.setSpeaker();
+						this.setState({ processingTransaction: false });
 					})
 					.catch((err) => {
 						this.setState({ processingTransaction: false });

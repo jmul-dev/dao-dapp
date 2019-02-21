@@ -24,6 +24,8 @@ class NameProfile extends React.Component {
 		this.initialState = this.state;
 		this.getData = this.getData.bind(this);
 		this.refreshProfileImage = this.refreshProfileImage.bind(this);
+		this.setListener = this.setListener.bind(this);
+		this.setSpeaker = this.setSpeaker.bind(this);
 	}
 
 	async componentDidMount() {
@@ -110,6 +112,14 @@ class NameProfile extends React.Component {
 		this.setState({ profileImage });
 	}
 
+	setListener() {
+		this.setState({ isListener: true });
+	}
+
+	setSpeaker() {
+		this.setState({ isSpeaker: true });
+	}
+
 	render() {
 		const { isOwner, nameInfo, isListener, isSpeaker, position, profileImage } = this.state;
 		if (!nameInfo || !position) {
@@ -119,7 +129,14 @@ class NameProfile extends React.Component {
 		return (
 			<Wrapper className="padding-40">
 				<LeftContainer>
-					<ProfileContainer isOwner={isOwner} nameInfo={nameInfo} isListener={isListener} isSpeaker={isSpeaker} />
+					<ProfileContainer
+						isOwner={isOwner}
+						nameInfo={nameInfo}
+						isListener={isListener}
+						isSpeaker={isSpeaker}
+						setListener={this.setListener}
+						setSpeaker={this.setSpeaker}
+					/>
 					<PositionDetails position={position} />
 				</LeftContainer>
 				<RightContainer>
