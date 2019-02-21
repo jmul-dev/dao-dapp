@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Wrapper, Title, Header, Ahref, Icon, MediumEditor } from "components/";
-import { LeftContainer, RightContainer } from "./styledComponents";
+import { Wrapper, Ahref, MediumEditor } from "components/";
+import { TAOName } from "./TAOName/";
 import { get, encodeParams } from "utils/";
 
 const promisify = require("tiny-promisify");
@@ -10,7 +10,8 @@ class TAODetails extends React.Component {
 		super(props);
 		this.state = {
 			taoInfo: null,
-			taoDescription: null
+			taoDescription: null,
+			position: null
 		};
 		this.initialState = this.state;
 		this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -19,6 +20,7 @@ class TAODetails extends React.Component {
 	async componentDidMount() {
 		await this.getTAOInfo(this.props.params.id);
 		await this.getTAODescription(this.props.params.id);
+		await this.getTAOPosition(this.props.params.id);
 	}
 
 	async componentDidUpdate(prevProps) {
@@ -26,6 +28,7 @@ class TAODetails extends React.Component {
 			this.setState(this.initialState);
 			await this.getTAOInfo(this.props.params.id);
 			await this.getTAODescription(this.props.params.id);
+			await this.getTAOPosition(this.props.params.id);
 		}
 	}
 
@@ -54,45 +57,42 @@ class TAODetails extends React.Component {
 		} catch (e) {}
 	}
 
+	async getTAOPosition(id) {
+		const { nameTAOPosition } = this.props;
+		if (!nameTAOPosition || !id) {
+			return;
+		}
+
+		const _position = await promisify(nameTAOPosition.getPositionById)(id);
+		const position = {
+			advocateName: _position[0],
+			advocateId: _position[1],
+			listenerName: _position[2],
+			listenerId: _position[3],
+			speakerName: _position[4],
+			speakerId: _position[5]
+		};
+		this.setState({ position });
+	}
+
 	handleEditorChange(taoDescription) {
 		this.setState({ taoDescription });
 	}
 
 	render() {
 		const { id } = this.props.params;
-		const { taoInfo, taoDescription } = this.state;
-		if (!taoInfo || !taoDescription) {
+		const { taoInfo, taoDescription, position } = this.state;
+		if (!taoInfo || !taoDescription || !position) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 
 		return (
-			<Wrapper>
-				<Wrapper className="padding-40">
-					<Ahref className="small" to="/">
-						Back to Dashboard
-					</Ahref>
-					<Wrapper className="margin-bottom-20">
-						<LeftContainer>
-							<Title className="medium margin-top-20 margin-bottom-0">{taoInfo.name}</Title>
-							<Header>{id}</Header>
-						</LeftContainer>
-						<RightContainer>
-							<Ahref className="white" to={`/meet/${id}/`}>
-								<Icon className="animated bounceIn">
-									<img src={process.env.PUBLIC_URL + "/images/video_call.png"} alt={"Video Call"} />
-									<div>Video Call</div>
-								</Icon>
-							</Ahref>
-							<Ahref className="white" to={`/ide/${id}/`}>
-								<Icon className="animated bounceIn">
-									<img src={process.env.PUBLIC_URL + "/images/open_ide.png"} alt={"Open IDE"} />
-									<div>Open IDE</div>
-								</Icon>
-							</Ahref>
-						</RightContainer>
-					</Wrapper>
-					<MediumEditor text={taoDescription} onChange={this.handleEditorChange} />
-				</Wrapper>
+			<Wrapper className="padding-40">
+				<Ahref className="small" to="/">
+					Back to Dashboard
+				</Ahref>
+				<TAOName id={id} name={taoInfo.name} />
+				<MediumEditor text={taoDescription} onChange={this.handleEditorChange} />
 			</Wrapper>
 		);
 	}

@@ -4,7 +4,8 @@ import { TAODetails } from "./TAODetails";
 const mapStateToProps = (state) => {
 	return {
 		nameId: state.nameReducer.nameId,
-		taoFactory: state.contractReducer.contracts.taoFactory
+		taoFactory: state.contractReducer.contracts.taoFactory,
+		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition
 	};
 };
 
