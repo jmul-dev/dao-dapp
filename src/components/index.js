@@ -190,11 +190,12 @@ export const Table = styled(ReactTable)`
 `;
 
 export const FieldContainer = styled.div`
-	margin-bottom: 3px;
+	margin-bottom: 5px;
 `;
 
 export const FieldName = styled.div`
 	display: inline-block;
+	vertical-align: top;
 	font-size: 0.875em;
 	font-weight: 500;
 	margin-right: 10px;
@@ -207,6 +208,7 @@ export const FieldName = styled.div`
 
 export const FieldValue = styled.div`
 	display: inline-block;
+	vertical-align: top;
 	font-size: 0.875em;
 	color: #888888;
 `;

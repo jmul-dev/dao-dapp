@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
 		taoAncestry: state.contractReducer.contracts.taoAncestry,
 		taoPool: state.contractReducer.contracts.taoPool,
 		ethos: state.contractReducer.contracts.ethos,
-		pathos: state.contractReducer.contracts.pathos
+		pathos: state.contractReducer.contracts.pathos,
+		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup
 	};
 };
 

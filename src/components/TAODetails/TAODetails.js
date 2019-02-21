@@ -3,6 +3,7 @@ import { Wrapper, Ahref, MediumEditor } from "components/";
 import { LeftContainer, RightContainer } from "./styledComponents";
 import { TAOName } from "./TAOName/";
 import { PositionDetails } from "./PositionDetails/";
+import { AncestryDetails } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
 import { get, encodeParams } from "utils/";
 
@@ -102,17 +103,23 @@ class TAODetails extends React.Component {
 	}
 
 	async getTAOAncestry(id) {
-		const { taoAncestry } = this.props;
-		if (!taoAncestry || !id) {
+		const { taoAncestry, nameTAOLookup } = this.props;
+		if (!taoAncestry || !nameTAOLookup || !id) {
 			return;
 		}
 
 		const _ancestry = await promisify(taoAncestry.getAncestryById)(id);
 		const ancestry = {
 			parentId: _ancestry[0],
+			parentIsTAO: false,
+			parentName: "",
 			childMinLogos: _ancestry[1],
 			totalChildren: _ancestry[2]
 		};
+
+		const _taoInfo = await promisify(nameTAOLookup.getById)(ancestry.parentId);
+		ancestry.parentIsTAO = _taoInfo[2].eq(0);
+		ancestry.parentName = _taoInfo[0];
 		this.setState({ ancestry });
 	}
 
@@ -166,6 +173,7 @@ class TAODetails extends React.Component {
 				<MediumEditor text={taoDescription} />
 				<LeftContainer>
 					<PositionDetails position={position} />
+					<AncestryDetails ancestry={ancestry} />
 				</LeftContainer>
 				<RightContainer>
 					<Financials
