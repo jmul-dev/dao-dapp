@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, Ahref, FieldContainer, FieldName, FieldValue } from "components/";
+import { Wrapper, Title, FieldContainer, FieldName, FieldValue } from "components/";
 import { Bar } from "react-chartjs";
 
 class Financials extends React.Component {

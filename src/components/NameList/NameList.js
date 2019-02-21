@@ -23,7 +23,7 @@ class NameList extends React.Component {
 		return (
 			<Wrapper className="padding-40">
 				<Title>View Names</Title>
-				<Table data={names} columns={columns} defaultPageSize={10} filterable={true} />
+				<Table data={names} columns={columns} defaultPageSize={5} filterable={true} />
 			</Wrapper>
 		);
 	}

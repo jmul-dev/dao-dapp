@@ -12,6 +12,7 @@ import { CreateTAOContainer } from "components/CreateTAO/";
 import { TAODetailsContainer } from "components/TAODetails/";
 import { MeetContainer } from "components/Meet/";
 import { IdeContainer } from "components/Ide/";
+import { OwnTAOContainer } from "components/OwnTAO/";
 
 import {
 	web3Connected,
@@ -234,6 +235,7 @@ class AppRouter extends React.Component {
 					<Route path="/tao/:id" component={TAODetailsContainer} />
 					<Route path="/meet/:id" component={MeetContainer} />
 					<Route path="/ide/:id" component={IdeContainer} />
+					<Route path="/view-own-taos" component={OwnTAOContainer} />
 				</Route>
 			</Router>
 		);
