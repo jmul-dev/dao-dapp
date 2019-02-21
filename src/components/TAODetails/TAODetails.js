@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Wrapper, Ahref, MediumEditor } from "components/";
+import { LeftContainer, RightContainer } from "./styledComponents";
 import { TAOName } from "./TAOName/";
 import { PositionDetails } from "./PositionDetails/";
+import { Financials } from "./Financials/";
 import { get, encodeParams } from "utils/";
 
 const promisify = require("tiny-promisify");
@@ -13,26 +15,35 @@ class TAODetails extends React.Component {
 			taoInfo: null,
 			taoDescription: null,
 			position: null,
-			ancestry: null
+			ancestry: null,
+			ethosCapStatus: null,
+			ethosCapAmount: null,
+			status: null,
+			poolTotalLot: null,
+			poolTotalLogosWithdrawn: null,
+			ethosBalance: null,
+			pathosBalance: null
 		};
 		this.initialState = this.state;
 	}
 
 	async componentDidMount() {
-		await this.getTAOInfo(this.props.params.id);
-		await this.getTAODescription(this.props.params.id);
-		await this.getTAOPosition(this.props.params.id);
-		await this.getTAOAncestry(this.props.params.id);
+		await this.getData(this.props.params.id);
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.params.id !== prevProps.params.id) {
 			this.setState(this.initialState);
-			await this.getTAOInfo(this.props.params.id);
-			await this.getTAODescription(this.props.params.id);
-			await this.getTAOPosition(this.props.params.id);
-			await this.getTAOAncestry(this.props.params.id);
+			await this.getData(this.props.params.id);
 		}
+	}
+
+	async getData(id) {
+		await this.getTAOInfo(id);
+		await this.getTAODescription(id);
+		await this.getTAOPosition(id);
+		await this.getTAOAncestry(id);
+		await this.getTAOPool(id);
 	}
 
 	async getTAOInfo(id) {
@@ -105,10 +116,44 @@ class TAODetails extends React.Component {
 		this.setState({ ancestry });
 	}
 
+	async getTAOPool(id) {
+		const { taoPool, ethos, pathos } = this.props;
+		if (!taoPool || !ethos || !pathos || !id) {
+			return;
+		}
+		const _pool = await promisify(taoPool.pools)(id);
+		const poolTotalLot = await promisify(taoPool.poolTotalLot)(id);
+		const poolTotalLogosWithdrawn = await promisify(taoPool.poolTotalLogosWithdrawn)(id);
+		const ethosBalance = await promisify(ethos.balanceOf)(id);
+		const pathosBalance = await promisify(pathos.balanceOf)(id);
+
+		this.setState({
+			ethosCapStatus: _pool[1],
+			ethosCapAmount: _pool[2],
+			status: _pool[3],
+			poolTotalLot,
+			poolTotalLogosWithdrawn,
+			ethosBalance,
+			pathosBalance
+		});
+	}
+
 	render() {
 		const { id } = this.props.params;
-		const { taoInfo, taoDescription, position, ancestry } = this.state;
-		if (!taoInfo || !taoDescription || !position || !ancestry) {
+		const {
+			taoInfo,
+			taoDescription,
+			position,
+			ancestry,
+			ethosCapStatus,
+			ethosCapAmount,
+			status,
+			poolTotalLot,
+			poolTotalLogosWithdrawn,
+			ethosBalance,
+			pathosBalance
+		} = this.state;
+		if (!taoInfo || !taoDescription || !position || !ancestry || !pathosBalance) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 
@@ -119,7 +164,20 @@ class TAODetails extends React.Component {
 				</Ahref>
 				<TAOName id={id} name={taoInfo.name} />
 				<MediumEditor text={taoDescription} />
-				<PositionDetails position={position} />
+				<LeftContainer>
+					<PositionDetails position={position} />
+				</LeftContainer>
+				<RightContainer>
+					<Financials
+						ethosCapStatus={ethosCapStatus}
+						ethosCapAmount={ethosCapAmount}
+						status={status}
+						poolTotalLot={poolTotalLot}
+						poolTotalLogosWithdrawn={poolTotalLogosWithdrawn}
+						ethosBalance={ethosBalance}
+						pathosBalance={pathosBalance}
+					/>
+				</RightContainer>
 			</Wrapper>
 		);
 	}

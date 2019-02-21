@@ -198,6 +198,11 @@ export const FieldName = styled.div`
 	font-size: 0.875em;
 	font-weight: 500;
 	margin-right: 10px;
+	width: 200px;
+
+	&.small {
+		width: 150px;
+	}
 `;
 
 export const FieldValue = styled.div`
