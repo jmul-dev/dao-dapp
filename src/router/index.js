@@ -139,7 +139,7 @@ class AppRouter extends React.Component {
 	async getNetworkId(web3) {
 		const networkIdString = await promisify(web3.version.getNetwork)();
 		const networkId = parseInt(networkIdString, 10);
-		if (networkId === 1985) {
+		if (networkId === 4) {
 			return networkId;
 		} else {
 			throw new Error(web3Errors.UNSUPPORTED_NETWORK);
