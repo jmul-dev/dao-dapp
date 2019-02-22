@@ -76,3 +76,38 @@ export const appendNameTAO = (tao) => {
 		tao
 	};
 };
+
+export const setTAOsNeedApproval = (taosNeedApproval) => {
+	return {
+		type: actionsEnums.SET_TAOS_NEED_APPROVAL,
+		taosNeedApproval
+	};
+};
+
+export const appendTAONeedApproval = (tao) => {
+	return {
+		type: actionsEnums.APPEND_TAO_NEED_APPROVAL,
+		tao
+	};
+};
+
+export const removeTAONeedApproval = (tao) => {
+	return {
+		type: actionsEnums.REMOVE_TAO_NEED_APPROVAL,
+		tao
+	};
+};
+
+export const setTAOAsChild = (tao) => {
+	return {
+		type: actionsEnums.SET_TAO_AS_CHILD,
+		tao
+	};
+};
+
+export const setNameTAOAsChild = (tao) => {
+	return {
+		type: actionsEnums.SET_NAME_TAO_AS_CHILD,
+		tao
+	};
+};

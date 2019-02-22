@@ -3,8 +3,8 @@ import { Wrapper, Title, Header, Ahref, Table } from "components/";
 
 class OwnTAO extends React.Component {
 	render() {
-		const { taos } = this.props;
-		if (!taos) {
+		const { taos, taosNeedApproval } = this.props;
+		if (!taos || !taosNeedApproval) {
 			return null;
 		}
 
@@ -23,6 +23,18 @@ class OwnTAO extends React.Component {
 			}
 		];
 
+		const taosNeedApprovalColumns = [
+			{
+				Header: "ID",
+				accessor: "childId",
+				Cell: (props) => <Ahref to={`/tao/${props.value}`}>{props.value}</Ahref>
+			},
+			{
+				Header: "Name",
+				accessor: "childName"
+			}
+		];
+
 		return (
 			<Wrapper className="padding-40">
 				<Wrapper className="margin-bottom-40">
@@ -33,6 +45,12 @@ class OwnTAO extends React.Component {
 						<Header>Currently, you have no TAO of which you are the Advocate</Header>
 					)}
 				</Wrapper>
+				{taosNeedApproval.length && (
+					<Wrapper className="margin-bottom-40">
+						<Title>Child TAOs That Need Approvals</Title>
+						<Table data={taosNeedApproval} columns={taosNeedApprovalColumns} defaultPageSize={5} filterable={true} />
+					</Wrapper>
+				)}
 				<Wrapper className="margin-bottom-40">
 					<Title>Staked Ethos TAOs</Title>
 					{stakedEthosTAOs.length ? (

@@ -7,6 +7,7 @@ class NameReducerState {
 		this.profileImage = null;
 		this.taoCurrencyBalances = null;
 		this.taos = [];
+		this.taosNeedApproval = [];
 	}
 }
 
@@ -56,6 +57,47 @@ const handleAppendNameTAO = (state, action) => {
 	};
 };
 
+const handleSetTAOsNeedApproval = (state, action) => {
+	return {
+		...state,
+		taosNeedApproval: action.taosNeedApproval
+	};
+};
+
+const handleAppendTAONeedApproval = (state, action) => {
+	const _taosNeedApproval = state.taosNeedApproval.slice();
+	if (!_taosNeedApproval.find((tao) => tao.childId === action.tao.childId)) {
+		_taosNeedApproval.push(action.tao);
+	}
+	return {
+		...state,
+		taosNeedApproval: _taosNeedApproval
+	};
+};
+
+const handleRemoveTAONeedApproval = (state, action) => {
+	const _taosNeedApproval = state.taosNeedApproval.filter((tao) => tao.childId !== action.tao.childId);
+	return {
+		...state,
+		taosNeedApproval: _taosNeedApproval
+	};
+};
+
+const handleSetNameTAOAsChild = (state, action) => {
+	const { taos } = state;
+	const _taos = [];
+	taos.forEach((tao) => {
+		if (tao.taoId === action.tao.childId && tao.parent === action.tao.taoId) {
+			tao.isChild = true;
+		}
+		_taos.push(tao);
+	});
+	return {
+		...state,
+		taos: _taos
+	};
+};
+
 export const nameReducer = (state = new NameReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_NAME_ID:
@@ -70,6 +112,14 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleSetNameTAOs(state, action);
 		case actionsEnums.APPEND_NAME_TAO:
 			return handleAppendNameTAO(state, action);
+		case actionsEnums.SET_TAOS_NEED_APPROVAL:
+			return handleSetTAOsNeedApproval(state, action);
+		case actionsEnums.APPEND_TAO_NEED_APPROVAL:
+			return handleAppendTAONeedApproval(state, action);
+		case actionsEnums.REMOVE_TAO_NEED_APPROVAL:
+			return handleRemoveTAONeedApproval(state, action);
+		case actionsEnums.SET_NAME_TAO_AS_CHILD:
+			return handleSetNameTAOAsChild(state, action);
 		default:
 			return state;
 	}

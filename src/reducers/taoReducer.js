@@ -55,6 +55,21 @@ const handleSetSettingTAOId = (state, action) => {
 	};
 };
 
+const handleSetTAOAsChild = (state, action) => {
+	const { taos } = state;
+	const _taos = [];
+	taos.forEach((tao) => {
+		if (tao.taoId === action.tao.childId && tao.parent === action.tao.taoId) {
+			tao.isChild = true;
+		}
+		_taos.push(tao);
+	});
+	return {
+		...state,
+		taos: _taos
+	};
+};
+
 export const taoReducer = (state = new TAOReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_NAMES:
@@ -67,6 +82,8 @@ export const taoReducer = (state = new TAOReducerState(), action) => {
 			return handleAppendTAO(state, action);
 		case actionsEnums.SET_SETTING_TAO_ID:
 			return handleSetSettingTAOId(state, action);
+		case actionsEnums.SET_TAO_AS_CHILD:
+			return handleSetTAOAsChild(state, action);
 		default:
 			return state;
 	}
