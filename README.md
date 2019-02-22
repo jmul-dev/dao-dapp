@@ -33,9 +33,12 @@ For examples:
 const response = await get(`https://localhost/api/get-tao-description?${encodeParams({ taoId: id })}`);
 // components/Ide/Ide.js, components/Meet/Meet.js, components/TAODetails/TAODetails.js
 
-const response = await get(`https://localhost/api/get-profile-image?${encodeParams({ nameId: id })}`); // components/NameProfile/NameProfile.js, layouts/TopNavBar/TopNavBar.js
+const response = await get(`https://localhost/api/get-profile-image?${encodeParams({ nameId: id })}`);
+// components/NameProfile/NameProfile.js, layouts/TopNavBar/TopNavBar.js
 
-const response = await post(`https://localhost/api/set-tao-description`, { taoId, description: taoDescription }); // components/CreateTAO/CreateTAO.js
+const response = await post(`https://localhost/api/set-tao-description`, { taoId, description: taoDescription });
+// components/CreateTAO/CreateTAO.js
 
 const response = await post(`https://localhost/api/upload-profile-image`, { nameId, imageString: formData.imageFile });
+// components/NameProfile/ProfileImage/UploadProfileImageForm/UploadProfileImageForm.js
 ```
