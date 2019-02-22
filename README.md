@@ -26,8 +26,16 @@ Things to do before you merge the app back to AO:
 
 1. Replace `hyperdb` with `aodb` in `ao-iptv-core`
 2. Replace TAO UI's `get()` / `post()` calls to `tao-db-server` api endpoints with Y-design's `hyperdb` setup.
-   For example:
 
-```
-const response = await get(`https://localhost/api/get-tao-description?${encodeParams({ taoId: id })}`); // need to be replaced
+For examples:
+
+```javascript
+const response = await get(`https://localhost/api/get-tao-description?${encodeParams({ taoId: id })}`);
+// components/Ide/Ide.js, components/Meet/Meet.js, components/TAODetails/TAODetails.js
+
+const response = await get(`https://localhost/api/get-profile-image?${encodeParams({ nameId: id })}`); // components/NameProfile/NameProfile.js, layouts/TopNavBar/TopNavBar.js
+
+const response = await post(`https://localhost/api/set-tao-description`, { taoId, description: taoDescription }); // components/CreateTAO/CreateTAO.js
+
+const response = await post(`https://localhost/api/upload-profile-image`, { nameId, imageString: formData.imageFile });
 ```
