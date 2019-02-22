@@ -45,7 +45,7 @@ class OwnTAO extends React.Component {
 						<Header>Currently, you have no TAO of which you are the Advocate</Header>
 					)}
 				</Wrapper>
-				{taosNeedApproval.length && (
+				{taosNeedApproval.length > 0 && (
 					<Wrapper className="margin-bottom-40">
 						<Title>Child TAOs That Need Approvals</Title>
 						<Table data={taosNeedApproval} columns={taosNeedApprovalColumns} defaultPageSize={5} filterable={true} />

@@ -244,36 +244,37 @@ class AppRouter extends React.Component {
 						}
 					});
 					dispatch(setTAOsNeedApproval(taosNeedApproval));
+
+					var approveChildEvent = taoAncestry.ApproveChild({}, { fromBlock: receipt.blockNumber, toBlock: "latest" });
+					approveChildEvent.get(async (err, logs) => {
+						if (!err) {
+							logs.forEach((log) => {
+								if (log.args.taoAdvocate === nameId) {
+									dispatch(removeTAONeedApproval(log.args));
+								}
+								dispatch(setTAOAsChild(log.args));
+								dispatch(setNameTAOAsChild(log.args));
+							});
+						}
+					});
+					approveChildEvent.watch(async (err, log) => {
+						if (!err) {
+							if (log.args.advocateId === nameId) {
+								dispatch(removeTAONeedApproval(log.args));
+							}
+							dispatch(setTAOAsChild(log.args));
+							dispatch(setNameTAOAsChild(log.args));
+						}
+					});
 				}
 			});
+
 			addChildEvent.watch(async (err, log) => {
 				if (!err) {
 					if (log.args.taoAdvocate === nameId) {
 						const [childName] = await promisify(taoFactory.getTAO)(log.args.childId);
 						dispatch(appendTAONeedApproval({ ...log.args, childName }));
 					}
-				}
-			});
-
-			var approveChildEvent = taoAncestry.ApproveChild({}, { fromBlock: receipt.blockNumber, toBlock: "latest" });
-			approveChildEvent.get(async (err, logs) => {
-				if (!err) {
-					logs.forEach((log) => {
-						if (log.args.taoAdvocate === nameId) {
-							dispatch(removeTAONeedApproval(log.args));
-						}
-						dispatch(setTAOAsChild(log.args));
-						dispatch(setNameTAOAsChild(log.args));
-					});
-				}
-			});
-			approveChildEvent.watch(async (err, log) => {
-				if (!err) {
-					if (log.args.advocateId === nameId) {
-						dispatch(removeTAONeedApproval(log.args));
-					}
-					dispatch(setTAOAsChild(log.args));
-					dispatch(setNameTAOAsChild(log.args));
 				}
 			});
 		} catch (e) {
