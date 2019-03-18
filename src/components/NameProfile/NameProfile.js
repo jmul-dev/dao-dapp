@@ -144,7 +144,7 @@ class NameProfile extends React.Component {
 				</RightContainer>
 				{isOwner && (
 					<div>
-						<LogosDetailsContainer id={this.props.params.id} />
+						<LogosDetailsContainer id={this.props.params.id} isOwner={isOwner} />
 						<PublicKeysContainer id={this.props.params.id} />
 					</div>
 				)}

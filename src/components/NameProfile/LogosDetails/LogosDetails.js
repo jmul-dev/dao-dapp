@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { ChartContainer, DetailsContainer } from "./styledComponents";
 import { PositionLogosFormContainer } from "./PositionLogosForm/";
+import { PositionOnOthersDetailsContainer } from "./PositionOnOthersDetails/";
 import { DoughnutChart } from "widgets/DoughnutChart/";
 import { Palette, Highlight } from "css/color.json";
 import { BigNumber } from "bignumber.js";
@@ -10,6 +11,8 @@ import "css/animate.min.css";
 const promisify = require("tiny-promisify");
 
 class LogosDetails extends React.Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -27,8 +30,14 @@ class LogosDetails extends React.Component {
 	}
 
 	async componentDidMount() {
+		this._isMounted = true;
+
 		const { logos, id } = this.props;
 		await this.getLogosBalance(logos, id);
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	async componentDidUpdate(prevProps) {
@@ -51,14 +60,16 @@ class LogosDetails extends React.Component {
 		const totalPositionOnOthers = await promisify(logos.totalPositionOnOthers)(id);
 		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(id);
 
-		this.setState({
-			balanceOf,
-			positionFromOthers,
-			totalAdvocatedTAOLogos,
-			sumBalanceOf,
-			totalPositionOnOthers,
-			availableToPositionAmount
-		});
+		if (this._isMounted) {
+			this.setState({
+				balanceOf,
+				positionFromOthers,
+				totalAdvocatedTAOLogos,
+				sumBalanceOf,
+				totalPositionOnOthers,
+				availableToPositionAmount
+			});
+		}
 	}
 
 	togglePositionLogosForm() {
@@ -89,6 +100,8 @@ class LogosDetails extends React.Component {
 			availableToPositionAmount,
 			showPositionLogosForm
 		} = this.state;
+
+		const { isOwner } = this.props;
 
 		let showSumLogosChart = false,
 			sumLogosData = [];
@@ -125,7 +138,7 @@ class LogosDetails extends React.Component {
 							<FieldValue>{balanceOf.toNumber()}</FieldValue>
 						</FieldContainer>
 						<FieldContainer>
-							<FieldName>Position from Others</FieldName>
+							<FieldName>Positioned from Others</FieldName>
 							<FieldValue>{positionFromOthers.toNumber()}</FieldValue>
 						</FieldContainer>
 						<FieldContainer>
@@ -142,7 +155,7 @@ class LogosDetails extends React.Component {
 							<FieldValue>{availableToPositionAmount.toNumber()}</FieldValue>
 						</FieldContainer>
 						<FieldContainer>
-							<FieldName>Total Position on Others</FieldName>
+							<FieldName>Total Positioned on Others</FieldName>
 							<FieldValue>{totalPositionOnOthers.toNumber()}</FieldValue>
 						</FieldContainer>
 						{availableToPositionAmount.gt(0) && !showPositionLogosForm && (
@@ -161,6 +174,7 @@ class LogosDetails extends React.Component {
 						/>
 					)}
 				</ChartContainer>
+				{isOwner && <PositionOnOthersDetailsContainer refreshPositionLogos={this.refreshPositionLogos} />}
 			</Wrapper>
 		);
 	}

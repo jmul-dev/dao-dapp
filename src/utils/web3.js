@@ -25,3 +25,12 @@ export const waitForTransactionReceipt = (transactionHash) => {
 		}, 1000);
 	});
 };
+
+export const getCurrentBlockNumber = () => {
+	return new Promise((resolve, reject) => {
+		window.web3.eth.getBlockNumber((err, result) => {
+			if (err) reject(err);
+			resolve(result);
+		});
+	});
+};

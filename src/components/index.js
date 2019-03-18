@@ -13,6 +13,9 @@ export const Wrapper = styled.div`
 	&.margin-top-30 {
 		margin-top: 30px;
 	}
+	&.margin-top-40 {
+		margin-top: 40px;
+	}
 	&.margin-bottom-20 {
 		margin-bottom: 20px;
 	}
@@ -59,6 +62,10 @@ export const Title = styled.div`
 export const Header = styled.div`
 	font-size: 0.875em;
 	margin: 10px 0;
+
+	&.strong {
+		font-weight: 800;
+	}
 `;
 
 export const SchemaForm = styled(Form)`

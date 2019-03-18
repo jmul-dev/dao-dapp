@@ -30,7 +30,9 @@ import {
 	appendTAONeedApproval,
 	removeTAONeedApproval,
 	setTAOAsChild,
-	setNameTAOAsChild
+	setNameTAOAsChild,
+	positionLogos,
+	unpositionLogos
 } from "./actions";
 import { web3Errors } from "common/errors";
 
@@ -53,7 +55,7 @@ import AOLibrary from "contracts/AOLibrary.json";
 
 import { setError } from "widgets/Toast/actions";
 
-import { getTransactionReceipt } from "utils/web3";
+import { getTransactionReceipt, getCurrentBlockNumber } from "utils/web3";
 import { asyncForEach } from "utils/";
 
 import { EMPTY_ADDRESS } from "common/constants";
@@ -61,6 +63,9 @@ import { EMPTY_ADDRESS } from "common/constants";
 const promisify = require("tiny-promisify");
 
 class AppRouter extends React.Component {
+	_nameLookup = {};
+	_currentBlockNumber = null;
+
 	async componentDidMount() {
 		const { store, env } = this.props;
 		const dispatch = store.dispatch;
@@ -105,6 +110,8 @@ class AppRouter extends React.Component {
 			const settingTAOId = await promisify(contracts.taoFactory.settingTAOId)();
 			dispatch(setSettingTAOId(settingTAOId));
 
+			this._currentBlockNumber = await getCurrentBlockNumber();
+
 			this.watchNameFactoryEvent(web3, networkId, contracts.nameFactory);
 
 			let nameId = EMPTY_ADDRESS;
@@ -113,6 +120,7 @@ class AppRouter extends React.Component {
 			}
 			this.watchTAOFactoryEvent(web3, networkId, contracts.taoFactory, contracts.taoAncestry, nameId);
 			this.watchTAOAncestryEvent(web3, networkId, contracts.taoFactory, contracts.taoAncestry, nameId);
+			this.watchLogosEvent(web3, networkId, contracts.logos, contracts.nameTAOLookup, nameId);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}
@@ -139,7 +147,7 @@ class AppRouter extends React.Component {
 	async getNetworkId(web3) {
 		const networkIdString = await promisify(web3.version.getNetwork)();
 		const networkId = parseInt(networkIdString, 10);
-		if (networkId === 4) {
+		if (networkId === 4 || networkId === 1985) {
 			return networkId;
 		} else {
 			throw new Error(web3Errors.UNSUPPORTED_NETWORK);
@@ -170,6 +178,7 @@ class AppRouter extends React.Component {
 					const names = [];
 					logs.forEach((log) => {
 						names.push({ nameId: log.args.nameId, name: log.args.name });
+						this._nameLookup[log.args.nameId] = log.args.name;
 					});
 					dispatch(setNames(names));
 				}
@@ -279,6 +288,44 @@ class AppRouter extends React.Component {
 			});
 		} catch (e) {
 			console.log("error", e);
+		}
+	}
+
+	async watchLogosEvent(web3, networkId, logos, nameTAOLookup, nameId) {
+		try {
+			const receipt = await getTransactionReceipt(Logos.networks[networkId].transactionHash);
+			logos.allEvents({ from: nameId, fromBlock: receipt.blockNumber, toBlock: this._currentBlockNumber - 1 }).get((err, logs) => {
+				if (!err) {
+					logs.forEach(async (log) => {
+						await this.parseLogosEvent(log, nameTAOLookup, nameId);
+					});
+				}
+			});
+			logos.allEvents({ fromBlock: this._currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
+				if (!err) {
+					await this.parseLogosEvent(log, nameTAOLookup, nameId);
+				}
+			});
+		} catch (e) {
+			console.log("error", e);
+		}
+	}
+
+	async parseLogosEvent(log, nameTAOLookup, nameId) {
+		const dispatch = this.props.store.dispatch;
+		switch (log.event) {
+			case "PositionFrom":
+				if (!this._nameLookup[log.args.from]) {
+					const nameInfo = await promisify(nameTAOLookup.getById)(log.args.to);
+					this._nameLookup[log.args.to] = nameInfo[0];
+				}
+				dispatch(positionLogos(log.args.to, this._nameLookup[log.args.to], log.args.value));
+				break;
+			case "UnpositionFrom":
+				dispatch(unpositionLogos(log.args.to, log.args.value));
+				break;
+			default:
+				break;
 		}
 	}
 

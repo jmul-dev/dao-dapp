@@ -111,3 +111,20 @@ export const setNameTAOAsChild = (tao) => {
 		tao
 	};
 };
+
+export const positionLogos = (nameId, name, value) => {
+	return {
+		type: actionsEnums.POSITION_LOGOS,
+		nameId,
+		name,
+		value
+	};
+};
+
+export const unpositionLogos = (nameId, value) => {
+	return {
+		type: actionsEnums.UNPOSITION_LOGOS,
+		nameId,
+		value
+	};
+};

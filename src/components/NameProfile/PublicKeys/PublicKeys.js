@@ -18,6 +18,8 @@ const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
 
 class PublicKeys extends React.Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -37,8 +39,14 @@ class PublicKeys extends React.Component {
 	}
 
 	async componentDidMount() {
+		this._isMounted = true;
+
 		const { id } = this.props;
 		await this.getNamePublicKey(id);
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	async componentDidUpdate(prevProps) {
@@ -65,7 +73,9 @@ class PublicKeys extends React.Component {
 			const primordialBalance = await promisify(aoion.primordialBalanceOf)(publicKey);
 			publicKeysBalance[publicKey] = { networkBalance, primordialBalance };
 		});
-		this.setState({ defaultPublicKey, publicKeys, publicKeysBalance });
+		if (this._isMounted) {
+			this.setState({ defaultPublicKey, publicKeys, publicKeysBalance });
+		}
 	}
 
 	toggleAddKeyForm() {
