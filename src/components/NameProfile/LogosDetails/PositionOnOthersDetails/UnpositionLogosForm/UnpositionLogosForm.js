@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Header, FieldContainer, FieldName, FieldValue, SchemaForm, Button, Error } from "components/";
+import { Wrapper, FieldContainer, FieldName, FieldValue, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 
