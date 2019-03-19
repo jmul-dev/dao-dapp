@@ -3,7 +3,7 @@ import { PositionOnOthersDetails } from "./PositionOnOthersDetails";
 
 const mapStateToProps = (state) => {
 	return {
-		positionLogos: state.nameReducer.positionLogos
+		positionLogosOn: state.nameReducer.positionLogosOn
 	};
 };
 

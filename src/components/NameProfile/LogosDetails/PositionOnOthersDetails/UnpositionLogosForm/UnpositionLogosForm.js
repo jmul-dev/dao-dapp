@@ -19,13 +19,13 @@ class UnpositionLogosForm extends React.Component {
 
 	async handleSubmit(data) {
 		const { formData } = data;
-		const { positionLogos, logos, accounts, nameId, targetNameId } = this.props;
-		if (!positionLogos || !logos || !accounts || !nameId || !formData) {
+		const { positionLogosOn, logos, accounts, nameId, targetNameId } = this.props;
+		if (!positionLogosOn || !logos || !accounts || !nameId || !formData) {
 			return;
 		}
 		this.setState({ formLoading: true });
 
-		const _targetName = positionLogos.find((position) => position.nameId === targetNameId);
+		const _targetName = positionLogosOn.find((position) => position.nameId === targetNameId);
 
 		// Validation
 		const availableToUnpositionAmount = await promisify(logos.positionOnOthers)(nameId, targetNameId);
@@ -59,11 +59,11 @@ class UnpositionLogosForm extends React.Component {
 
 	render() {
 		const { error, errorMessage, formLoading } = this.state;
-		const { positionLogos, nameId, targetNameId } = this.props;
-		if (!positionLogos || !nameId || !targetNameId) {
+		const { positionLogosOn, nameId, targetNameId } = this.props;
+		if (!positionLogosOn || !nameId || !targetNameId) {
 			return null;
 		}
-		const _targetName = positionLogos.find((position) => position.nameId === targetNameId);
+		const _targetName = positionLogosOn.find((position) => position.nameId === targetNameId);
 		schema.properties.amount.maximum = _targetName.value.toNumber();
 		return (
 			<Wrapper>

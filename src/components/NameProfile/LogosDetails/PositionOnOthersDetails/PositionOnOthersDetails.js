@@ -6,7 +6,7 @@ class PositionOnOthersDetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			positionLogos: null,
+			positionLogosOn: null,
 			showUnpositionLogosForm: false,
 			targetNameId: null
 		};
@@ -14,13 +14,13 @@ class PositionOnOthersDetails extends React.Component {
 	}
 
 	componentDidMount() {
-		const { positionLogos } = this.props;
-		this.setState({ positionLogos });
+		const { positionLogosOn } = this.props;
+		this.setState({ positionLogosOn });
 	}
 
 	componentDidUpdate(prevProps) {
-		if (this.props.positionLogos !== prevProps.positionLogos) {
-			this.setState({ positionLogos: this.props.positionLogos });
+		if (this.props.positionLogosOn !== prevProps.positionLogosOn) {
+			this.setState({ positionLogosOn: this.props.positionLogosOn });
 		}
 	}
 
@@ -29,9 +29,9 @@ class PositionOnOthersDetails extends React.Component {
 	}
 
 	render() {
-		const { positionLogos, showUnpositionLogosForm, targetNameId } = this.state;
+		const { positionLogosOn, showUnpositionLogosForm, targetNameId } = this.state;
 		const { refreshPositionLogos } = this.props;
-		if (!positionLogos) {
+		if (!positionLogosOn || !positionLogosOn.length) {
 			return null;
 		}
 
@@ -66,7 +66,7 @@ class PositionOnOthersDetails extends React.Component {
 				{!showUnpositionLogosForm ? (
 					<Wrapper>
 						<Title>Logos Positioned on Others Details</Title>
-						<Table data={positionLogos} columns={columns} defaultPageSize={5} filterable={true} />
+						<Table data={positionLogosOn} columns={columns} defaultPageSize={5} filterable={true} />
 					</Wrapper>
 				) : (
 					<Wrapper>

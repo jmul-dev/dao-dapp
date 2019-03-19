@@ -8,20 +8,6 @@ class TAOReducerState {
 	}
 }
 
-const handleSetNames = (state, action) => {
-	return {
-		...state,
-		names: action.names
-	};
-};
-
-const handleSetTAOs = (state, action) => {
-	return {
-		...state,
-		taos: action.taos
-	};
-};
-
 const handleAppendName = (state, action) => {
 	const _names = state.names.slice();
 	if (!_names.find((name) => name.nameId === action.name.nameId)) {
@@ -72,12 +58,8 @@ const handleSetTAOAsChild = (state, action) => {
 
 export const taoReducer = (state = new TAOReducerState(), action) => {
 	switch (action.type) {
-		case actionsEnums.SET_NAMES:
-			return handleSetNames(state, action);
 		case actionsEnums.APPEND_NAME:
 			return handleAppendName(state, action);
-		case actionsEnums.SET_TAOS:
-			return handleSetTAOs(state, action);
 		case actionsEnums.APPEND_TAO:
 			return handleAppendTAO(state, action);
 		case actionsEnums.SET_SETTING_TAO_ID:

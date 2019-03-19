@@ -8,7 +8,8 @@ class NameReducerState {
 		this.taoCurrencyBalances = null;
 		this.taos = [];
 		this.taosNeedApproval = [];
-		this.positionLogos = [];
+		this.positionLogosOn = [];
+		this.positionLogosFrom = [];
 	}
 }
 
@@ -40,13 +41,6 @@ const handleSetTAOCurrencyBalances = (state, action) => {
 	};
 };
 
-const handleSetNameTAOs = (state, action) => {
-	return {
-		...state,
-		taos: action.taos
-	};
-};
-
 const handleAppendNameTAO = (state, action) => {
 	const _taos = state.taos.slice();
 	if (!_taos.find((tao) => tao.taoId === action.tao.taoId)) {
@@ -55,13 +49,6 @@ const handleAppendNameTAO = (state, action) => {
 	return {
 		...state,
 		taos: _taos
-	};
-};
-
-const handleSetTAOsNeedApproval = (state, action) => {
-	return {
-		...state,
-		taosNeedApproval: action.taosNeedApproval
 	};
 };
 
@@ -99,34 +86,65 @@ const handleSetNameTAOAsChild = (state, action) => {
 	};
 };
 
-const handlePositionLogos = (state, action) => {
-	const _positionLogos = state.positionLogos.slice();
-	if (!_positionLogos.find((position) => position.nameId === action.nameId)) {
-		_positionLogos.push({
+const handlePositionLogosOn = (state, action) => {
+	const _positionLogosOn = state.positionLogosOn.slice();
+	if (!_positionLogosOn.find((position) => position.nameId === action.nameId)) {
+		_positionLogosOn.push({
 			nameId: action.nameId,
 			name: action.name,
 			value: action.value
 		});
 	} else {
-		const positionIndex = _positionLogos.findIndex((position) => position.nameId === action.nameId);
-		_positionLogos[positionIndex].value = _positionLogos[positionIndex].value.plus(action.value);
+		const positionIndex = _positionLogosOn.findIndex((position) => position.nameId === action.nameId);
+		_positionLogosOn[positionIndex].value = _positionLogosOn[positionIndex].value.plus(action.value);
 	}
 	return {
 		...state,
-		positionLogos: _positionLogos
+		positionLogosOn: _positionLogosOn
 	};
 };
 
-const handleUnpositionLogos = (state, action) => {
-	const _positionLogos = state.positionLogos.slice();
-	const positionIndex = _positionLogos.findIndex((position) => position.nameId === action.nameId);
-	_positionLogos[positionIndex].value = _positionLogos[positionIndex].value.minus(action.value);
-	if (_positionLogos[positionIndex].value.eq(0)) {
-		delete _positionLogos[positionIndex];
+const handleUnpositionLogosOn = (state, action) => {
+	const _positionLogosOn = state.positionLogosOn.slice();
+	const positionIndex = _positionLogosOn.findIndex((position) => position.nameId === action.nameId);
+	_positionLogosOn[positionIndex].value = _positionLogosOn[positionIndex].value.minus(action.value);
+	if (_positionLogosOn[positionIndex].value.eq(0)) {
+		delete _positionLogosOn[positionIndex];
 	}
 	return {
 		...state,
-		positionLogos: _positionLogos
+		positionLogosOn: _positionLogosOn
+	};
+};
+
+const handlePositionLogosFrom = (state, action) => {
+	const _positionLogosFrom = state.positionLogosFrom.slice();
+	if (!_positionLogosFrom.find((position) => position.nameId === action.nameId)) {
+		_positionLogosFrom.push({
+			nameId: action.nameId,
+			name: action.name,
+			value: action.value
+		});
+	} else {
+		const positionIndex = _positionLogosFrom.findIndex((position) => position.nameId === action.nameId);
+		_positionLogosFrom[positionIndex].value = _positionLogosFrom[positionIndex].value.plus(action.value);
+	}
+	return {
+		...state,
+		positionLogosFrom: _positionLogosFrom
+	};
+};
+
+const handleUnpositionLogosFrom = (state, action) => {
+	const _positionLogosFrom = state.positionLogosFrom.slice();
+	const positionIndex = _positionLogosFrom.findIndex((position) => position.nameId === action.nameId);
+	_positionLogosFrom[positionIndex].value = _positionLogosFrom[positionIndex].value.minus(action.value);
+	if (_positionLogosFrom[positionIndex].value.eq(0)) {
+		delete _positionLogosFrom[positionIndex];
+	}
+	return {
+		...state,
+		positionLogosFrom: _positionLogosFrom
 	};
 };
 
@@ -140,22 +158,22 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleSetProfileImage(state, action);
 		case actionsEnums.SET_TAO_CURRENCY_BALANCES:
 			return handleSetTAOCurrencyBalances(state, action);
-		case actionsEnums.SET_NAME_TAOS:
-			return handleSetNameTAOs(state, action);
 		case actionsEnums.APPEND_NAME_TAO:
 			return handleAppendNameTAO(state, action);
-		case actionsEnums.SET_TAOS_NEED_APPROVAL:
-			return handleSetTAOsNeedApproval(state, action);
 		case actionsEnums.APPEND_TAO_NEED_APPROVAL:
 			return handleAppendTAONeedApproval(state, action);
 		case actionsEnums.REMOVE_TAO_NEED_APPROVAL:
 			return handleRemoveTAONeedApproval(state, action);
 		case actionsEnums.SET_NAME_TAO_AS_CHILD:
 			return handleSetNameTAOAsChild(state, action);
-		case actionsEnums.POSITION_LOGOS:
-			return handlePositionLogos(state, action);
-		case actionsEnums.UNPOSITION_LOGOS:
-			return handleUnpositionLogos(state, action);
+		case actionsEnums.POSITION_LOGOS_ON:
+			return handlePositionLogosOn(state, action);
+		case actionsEnums.UNPOSITION_LOGOS_ON:
+			return handleUnpositionLogosOn(state, action);
+		case actionsEnums.POSITION_LOGOS_FROM:
+			return handlePositionLogosFrom(state, action);
+		case actionsEnums.UNPOSITION_LOGOS_FROM:
+			return handleUnpositionLogosFrom(state, action);
 		default:
 			return state;
 	}

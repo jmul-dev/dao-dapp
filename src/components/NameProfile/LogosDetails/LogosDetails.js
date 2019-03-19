@@ -3,6 +3,7 @@ import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "com
 import { ChartContainer, DetailsContainer } from "./styledComponents";
 import { PositionLogosFormContainer } from "./PositionLogosForm/";
 import { PositionOnOthersDetailsContainer } from "./PositionOnOthersDetails/";
+import { PositionFromOthersDetailsContainer } from "./PositionFromOthersDetails/";
 import { DoughnutChart } from "widgets/DoughnutChart/";
 import { Palette, Highlight } from "css/color.json";
 import { BigNumber } from "bignumber.js";
@@ -174,7 +175,12 @@ class LogosDetails extends React.Component {
 						/>
 					)}
 				</ChartContainer>
-				{isOwner && <PositionOnOthersDetailsContainer refreshPositionLogos={this.refreshPositionLogos} />}
+				{isOwner && (
+					<Wrapper>
+						<PositionOnOthersDetailsContainer refreshPositionLogos={this.refreshPositionLogos} />
+						<PositionFromOthersDetailsContainer />
+					</Wrapper>
+				)}
 			</Wrapper>
 		);
 	}

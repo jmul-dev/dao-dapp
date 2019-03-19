@@ -112,18 +112,35 @@ export const setNameTAOAsChild = (tao) => {
 	};
 };
 
-export const positionLogos = (nameId, name, value) => {
+export const positionLogosOn = (nameId, name, value) => {
 	return {
-		type: actionsEnums.POSITION_LOGOS,
+		type: actionsEnums.POSITION_LOGOS_ON,
 		nameId,
 		name,
 		value
 	};
 };
 
-export const unpositionLogos = (nameId, value) => {
+export const unpositionLogosOn = (nameId, value) => {
 	return {
-		type: actionsEnums.UNPOSITION_LOGOS,
+		type: actionsEnums.UNPOSITION_LOGOS_ON,
+		nameId,
+		value
+	};
+};
+
+export const positionLogosFrom = (nameId, name, value) => {
+	return {
+		type: actionsEnums.POSITION_LOGOS_FROM,
+		nameId,
+		name,
+		value
+	};
+};
+
+export const unpositionLogosFrom = (nameId, value) => {
+	return {
+		type: actionsEnums.UNPOSITION_LOGOS_FROM,
 		nameId,
 		value
 	};
