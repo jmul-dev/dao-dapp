@@ -6,6 +6,7 @@ import Editor from "react-medium-editor";
 
 import "css/react-table.css";
 import "css/medium-editor.css";
+import "css/animate.min.css";
 
 export const Wrapper = styled.div`
 	font-size: 1em;

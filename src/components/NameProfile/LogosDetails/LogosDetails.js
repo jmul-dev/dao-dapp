@@ -7,7 +7,6 @@ import { PositionFromOthersDetailsContainer } from "./PositionFromOthersDetails/
 import { DoughnutChart } from "widgets/DoughnutChart/";
 import { Palette, Highlight } from "css/color.json";
 import { BigNumber } from "bignumber.js";
-import "css/animate.min.css";
 
 const promisify = require("tiny-promisify");
 

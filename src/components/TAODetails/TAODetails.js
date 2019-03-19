@@ -26,28 +26,30 @@ class TAODetails extends React.Component {
 			pathosBalance: null
 		};
 		this.initialState = this.state;
+		this.getTAOPool = this.getTAOPool.bind(this);
 	}
 
 	async componentDidMount() {
-		await this.getData(this.props.params.id);
+		await this.getData();
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.params.id !== prevProps.params.id) {
 			this.setState(this.initialState);
-			await this.getData(this.props.params.id);
+			await this.getData();
 		}
 	}
 
-	async getData(id) {
-		await this.getTAOInfo(id);
-		await this.getTAODescription(id);
-		await this.getTAOPosition(id);
-		await this.getTAOAncestry(id);
-		await this.getTAOPool(id);
+	async getData() {
+		await this.getTAOInfo();
+		await this.getTAODescription();
+		await this.getTAOPosition();
+		await this.getTAOAncestry();
+		await this.getTAOPool();
 	}
 
-	async getTAOInfo(id) {
+	async getTAOInfo() {
+		const { id } = this.props.params;
 		const { taoFactory } = this.props;
 		if (!taoFactory || !id) {
 			return;
@@ -60,7 +62,8 @@ class TAODetails extends React.Component {
 		this.setState({ taoInfo });
 	}
 
-	async getTAODescription(id) {
+	async getTAODescription() {
+		const { id } = this.props.params;
 		if (!id) {
 			return;
 		}
@@ -72,7 +75,8 @@ class TAODetails extends React.Component {
 		} catch (e) {}
 	}
 
-	async getTAOPosition(id) {
+	async getTAOPosition() {
+		const { id } = this.props.params;
 		const { nameTAOPosition, aoLibrary } = this.props;
 		if (!nameTAOPosition || !aoLibrary || !id) {
 			return;
@@ -102,7 +106,8 @@ class TAODetails extends React.Component {
 		this.setState({ position });
 	}
 
-	async getTAOAncestry(id) {
+	async getTAOAncestry() {
+		const { id } = this.props.params;
 		const { taoAncestry, nameTAOLookup } = this.props;
 		if (!taoAncestry || !nameTAOLookup || !id) {
 			return;
@@ -129,7 +134,8 @@ class TAODetails extends React.Component {
 		this.setState({ ancestry });
 	}
 
-	async getTAOPool(id) {
+	async getTAOPool() {
+		const { id } = this.props.params;
 		const { taoPool, ethos, pathos } = this.props;
 		if (!taoPool || !ethos || !pathos || !id) {
 			return;
@@ -183,6 +189,7 @@ class TAODetails extends React.Component {
 				</LeftContainer>
 				<RightContainer>
 					<Financials
+						id={id}
 						ethosCapStatus={ethosCapStatus}
 						ethosCapAmount={ethosCapAmount}
 						status={status}
@@ -190,6 +197,7 @@ class TAODetails extends React.Component {
 						poolTotalLogosWithdrawn={poolTotalLogosWithdrawn}
 						ethosBalance={ethosBalance}
 						pathosBalance={pathosBalance}
+						getTAOPool={this.getTAOPool}
 					/>
 				</RightContainer>
 			</Wrapper>

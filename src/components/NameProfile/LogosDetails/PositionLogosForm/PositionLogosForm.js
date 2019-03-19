@@ -28,7 +28,7 @@ class PositionLogosForm extends React.Component {
 		// Validation
 		const availableToPositionAmount = await promisify(logos.availableToPositionAmount)(nameId);
 		if (availableToPositionAmount.lt(formData.amount)) {
-			this.setState({ error: true, errorMessage: "Insufficient Logos amount", formLoading: false });
+			this.setState({ error: true, errorMessage: "Insufficient Logos balance", formLoading: false });
 			return;
 		}
 		logos.positionFrom(nameId, formData.recipient, formData.amount, { from: accounts[0] }, (err, transactionHash) => {
