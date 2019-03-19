@@ -53,9 +53,9 @@
 	"sourceMap": "",
 	"deployedSourceMap": "",
 	"source": "pragma solidity ^0.4.24;\n\ninterface ITAOCurrencyTreasury {\n\tfunction toBase(uint256 integerAmount, uint256 fractionAmount, bytes8 denominationName) external view returns (uint256);\n\tfunction isDenominationExist(bytes8 denominationName) external view returns (bool);\n}\n",
-	"sourcePath": "/data/jmulyono/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
+	"sourcePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
 	"ast": {
-		"absolutePath": "/data/jmulyono/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
+		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
 		"exportedSymbols": {
 			"ITAOCurrencyTreasury": [22100]
 		},
@@ -305,7 +305,7 @@
 		"src": "0:268:55"
 	},
 	"legacyAST": {
-		"absolutePath": "/data/jmulyono/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
+		"absolutePath": "/Users/johanmulyono/Work/AO/ao-contracts/contracts/ITAOCurrencyTreasury.sol",
 		"exportedSymbols": {
 			"ITAOCurrencyTreasury": [22100]
 		},
@@ -560,5 +560,5 @@
 	},
 	"networks": {},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-02-22T06:38:41.841Z"
+	"updatedAt": "2019-03-19T01:55:44.276Z"
 }
