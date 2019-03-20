@@ -59,20 +59,6 @@ const handleSetTAOAsChild = (state, action) => {
 	};
 };
 
-const handleStakeEthos = (state, action) => {
-	const _stakedTAOs = state.stakedTAOs.slice();
-	const _taoIndex = _stakedTAOs.findIndex((tao) => tao.taoId === action.tao.taoId);
-	if (_taoIndex === -1) {
-		_stakedTAOs.push({ taoId: action.tao.taoId, ethos: action.tao.lotQuantity, pathos: new BigNumber(0) });
-	} else {
-		_stakedTAOs[_taoIndex].ethos = _stakedTAOs[_taoIndex].ethos.plus(action.tao.lotQuantity);
-	}
-	return {
-		...state,
-		stakedTAOs: _stakedTAOs
-	};
-};
-
 const handleAddNamePositionLogos = (state, action) => {
 	const _namesPositionLogos = state.namesPositionLogos.slice();
 	const _nameIndex = _namesPositionLogos.findIndex((name) => name.nameId === action.nameId);
@@ -101,6 +87,34 @@ const handleSubtractNamePositionLogos = (state, action) => {
 	};
 };
 
+const handleStakeEthos = (state, action) => {
+	const _stakedTAOs = state.stakedTAOs.slice();
+	const _taoIndex = _stakedTAOs.findIndex((tao) => tao.taoId === action.tao.taoId);
+	if (_taoIndex === -1) {
+		_stakedTAOs.push({ taoId: action.tao.taoId, ethos: action.tao.lotQuantity, pathos: new BigNumber(0) });
+	} else {
+		_stakedTAOs[_taoIndex].ethos = _stakedTAOs[_taoIndex].ethos.plus(action.tao.lotQuantity);
+	}
+	return {
+		...state,
+		stakedTAOs: _stakedTAOs
+	};
+};
+
+const handleStakePathos = (state, action) => {
+	const _stakedTAOs = state.stakedTAOs.slice();
+	const _taoIndex = _stakedTAOs.findIndex((tao) => tao.taoId === action.tao.taoId);
+	if (_taoIndex === -1) {
+		_stakedTAOs.push({ taoId: action.tao.taoId, ethos: new BigNumber(0), pathos: action.tao.stakeQuantity });
+	} else {
+		_stakedTAOs[_taoIndex].pathos = _stakedTAOs[_taoIndex].pathos.plus(action.tao.stakeQuantity);
+	}
+	return {
+		...state,
+		stakedTAOs: _stakedTAOs
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.ADD_NAME_POSITION_LOGOS:
@@ -115,6 +129,8 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleSetTAOAsChild(state, action);
 		case actionsEnums.STAKE_ETHOS:
 			return handleStakeEthos(state, action);
+		case actionsEnums.STAKE_PATHOS:
+			return handleStakePathos(state, action);
 		case actionsEnums.SUBTRACT_NAME_POSITION_LOGOS:
 			return handleSubtractNamePositionLogos(state, action);
 		default:

@@ -13,9 +13,10 @@ import {
 	unpositionLogosOn,
 	positionLogosFrom,
 	unpositionLogosFrom,
-	stakeEthos,
 	addNamePositionLogos,
-	subtractNamePositionLogos
+	subtractNamePositionLogos,
+	stakeEthos,
+	stakePathos
 } from "./actions";
 
 // Contracts
@@ -236,6 +237,9 @@ export const watchTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameI
 				switch (log.event) {
 					case "StakeEthos":
 						dispatch(stakeEthos(log.args));
+						break;
+					case "StakePathos":
+						dispatch(stakePathos(log.args));
 						break;
 					default:
 						break;

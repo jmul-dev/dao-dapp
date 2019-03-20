@@ -2,27 +2,34 @@ import * as React from "react";
 import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { Bar } from "react-chartjs";
 import { StakeEthosFormContainer } from "./StakeEthosForm/";
+import { StakePathosFormContainer } from "./StakePathosForm/";
 
 class Financials extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			showForm: false,
-			showStakeEthosForm: false
+			showStakeEthosForm: false,
+			showStakePathosForm: false
 		};
 		this.toggleShowForm = this.toggleShowForm.bind(this);
 		this.showStakeEthosForm = this.showStakeEthosForm.bind(this);
+		this.showStakePathosForm = this.showStakePathosForm.bind(this);
 	}
 
 	toggleShowForm() {
 		this.setState({ showForm: !this.state.showForm });
 		if (!this.state.showForm) {
-			this.setState({ showStakeEthosForm: false });
+			this.setState({ showStakeEthosForm: false, showStakePathosForm: false });
 		}
 	}
 
 	showStakeEthosForm() {
-		this.setState({ showForm: true, showStakeEthosForm: true });
+		this.setState({ showForm: true, showStakeEthosForm: true, showStakePathosForm: false });
+	}
+
+	showStakePathosForm() {
+		this.setState({ showForm: true, showStakeEthosForm: false, showStakePathosForm: true });
 	}
 
 	render() {
@@ -37,7 +44,7 @@ class Financials extends React.Component {
 			pathosBalance,
 			getTAOPool
 		} = this.props;
-		const { showForm, showStakeEthosForm } = this.state;
+		const { showForm, showStakeEthosForm, showStakePathosForm } = this.state;
 
 		const barChartData = {
 			labels: ["Ethos", "Pathos", "Withdrawn Logos"],
@@ -82,18 +89,24 @@ class Financials extends React.Component {
 						<FieldValue>{poolTotalLogosWithdrawn.toNumber()}</FieldValue>
 					</FieldContainer>
 					<FieldContainer>
-						<FieldName>Ethos Staked</FieldName>
+						<FieldName>Total Ethos Staked</FieldName>
 						<FieldValue>{ethosBalance.toNumber()}</FieldValue>
 					</FieldContainer>
 					<FieldContainer>
-						<FieldName>Pathos Staked</FieldName>
+						<FieldName>Total Pathos Staked</FieldName>
 						<FieldValue>{pathosBalance.toNumber()}</FieldValue>
 					</FieldContainer>
 					<Bar data={barChartData} options={{ responsive: true, animationSteps: 300 }} height="120" width="400" />
-					{(!ethosCapStatus || (ethosCapStatus && ethosBalance.lt(ethosCapAmount))) && (
+					{status && (!ethosCapStatus || (ethosCapStatus && ethosBalance.lt(ethosCapAmount))) && (
 						<Icon className="animated bounceIn" onClick={this.showStakeEthosForm}>
 							<img src={process.env.PUBLIC_URL + "/images/stake.png"} alt={"Stake Ethos"} />
 							<div>Stake Ethos</div>
+						</Icon>
+					)}
+					{status && pathosBalance.lt(ethosBalance) && (
+						<Icon className="animated bounceIn" onClick={this.showStakePathosForm}>
+							<img src={process.env.PUBLIC_URL + "/images/stake.png"} alt={"Stake Pathos"} />
+							<div>Stake Pathos</div>
 						</Icon>
 					)}
 				</Wrapper>
@@ -110,6 +123,19 @@ class Financials extends React.Component {
 							ethosCapStatus={ethosCapStatus}
 							ethosCapAmount={ethosCapAmount}
 							ethosBalance={ethosBalance}
+						/>
+					</Wrapper>
+				);
+			} else if (showStakePathosForm) {
+				return (
+					<Wrapper>
+						<Title className="margin-top">Stake Pathos</Title>
+						<StakePathosFormContainer
+							id={id}
+							getTAOPool={getTAOPool}
+							toggleShowForm={this.toggleShowForm}
+							ethosBalance={ethosBalance}
+							pathosBalance={pathosBalance}
 						/>
 					</Wrapper>
 				);

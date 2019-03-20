@@ -168,3 +168,10 @@ export const stakeEthos = (tao) => {
 		tao
 	};
 };
+
+export const stakePathos = (tao) => {
+	return {
+		type: actionsEnums.STAKE_PATHOS,
+		tao
+	};
+};
