@@ -155,7 +155,7 @@ export const Icon = styled.div`
 	margin: 30px 20px 0 0;
 
 	&.navbar {
-		font-size: 0.1em;
+		font-size: 0.7em;
 		color: #ffffff;
 		margin: 0;
 
