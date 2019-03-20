@@ -4,8 +4,8 @@ import { Dashboard } from "./Dashboard";
 const mapStateToProps = (state) => {
 	return {
 		nameId: state.nameReducer.nameId,
-		names: state.taoReducer.names,
-		taos: state.taoReducer.taos
+		names: state.globalReducer.names,
+		taos: state.globalReducer.taos
 	};
 };
 

@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 		ethos: state.contractReducer.contracts.ethos,
 		pathos: state.contractReducer.contracts.pathos,
 		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup,
-		stakedTAOs: state.taoReducer.stakedTAOs
+		stakedTAOs: state.globalReducer.stakedTAOs
 	};
 };
 

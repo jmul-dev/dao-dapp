@@ -5,7 +5,7 @@ import { toastReducer } from "./toastReducer";
 import { appReducer } from "./appReducer";
 import { contractReducer } from "./contractReducer";
 import { nameReducer } from "./nameReducer";
-import { taoReducer } from "./taoReducer";
+import { globalReducer } from "./globalReducer";
 
 export const reducers = combineReducers({
 	web3Reducer,
@@ -13,6 +13,6 @@ export const reducers = combineReducers({
 	appReducer,
 	contractReducer,
 	nameReducer,
-	taoReducer,
+	globalReducer,
 	routing: routerReducer
 });

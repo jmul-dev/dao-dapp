@@ -3,7 +3,7 @@ import { NameList } from "./NameList";
 
 const mapStateToProps = (state) => {
 	return {
-		names: state.taoReducer.names
+		names: state.globalReducer.names
 	};
 };
 

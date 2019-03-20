@@ -1,7 +1,7 @@
 import { actionsEnums } from "common/actionsEnums";
 import { BigNumber } from "bignumber.js";
 
-class TAOReducerState {
+class GlobalReducerState {
 	constructor() {
 		this.names = [];
 		this.stakedTAOs = [];
@@ -72,7 +72,7 @@ const handleStakeEthos = (state, action) => {
 	};
 };
 
-export const taoReducer = (state = new TAOReducerState(), action) => {
+export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.APPEND_NAME:
 			return handleAppendName(state, action);

@@ -4,7 +4,7 @@ import { EnsureCreateName } from "./EnsureCreateName";
 const mapStateToProps = (state) => {
 	return {
 		nameId: state.nameReducer.nameId,
-		taos: state.taoReducer.taos
+		taos: state.globalReducer.taos
 	};
 };
 

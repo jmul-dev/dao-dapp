@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
 		accounts: state.web3Reducer.accounts,
 		nameId: state.nameReducer.nameId,
 		logos: state.contractReducer.contracts.logos,
-		names: state.taoReducer.names
+		names: state.globalReducer.names
 	};
 };
 
