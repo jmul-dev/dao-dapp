@@ -4,6 +4,7 @@ import { BigNumber } from "bignumber.js";
 class GlobalReducerState {
 	constructor() {
 		this.names = [];
+		this.namesPositionLogos = [];
 		this.stakedTAOs = [];
 		this.taos = [];
 		this.settingTAOId = null;
@@ -72,8 +73,38 @@ const handleStakeEthos = (state, action) => {
 	};
 };
 
+const handleAddNamePositionLogos = (state, action) => {
+	const _namesPositionLogos = state.namesPositionLogos.slice();
+	const _nameIndex = _namesPositionLogos.findIndex((name) => name.nameId === action.nameId);
+	if (_nameIndex === -1) {
+		_namesPositionLogos.push({ nameId: action.nameId, positionLogos: action.value });
+	} else {
+		_namesPositionLogos[_nameIndex].positionLogos = _namesPositionLogos[_nameIndex].positionLogos.plus(action.value);
+	}
+	return {
+		...state,
+		namesPositionLogos: _namesPositionLogos
+	};
+};
+
+const handleSubtractNamePositionLogos = (state, action) => {
+	const _namesPositionLogos = state.namesPositionLogos.slice();
+	const _nameIndex = _namesPositionLogos.findIndex((name) => name.nameId === action.nameId);
+	if (_nameIndex === -1) {
+		_namesPositionLogos.push({ nameId: action.nameId, positionLogos: new BigNumber(0).minus(action.value) });
+	} else {
+		_namesPositionLogos[_nameIndex].positionLogos = _namesPositionLogos[_nameIndex].positionLogos.minus(action.value);
+	}
+	return {
+		...state,
+		namesPositionLogos: _namesPositionLogos
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
+		case actionsEnums.ADD_NAME_POSITION_LOGOS:
+			return handleAddNamePositionLogos(state, action);
 		case actionsEnums.APPEND_NAME:
 			return handleAppendName(state, action);
 		case actionsEnums.APPEND_TAO:
@@ -84,6 +115,8 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleSetTAOAsChild(state, action);
 		case actionsEnums.STAKE_ETHOS:
 			return handleStakeEthos(state, action);
+		case actionsEnums.SUBTRACT_NAME_POSITION_LOGOS:
+			return handleSubtractNamePositionLogos(state, action);
 		default:
 			return state;
 	}

@@ -22,6 +22,10 @@ class TopNavBar extends React.Component {
 			await this.getTAOCurrencyBalances(this.props.nameId);
 		} else if (this.props.stakedTAOs !== prevProps.stakedTAOs && this.props.nameId) {
 			await this.getTAOCurrencyBalances(this.props.nameId);
+		} else if (this.props.namesPositionLogos !== prevProps.namesPositionLogos && this.props.nameId) {
+			if (this.props.namesPositionLogos.find((name) => name.nameId === this.props.nameId)) {
+				await this.getTAOCurrencyBalances(this.props.nameId);
+			}
 		}
 	}
 

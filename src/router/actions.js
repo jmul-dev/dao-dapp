@@ -146,6 +146,22 @@ export const unpositionLogosFrom = (nameId, value) => {
 	};
 };
 
+export const addNamePositionLogos = (nameId, value) => {
+	return {
+		type: actionsEnums.ADD_NAME_POSITION_LOGOS,
+		nameId,
+		value
+	};
+};
+
+export const subtractNamePositionLogos = (nameId, value) => {
+	return {
+		type: actionsEnums.SUBTRACT_NAME_POSITION_LOGOS,
+		nameId,
+		value
+	};
+};
+
 export const stakeEthos = (tao) => {
 	return {
 		type: actionsEnums.STAKE_ETHOS,

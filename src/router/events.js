@@ -13,7 +13,9 @@ import {
 	unpositionLogosOn,
 	positionLogosFrom,
 	unpositionLogosFrom,
-	stakeEthos
+	stakeEthos,
+	addNamePositionLogos,
+	subtractNamePositionLogos
 } from "./actions";
 
 // Contracts
@@ -211,6 +213,7 @@ const _parseLogosEvent = async (dispatch, log, nameLookup, nameId) => {
 			} else if (log.args.to === nameId) {
 				dispatch(positionLogosFrom(log.args.from, nameLookup[log.args.from], log.args.value));
 			}
+			dispatch(addNamePositionLogos(log.args.to, log.args.value));
 			break;
 		case "UnpositionFrom":
 			if (log.args.from === nameId) {
@@ -218,6 +221,7 @@ const _parseLogosEvent = async (dispatch, log, nameLookup, nameId) => {
 			} else if (log.args.to === nameId) {
 				dispatch(unpositionLogosFrom(log.args.from, log.args.value));
 			}
+			dispatch(subtractNamePositionLogos(log.args.to, log.args.value));
 			break;
 		default:
 			break;
