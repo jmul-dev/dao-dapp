@@ -1,8 +1,10 @@
 import { actionsEnums } from "common/actionsEnums";
+import { BigNumber } from "bignumber.js";
 
 class TAOReducerState {
 	constructor() {
 		this.names = [];
+		this.stakedTAOs = [];
 		this.taos = [];
 		this.settingTAOId = null;
 	}
@@ -56,6 +58,20 @@ const handleSetTAOAsChild = (state, action) => {
 	};
 };
 
+const handleStakeEthos = (state, action) => {
+	const _stakedTAOs = state.stakedTAOs.slice();
+	const _taoIndex = _stakedTAOs.findIndex((tao) => tao.taoId === action.tao.taoId);
+	if (_taoIndex === -1) {
+		_stakedTAOs.push({ taoId: action.tao.taoId, ethos: action.tao.lotQuantity, pathos: new BigNumber(0) });
+	} else {
+		_stakedTAOs[_taoIndex].ethos = _stakedTAOs[_taoIndex].ethos.plus(action.tao.lotQuantity);
+	}
+	return {
+		...state,
+		stakedTAOs: _stakedTAOs
+	};
+};
+
 export const taoReducer = (state = new TAOReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.APPEND_NAME:
@@ -66,6 +82,8 @@ export const taoReducer = (state = new TAOReducerState(), action) => {
 			return handleSetSettingTAOId(state, action);
 		case actionsEnums.SET_TAO_AS_CHILD:
 			return handleSetTAOAsChild(state, action);
+		case actionsEnums.STAKE_ETHOS:
+			return handleStakeEthos(state, action);
 		default:
 			return state;
 	}

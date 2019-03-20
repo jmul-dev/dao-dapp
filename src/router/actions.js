@@ -145,3 +145,10 @@ export const unpositionLogosFrom = (nameId, value) => {
 		value
 	};
 };
+
+export const stakeEthos = (tao) => {
+	return {
+		type: actionsEnums.STAKE_ETHOS,
+		tao
+	};
+};

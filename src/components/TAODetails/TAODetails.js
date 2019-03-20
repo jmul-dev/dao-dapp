@@ -37,6 +37,10 @@ class TAODetails extends React.Component {
 		if (this.props.params.id !== prevProps.params.id) {
 			this.setState(this.initialState);
 			await this.getData();
+		} else if (this.props.stakedTAOs !== prevProps.stakedTAOs && this.props.params.id) {
+			if (this.props.stakedTAOs.find((tao) => tao.taoId === this.props.params.id)) {
+				await this.getTAOPool();
+			}
 		}
 	}
 

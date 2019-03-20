@@ -12,7 +12,8 @@ import {
 	positionLogosOn,
 	unpositionLogosOn,
 	positionLogosFrom,
-	unpositionLogosFrom
+	unpositionLogosFrom,
+	stakeEthos
 } from "./actions";
 
 // Contracts
@@ -20,6 +21,7 @@ import NameFactory from "contracts/NameFactory.json";
 import TAOFactory from "contracts/TAOFactory.json";
 import TAOAncestry from "contracts/TAOAncestry.json";
 import Logos from "contracts/Logos.json";
+import TAOPool from "contracts/TAOPool.json";
 
 const promisify = require("tiny-promisify");
 
@@ -219,5 +221,24 @@ const _parseLogosEvent = async (dispatch, log, nameLookup, nameId) => {
 			break;
 		default:
 			break;
+	}
+};
+
+export const watchTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	try {
+		const taoPool = window.web3.eth.contract(TAOPool.abi).at(TAOPool.networks[networkId].address);
+		taoPool.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
+			if (!err) {
+				switch (log.event) {
+					case "StakeEthos":
+						dispatch(stakeEthos(log.args));
+						break;
+					default:
+						break;
+				}
+			}
+		});
+	} catch (e) {
+		console.log("error", e);
 	}
 };

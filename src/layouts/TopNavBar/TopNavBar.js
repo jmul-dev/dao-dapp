@@ -17,10 +17,11 @@ class TopNavBar extends React.Component {
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.nameId !== prevProps.nameId) {
-			const { nameId } = this.props;
-			await this.getNameInfo(nameId);
-			await this.getProfileImage(nameId);
-			await this.getTAOCurrencyBalances(nameId);
+			await this.getNameInfo(this.props.nameId);
+			await this.getProfileImage(this.props.nameId);
+			await this.getTAOCurrencyBalances(this.props.nameId);
+		} else if (this.props.stakedTAOs !== prevProps.stakedTAOs && this.props.nameId) {
+			await this.getTAOCurrencyBalances(this.props.nameId);
 		}
 	}
 
