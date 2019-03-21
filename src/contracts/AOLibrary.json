@@ -506,7 +506,7 @@
 				"id": 9065,
 				"nodeType": "ImportDirective",
 				"scope": 9659,
-				"sourceUnit": 34319,
+				"sourceUnit": 34403,
 				"src": "125:26:11",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -2265,7 +2265,7 @@
 											"stateVariable": false,
 											"storageLocation": "default",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_TokenERC20_$34318",
+												"typeIdentifier": "t_contract$_TokenERC20_$34402",
 												"typeString": "contract TokenERC20"
 											},
 											"typeName": {
@@ -2273,10 +2273,10 @@
 												"id": 9182,
 												"name": "TokenERC20",
 												"nodeType": "UserDefinedTypeName",
-												"referencedDeclaration": 34318,
+												"referencedDeclaration": 34402,
 												"src": "1371:10:11",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_TokenERC20_$34318",
+													"typeIdentifier": "t_contract$_TokenERC20_$34402",
 													"typeString": "contract TokenERC20"
 												}
 											},
@@ -2313,10 +2313,10 @@
 											"name": "TokenERC20",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 34318,
+											"referencedDeclaration": 34402,
 											"src": "1391:10:11",
 											"typeDescriptions": {
-												"typeIdentifier": "t_type$_t_contract$_TokenERC20_$34318_$",
+												"typeIdentifier": "t_type$_t_contract$_TokenERC20_$34402_$",
 												"typeString": "type(contract TokenERC20)"
 											}
 										},
@@ -2330,7 +2330,7 @@
 										"nodeType": "FunctionCall",
 										"src": "1391:25:11",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_TokenERC20_$34318",
+											"typeIdentifier": "t_contract$_TokenERC20_$34402",
 											"typeString": "contract TokenERC20"
 										}
 									},
@@ -2388,7 +2388,7 @@
 																	"referencedDeclaration": 9183,
 																	"src": "1428:6:11",
 																	"typeDescriptions": {
-																		"typeIdentifier": "t_contract$_TokenERC20_$34318",
+																		"typeIdentifier": "t_contract$_TokenERC20_$34402",
 																		"typeString": "contract TokenERC20"
 																	}
 																},
@@ -2399,7 +2399,7 @@
 																"lValueRequested": false,
 																"memberName": "totalSupply",
 																"nodeType": "MemberAccess",
-																"referencedDeclaration": 33960,
+																"referencedDeclaration": 34044,
 																"src": "1428:18:11",
 																"typeDescriptions": {
 																	"typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
@@ -2478,7 +2478,7 @@
 																				"referencedDeclaration": 9183,
 																				"src": "1463:6:11",
 																				"typeDescriptions": {
-																					"typeIdentifier": "t_contract$_TokenERC20_$34318",
+																					"typeIdentifier": "t_contract$_TokenERC20_$34402",
 																					"typeString": "contract TokenERC20"
 																				}
 																			},
@@ -2489,7 +2489,7 @@
 																			"lValueRequested": false,
 																			"memberName": "name",
 																			"nodeType": "MemberAccess",
-																			"referencedDeclaration": 33953,
+																			"referencedDeclaration": 34037,
 																			"src": "1463:11:11",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_function_external_view$__$returns$_t_string_memory_$",
@@ -2623,7 +2623,7 @@
 																			"referencedDeclaration": 9183,
 																			"src": "1498:6:11",
 																			"typeDescriptions": {
-																				"typeIdentifier": "t_contract$_TokenERC20_$34318",
+																				"typeIdentifier": "t_contract$_TokenERC20_$34402",
 																				"typeString": "contract TokenERC20"
 																			}
 																		},
@@ -2634,7 +2634,7 @@
 																		"lValueRequested": false,
 																		"memberName": "symbol",
 																		"nodeType": "MemberAccess",
-																		"referencedDeclaration": 33955,
+																		"referencedDeclaration": 34039,
 																		"src": "1498:13:11",
 																		"typeDescriptions": {
 																			"typeIdentifier": "t_function_external_view$__$returns$_t_string_memory_$",
@@ -9023,7 +9023,7 @@
 				"id": 9065,
 				"nodeType": "ImportDirective",
 				"scope": 9659,
-				"sourceUnit": 34319,
+				"sourceUnit": 34403,
 				"src": "125:26:11",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10782,7 +10782,7 @@
 											"stateVariable": false,
 											"storageLocation": "default",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_TokenERC20_$34318",
+												"typeIdentifier": "t_contract$_TokenERC20_$34402",
 												"typeString": "contract TokenERC20"
 											},
 											"typeName": {
@@ -10790,10 +10790,10 @@
 												"id": 9182,
 												"name": "TokenERC20",
 												"nodeType": "UserDefinedTypeName",
-												"referencedDeclaration": 34318,
+												"referencedDeclaration": 34402,
 												"src": "1371:10:11",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_TokenERC20_$34318",
+													"typeIdentifier": "t_contract$_TokenERC20_$34402",
 													"typeString": "contract TokenERC20"
 												}
 											},
@@ -10830,10 +10830,10 @@
 											"name": "TokenERC20",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 34318,
+											"referencedDeclaration": 34402,
 											"src": "1391:10:11",
 											"typeDescriptions": {
-												"typeIdentifier": "t_type$_t_contract$_TokenERC20_$34318_$",
+												"typeIdentifier": "t_type$_t_contract$_TokenERC20_$34402_$",
 												"typeString": "type(contract TokenERC20)"
 											}
 										},
@@ -10847,7 +10847,7 @@
 										"nodeType": "FunctionCall",
 										"src": "1391:25:11",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_TokenERC20_$34318",
+											"typeIdentifier": "t_contract$_TokenERC20_$34402",
 											"typeString": "contract TokenERC20"
 										}
 									},
@@ -10905,7 +10905,7 @@
 																	"referencedDeclaration": 9183,
 																	"src": "1428:6:11",
 																	"typeDescriptions": {
-																		"typeIdentifier": "t_contract$_TokenERC20_$34318",
+																		"typeIdentifier": "t_contract$_TokenERC20_$34402",
 																		"typeString": "contract TokenERC20"
 																	}
 																},
@@ -10916,7 +10916,7 @@
 																"lValueRequested": false,
 																"memberName": "totalSupply",
 																"nodeType": "MemberAccess",
-																"referencedDeclaration": 33960,
+																"referencedDeclaration": 34044,
 																"src": "1428:18:11",
 																"typeDescriptions": {
 																	"typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
@@ -10995,7 +10995,7 @@
 																				"referencedDeclaration": 9183,
 																				"src": "1463:6:11",
 																				"typeDescriptions": {
-																					"typeIdentifier": "t_contract$_TokenERC20_$34318",
+																					"typeIdentifier": "t_contract$_TokenERC20_$34402",
 																					"typeString": "contract TokenERC20"
 																				}
 																			},
@@ -11006,7 +11006,7 @@
 																			"lValueRequested": false,
 																			"memberName": "name",
 																			"nodeType": "MemberAccess",
-																			"referencedDeclaration": 33953,
+																			"referencedDeclaration": 34037,
 																			"src": "1463:11:11",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_function_external_view$__$returns$_t_string_memory_$",
@@ -11140,7 +11140,7 @@
 																			"referencedDeclaration": 9183,
 																			"src": "1498:6:11",
 																			"typeDescriptions": {
-																				"typeIdentifier": "t_contract$_TokenERC20_$34318",
+																				"typeIdentifier": "t_contract$_TokenERC20_$34402",
 																				"typeString": "contract TokenERC20"
 																			}
 																		},
@@ -11151,7 +11151,7 @@
 																		"lValueRequested": false,
 																		"memberName": "symbol",
 																		"nodeType": "MemberAccess",
-																		"referencedDeclaration": 33955,
+																		"referencedDeclaration": 34039,
 																		"src": "1498:13:11",
 																		"typeDescriptions": {
 																			"typeIdentifier": "t_function_external_view$__$returns$_t_string_memory_$",
@@ -17495,5 +17495,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-03-19T01:57:05.358Z"
+	"updatedAt": "2019-03-21T01:34:19.047Z"
 }

@@ -367,12 +367,12 @@
 						"src": "78:11:85"
 					}
 				],
-				"contractDependencies": [30591, 33948],
+				"contractDependencies": [30591, 34032],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 28775,
-				"linearizedBaseContracts": [28775, 30591, 33948],
+				"linearizedBaseContracts": [28775, 30591, 34032],
 				"name": "PathosXona",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -705,12 +705,12 @@
 						"src": "78:11:85"
 					}
 				],
-				"contractDependencies": [30591, 33948],
+				"contractDependencies": [30591, 34032],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 28775,
-				"linearizedBaseContracts": [28775, 30591, 33948],
+				"linearizedBaseContracts": [28775, 30591, 34032],
 				"name": "PathosXona",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1020,5 +1020,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-03-19T01:57:05.613Z"
+	"updatedAt": "2019-03-21T01:34:19.400Z"
 }

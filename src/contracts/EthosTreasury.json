@@ -599,12 +599,12 @@
 						"src": "251:19:35"
 					}
 				],
-				"contractDependencies": [22100, 31694, 33948],
+				"contractDependencies": [22100, 31694, 34032],
 				"contractKind": "contract",
 				"documentation": "@title EthosTreasury\n * The purpose of this contract is to list all of the valid denominations of Ethos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 21134,
-				"linearizedBaseContracts": [21134, 31694, 22100, 33948],
+				"linearizedBaseContracts": [21134, 31694, 22100, 34032],
 				"name": "EthosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -795,12 +795,12 @@
 						"src": "251:19:35"
 					}
 				],
-				"contractDependencies": [22100, 31694, 33948],
+				"contractDependencies": [22100, 31694, 34032],
 				"contractKind": "contract",
 				"documentation": "@title EthosTreasury\n * The purpose of this contract is to list all of the valid denominations of Ethos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 21134,
-				"linearizedBaseContracts": [21134, 31694, 22100, 33948],
+				"linearizedBaseContracts": [21134, 31694, 22100, 34032],
 				"name": "EthosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -968,5 +968,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-03-19T01:57:05.594Z"
+	"updatedAt": "2019-03-21T01:34:19.385Z"
 }

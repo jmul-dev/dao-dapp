@@ -367,12 +367,12 @@
 						"src": "74:11:77"
 					}
 				],
-				"contractDependencies": [30591, 33948],
+				"contractDependencies": [30591, 34032],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 28554,
-				"linearizedBaseContracts": [28554, 30591, 33948],
+				"linearizedBaseContracts": [28554, 30591, 34032],
 				"name": "Pathos",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -602,12 +602,12 @@
 						"src": "74:11:77"
 					}
 				],
-				"contractDependencies": [30591, 33948],
+				"contractDependencies": [30591, 34032],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 28554,
-				"linearizedBaseContracts": [28554, 30591, 33948],
+				"linearizedBaseContracts": [28554, 30591, 34032],
 				"name": "Pathos",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -894,5 +894,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-03-19T01:57:05.593Z"
+	"updatedAt": "2019-03-21T01:34:19.386Z"
 }

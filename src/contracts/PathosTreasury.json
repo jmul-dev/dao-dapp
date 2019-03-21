@@ -599,12 +599,12 @@
 						"src": "254:19:84"
 					}
 				],
-				"contractDependencies": [22100, 31694, 33948],
+				"contractDependencies": [22100, 31694, 34032],
 				"contractKind": "contract",
 				"documentation": "@title PathosTreasury\n * The purpose of this contract is to list all of the valid denominations of Pathos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 28746,
-				"linearizedBaseContracts": [28746, 31694, 22100, 33948],
+				"linearizedBaseContracts": [28746, 31694, 22100, 34032],
 				"name": "PathosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -795,12 +795,12 @@
 						"src": "254:19:84"
 					}
 				],
-				"contractDependencies": [22100, 31694, 33948],
+				"contractDependencies": [22100, 31694, 34032],
 				"contractKind": "contract",
 				"documentation": "@title PathosTreasury\n * The purpose of this contract is to list all of the valid denominations of Pathos and do the conversion between denominations",
 				"fullyImplemented": true,
 				"id": 28746,
-				"linearizedBaseContracts": [28746, 31694, 22100, 33948],
+				"linearizedBaseContracts": [28746, 31694, 22100, 34032],
 				"name": "PathosTreasury",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -968,5 +968,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-03-19T01:57:05.614Z"
+	"updatedAt": "2019-03-21T01:34:19.402Z"
 }
