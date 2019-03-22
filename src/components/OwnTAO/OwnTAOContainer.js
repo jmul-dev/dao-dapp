@@ -3,8 +3,11 @@ import { OwnTAO } from "./OwnTAO";
 
 const mapStateToProps = (state) => {
 	return {
-		taos: state.nameReducer.taos,
-		taosNeedApproval: state.nameReducer.taosNeedApproval
+		ownTAOs: state.nameReducer.taos,
+		taosNeedApproval: state.nameReducer.taosNeedApproval,
+		stakeEthos: state.nameReducer.stakeEthos,
+		stakePathos: state.nameReducer.stakePathos,
+		taos: state.globalReducer.taos
 	};
 };
 

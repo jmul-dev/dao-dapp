@@ -3,13 +3,24 @@ import { Wrapper, Title, Header, Ahref, Table } from "components/";
 
 class OwnTAO extends React.Component {
 	render() {
-		const { taos, taosNeedApproval } = this.props;
-		if (!taos || !taosNeedApproval) {
+		const { ownTAOs, taosNeedApproval, stakeEthos, stakePathos, taos } = this.props;
+		if (!ownTAOs || !taosNeedApproval || !stakeEthos || !stakePathos || !taos) {
 			return null;
 		}
 
-		const stakedEthosTAOs = [],
-			stakedPathosTAOs = [];
+		const stakedEthosTAOIds = stakeEthos.map((tao) => tao.taoId).filter((value, index, self) => self.indexOf(value) === index);
+		const stakedEthosTAOs = [];
+		stakedEthosTAOIds.forEach((taoId) => {
+			const tao = taos.find((tao) => tao.taoId === taoId);
+			stakedEthosTAOs.push(tao);
+		});
+
+		const stakedPathosTAOIds = stakePathos.map((tao) => tao.taoId).filter((value, index, self) => self.indexOf(value) === index);
+		const stakedPathosTAOs = [];
+		stakedPathosTAOIds.forEach((taoId) => {
+			const tao = taos.find((tao) => tao.taoId === taoId);
+			stakedPathosTAOs.push(tao);
+		});
 
 		const columns = [
 			{
@@ -39,8 +50,8 @@ class OwnTAO extends React.Component {
 			<Wrapper className="padding-40">
 				<Wrapper className="margin-bottom-40">
 					<Title>Advocated TAOs</Title>
-					{taos.length ? (
-						<Table data={taos} columns={columns} defaultPageSize={5} filterable={true} />
+					{ownTAOs.length ? (
+						<Table data={ownTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 					) : (
 						<Header>Currently, you have no TAO of which you are the Advocate</Header>
 					)}
