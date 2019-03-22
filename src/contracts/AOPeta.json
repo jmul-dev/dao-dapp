@@ -1020,12 +1020,12 @@
 						"src": "77:14:13"
 					}
 				],
-				"contractDependencies": [8277, 34032],
+				"contractDependencies": [8277, 34096],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 9728,
-				"linearizedBaseContracts": [9728, 8277, 34032],
+				"linearizedBaseContracts": [9728, 8277, 34096],
 				"name": "AOPeta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1436,12 +1436,12 @@
 						"src": "77:14:13"
 					}
 				],
-				"contractDependencies": [8277, 34032],
+				"contractDependencies": [8277, 34096],
 				"contractKind": "contract",
 				"documentation": null,
 				"fullyImplemented": true,
 				"id": 9728,
-				"linearizedBaseContracts": [9728, 8277, 34032],
+				"linearizedBaseContracts": [9728, 8277, 34096],
 				"name": "AOPeta",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -1829,5 +1829,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-03-21T01:34:19.463Z"
+	"updatedAt": "2019-03-22T03:50:43.770Z"
 }

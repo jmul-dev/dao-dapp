@@ -595,7 +595,7 @@
 				"id": 865,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 28928,
+				"sourceUnit": 28966,
 				"src": "26:24:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -617,7 +617,7 @@
 				"id": 867,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 34033,
+				"sourceUnit": 34097,
 				"src": "77:21:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -628,7 +628,7 @@
 				"id": 868,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21512,
+				"sourceUnit": 21550,
 				"src": "99:26:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -639,7 +639,7 @@
 				"id": 869,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21822,
+				"sourceUnit": 21860,
 				"src": "126:27:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -650,7 +650,7 @@
 				"id": 870,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21277,
+				"sourceUnit": 21315,
 				"src": "154:26:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -661,7 +661,7 @@
 				"id": 871,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21801,
+				"sourceUnit": 21839,
 				"src": "181:32:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -672,7 +672,7 @@
 				"id": 872,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21331,
+				"sourceUnit": 21369,
 				"src": "214:30:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -683,7 +683,7 @@
 				"id": 873,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21359,
+				"sourceUnit": 21397,
 				"src": "245:26:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -694,7 +694,7 @@
 				"id": 874,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 22037,
+				"sourceUnit": 22075,
 				"src": "272:32:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -708,10 +708,10 @@
 							"id": 875,
 							"name": "TheAO",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 34032,
+							"referencedDeclaration": 34096,
 							"src": "507:5:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TheAO_$34032",
+								"typeIdentifier": "t_contract$_TheAO_$34096",
 								"typeString": "contract TheAO"
 							}
 						},
@@ -720,12 +720,12 @@
 						"src": "507:5:1"
 					}
 				],
-				"contractDependencies": [34032],
+				"contractDependencies": [34096],
 				"contractKind": "contract",
 				"documentation": "@title AOContentFactory\n * The purpose of this contract is to allow content creator to stake network AO ions and/or primordial AO+ ions\non his/her content",
 				"fullyImplemented": true,
 				"id": 1597,
-				"linearizedBaseContracts": [1597, 34032],
+				"linearizedBaseContracts": [1597, 34096],
 				"name": "AOContentFactory",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -736,10 +736,10 @@
 							"id": 877,
 							"name": "SafeMath",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 28927,
+							"referencedDeclaration": 28965,
 							"src": "522:8:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_SafeMath_$28927",
+								"typeIdentifier": "t_contract$_SafeMath_$28965",
 								"typeString": "library SafeMath"
 							}
 						},
@@ -948,7 +948,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOSetting_$21511",
+							"typeIdentifier": "t_contract$_IAOSetting_$21549",
 							"typeString": "contract IAOSetting"
 						},
 						"typeName": {
@@ -956,10 +956,10 @@
 							"id": 894,
 							"name": "IAOSetting",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21511,
+							"referencedDeclaration": 21549,
 							"src": "792:10:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOSetting_$21511",
+								"typeIdentifier": "t_contract$_IAOSetting_$21549",
 								"typeString": "contract IAOSetting"
 							}
 						},
@@ -976,7 +976,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+							"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 							"typeString": "contract IAOTreasury"
 						},
 						"typeName": {
@@ -984,10 +984,10 @@
 							"id": 896,
 							"name": "IAOTreasury",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21821,
+							"referencedDeclaration": 21859,
 							"src": "825:11:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+								"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 								"typeString": "contract IAOTreasury"
 							}
 						},
@@ -1004,7 +1004,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOContent_$21276",
+							"typeIdentifier": "t_contract$_IAOContent_$21314",
 							"typeString": "contract IAOContent"
 						},
 						"typeName": {
@@ -1012,10 +1012,10 @@
 							"id": 898,
 							"name": "IAOContent",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21276,
+							"referencedDeclaration": 21314,
 							"src": "860:10:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOContent_$21276",
+								"typeIdentifier": "t_contract$_IAOContent_$21314",
 								"typeString": "contract IAOContent"
 							}
 						},
@@ -1032,7 +1032,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+							"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 							"typeString": "contract IAOStakedContent"
 						},
 						"typeName": {
@@ -1040,10 +1040,10 @@
 							"id": 900,
 							"name": "IAOStakedContent",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21800,
+							"referencedDeclaration": 21838,
 							"src": "893:16:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+								"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 								"typeString": "contract IAOStakedContent"
 							}
 						},
@@ -1060,7 +1060,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+							"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 							"typeString": "contract IAOContentHost"
 						},
 						"typeName": {
@@ -1068,10 +1068,10 @@
 							"id": 902,
 							"name": "IAOContentHost",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21330,
+							"referencedDeclaration": 21368,
 							"src": "938:14:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+								"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 								"typeString": "contract IAOContentHost"
 							}
 						},
@@ -1088,7 +1088,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOEarning_$21358",
+							"typeIdentifier": "t_contract$_IAOEarning_$21396",
 							"typeString": "contract IAOEarning"
 						},
 						"typeName": {
@@ -1096,10 +1096,10 @@
 							"id": 904,
 							"name": "IAOEarning",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21358,
+							"referencedDeclaration": 21396,
 							"src": "979:10:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOEarning_$21358",
+								"typeIdentifier": "t_contract$_IAOEarning_$21396",
 								"typeString": "contract IAOEarning"
 							}
 						},
@@ -1116,7 +1116,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+							"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 							"typeString": "contract INameTAOPosition"
 						},
 						"typeName": {
@@ -1124,10 +1124,10 @@
 							"id": 906,
 							"name": "INameTAOPosition",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 22036,
+							"referencedDeclaration": 22074,
 							"src": "1012:16:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+								"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 								"typeString": "contract INameTAOPosition"
 							}
 						},
@@ -1831,7 +1831,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "2415:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -1858,7 +1858,7 @@
 														"name": "theAO",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33949,
+														"referencedDeclaration": 34013,
 														"src": "2427:5:1",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -1871,7 +1871,7 @@
 														"name": "nameTAOPositionAddress",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33951,
+														"referencedDeclaration": 34015,
 														"src": "2434:22:1",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -1946,8 +1946,8 @@
 											"id": 961,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "2388:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2101,8 +2101,8 @@
 											"id": 980,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "2684:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2141,7 +2141,7 @@
 											"name": "theAO",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33949,
+											"referencedDeclaration": 34013,
 											"src": "2718:5:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -2246,7 +2246,7 @@
 						"scope": 1597,
 						"src": "2620:116:1",
 						"stateMutability": "nonpayable",
-						"superFunction": 34002,
+						"superFunction": 34066,
 						"visibility": "public"
 					},
 					{
@@ -2358,8 +2358,8 @@
 											"id": 1002,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "2991:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2400,7 +2400,7 @@
 												"name": "whitelist",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 33955,
+												"referencedDeclaration": 34019,
 												"src": "3027:9:1",
 												"typeDescriptions": {
 													"typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
@@ -2556,7 +2556,7 @@
 						"scope": 1597,
 						"src": "2913:150:1",
 						"stateMutability": "nonpayable",
-						"superFunction": 34031,
+						"superFunction": 34095,
 						"visibility": "public"
 					},
 					{
@@ -2645,8 +2645,8 @@
 											"id": 1024,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "3236:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2902,8 +2902,8 @@
 											"id": 1043,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "3496:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2991,7 +2991,7 @@
 											"referencedDeclaration": 895,
 											"src": "3581:10:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOSetting_$21511",
+												"typeIdentifier": "t_contract$_IAOSetting_$21549",
 												"typeString": "contract IAOSetting"
 											}
 										},
@@ -3025,10 +3025,10 @@
 												"name": "IAOSetting",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21511,
+												"referencedDeclaration": 21549,
 												"src": "3594:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOSetting_$21511_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOSetting_$21549_$",
 													"typeString": "type(contract IAOSetting)"
 												}
 											},
@@ -3042,13 +3042,13 @@
 											"nodeType": "FunctionCall",
 											"src": "3594:29:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOSetting_$21511",
+												"typeIdentifier": "t_contract$_IAOSetting_$21549",
 												"typeString": "contract IAOSetting"
 											}
 										},
 										"src": "3581:42:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOSetting_$21511",
+											"typeIdentifier": "t_contract$_IAOSetting_$21549",
 											"typeString": "contract IAOSetting"
 										}
 									},
@@ -3241,8 +3241,8 @@
 											"id": 1069,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "3816:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3330,7 +3330,7 @@
 											"referencedDeclaration": 897,
 											"src": "3904:11:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+												"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 												"typeString": "contract IAOTreasury"
 											}
 										},
@@ -3364,10 +3364,10 @@
 												"name": "IAOTreasury",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21821,
+												"referencedDeclaration": 21859,
 												"src": "3918:11:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOTreasury_$21821_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOTreasury_$21859_$",
 													"typeString": "type(contract IAOTreasury)"
 												}
 											},
@@ -3381,13 +3381,13 @@
 											"nodeType": "FunctionCall",
 											"src": "3918:31:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+												"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 												"typeString": "contract IAOTreasury"
 											}
 										},
 										"src": "3904:45:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+											"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 											"typeString": "contract IAOTreasury"
 										}
 									},
@@ -3580,8 +3580,8 @@
 											"id": 1095,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "4136:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3669,7 +3669,7 @@
 											"referencedDeclaration": 899,
 											"src": "4221:10:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContent_$21276",
+												"typeIdentifier": "t_contract$_IAOContent_$21314",
 												"typeString": "contract IAOContent"
 											}
 										},
@@ -3703,10 +3703,10 @@
 												"name": "IAOContent",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21276,
+												"referencedDeclaration": 21314,
 												"src": "4234:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOContent_$21276_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOContent_$21314_$",
 													"typeString": "type(contract IAOContent)"
 												}
 											},
@@ -3720,13 +3720,13 @@
 											"nodeType": "FunctionCall",
 											"src": "4234:29:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContent_$21276",
+												"typeIdentifier": "t_contract$_IAOContent_$21314",
 												"typeString": "contract IAOContent"
 											}
 										},
 										"src": "4221:42:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOContent_$21276",
+											"typeIdentifier": "t_contract$_IAOContent_$21314",
 											"typeString": "contract IAOContent"
 										}
 									},
@@ -3919,8 +3919,8 @@
 											"id": 1121,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "4480:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4008,7 +4008,7 @@
 											"referencedDeclaration": 901,
 											"src": "4583:16:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+												"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 												"typeString": "contract IAOStakedContent"
 											}
 										},
@@ -4042,10 +4042,10 @@
 												"name": "IAOStakedContent",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21800,
+												"referencedDeclaration": 21838,
 												"src": "4602:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOStakedContent_$21800_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOStakedContent_$21838_$",
 													"typeString": "type(contract IAOStakedContent)"
 												}
 											},
@@ -4059,13 +4059,13 @@
 											"nodeType": "FunctionCall",
 											"src": "4602:41:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+												"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 												"typeString": "contract IAOStakedContent"
 											}
 										},
 										"src": "4583:60:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+											"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 											"typeString": "contract IAOStakedContent"
 										}
 									},
@@ -4258,8 +4258,8 @@
 											"id": 1147,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "4850:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4347,7 +4347,7 @@
 											"referencedDeclaration": 903,
 											"src": "4947:14:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+												"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 												"typeString": "contract IAOContentHost"
 											}
 										},
@@ -4381,10 +4381,10 @@
 												"name": "IAOContentHost",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21330,
+												"referencedDeclaration": 21368,
 												"src": "4964:14:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOContentHost_$21330_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOContentHost_$21368_$",
 													"typeString": "type(contract IAOContentHost)"
 												}
 											},
@@ -4398,13 +4398,13 @@
 											"nodeType": "FunctionCall",
 											"src": "4964:37:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+												"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 												"typeString": "contract IAOContentHost"
 											}
 										},
 										"src": "4947:54:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+											"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 											"typeString": "contract IAOContentHost"
 										}
 									},
@@ -4597,8 +4597,8 @@
 											"id": 1173,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "5188:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4686,7 +4686,7 @@
 											"referencedDeclaration": 905,
 											"src": "5273:10:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOEarning_$21358",
+												"typeIdentifier": "t_contract$_IAOEarning_$21396",
 												"typeString": "contract IAOEarning"
 											}
 										},
@@ -4720,10 +4720,10 @@
 												"name": "IAOEarning",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21358,
+												"referencedDeclaration": 21396,
 												"src": "5286:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOEarning_$21358_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOEarning_$21396_$",
 													"typeString": "type(contract IAOEarning)"
 												}
 											},
@@ -4737,13 +4737,13 @@
 											"nodeType": "FunctionCall",
 											"src": "5286:29:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOEarning_$21358",
+												"typeIdentifier": "t_contract$_IAOEarning_$21396",
 												"typeString": "contract IAOEarning"
 											}
 										},
 										"src": "5273:42:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOEarning_$21358",
+											"typeIdentifier": "t_contract$_IAOEarning_$21396",
 											"typeString": "contract IAOEarning"
 										}
 									},
@@ -4936,8 +4936,8 @@
 											"id": 1199,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "5532:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -4976,7 +4976,7 @@
 											"name": "nameTAOPositionAddress",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33951,
+											"referencedDeclaration": 34015,
 											"src": "5583:22:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -5025,7 +5025,7 @@
 											"referencedDeclaration": 907,
 											"src": "5635:16:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+												"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 												"typeString": "contract INameTAOPosition"
 											}
 										},
@@ -5059,10 +5059,10 @@
 												"name": "INameTAOPosition",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 22036,
+												"referencedDeclaration": 22074,
 												"src": "5654:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_INameTAOPosition_$22036_$",
+													"typeIdentifier": "t_type$_t_contract$_INameTAOPosition_$22074_$",
 													"typeString": "type(contract INameTAOPosition)"
 												}
 											},
@@ -5076,13 +5076,13 @@
 											"nodeType": "FunctionCall",
 											"src": "5654:41:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+												"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 												"typeString": "contract INameTAOPosition"
 											}
 										},
 										"src": "5635:60:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+											"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 											"typeString": "contract INameTAOPosition"
 										}
 									},
@@ -5187,7 +5187,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "7159:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -5219,7 +5219,7 @@
 																	"name": "msg",
 																	"nodeType": "Identifier",
 																	"overloadedDeclarations": [],
-																	"referencedDeclaration": 34987,
+																	"referencedDeclaration": 35051,
 																	"src": "7195:3:1",
 																	"typeDescriptions": {
 																		"typeIdentifier": "t_magic_message",
@@ -5251,7 +5251,7 @@
 																			"name": "msg",
 																			"nodeType": "Identifier",
 																			"overloadedDeclarations": [],
-																			"referencedDeclaration": 34987,
+																			"referencedDeclaration": 35051,
 																			"src": "7233:3:1",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_magic_message",
@@ -5654,8 +5654,8 @@
 											"id": 1241,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "7128:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -5991,7 +5991,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "8884:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -6023,7 +6023,7 @@
 																	"name": "msg",
 																	"nodeType": "Identifier",
 																	"overloadedDeclarations": [],
-																	"referencedDeclaration": 34987,
+																	"referencedDeclaration": 35051,
 																	"src": "8920:3:1",
 																	"typeDescriptions": {
 																		"typeIdentifier": "t_magic_message",
@@ -6055,7 +6055,7 @@
 																			"name": "msg",
 																			"nodeType": "Identifier",
 																			"overloadedDeclarations": [],
-																			"referencedDeclaration": 34987,
+																			"referencedDeclaration": 35051,
 																			"src": "8958:3:1",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_magic_message",
@@ -6463,8 +6463,8 @@
 											"id": 1293,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "8853:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -6774,7 +6774,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "10676:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -6806,7 +6806,7 @@
 																	"name": "msg",
 																	"nodeType": "Identifier",
 																	"overloadedDeclarations": [],
-																	"referencedDeclaration": 34987,
+																	"referencedDeclaration": 35051,
 																	"src": "10712:3:1",
 																	"typeDescriptions": {
 																		"typeIdentifier": "t_magic_message",
@@ -6838,7 +6838,7 @@
 																			"name": "msg",
 																			"nodeType": "Identifier",
 																			"overloadedDeclarations": [],
-																			"referencedDeclaration": 34987,
+																			"referencedDeclaration": 35051,
 																			"src": "10750:3:1",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_magic_message",
@@ -7203,8 +7203,8 @@
 											"id": 1347,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "10645:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -7646,7 +7646,7 @@
 												"referencedDeclaration": 901,
 												"src": "11574:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+													"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 													"typeString": "contract IAOStakedContent"
 												}
 											},
@@ -7657,7 +7657,7 @@
 											"lValueRequested": false,
 											"memberName": "getById",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21773,
+											"referencedDeclaration": 21811,
 											"src": "11574:24:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_bytes32_$_t_address_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_bool_$_t_uint256_$",
@@ -7918,7 +7918,7 @@
 												"referencedDeclaration": 905,
 												"src": "12116:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOEarning_$21358",
+													"typeIdentifier": "t_contract$_IAOEarning_$21396",
 													"typeString": "contract IAOEarning"
 												}
 											},
@@ -7929,7 +7929,7 @@
 											"lValueRequested": false,
 											"memberName": "getTotalStakedContentEarning",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21357,
+											"referencedDeclaration": 21395,
 											"src": "12116:39:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_uint256_$_t_uint256_$_t_uint256_$",
@@ -8776,7 +8776,7 @@
 												"referencedDeclaration": 895,
 												"src": "13503:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOSetting_$21511",
+													"typeIdentifier": "t_contract$_IAOSetting_$21549",
 													"typeString": "contract IAOSetting"
 												}
 											},
@@ -8787,7 +8787,7 @@
 											"lValueRequested": false,
 											"memberName": "getSettingValuesByTAOName",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21490,
+											"referencedDeclaration": 21528,
 											"src": "13503:36:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_address_$_t_string_memory_ptr_$returns$_t_uint256_$_t_bool_$_t_address_$_t_bytes32_$_t_string_memory_ptr_$",
@@ -8982,7 +8982,7 @@
 												"referencedDeclaration": 895,
 												"src": "13909:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOSetting_$21511",
+													"typeIdentifier": "t_contract$_IAOSetting_$21549",
 													"typeString": "contract IAOSetting"
 												}
 											},
@@ -8993,7 +8993,7 @@
 											"lValueRequested": false,
 											"memberName": "getSettingValuesByTAOName",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21490,
+											"referencedDeclaration": 21528,
 											"src": "13909:36:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_address_$_t_string_memory_ptr_$returns$_t_uint256_$_t_bool_$_t_address_$_t_bytes32_$_t_string_memory_ptr_$",
@@ -9188,7 +9188,7 @@
 												"referencedDeclaration": 895,
 												"src": "14304:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOSetting_$21511",
+													"typeIdentifier": "t_contract$_IAOSetting_$21549",
 													"typeString": "contract IAOSetting"
 												}
 											},
@@ -9199,7 +9199,7 @@
 											"lValueRequested": false,
 											"memberName": "getSettingValuesByTAOName",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21490,
+											"referencedDeclaration": 21528,
 											"src": "14304:36:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_address_$_t_string_memory_ptr_$returns$_t_uint256_$_t_bool_$_t_address_$_t_bytes32_$_t_string_memory_ptr_$",
@@ -9406,7 +9406,7 @@
 												"referencedDeclaration": 899,
 												"src": "15084:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOContent_$21276",
+													"typeIdentifier": "t_contract$_IAOContent_$21314",
 													"typeString": "contract IAOContent"
 												}
 											},
@@ -9417,7 +9417,7 @@
 											"lValueRequested": false,
 											"memberName": "create",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21238,
+											"referencedDeclaration": 21276,
 											"src": "15084:17:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_bytes32_$_t_address_$returns$_t_bytes32_$",
@@ -9772,7 +9772,7 @@
 												"referencedDeclaration": 901,
 												"src": "16022:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+													"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 													"typeString": "contract IAOStakedContent"
 												}
 											},
@@ -9783,7 +9783,7 @@
 											"lValueRequested": false,
 											"memberName": "create",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21792,
+											"referencedDeclaration": 21830,
 											"src": "16022:23:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_bytes32_$_t_uint256_$_t_uint256_$_t_bytes8_$_t_uint256_$_t_uint256_$returns$_t_bytes32_$",
@@ -10156,7 +10156,7 @@
 												"referencedDeclaration": 903,
 												"src": "16764:14:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+													"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 													"typeString": "contract IAOContentHost"
 												}
 											},
@@ -10167,7 +10167,7 @@
 											"lValueRequested": false,
 											"memberName": "create",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21293,
+											"referencedDeclaration": 21331,
 											"src": "16764:21:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_bytes32_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$_t_bool_$",
@@ -10407,7 +10407,7 @@
 				"id": 865,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 28928,
+				"sourceUnit": 28966,
 				"src": "26:24:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10429,7 +10429,7 @@
 				"id": 867,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 34033,
+				"sourceUnit": 34097,
 				"src": "77:21:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10440,7 +10440,7 @@
 				"id": 868,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21512,
+				"sourceUnit": 21550,
 				"src": "99:26:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10451,7 +10451,7 @@
 				"id": 869,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21822,
+				"sourceUnit": 21860,
 				"src": "126:27:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10462,7 +10462,7 @@
 				"id": 870,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21277,
+				"sourceUnit": 21315,
 				"src": "154:26:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10473,7 +10473,7 @@
 				"id": 871,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21801,
+				"sourceUnit": 21839,
 				"src": "181:32:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10484,7 +10484,7 @@
 				"id": 872,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21331,
+				"sourceUnit": 21369,
 				"src": "214:30:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10495,7 +10495,7 @@
 				"id": 873,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 21359,
+				"sourceUnit": 21397,
 				"src": "245:26:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10506,7 +10506,7 @@
 				"id": 874,
 				"nodeType": "ImportDirective",
 				"scope": 1598,
-				"sourceUnit": 22037,
+				"sourceUnit": 22075,
 				"src": "272:32:1",
 				"symbolAliases": [],
 				"unitAlias": ""
@@ -10520,10 +10520,10 @@
 							"id": 875,
 							"name": "TheAO",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 34032,
+							"referencedDeclaration": 34096,
 							"src": "507:5:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_TheAO_$34032",
+								"typeIdentifier": "t_contract$_TheAO_$34096",
 								"typeString": "contract TheAO"
 							}
 						},
@@ -10532,12 +10532,12 @@
 						"src": "507:5:1"
 					}
 				],
-				"contractDependencies": [34032],
+				"contractDependencies": [34096],
 				"contractKind": "contract",
 				"documentation": "@title AOContentFactory\n * The purpose of this contract is to allow content creator to stake network AO ions and/or primordial AO+ ions\non his/her content",
 				"fullyImplemented": true,
 				"id": 1597,
-				"linearizedBaseContracts": [1597, 34032],
+				"linearizedBaseContracts": [1597, 34096],
 				"name": "AOContentFactory",
 				"nodeType": "ContractDefinition",
 				"nodes": [
@@ -10548,10 +10548,10 @@
 							"id": 877,
 							"name": "SafeMath",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 28927,
+							"referencedDeclaration": 28965,
 							"src": "522:8:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_SafeMath_$28927",
+								"typeIdentifier": "t_contract$_SafeMath_$28965",
 								"typeString": "library SafeMath"
 							}
 						},
@@ -10760,7 +10760,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOSetting_$21511",
+							"typeIdentifier": "t_contract$_IAOSetting_$21549",
 							"typeString": "contract IAOSetting"
 						},
 						"typeName": {
@@ -10768,10 +10768,10 @@
 							"id": 894,
 							"name": "IAOSetting",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21511,
+							"referencedDeclaration": 21549,
 							"src": "792:10:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOSetting_$21511",
+								"typeIdentifier": "t_contract$_IAOSetting_$21549",
 								"typeString": "contract IAOSetting"
 							}
 						},
@@ -10788,7 +10788,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+							"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 							"typeString": "contract IAOTreasury"
 						},
 						"typeName": {
@@ -10796,10 +10796,10 @@
 							"id": 896,
 							"name": "IAOTreasury",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21821,
+							"referencedDeclaration": 21859,
 							"src": "825:11:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+								"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 								"typeString": "contract IAOTreasury"
 							}
 						},
@@ -10816,7 +10816,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOContent_$21276",
+							"typeIdentifier": "t_contract$_IAOContent_$21314",
 							"typeString": "contract IAOContent"
 						},
 						"typeName": {
@@ -10824,10 +10824,10 @@
 							"id": 898,
 							"name": "IAOContent",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21276,
+							"referencedDeclaration": 21314,
 							"src": "860:10:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOContent_$21276",
+								"typeIdentifier": "t_contract$_IAOContent_$21314",
 								"typeString": "contract IAOContent"
 							}
 						},
@@ -10844,7 +10844,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+							"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 							"typeString": "contract IAOStakedContent"
 						},
 						"typeName": {
@@ -10852,10 +10852,10 @@
 							"id": 900,
 							"name": "IAOStakedContent",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21800,
+							"referencedDeclaration": 21838,
 							"src": "893:16:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+								"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 								"typeString": "contract IAOStakedContent"
 							}
 						},
@@ -10872,7 +10872,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+							"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 							"typeString": "contract IAOContentHost"
 						},
 						"typeName": {
@@ -10880,10 +10880,10 @@
 							"id": 902,
 							"name": "IAOContentHost",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21330,
+							"referencedDeclaration": 21368,
 							"src": "938:14:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+								"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 								"typeString": "contract IAOContentHost"
 							}
 						},
@@ -10900,7 +10900,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_IAOEarning_$21358",
+							"typeIdentifier": "t_contract$_IAOEarning_$21396",
 							"typeString": "contract IAOEarning"
 						},
 						"typeName": {
@@ -10908,10 +10908,10 @@
 							"id": 904,
 							"name": "IAOEarning",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 21358,
+							"referencedDeclaration": 21396,
 							"src": "979:10:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_IAOEarning_$21358",
+								"typeIdentifier": "t_contract$_IAOEarning_$21396",
 								"typeString": "contract IAOEarning"
 							}
 						},
@@ -10928,7 +10928,7 @@
 						"stateVariable": true,
 						"storageLocation": "default",
 						"typeDescriptions": {
-							"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+							"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 							"typeString": "contract INameTAOPosition"
 						},
 						"typeName": {
@@ -10936,10 +10936,10 @@
 							"id": 906,
 							"name": "INameTAOPosition",
 							"nodeType": "UserDefinedTypeName",
-							"referencedDeclaration": 22036,
+							"referencedDeclaration": 22074,
 							"src": "1012:16:1",
 							"typeDescriptions": {
-								"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+								"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 								"typeString": "contract INameTAOPosition"
 							}
 						},
@@ -11643,7 +11643,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "2415:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -11670,7 +11670,7 @@
 														"name": "theAO",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33949,
+														"referencedDeclaration": 34013,
 														"src": "2427:5:1",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -11683,7 +11683,7 @@
 														"name": "nameTAOPositionAddress",
 														"nodeType": "Identifier",
 														"overloadedDeclarations": [],
-														"referencedDeclaration": 33951,
+														"referencedDeclaration": 34015,
 														"src": "2434:22:1",
 														"typeDescriptions": {
 															"typeIdentifier": "t_address",
@@ -11758,8 +11758,8 @@
 											"id": 961,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "2388:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -11913,8 +11913,8 @@
 											"id": 980,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "2684:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -11953,7 +11953,7 @@
 											"name": "theAO",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33949,
+											"referencedDeclaration": 34013,
 											"src": "2718:5:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -12058,7 +12058,7 @@
 						"scope": 1597,
 						"src": "2620:116:1",
 						"stateMutability": "nonpayable",
-						"superFunction": 34002,
+						"superFunction": 34066,
 						"visibility": "public"
 					},
 					{
@@ -12170,8 +12170,8 @@
 											"id": 1002,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "2991:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -12212,7 +12212,7 @@
 												"name": "whitelist",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 33955,
+												"referencedDeclaration": 34019,
 												"src": "3027:9:1",
 												"typeDescriptions": {
 													"typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
@@ -12368,7 +12368,7 @@
 						"scope": 1597,
 						"src": "2913:150:1",
 						"stateMutability": "nonpayable",
-						"superFunction": 34031,
+						"superFunction": 34095,
 						"visibility": "public"
 					},
 					{
@@ -12457,8 +12457,8 @@
 											"id": 1024,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "3236:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -12714,8 +12714,8 @@
 											"id": 1043,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "3496:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -12803,7 +12803,7 @@
 											"referencedDeclaration": 895,
 											"src": "3581:10:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOSetting_$21511",
+												"typeIdentifier": "t_contract$_IAOSetting_$21549",
 												"typeString": "contract IAOSetting"
 											}
 										},
@@ -12837,10 +12837,10 @@
 												"name": "IAOSetting",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21511,
+												"referencedDeclaration": 21549,
 												"src": "3594:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOSetting_$21511_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOSetting_$21549_$",
 													"typeString": "type(contract IAOSetting)"
 												}
 											},
@@ -12854,13 +12854,13 @@
 											"nodeType": "FunctionCall",
 											"src": "3594:29:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOSetting_$21511",
+												"typeIdentifier": "t_contract$_IAOSetting_$21549",
 												"typeString": "contract IAOSetting"
 											}
 										},
 										"src": "3581:42:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOSetting_$21511",
+											"typeIdentifier": "t_contract$_IAOSetting_$21549",
 											"typeString": "contract IAOSetting"
 										}
 									},
@@ -13053,8 +13053,8 @@
 											"id": 1069,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "3816:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -13142,7 +13142,7 @@
 											"referencedDeclaration": 897,
 											"src": "3904:11:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+												"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 												"typeString": "contract IAOTreasury"
 											}
 										},
@@ -13176,10 +13176,10 @@
 												"name": "IAOTreasury",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21821,
+												"referencedDeclaration": 21859,
 												"src": "3918:11:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOTreasury_$21821_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOTreasury_$21859_$",
 													"typeString": "type(contract IAOTreasury)"
 												}
 											},
@@ -13193,13 +13193,13 @@
 											"nodeType": "FunctionCall",
 											"src": "3918:31:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+												"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 												"typeString": "contract IAOTreasury"
 											}
 										},
 										"src": "3904:45:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOTreasury_$21821",
+											"typeIdentifier": "t_contract$_IAOTreasury_$21859",
 											"typeString": "contract IAOTreasury"
 										}
 									},
@@ -13392,8 +13392,8 @@
 											"id": 1095,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "4136:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -13481,7 +13481,7 @@
 											"referencedDeclaration": 899,
 											"src": "4221:10:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContent_$21276",
+												"typeIdentifier": "t_contract$_IAOContent_$21314",
 												"typeString": "contract IAOContent"
 											}
 										},
@@ -13515,10 +13515,10 @@
 												"name": "IAOContent",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21276,
+												"referencedDeclaration": 21314,
 												"src": "4234:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOContent_$21276_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOContent_$21314_$",
 													"typeString": "type(contract IAOContent)"
 												}
 											},
@@ -13532,13 +13532,13 @@
 											"nodeType": "FunctionCall",
 											"src": "4234:29:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContent_$21276",
+												"typeIdentifier": "t_contract$_IAOContent_$21314",
 												"typeString": "contract IAOContent"
 											}
 										},
 										"src": "4221:42:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOContent_$21276",
+											"typeIdentifier": "t_contract$_IAOContent_$21314",
 											"typeString": "contract IAOContent"
 										}
 									},
@@ -13731,8 +13731,8 @@
 											"id": 1121,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "4480:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -13820,7 +13820,7 @@
 											"referencedDeclaration": 901,
 											"src": "4583:16:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+												"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 												"typeString": "contract IAOStakedContent"
 											}
 										},
@@ -13854,10 +13854,10 @@
 												"name": "IAOStakedContent",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21800,
+												"referencedDeclaration": 21838,
 												"src": "4602:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOStakedContent_$21800_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOStakedContent_$21838_$",
 													"typeString": "type(contract IAOStakedContent)"
 												}
 											},
@@ -13871,13 +13871,13 @@
 											"nodeType": "FunctionCall",
 											"src": "4602:41:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+												"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 												"typeString": "contract IAOStakedContent"
 											}
 										},
 										"src": "4583:60:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+											"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 											"typeString": "contract IAOStakedContent"
 										}
 									},
@@ -14070,8 +14070,8 @@
 											"id": 1147,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "4850:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -14159,7 +14159,7 @@
 											"referencedDeclaration": 903,
 											"src": "4947:14:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+												"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 												"typeString": "contract IAOContentHost"
 											}
 										},
@@ -14193,10 +14193,10 @@
 												"name": "IAOContentHost",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21330,
+												"referencedDeclaration": 21368,
 												"src": "4964:14:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOContentHost_$21330_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOContentHost_$21368_$",
 													"typeString": "type(contract IAOContentHost)"
 												}
 											},
@@ -14210,13 +14210,13 @@
 											"nodeType": "FunctionCall",
 											"src": "4964:37:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+												"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 												"typeString": "contract IAOContentHost"
 											}
 										},
 										"src": "4947:54:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+											"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 											"typeString": "contract IAOContentHost"
 										}
 									},
@@ -14409,8 +14409,8 @@
 											"id": 1173,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "5188:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -14498,7 +14498,7 @@
 											"referencedDeclaration": 905,
 											"src": "5273:10:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOEarning_$21358",
+												"typeIdentifier": "t_contract$_IAOEarning_$21396",
 												"typeString": "contract IAOEarning"
 											}
 										},
@@ -14532,10 +14532,10 @@
 												"name": "IAOEarning",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 21358,
+												"referencedDeclaration": 21396,
 												"src": "5286:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_IAOEarning_$21358_$",
+													"typeIdentifier": "t_type$_t_contract$_IAOEarning_$21396_$",
 													"typeString": "type(contract IAOEarning)"
 												}
 											},
@@ -14549,13 +14549,13 @@
 											"nodeType": "FunctionCall",
 											"src": "5286:29:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_IAOEarning_$21358",
+												"typeIdentifier": "t_contract$_IAOEarning_$21396",
 												"typeString": "contract IAOEarning"
 											}
 										},
 										"src": "5273:42:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_IAOEarning_$21358",
+											"typeIdentifier": "t_contract$_IAOEarning_$21396",
 											"typeString": "contract IAOEarning"
 										}
 									},
@@ -14748,8 +14748,8 @@
 											"id": 1199,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "5532:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -14788,7 +14788,7 @@
 											"name": "nameTAOPositionAddress",
 											"nodeType": "Identifier",
 											"overloadedDeclarations": [],
-											"referencedDeclaration": 33951,
+											"referencedDeclaration": 34015,
 											"src": "5583:22:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_address",
@@ -14837,7 +14837,7 @@
 											"referencedDeclaration": 907,
 											"src": "5635:16:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+												"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 												"typeString": "contract INameTAOPosition"
 											}
 										},
@@ -14871,10 +14871,10 @@
 												"name": "INameTAOPosition",
 												"nodeType": "Identifier",
 												"overloadedDeclarations": [],
-												"referencedDeclaration": 22036,
+												"referencedDeclaration": 22074,
 												"src": "5654:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_type$_t_contract$_INameTAOPosition_$22036_$",
+													"typeIdentifier": "t_type$_t_contract$_INameTAOPosition_$22074_$",
 													"typeString": "type(contract INameTAOPosition)"
 												}
 											},
@@ -14888,13 +14888,13 @@
 											"nodeType": "FunctionCall",
 											"src": "5654:41:1",
 											"typeDescriptions": {
-												"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+												"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 												"typeString": "contract INameTAOPosition"
 											}
 										},
 										"src": "5635:60:1",
 										"typeDescriptions": {
-											"typeIdentifier": "t_contract$_INameTAOPosition_$22036",
+											"typeIdentifier": "t_contract$_INameTAOPosition_$22074",
 											"typeString": "contract INameTAOPosition"
 										}
 									},
@@ -14999,7 +14999,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "7159:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -15031,7 +15031,7 @@
 																	"name": "msg",
 																	"nodeType": "Identifier",
 																	"overloadedDeclarations": [],
-																	"referencedDeclaration": 34987,
+																	"referencedDeclaration": 35051,
 																	"src": "7195:3:1",
 																	"typeDescriptions": {
 																		"typeIdentifier": "t_magic_message",
@@ -15063,7 +15063,7 @@
 																			"name": "msg",
 																			"nodeType": "Identifier",
 																			"overloadedDeclarations": [],
-																			"referencedDeclaration": 34987,
+																			"referencedDeclaration": 35051,
 																			"src": "7233:3:1",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_magic_message",
@@ -15466,8 +15466,8 @@
 											"id": 1241,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "7128:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -15803,7 +15803,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "8884:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -15835,7 +15835,7 @@
 																	"name": "msg",
 																	"nodeType": "Identifier",
 																	"overloadedDeclarations": [],
-																	"referencedDeclaration": 34987,
+																	"referencedDeclaration": 35051,
 																	"src": "8920:3:1",
 																	"typeDescriptions": {
 																		"typeIdentifier": "t_magic_message",
@@ -15867,7 +15867,7 @@
 																			"name": "msg",
 																			"nodeType": "Identifier",
 																			"overloadedDeclarations": [],
-																			"referencedDeclaration": 34987,
+																			"referencedDeclaration": 35051,
 																			"src": "8958:3:1",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_magic_message",
@@ -16275,8 +16275,8 @@
 											"id": 1293,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "8853:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -16586,7 +16586,7 @@
 															"name": "msg",
 															"nodeType": "Identifier",
 															"overloadedDeclarations": [],
-															"referencedDeclaration": 34987,
+															"referencedDeclaration": 35051,
 															"src": "10676:3:1",
 															"typeDescriptions": {
 																"typeIdentifier": "t_magic_message",
@@ -16618,7 +16618,7 @@
 																	"name": "msg",
 																	"nodeType": "Identifier",
 																	"overloadedDeclarations": [],
-																	"referencedDeclaration": 34987,
+																	"referencedDeclaration": 35051,
 																	"src": "10712:3:1",
 																	"typeDescriptions": {
 																		"typeIdentifier": "t_magic_message",
@@ -16650,7 +16650,7 @@
 																			"name": "msg",
 																			"nodeType": "Identifier",
 																			"overloadedDeclarations": [],
-																			"referencedDeclaration": 34987,
+																			"referencedDeclaration": 35051,
 																			"src": "10750:3:1",
 																			"typeDescriptions": {
 																				"typeIdentifier": "t_magic_message",
@@ -17015,8 +17015,8 @@
 											"id": 1347,
 											"name": "require",
 											"nodeType": "Identifier",
-											"overloadedDeclarations": [34990, 34991],
-											"referencedDeclaration": 34990,
+											"overloadedDeclarations": [35054, 35055],
+											"referencedDeclaration": 35054,
 											"src": "10645:7:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -17458,7 +17458,7 @@
 												"referencedDeclaration": 901,
 												"src": "11574:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+													"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 													"typeString": "contract IAOStakedContent"
 												}
 											},
@@ -17469,7 +17469,7 @@
 											"lValueRequested": false,
 											"memberName": "getById",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21773,
+											"referencedDeclaration": 21811,
 											"src": "11574:24:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_bytes32_$_t_address_$_t_uint256_$_t_uint256_$_t_uint256_$_t_uint256_$_t_bool_$_t_uint256_$",
@@ -17730,7 +17730,7 @@
 												"referencedDeclaration": 905,
 												"src": "12116:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOEarning_$21358",
+													"typeIdentifier": "t_contract$_IAOEarning_$21396",
 													"typeString": "contract IAOEarning"
 												}
 											},
@@ -17741,7 +17741,7 @@
 											"lValueRequested": false,
 											"memberName": "getTotalStakedContentEarning",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21357,
+											"referencedDeclaration": 21395,
 											"src": "12116:39:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_bytes32_$returns$_t_uint256_$_t_uint256_$_t_uint256_$",
@@ -18588,7 +18588,7 @@
 												"referencedDeclaration": 895,
 												"src": "13503:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOSetting_$21511",
+													"typeIdentifier": "t_contract$_IAOSetting_$21549",
 													"typeString": "contract IAOSetting"
 												}
 											},
@@ -18599,7 +18599,7 @@
 											"lValueRequested": false,
 											"memberName": "getSettingValuesByTAOName",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21490,
+											"referencedDeclaration": 21528,
 											"src": "13503:36:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_address_$_t_string_memory_ptr_$returns$_t_uint256_$_t_bool_$_t_address_$_t_bytes32_$_t_string_memory_ptr_$",
@@ -18794,7 +18794,7 @@
 												"referencedDeclaration": 895,
 												"src": "13909:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOSetting_$21511",
+													"typeIdentifier": "t_contract$_IAOSetting_$21549",
 													"typeString": "contract IAOSetting"
 												}
 											},
@@ -18805,7 +18805,7 @@
 											"lValueRequested": false,
 											"memberName": "getSettingValuesByTAOName",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21490,
+											"referencedDeclaration": 21528,
 											"src": "13909:36:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_address_$_t_string_memory_ptr_$returns$_t_uint256_$_t_bool_$_t_address_$_t_bytes32_$_t_string_memory_ptr_$",
@@ -19000,7 +19000,7 @@
 												"referencedDeclaration": 895,
 												"src": "14304:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOSetting_$21511",
+													"typeIdentifier": "t_contract$_IAOSetting_$21549",
 													"typeString": "contract IAOSetting"
 												}
 											},
@@ -19011,7 +19011,7 @@
 											"lValueRequested": false,
 											"memberName": "getSettingValuesByTAOName",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21490,
+											"referencedDeclaration": 21528,
 											"src": "14304:36:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_view$_t_address_$_t_string_memory_ptr_$returns$_t_uint256_$_t_bool_$_t_address_$_t_bytes32_$_t_string_memory_ptr_$",
@@ -19218,7 +19218,7 @@
 												"referencedDeclaration": 899,
 												"src": "15084:10:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOContent_$21276",
+													"typeIdentifier": "t_contract$_IAOContent_$21314",
 													"typeString": "contract IAOContent"
 												}
 											},
@@ -19229,7 +19229,7 @@
 											"lValueRequested": false,
 											"memberName": "create",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21238,
+											"referencedDeclaration": 21276,
 											"src": "15084:17:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_bytes32_$_t_address_$returns$_t_bytes32_$",
@@ -19584,7 +19584,7 @@
 												"referencedDeclaration": 901,
 												"src": "16022:16:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOStakedContent_$21800",
+													"typeIdentifier": "t_contract$_IAOStakedContent_$21838",
 													"typeString": "contract IAOStakedContent"
 												}
 											},
@@ -19595,7 +19595,7 @@
 											"lValueRequested": false,
 											"memberName": "create",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21792,
+											"referencedDeclaration": 21830,
 											"src": "16022:23:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_bytes32_$_t_uint256_$_t_uint256_$_t_bytes8_$_t_uint256_$_t_uint256_$returns$_t_bytes32_$",
@@ -19968,7 +19968,7 @@
 												"referencedDeclaration": 903,
 												"src": "16764:14:1",
 												"typeDescriptions": {
-													"typeIdentifier": "t_contract$_IAOContentHost_$21330",
+													"typeIdentifier": "t_contract$_IAOContentHost_$21368",
 													"typeString": "contract IAOContentHost"
 												}
 											},
@@ -19979,7 +19979,7 @@
 											"lValueRequested": false,
 											"memberName": "create",
 											"nodeType": "MemberAccess",
-											"referencedDeclaration": 21293,
+											"referencedDeclaration": 21331,
 											"src": "16764:21:1",
 											"typeDescriptions": {
 												"typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_bytes32_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$_t_bool_$",
@@ -20222,5 +20222,5 @@
 		}
 	},
 	"schemaVersion": "2.0.1",
-	"updatedAt": "2019-03-21T01:34:19.737Z"
+	"updatedAt": "2019-03-22T03:50:44.583Z"
 }
