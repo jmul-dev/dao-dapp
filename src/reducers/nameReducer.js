@@ -153,7 +153,7 @@ const handleUnpositionLogosFrom = (state, action) => {
 
 const handleNameStakeEthos = (state, action) => {
 	const _stakeEthos = state.stakeEthos.slice();
-	if (!_stakeEthos.find((tao) => tao.taoId === action.tao.taoId)) {
+	if (!_stakeEthos.find((tao) => tao.ethosLotId === action.tao.ethosLotId)) {
 		_stakeEthos.push({
 			...action.tao,
 			logosEarned: new BigNumber(0),
@@ -168,7 +168,7 @@ const handleNameStakeEthos = (state, action) => {
 
 const handleNameStakePathos = (state, action) => {
 	const _stakePathos = state.stakePathos.slice();
-	if (!_stakePathos.find((tao) => tao.taoId === action.tao.taoId)) {
+	if (!_stakePathos.find((tao) => tao.stakeId === action.tao.stakeId)) {
 		_stakePathos.push(action.tao);
 	}
 
@@ -181,18 +181,13 @@ const handleNameStakePathos = (state, action) => {
 const handleUpdateLogosEarned = (state, action) => {
 	const _stakeEthosNonTAO = state.stakeEthos.filter((tao) => tao.taoId !== action.tao.taoId);
 	const _stakeEthosTAO = state.stakeEthos.filter((tao) => tao.taoId === action.tao.taoId);
-	const _ethosLotIndex = _stakeEthosTAO.findIndex(
-		(tao) =>
-			action.tao.currentPoolTotalStakedPathos.gt(tao.poolPreStakeSnapshot) &&
-			action.tao.currentPoolTotalStakedPathos.lte(tao.poolStakeLotSnapshot)
-	);
-	if (_ethosLotIndex !== -1) {
-		_stakeEthosTAO[_ethosLotIndex].logosEarned = action.tao.currentPoolTotalStakedPathos.gte(
-			_stakeEthosTAO[_ethosLotIndex].poolStakeLotSnapshot
-		)
-			? _stakeEthosTAO[_ethosLotIndex].lotQuantity
-			: action.tao.currentPoolTotalStakedPathos.sub(_stakeEthosTAO[_ethosLotIndex].poolPreStakeSnapshot);
-	}
+	_stakeEthosTAO.forEach((tao, index) => {
+		if (action.tao.currentPoolTotalStakedPathos.gt(tao.poolPreStakeSnapshot)) {
+			_stakeEthosTAO[index].logosEarned = action.tao.currentPoolTotalStakedPathos.gte(_stakeEthosTAO[index].poolStakeLotSnapshot)
+				? _stakeEthosTAO[index].lotQuantity
+				: action.tao.currentPoolTotalStakedPathos.sub(_stakeEthosTAO[index].poolPreStakeSnapshot);
+		}
+	}, _stakeEthosTAO);
 
 	return {
 		...state,

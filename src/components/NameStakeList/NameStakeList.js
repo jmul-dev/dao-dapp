@@ -17,10 +17,11 @@ class NameStakeList extends React.Component {
 			dataPopulated: false
 		};
 		this.initialState = this.state;
+		this.getTAOPoolBalance = this.getTAOPoolBalance.bind(this);
 	}
 
 	async componentDidMount() {
-		await this.getData();
+		await this.getTAOPoolBalance();
 	}
 
 	async componentDidUpdate(prevProps) {
@@ -32,11 +33,11 @@ class NameStakeList extends React.Component {
 			if (this.props.params.id !== prevProps.params.id) {
 				this.setState(this.initialState);
 			}
-			await this.getData();
+			await this.getTAOPoolBalance();
 		}
 	}
 
-	async getData() {
+	async getTAOPoolBalance() {
 		const { id } = this.props.params;
 		const { nameId, taoPool } = this.props;
 		if (!id || !nameId || !taoPool) {
@@ -67,7 +68,7 @@ class NameStakeList extends React.Component {
 				</Ahref>
 				<TAOName name={taoInfo.name} id={id} />
 				<Financials ethosStaked={ethosStaked} pathosStaked={pathosStaked} logosWithdrawn={logosWithdrawn} />
-				<StakeEthosListContainer nameStakeEthos={_nameStakeEthos} />
+				<StakeEthosListContainer nameStakeEthos={_nameStakeEthos} getTAOPoolBalance={this.getTAOPoolBalance} />
 				<StakePathosList nameStakePathos={_nameStakePathos} />
 			</Wrapper>
 		);

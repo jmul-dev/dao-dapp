@@ -1,17 +1,19 @@
 import * as React from "react";
 import { Wrapper, Title, Table, Button } from "components/";
-//import { UnpositionLogosFormContainer } from "./UnpositionLogosForm/";
 import { formatDate } from "utils/";
+import { waitForTransactionReceipt } from "utils/web3";
+
+const promisify = require("tiny-promisify");
 
 class StakeEthosList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			nameStakeEthos: null,
-			showWithdrawLogosForm: false,
-			ethosLotId: null
+			processingWithdrawLogos: false,
+			processingEthosLotId: null
 		};
-		this.toggleWithdrawLogosForm = this.toggleWithdrawLogosForm.bind(this);
+		this.withdrawLogos = this.withdrawLogos.bind(this);
 	}
 
 	componentDidMount() {
@@ -25,13 +27,41 @@ class StakeEthosList extends React.Component {
 		}
 	}
 
-	toggleWithdrawLogosForm(ethosLotId) {
-		this.setState({ showWithdrawLogosForm: !this.state.showWithdrawLogosForm, ethosLotId });
+	async withdrawLogos(ethosLotId) {
+		const { taoPool, accounts } = this.props;
+		if (!taoPool || !accounts || !ethosLotId) {
+			return;
+		}
+
+		this.setState({ processingWithdrawLogos: true, processingEthosLotId: ethosLotId });
+		const logosAvailableToWithdraw = await promisify(taoPool.lotLogosAvailableToWithdraw)(ethosLotId);
+		if (logosAvailableToWithdraw.eq(0)) {
+			this.props.setError("Error!", "Currently, there is no available Logos to withdraw");
+			this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
+			return;
+		}
+
+		taoPool.withdrawLogos(ethosLotId, { from: accounts[0] }, (err, transactionHash) => {
+			if (err) {
+				this.props.setError("Error!", err.message);
+				this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
+			} else {
+				waitForTransactionReceipt(transactionHash)
+					.then(() => {
+						this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
+						this.props.getTAOPoolBalance();
+						this.props.setSuccess("Success!", `You have successfully withdrawn ${logosAvailableToWithdraw.toNumber()} Logos`);
+					})
+					.catch((err) => {
+						this.props.setError("Error!", err.message);
+						this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
+					});
+			}
+		});
 	}
 
 	render() {
-		const { nameStakeEthos, showWithdrawLogosForm } = this.state;
-		//		const { refreshPositionLogos } = this.props;
+		const { nameStakeEthos, processingWithdrawLogos, processingEthosLotId } = this.state;
 		if (!nameStakeEthos) {
 			return null;
 		}
@@ -74,9 +104,10 @@ class StakeEthosList extends React.Component {
 							<Button
 								type="button"
 								className="btn small"
-								onClick={() => this.toggleWithdrawLogosForm(props.original.ethosLotId)}
+								disabled={processingWithdrawLogos}
+								onClick={async () => await this.withdrawLogos(props.original.ethosLotId)}
 							>
-								Withdraw Logos
+								{processingEthosLotId !== props.original.ethosLotId ? "Withdraw Logos" : "Processing..."}
 							</Button>
 						);
 					} else {
@@ -88,12 +119,8 @@ class StakeEthosList extends React.Component {
 
 		return (
 			<Wrapper className="margin-top-40">
-				{!showWithdrawLogosForm ? (
-					<Wrapper>
-						<Title>Ethos Staked</Title>
-						<Table data={nameStakeEthos} columns={columns} defaultPageSize={5} filterable={true} />
-					</Wrapper>
-				) : null}
+				<Title>Ethos Staked</Title>
+				<Table data={nameStakeEthos} columns={columns} defaultPageSize={5} filterable={true} />
 			</Wrapper>
 		);
 	}
