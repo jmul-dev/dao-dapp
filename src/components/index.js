@@ -233,3 +233,27 @@ export const MediumEditor = styled(Editor)`
 		margin-bottom: 20px;
 	}
 `;
+
+export const LeftContainer = styled.div`
+	display: inline-block;
+	width: 50%;
+	vertical-align: top;
+
+	&.width-65 {
+		width: 65%;
+	}
+`;
+
+export const RightContainer = styled.div`
+	display: inline-block;
+	width: 50%;
+	vertical-align: top;
+
+	&.width-35 {
+		width: 35%;
+	}
+
+	&.right {
+		text-align: right;
+	}
+`;

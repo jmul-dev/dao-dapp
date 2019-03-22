@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Wrapper } from "components/";
-import { LeftContainer, RightContainer } from "./styledComponents";
+import { Wrapper, LeftContainer, RightContainer } from "components/";
 import { ProfileContainer } from "./Profile/";
 import { PositionDetails } from "./PositionDetails/";
 import { ProfileImage } from "./ProfileImage/";
@@ -128,7 +127,7 @@ class NameProfile extends React.Component {
 
 		return (
 			<Wrapper className="padding-40">
-				<LeftContainer>
+				<LeftContainer className="width-65">
 					<ProfileContainer
 						isOwner={isOwner}
 						nameInfo={nameInfo}
@@ -139,7 +138,7 @@ class NameProfile extends React.Component {
 					/>
 					<PositionDetails position={position} />
 				</LeftContainer>
-				<RightContainer>
+				<RightContainer className="width-35">
 					<ProfileImage isOwner={isOwner} profileImage={profileImage} refreshProfileImage={this.refreshProfileImage} />
 				</RightContainer>
 				{isOwner && (

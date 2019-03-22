@@ -13,6 +13,7 @@ import { TAODetailsContainer } from "components/TAODetails/";
 import { MeetContainer } from "components/Meet/";
 import { IdeContainer } from "components/Ide/";
 import { OwnTAOContainer } from "components/OwnTAO/";
+import { NameStakeListContainer } from "components/NameStakeList/";
 
 import { web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId } from "./actions";
 import { web3Errors } from "common/errors";
@@ -48,6 +49,7 @@ import {
 	watchTAOAncestryEvent,
 	getLogosEvent,
 	watchLogosEvent,
+	getTAOPoolEvent,
 	watchTAOPoolEvent
 } from "./events";
 
@@ -124,6 +126,7 @@ class AppRouter extends React.Component {
 			await getLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameLookup, this._nameId);
 			watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameLookup, this._nameId);
 
+			await getTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
@@ -184,6 +187,8 @@ class AppRouter extends React.Component {
 					<Route path="/tao/:id" component={TAODetailsContainer} />
 					<Route path="/meet/:id" component={MeetContainer} />
 					<Route path="/ide/:id" component={IdeContainer} />
+					<Route path="/view-own-taos" component={OwnTAOContainer} />
+					<Route path="/name-stake-list/:id" component={NameStakeListContainer} />
 					<Route path="/view-own-taos" component={OwnTAOContainer} />
 				</Route>
 			</Router>

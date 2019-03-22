@@ -91,7 +91,12 @@ const handleStakeEthos = (state, action) => {
 	const _stakedTAOs = state.stakedTAOs.slice();
 	const _taoIndex = _stakedTAOs.findIndex((tao) => tao.taoId === action.tao.taoId);
 	if (_taoIndex === -1) {
-		_stakedTAOs.push({ taoId: action.tao.taoId, ethos: action.tao.lotQuantity, pathos: new BigNumber(0) });
+		_stakedTAOs.push({
+			taoId: action.tao.taoId,
+			ethos: action.tao.lotQuantity,
+			pathos: new BigNumber(0),
+			logosWithdrawn: new BigNumber(0)
+		});
 	} else {
 		_stakedTAOs[_taoIndex].ethos = _stakedTAOs[_taoIndex].ethos.plus(action.tao.lotQuantity);
 	}
@@ -104,10 +109,20 @@ const handleStakeEthos = (state, action) => {
 const handleStakePathos = (state, action) => {
 	const _stakedTAOs = state.stakedTAOs.slice();
 	const _taoIndex = _stakedTAOs.findIndex((tao) => tao.taoId === action.tao.taoId);
-	if (_taoIndex === -1) {
-		_stakedTAOs.push({ taoId: action.tao.taoId, ethos: new BigNumber(0), pathos: action.tao.stakeQuantity });
-	} else {
+	if (_taoIndex >= 0) {
 		_stakedTAOs[_taoIndex].pathos = _stakedTAOs[_taoIndex].pathos.plus(action.tao.stakeQuantity);
+	}
+	return {
+		...state,
+		stakedTAOs: _stakedTAOs
+	};
+};
+
+const handleWithdrawLogos = (state, action) => {
+	const _stakedTAOs = state.stakedTAOs.slice();
+	const _taoIndex = _stakedTAOs.findIndex((tao) => tao.taoId === action.tao.taoId);
+	if (_taoIndex >= 0) {
+		_stakedTAOs[_taoIndex].logosWithdrawn = _stakedTAOs[_taoIndex].logosWithdrawn.plus(action.tao.withdrawnAmount);
 	}
 	return {
 		...state,
@@ -133,6 +148,8 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleStakePathos(state, action);
 		case actionsEnums.SUBTRACT_NAME_POSITION_LOGOS:
 			return handleSubtractNamePositionLogos(state, action);
+		case actionsEnums.WITHDRAW_LOGOS:
+			return handleWithdrawLogos(state, action);
 		default:
 			return state;
 	}

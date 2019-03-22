@@ -16,7 +16,12 @@ import {
 	addNamePositionLogos,
 	subtractNamePositionLogos,
 	stakeEthos,
-	stakePathos
+	stakePathos,
+	withdrawLogos,
+	nameStakeEthos,
+	nameStakePathos,
+	updateLogosEarned,
+	nameWithdrawLogos
 } from "./actions";
 
 // Contracts
@@ -229,24 +234,62 @@ const _parseLogosEvent = async (dispatch, log, nameLookup, nameId) => {
 	}
 };
 
+export const getTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const taoPool = window.web3.eth.contract(TAOPool.abi).at(TAOPool.networks[networkId].address);
+			const receipt = await getTransactionReceipt(TAOPool.networks[networkId].transactionHash);
+			taoPool.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+				if (!err) {
+					logs.forEach((log) => {
+						_parseTAOPoolEvent(dispatch, log, nameId);
+					});
+					resolve();
+				} else {
+					reject(err);
+				}
+			});
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+
 export const watchTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
 	try {
 		const taoPool = window.web3.eth.contract(TAOPool.abi).at(TAOPool.networks[networkId].address);
-		taoPool.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
+		taoPool.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
 			if (!err) {
-				switch (log.event) {
-					case "StakeEthos":
-						dispatch(stakeEthos(log.args));
-						break;
-					case "StakePathos":
-						dispatch(stakePathos(log.args));
-						break;
-					default:
-						break;
-				}
+				_parseTAOPoolEvent(dispatch, log, nameId);
 			}
 		});
 	} catch (e) {
 		console.log("error", e);
+	}
+};
+
+const _parseTAOPoolEvent = (dispatch, log, nameId) => {
+	switch (log.event) {
+		case "StakeEthos":
+			if (log.args.nameId === nameId) {
+				dispatch(nameStakeEthos(log.args));
+			}
+			dispatch(stakeEthos(log.args));
+			break;
+		case "StakePathos":
+			if (log.args.nameId === nameId) {
+				dispatch(nameStakePathos(log.args));
+			}
+			dispatch(updateLogosEarned(log.args));
+			dispatch(stakePathos(log.args));
+			break;
+		case "WithdrawLogos":
+			if (log.args.nameId === nameId) {
+				dispatch(nameWithdrawLogos(log.args));
+			}
+			dispatch(withdrawLogos(log.args));
+			break;
+		default:
+			break;
 	}
 };

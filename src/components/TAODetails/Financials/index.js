@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
+import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon, Ahref } from "components/";
 import { Bar } from "react-chartjs";
 import { StakeEthosFormContainer } from "./StakeEthosForm/";
 import { StakePathosFormContainer } from "./StakePathosForm/";
@@ -38,16 +38,18 @@ class Financials extends React.Component {
 			status,
 			ethosCapStatus,
 			ethosCapAmount,
-			poolTotalLot,
 			poolTotalLogosWithdrawn,
 			ethosBalance,
 			pathosBalance,
+			nameEthosStaked,
+			namePathosStaked,
+			nameLogosWithdrawn,
 			getTAOPool
 		} = this.props;
 		const { showForm, showStakeEthosForm, showStakePathosForm } = this.state;
 
 		const barChartData = {
-			labels: ["Ethos", "Pathos", "Withdrawn Logos"],
+			labels: ["Ethos", "Pathos", "Logos Withdrawn"],
 			datasets: [
 				{
 					label: "Staked",
@@ -81,14 +83,6 @@ class Financials extends React.Component {
 						</FieldContainer>
 					)}
 					<FieldContainer>
-						<FieldName>Total Lot</FieldName>
-						<FieldValue>{poolTotalLot.toNumber()}</FieldValue>
-					</FieldContainer>
-					<FieldContainer>
-						<FieldName>Total Logos Withdrawn</FieldName>
-						<FieldValue>{poolTotalLogosWithdrawn.toNumber()}</FieldValue>
-					</FieldContainer>
-					<FieldContainer>
 						<FieldName>Total Ethos Staked</FieldName>
 						<FieldValue>{ethosBalance.toNumber()}</FieldValue>
 					</FieldContainer>
@@ -96,7 +90,24 @@ class Financials extends React.Component {
 						<FieldName>Total Pathos Staked</FieldName>
 						<FieldValue>{pathosBalance.toNumber()}</FieldValue>
 					</FieldContainer>
+					<FieldContainer>
+						<FieldName>Total Logos Withdrawn</FieldName>
+						<FieldValue>{poolTotalLogosWithdrawn.toNumber()}</FieldValue>
+					</FieldContainer>
 					<Bar data={barChartData} options={{ responsive: true, animationSteps: 300 }} height="120" width="400" />
+					<Title className="margin-top">Your Financials</Title>
+					<FieldContainer>
+						<FieldName>Ethos Staked on TAO</FieldName>
+						<FieldValue>{nameEthosStaked.toNumber()}</FieldValue>
+					</FieldContainer>
+					<FieldContainer>
+						<FieldName>Pathos Staked on TAO</FieldName>
+						<FieldValue>{namePathosStaked.toNumber()}</FieldValue>
+					</FieldContainer>
+					<FieldContainer>
+						<FieldName>Logos Withdrawn from TAO</FieldName>
+						<FieldValue>{nameLogosWithdrawn.toNumber()}</FieldValue>
+					</FieldContainer>
 					{status && (!ethosCapStatus || (ethosCapStatus && ethosBalance.lt(ethosCapAmount))) && (
 						<Icon className="animated bounceIn" onClick={this.showStakeEthosForm}>
 							<img src={process.env.PUBLIC_URL + "/images/stake.png"} alt={"Stake Ethos"} />
@@ -108,6 +119,14 @@ class Financials extends React.Component {
 							<img src={process.env.PUBLIC_URL + "/images/stake.png"} alt={"Stake Pathos"} />
 							<div>Stake Pathos</div>
 						</Icon>
+					)}
+					{(nameEthosStaked.gt(0) || namePathosStaked.gt(0)) && (
+						<Ahref className="white" to={`/name-stake-list/${id}/`}>
+							<Icon className="animated bounceIn">
+								<img src={process.env.PUBLIC_URL + "/images/view_list.png"} alt={"View Staking Details"} />
+								<div>View Staking Details</div>
+							</Icon>
+						</Ahref>
 					)}
 				</Wrapper>
 			);

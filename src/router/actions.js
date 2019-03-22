@@ -175,3 +175,38 @@ export const stakePathos = (tao) => {
 		tao
 	};
 };
+
+export const withdrawLogos = (tao) => {
+	return {
+		type: actionsEnums.WITHDRAW_LOGOS,
+		tao
+	};
+};
+
+export const nameStakeEthos = (tao) => {
+	return {
+		type: actionsEnums.NAME_STAKE_ETHOS,
+		tao
+	};
+};
+
+export const nameStakePathos = (tao) => {
+	return {
+		type: actionsEnums.NAME_STAKE_PATHOS,
+		tao
+	};
+};
+
+export const updateLogosEarned = (tao) => {
+	return {
+		type: actionsEnums.UPDATE_LOGOS_EARNED,
+		tao
+	};
+};
+
+export const nameWithdrawLogos = (tao) => {
+	return {
+		type: actionsEnums.NAME_WITHDRAW_LOGOS,
+		tao
+	};
+};

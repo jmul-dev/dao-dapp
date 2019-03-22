@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, Header, Ahref, Icon } from "components/";
-import { LeftContainer, RightContainer } from "./styledComponents";
+import { Wrapper, Title, Header, Ahref, Icon, LeftContainer, RightContainer } from "components/";
 
 class TAOName extends React.Component {
 	render() {
@@ -14,7 +13,7 @@ class TAOName extends React.Component {
 					<Title className="medium margin-top-20 margin-bottom-0">{name}</Title>
 					<Header>{id}</Header>
 				</LeftContainer>
-				<RightContainer>
+				<RightContainer className="right">
 					<Ahref className="white" to={`/create-tao/${id}/`}>
 						<Icon className="animated bounceIn">
 							<img src={process.env.PUBLIC_URL + "/images/create_child_tao.png"} alt={"Create Child TAO"} />
