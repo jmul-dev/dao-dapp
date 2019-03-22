@@ -1,5 +1,7 @@
 import * as React from "react";
-import { Wrapper, Title, Header, Ahref, Table } from "components/";
+import { Wrapper, Title, Header, Ahref, Table, LeftContainer, RightContainer } from "components/";
+import { Tab, Nav } from "react-bootstrap";
+import "./style.css";
 
 class OwnTAO extends React.Component {
 	render() {
@@ -48,36 +50,65 @@ class OwnTAO extends React.Component {
 
 		return (
 			<Wrapper className="padding-40">
-				<Wrapper className="margin-bottom-40">
-					<Title>Advocated TAOs</Title>
-					{ownTAOs.length ? (
-						<Table data={ownTAOs} columns={columns} defaultPageSize={5} filterable={true} />
-					) : (
-						<Header>Currently, you have no TAO of which you are the Advocate</Header>
-					)}
-				</Wrapper>
-				{taosNeedApproval.length > 0 && (
-					<Wrapper className="margin-bottom-40">
-						<Title>Child TAOs That Need Approvals</Title>
-						<Table data={taosNeedApproval} columns={taosNeedApprovalColumns} defaultPageSize={5} filterable={true} />
-					</Wrapper>
-				)}
-				<Wrapper className="margin-bottom-40">
-					<Title>Staked Ethos TAOs</Title>
-					{stakedEthosTAOs.length ? (
-						<Table data={stakedEthosTAOs} columns={columns} defaultPageSize={5} filterable={true} />
-					) : (
-						<Header>Currently, you have no TAO that is staked with Ethos</Header>
-					)}
-				</Wrapper>
-				<Wrapper className="margin-bottom-40">
-					<Title>Staked Pathos TAOs</Title>
-					{stakedPathosTAOs.length ? (
-						<Table data={stakedPathosTAOs} columns={columns} defaultPageSize={5} filterable={true} />
-					) : (
-						<Header>Currently, you have no TAO that is staked with Pathos</Header>
-					)}
-				</Wrapper>
+				<Tab.Container id="taos-table" defaultActiveKey="advocated">
+					<LeftContainer className="width-20">
+						<Nav className="flex-column">
+							<Nav.Item>
+								<Nav.Link eventKey="advocated">Advocated TAOs</Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link eventKey="need-approval">TAOs Need Approval</Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link eventKey="staked-ethos">Staked Ethos TAOs</Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link eventKey="staked-pathos">Staked Pathos TAOs</Nav.Link>
+							</Nav.Item>
+						</Nav>
+					</LeftContainer>
+					<RightContainer className="width-80">
+						<Tab.Content>
+							<Tab.Pane eventKey="advocated">
+								<Title>Advocated TAOs</Title>
+								{ownTAOs.length ? (
+									<Table data={ownTAOs} columns={columns} defaultPageSize={5} filterable={true} />
+								) : (
+									<Header>Currently, you have no TAO of which you are the Advocate</Header>
+								)}
+							</Tab.Pane>
+							<Tab.Pane eventKey="need-approval">
+								<Title>Child TAOs That Need Approvals</Title>
+								{taosNeedApproval.length ? (
+									<Table
+										data={taosNeedApproval}
+										columns={taosNeedApprovalColumns}
+										defaultPageSize={5}
+										filterable={true}
+									/>
+								) : (
+									<Header>Currently, there is no child TAO that needs your approval</Header>
+								)}
+							</Tab.Pane>
+							<Tab.Pane eventKey="staked-ethos">
+								<Title>Staked Ethos TAOs</Title>
+								{stakedEthosTAOs.length ? (
+									<Table data={stakedEthosTAOs} columns={columns} defaultPageSize={5} filterable={true} />
+								) : (
+									<Header>Currently, you have no TAO that is staked with Ethos</Header>
+								)}
+							</Tab.Pane>
+							<Tab.Pane eventKey="staked-pathos">
+								<Title>Staked Pathos TAOs</Title>
+								{stakedPathosTAOs.length ? (
+									<Table data={stakedPathosTAOs} columns={columns} defaultPageSize={5} filterable={true} />
+								) : (
+									<Header>Currently, you have no TAO that is staked with Pathos</Header>
+								)}
+							</Tab.Pane>
+						</Tab.Content>
+					</RightContainer>
+				</Tab.Container>
 			</Wrapper>
 		);
 	}

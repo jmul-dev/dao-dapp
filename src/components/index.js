@@ -239,6 +239,9 @@ export const LeftContainer = styled.div`
 	width: 50%;
 	vertical-align: top;
 
+	&.width-20 {
+		width: 20%;
+	}
 	&.width-65 {
 		width: 65%;
 	}
@@ -252,7 +255,9 @@ export const RightContainer = styled.div`
 	&.width-35 {
 		width: 35%;
 	}
-
+	&.width-80 {
+		width: 80%;
+	}
 	&.right {
 		text-align: right;
 	}
