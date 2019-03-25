@@ -20,8 +20,8 @@ import {
 	nameStakePathos,
 	updateLogosEarned,
 	nameWithdrawLogos,
-	appendNameAdvocatedTAO,
-	removeNameAdvocatedTAO
+	appendTAOPosition,
+	setTAOAdvocate
 } from "./actions";
 
 // Contracts
@@ -115,9 +115,14 @@ const _parseTAOFactoryEvent = async (dispatch, taoAncestry, log, nameId) => {
 		isChild = await promisify(taoAncestry.isChild)(log.args.parent, log.args.taoId);
 	}
 	dispatch(appendTAO({ ...log.args, isChild }));
-	if (log.args.advocateId === nameId) {
-		dispatch(appendNameAdvocatedTAO(log.args.taoId));
-	}
+	dispatch(
+		appendTAOPosition({
+			taoId: log.args.taoId,
+			advocateId: log.args.advocateId,
+			listenerId: log.args.advocateId,
+			speakerId: log.args.advocateId
+		})
+	);
 };
 
 export const getTAOAncestryEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
@@ -331,11 +336,7 @@ export const watchNameTAOPositionEvent = (dispatch, networkId, currentBlockNumbe
 const _parseNameTAOPositionEvent = (dispatch, log, nameId) => {
 	switch (log.event) {
 		case "SetAdvocate":
-			if (log.args.oldAdvocateId === nameId) {
-				dispatch(removeNameAdvocatedTAO(log.args.taoId));
-			} else if (log.args.newAdvocateId === nameId) {
-				dispatch(appendNameAdvocatedTAO(log.args.taoId));
-			}
+			dispatch(setTAOAdvocate(log.args.taoId, log.args.newAdvocateId));
 			break;
 		default:
 			break;

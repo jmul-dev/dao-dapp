@@ -3,6 +3,7 @@ import { TAODetails } from "./TAODetails";
 
 const mapStateToProps = (state) => {
 	return {
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		nameId: state.nameReducer.nameId,
 		taoFactory: state.contractReducer.contracts.taoFactory,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
@@ -13,7 +14,8 @@ const mapStateToProps = (state) => {
 		pathos: state.contractReducer.contracts.pathos,
 		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup,
 		stakedTAOs: state.globalReducer.stakedTAOs,
-		advocatedTAOIds: state.nameReducer.advocatedTAOIds
+		taoPositions: state.globalReducer.taoPositions,
+		names: state.globalReducer.names
 	};
 };
 

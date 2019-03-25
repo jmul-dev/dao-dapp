@@ -5,12 +5,13 @@ import "./style.css";
 
 class OwnTAO extends React.Component {
 	render() {
-		const { advocatedTAOIds, taosNeedApproval, stakeEthos, stakePathos, taos } = this.props;
-		if (!advocatedTAOIds || !taosNeedApproval || !stakeEthos || !stakePathos || !taos) {
-			return null;
+		const { pastEventsRetrieved, nameId, taoPositions, taosNeedApproval, stakeEthos, stakePathos, taos } = this.props;
+		if (!pastEventsRetrieved || !nameId || !taoPositions || !taosNeedApproval || !stakeEthos || !stakePathos || !taos) {
+			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 
 		const advocatedTAOs = [];
+		const advocatedTAOIds = taoPositions.filter((tao) => tao.advocateId === nameId).map((tao) => tao.taoId);
 		advocatedTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
 			advocatedTAOs.push(tao);

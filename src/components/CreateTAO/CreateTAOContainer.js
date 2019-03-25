@@ -4,6 +4,7 @@ import { setSuccess } from "widgets/Toast/actions";
 
 const mapStateToProps = (state) => {
 	return {
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		accounts: state.web3Reducer.accounts,
 		nameId: state.nameReducer.nameId,
 		nameInfo: state.nameReducer.nameInfo,

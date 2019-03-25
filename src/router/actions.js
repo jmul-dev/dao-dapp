@@ -190,16 +190,23 @@ export const nameWithdrawLogos = (tao) => {
 	};
 };
 
-export const appendNameAdvocatedTAO = (taoId) => {
+export const appendTAOPosition = (tao) => {
 	return {
-		type: actionsEnums.APPEND_NAME_ADVOCATED_TAO,
-		taoId
+		type: actionsEnums.APPEND_TAO_POSITION,
+		tao
 	};
 };
 
-export const removeNameAdvocatedTAO = (taoId) => {
+export const setTAOAdvocate = (taoId, advocateId) => {
 	return {
-		type: actionsEnums.REMOVE_NAME_ADVOCATED_TAO,
-		taoId
+		type: actionsEnums.SET_TAO_ADVOCATE,
+		taoId,
+		advocateId
+	};
+};
+
+export const pastEventsRetrieved = () => {
+	return {
+		type: actionsEnums.PAST_EVENTS_RETRIEVED
 	};
 };

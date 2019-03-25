@@ -44,7 +44,7 @@ class TAODetails extends React.Component {
 			if (this.props.stakedTAOs.find((tao) => tao.taoId === this.props.params.id)) {
 				await this.getTAOPool();
 			}
-		} else if (this.props.advocatedTAOIds !== prevProps.advocatedTAOIds && this.props.params.id) {
+		} else if (this.props.taoPositions !== prevProps.taoPositions && this.props.params.id) {
 			await this.getTAOPosition();
 		}
 	}
@@ -87,29 +87,41 @@ class TAODetails extends React.Component {
 
 	async getTAOPosition() {
 		const { id } = this.props.params;
-		const { nameTAOPosition, aoLibrary } = this.props;
-		if (!nameTAOPosition || !aoLibrary || !id) {
+		const { taoPositions, names, aoLibrary } = this.props;
+		if (!taoPositions || !names || !aoLibrary || !id) {
 			return;
 		}
 
-		const _position = await promisify(nameTAOPosition.getPositionById)(id);
+		const _position = taoPositions.find((tao) => tao.taoId === id);
+		if (!_position) {
+			return;
+		}
 		const position = {
 			advocate: {
-				name: _position[0],
-				id: _position[1],
+				name: "",
+				id: _position.advocateId,
 				isTAO: false
 			},
 			listener: {
-				name: _position[2],
-				id: _position[3],
+				name: "",
+				id: _position.listenerId,
 				isTAO: false
 			},
 			speaker: {
-				name: _position[4],
-				id: _position[5],
+				name: "",
+				id: _position.speakerId,
 				isTAO: false
 			}
 		};
+		const advocate = names.find((name) => name.nameId === _position.advocateId);
+		position.advocate.name = advocate.name;
+
+		const listener = names.find((name) => name.nameId === _position.listenerId);
+		position.listener.name = listener.name;
+
+		const speaker = names.find((name) => name.nameId === _position.speakerId);
+		position.speaker.name = speaker.name;
+
 		position.advocate.isTAO = await promisify(aoLibrary.isTAO)(position.advocate.id);
 		position.listener.isTAO = await promisify(aoLibrary.isTAO)(position.listener.id);
 		position.speaker.isTAO = await promisify(aoLibrary.isTAO)(position.speaker.id);
@@ -173,6 +185,7 @@ class TAODetails extends React.Component {
 
 	render() {
 		const { id } = this.props.params;
+		const { pastEventsRetrieved } = this.props;
 		const {
 			taoInfo,
 			taoDescription,
@@ -189,7 +202,7 @@ class TAODetails extends React.Component {
 			nameLogosWithdrawn,
 			dataPopulated
 		} = this.state;
-		if (!dataPopulated) {
+		if (!pastEventsRetrieved || !dataPopulated) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 

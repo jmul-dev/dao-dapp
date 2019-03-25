@@ -3,13 +3,22 @@ import { BigNumber } from "bignumber.js";
 
 class GlobalReducerState {
 	constructor() {
+		this.pastEventsRetrieved = false;
 		this.names = [];
 		this.namesPositionLogos = [];
 		this.stakedTAOs = [];
 		this.taos = [];
 		this.settingTAOId = null;
+		this.taoPositions = [];
 	}
 }
+
+const handlePastEventsRetrieved = (state, action) => {
+	return {
+		...state,
+		pastEventsRetrieved: true
+	};
+};
 
 const handleAppendName = (state, action) => {
 	const _names = state.names.slice();
@@ -130,8 +139,31 @@ const handleWithdrawLogos = (state, action) => {
 	};
 };
 
+const handleAppendTAOPosition = (state, action) => {
+	const _taoPositions = state.taoPositions.slice();
+	if (!_taoPositions.find((tao) => tao.taoId === action.tao.taoId)) {
+		_taoPositions.push(action.tao);
+	}
+	return {
+		...state,
+		taoPositions: _taoPositions
+	};
+};
+
+const handleSetTAOAdvocate = (state, action) => {
+	const _taoPositions = state.taoPositions.slice();
+	const taoIndex = _taoPositions.findIndex((tao) => tao.taoId === action.taoId);
+	_taoPositions[taoIndex].advocateId = action.advocateId;
+	return {
+		...state,
+		taoPositions: _taoPositions
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
+		case actionsEnums.PAST_EVENTS_RETRIEVED:
+			return handlePastEventsRetrieved(state, action);
 		case actionsEnums.ADD_NAME_POSITION_LOGOS:
 			return handleAddNamePositionLogos(state, action);
 		case actionsEnums.APPEND_NAME:
@@ -150,6 +182,10 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleSubtractNamePositionLogos(state, action);
 		case actionsEnums.WITHDRAW_LOGOS:
 			return handleWithdrawLogos(state, action);
+		case actionsEnums.APPEND_TAO_POSITION:
+			return handleAppendTAOPosition(state, action);
+		case actionsEnums.SET_TAO_ADVOCATE:
+			return handleSetTAOAdvocate(state, action);
 		default:
 			return state;
 	}

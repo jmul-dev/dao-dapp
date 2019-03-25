@@ -27,13 +27,14 @@ class EnsureCreateName extends React.Component {
 	}
 
 	render() {
+		const { pastEventsRetrieved, nameId } = this.props;
+		const { taoTreeData } = this.state;
+		if (!pastEventsRetrieved) {
+			return <Wrapper className="padding-40">Loading...</Wrapper>;
+		}
 		return (
 			<Wrapper>
-				{!this.props.nameId ? (
-					<CreateNameFormContainer />
-				) : (
-					<TAOPlotContainer taoData={this.state.taoTreeData} width={1200} height={800} />
-				)}
+				{!nameId ? <CreateNameFormContainer /> : <TAOPlotContainer taoData={taoTreeData} width={1200} height={800} />}
 			</Wrapper>
 		);
 	}

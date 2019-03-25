@@ -3,9 +3,9 @@ import { Wrapper, Title, Ahref, Table } from "components/";
 
 class NameList extends React.Component {
 	render() {
-		const { names } = this.props;
-		if (!names) {
-			return null;
+		const { pastEventsRetrieved, names } = this.props;
+		if (!pastEventsRetrieved || !names) {
+			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 
 		const columns = [

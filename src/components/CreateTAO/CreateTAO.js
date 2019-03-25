@@ -173,9 +173,9 @@ class CreateTAO extends React.Component {
 
 	render() {
 		const { error, errorMessage, formLoading, parentMinLogos, parentId, formData, taoDescription } = this.state;
-		const { nameId, nameInfo, taos, taoCurrencyBalances } = this.props;
-		if (!nameId || !nameInfo || !taos || !taoCurrencyBalances || !parentMinLogos) {
-			return null;
+		const { pastEventsRetrieved, nameId, nameInfo, taos, taoCurrencyBalances } = this.props;
+		if (!pastEventsRetrieved || !nameId || !nameInfo || !taos || !taoCurrencyBalances || !parentMinLogos) {
+			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 		const { id } = this.props.params;
 		const taoOptions = taos.map((tao) => (

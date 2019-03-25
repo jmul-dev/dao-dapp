@@ -15,7 +15,7 @@ import { IdeContainer } from "components/Ide/";
 import { OwnTAOContainer } from "components/OwnTAO/";
 import { NameStakeListContainer } from "components/NameStakeList/";
 
-import { web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId } from "./actions";
+import { web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
 import { web3Errors } from "common/errors";
 
 // Contracts
@@ -117,21 +117,18 @@ class AppRouter extends React.Component {
 
 			// Get and watch events
 			this._nameLookup = await getNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
-			watchNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
-
 			await getTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-
 			await getTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-
 			await getLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameLookup, this._nameId);
-			watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameLookup, this._nameId);
-
 			await getTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-
 			await getNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+			dispatch(pastEventsRetrieved());
+
+			watchNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
+			watchTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+			watchTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+			watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameLookup, this._nameId);
+			watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));

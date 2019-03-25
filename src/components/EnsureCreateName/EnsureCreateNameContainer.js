@@ -3,6 +3,7 @@ import { EnsureCreateName } from "./EnsureCreateName";
 
 const mapStateToProps = (state) => {
 	return {
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		nameId: state.nameReducer.nameId,
 		taos: state.globalReducer.taos
 	};
