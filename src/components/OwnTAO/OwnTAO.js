@@ -31,6 +31,13 @@ class OwnTAO extends React.Component {
 			stakedPathosTAOs.push(tao);
 		});
 
+		const listenedTAOs = [];
+		const listenedTAOIds = taoPositions.filter((tao) => tao.listenerId === nameId).map((tao) => tao.taoId);
+		listenedTAOIds.forEach((taoId) => {
+			const tao = taos.find((tao) => tao.taoId === taoId);
+			listenedTAOs.push(tao);
+		});
+
 		const columns = [
 			{
 				Header: "ID",
@@ -73,17 +80,17 @@ class OwnTAO extends React.Component {
 								<Nav.Link eventKey="staked-pathos">Staked Pathos TAOs</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="listener">Listener TAOs</Nav.Link>
+								<Nav.Link eventKey="listener">Listened TAOs</Nav.Link>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="speaker">Speaker TAOs</Nav.Link>
+								<Nav.Link eventKey="speaker">Spoken TAOs</Nav.Link>
 							</Nav.Item>
 						</Nav>
 					</LeftContainer>
 					<RightContainer className="width-80">
 						<Tab.Content>
 							<Tab.Pane eventKey="advocated">
-								<Title>Advocated TAOs</Title>
+								<Title>TAOs Where You are The Advocate</Title>
 								{advocatedTAOs.length ? (
 									<Table data={advocatedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 								) : (
@@ -121,6 +128,11 @@ class OwnTAO extends React.Component {
 							</Tab.Pane>
 							<Tab.Pane eventKey="listener">
 								<Title>TAOs Where You are The Listener</Title>
+								{listenedTAOs.length ? (
+									<Table data={listenedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
+								) : (
+									<Header>Currently, you have no TAO of which you are the Listener</Header>
+								)}
 							</Tab.Pane>
 							<Tab.Pane eventKey="speaker">
 								<Title>TAOs Where You are The Speaker</Title>
