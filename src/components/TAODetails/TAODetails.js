@@ -2,6 +2,8 @@ import * as React from "react";
 import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer } from "components/";
 import { TAOName } from "./TAOName/";
 import { PositionDetailsContainer } from "./PositionDetails/";
+import { ListenedTAOContainer } from "./ListenedTAO/";
+import { SpokenTAOContainer } from "./SpokenTAO/";
 import { AncestryDetails } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
 import { get, encodeParams } from "utils/";
@@ -221,6 +223,8 @@ class TAODetails extends React.Component {
 				<MediumEditor text={taoDescription} />
 				<LeftContainer>
 					<PositionDetailsContainer id={id} position={position} getTAOPosition={this.getTAOPosition} />
+					<ListenedTAOContainer id={id} />
+					<SpokenTAOContainer id={id} />
 					<AncestryDetails ancestry={ancestry} />
 				</LeftContainer>
 				<RightContainer>
