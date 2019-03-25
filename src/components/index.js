@@ -11,6 +11,9 @@ import "css/animate.min.css";
 export const Wrapper = styled.div`
 	font-size: 1em;
 
+	&.margin-top-20 {
+		margin-top: 20px;
+	}
 	&.margin-top-30 {
 		margin-top: 30px;
 	}
@@ -247,6 +250,7 @@ export const LeftContainer = styled.div`
 	display: inline-block;
 	width: 50%;
 	vertical-align: top;
+	padding-right: 10px;
 
 	&.width-20 {
 		width: 20%;
@@ -260,6 +264,7 @@ export const RightContainer = styled.div`
 	display: inline-block;
 	width: 50%;
 	vertical-align: top;
+	padding-left: 10px;
 
 	&.width-35 {
 		width: 35%;
