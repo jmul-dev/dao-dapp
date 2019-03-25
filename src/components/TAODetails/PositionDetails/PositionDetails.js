@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, Ahref, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { SetAdvocateFormContainer } from "./SetAdvocateForm/";
 import { SetListenerFormContainer } from "./SetListenerForm/";
+import { SetSpeakerFormContainer } from "./SetSpeakerForm/";
 
 class PositionDetails extends React.Component {
 	constructor(props) {
@@ -102,13 +103,24 @@ class PositionDetails extends React.Component {
 				return (
 					<Wrapper>
 						<Title className="margin-top">Set New Listener</Title>
-						<SetListenerFormContainer id={id} toggleShowForm={this.toggleShowForm} getTAOPosition={getTAOPosition} />
+						<SetListenerFormContainer
+							id={id}
+							currentListenerId={position.listener.id}
+							toggleShowForm={this.toggleShowForm}
+							getTAOPosition={getTAOPosition}
+						/>
 					</Wrapper>
 				);
 			} else if (showSetSpeakerForm) {
 				return (
 					<Wrapper>
 						<Title className="margin-top">Set New Speaker</Title>
+						<SetSpeakerFormContainer
+							id={id}
+							currentSpeakerId={position.speaker.id}
+							toggleShowForm={this.toggleShowForm}
+							getTAOPosition={getTAOPosition}
+						/>
 					</Wrapper>
 				);
 			}

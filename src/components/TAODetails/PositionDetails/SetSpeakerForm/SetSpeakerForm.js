@@ -5,35 +5,35 @@ import { waitForTransactionReceipt } from "utils/web3";
 
 const promisify = require("tiny-promisify");
 
-class SetListenerForm extends React.Component {
+class SetSpeakerForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			listenerId: null,
+			speakerId: null,
 			error: false,
 			errorMessage: "",
 			formLoading: false
 		};
-		this.handleListenerChange = this.handleListenerChange.bind(this);
+		this.handleSpeakerChange = this.handleSpeakerChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.cancelSet = this.cancelSet.bind(this);
 	}
 
-	handleListenerChange(event) {
+	handleSpeakerChange(event) {
 		event.persist();
-		this.setState({ listenerId: event.target.value });
+		this.setState({ speakerId: event.target.value });
 	}
 
 	async handleSubmit(data) {
-		const { listenerId } = this.state;
+		const { speakerId } = this.state;
 		const { nameTAOPosition, accounts, nameId, id } = this.props;
 		if (!nameTAOPosition || !accounts || !nameId || !id) {
 			return;
 		}
 		this.setState({ formLoading: true });
 
-		if (!listenerId) {
-			this.setState({ error: true, errorMessage: "Please select a Listener", formLoading: false });
+		if (!speakerId) {
+			this.setState({ error: true, errorMessage: "Please select a Speaker", formLoading: false });
 			return;
 		}
 
@@ -43,7 +43,7 @@ class SetListenerForm extends React.Component {
 			this.setState({ error: true, errorMessage: "You are currently not the Advocate of this TAO", formLoading: false });
 			return;
 		}
-		nameTAOPosition.setListener(id, listenerId, { from: accounts[0] }, (err, transactionHash) => {
+		nameTAOPosition.setSpeaker(id, speakerId, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
@@ -51,7 +51,7 @@ class SetListenerForm extends React.Component {
 					.then(async () => {
 						await this.props.getTAOPosition();
 						this.setState({ error: false, errorMessage: "", formLoading: false });
-						this.props.setSuccess("Success!", `A new Listener was set successfully`);
+						this.props.setSuccess("Success!", `A new Speaker was set successfully`);
 						this.props.toggleShowForm();
 					})
 					.catch((err) => {
@@ -67,12 +67,12 @@ class SetListenerForm extends React.Component {
 
 	render() {
 		const { error, errorMessage, formLoading } = this.state;
-		const { names, taos, nameId, currentListenerId, id } = this.props;
+		const { names, taos, nameId, currentSpeakerId, id } = this.props;
 		if (!names || !taos || !nameId) {
 			return null;
 		}
 
-		const _names = names.filter((_name) => _name.nameId !== currentListenerId);
+		const _names = names.filter((_name) => _name.nameId !== currentSpeakerId);
 		const nameOptions = _names.map((name) => (
 			<option key={name.nameId} value={name.nameId}>
 				{name.name} ({name.nameId})
@@ -89,8 +89,8 @@ class SetListenerForm extends React.Component {
 		return (
 			<Wrapper>
 				<FieldWrapper>
-					<Label>Select a Listener*</Label>
-					<Select className="form-control" onChange={this.handleListenerChange}>
+					<Label>Select a Speaker*</Label>
+					<Select className="form-control" onChange={this.handleSpeakerChange}>
 						<option value="" />
 						<optgroup label="Name">{nameOptions}</optgroup>
 						<optgroup label="TAO">{taoOptions}</optgroup>
@@ -98,7 +98,7 @@ class SetListenerForm extends React.Component {
 				</FieldWrapper>
 				<ButtonWrapper>
 					<Button type="button" disabled={formLoading} onClick={this.handleSubmit}>
-						{formLoading ? "Loading..." : "Set Listener"}
+						{formLoading ? "Loading..." : "Set Speaker"}
 					</Button>
 					<Button className="no-bg margin-left" type="button" disabled={formLoading} onClick={this.cancelSet}>
 						Cancel
@@ -110,4 +110,4 @@ class SetListenerForm extends React.Component {
 	}
 }
 
-export { SetListenerForm };
+export { SetSpeakerForm };

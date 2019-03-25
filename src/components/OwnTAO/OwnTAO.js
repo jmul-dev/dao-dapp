@@ -38,6 +38,13 @@ class OwnTAO extends React.Component {
 			listenedTAOs.push(tao);
 		});
 
+		const spokenTAOs = [];
+		const spokenTAOIds = taoPositions.filter((tao) => tao.speakerId === nameId).map((tao) => tao.taoId);
+		spokenTAOIds.forEach((taoId) => {
+			const tao = taos.find((tao) => tao.taoId === taoId);
+			spokenTAOs.push(tao);
+		});
+
 		const columns = [
 			{
 				Header: "ID",
@@ -136,6 +143,11 @@ class OwnTAO extends React.Component {
 							</Tab.Pane>
 							<Tab.Pane eventKey="speaker">
 								<Title>TAOs Where You are The Speaker</Title>
+								{spokenTAOs.length ? (
+									<Table data={spokenTAOs} columns={columns} defaultPageSize={5} filterable={true} />
+								) : (
+									<Header>Currently, you have no TAO of which you are the Speaker</Header>
+								)}
 							</Tab.Pane>
 						</Tab.Content>
 					</RightContainer>

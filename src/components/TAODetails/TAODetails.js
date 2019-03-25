@@ -9,6 +9,8 @@ import { get, encodeParams } from "utils/";
 const promisify = require("tiny-promisify");
 
 class TAODetails extends React.Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -33,7 +35,12 @@ class TAODetails extends React.Component {
 	}
 
 	async componentDidMount() {
+		this._isMounted = true;
 		await this.getData();
+	}
+
+	async componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	async componentDidUpdate(prevProps) {
@@ -55,7 +62,9 @@ class TAODetails extends React.Component {
 		await this.getTAOPosition();
 		await this.getTAOAncestry();
 		await this.getTAOPool();
-		this.setState({ dataPopulated: true });
+		if (this._isMounted) {
+			this.setState({ dataPopulated: true });
+		}
 	}
 
 	async getTAOInfo() {
@@ -69,7 +78,9 @@ class TAODetails extends React.Component {
 		const taoInfo = {
 			name: _taoInfo[0]
 		};
-		this.setState({ taoInfo });
+		if (this._isMounted) {
+			this.setState({ taoInfo });
+		}
 	}
 
 	async getTAODescription() {
@@ -79,7 +90,7 @@ class TAODetails extends React.Component {
 		}
 		try {
 			const response = await get(`https://localhost/api/get-tao-description?${encodeParams({ taoId: id })}`);
-			if (response.description) {
+			if (response.description && this._isMounted) {
 				this.setState({ taoDescription: response.description });
 			}
 		} catch (e) {}
@@ -113,7 +124,9 @@ class TAODetails extends React.Component {
 		position.listener.isTAO = await promisify(aoLibrary.isTAO)(position.listener.id);
 		position.speaker.isTAO = await promisify(aoLibrary.isTAO)(position.speaker.id);
 
-		this.setState({ position });
+		if (this._isMounted) {
+			this.setState({ position });
+		}
 	}
 
 	async getTAOAncestry() {
@@ -141,7 +154,10 @@ class TAODetails extends React.Component {
 			ancestry.isChild = await promisify(taoAncestry.isChild)(ancestry.parentId, id);
 			ancestry.isNotApprovedChild = await promisify(taoAncestry.isNotApprovedChild)(ancestry.parentId, id);
 		}
-		this.setState({ ancestry });
+
+		if (this._isMounted) {
+			this.setState({ ancestry });
+		}
 	}
 
 	async getTAOPool() {
@@ -158,17 +174,19 @@ class TAODetails extends React.Component {
 		const namePathosStaked = await promisify(taoPool.namePoolPathosStaked)(nameId, id);
 		const nameLogosWithdrawn = await promisify(taoPool.namePoolLogosWithdrawn)(nameId, id);
 
-		this.setState({
-			ethosCapStatus: _pool[1],
-			ethosCapAmount: _pool[2],
-			status: _pool[3],
-			poolTotalLogosWithdrawn,
-			ethosBalance,
-			pathosBalance,
-			nameEthosStaked,
-			namePathosStaked,
-			nameLogosWithdrawn
-		});
+		if (this._isMounted) {
+			this.setState({
+				ethosCapStatus: _pool[1],
+				ethosCapAmount: _pool[2],
+				status: _pool[3],
+				poolTotalLogosWithdrawn,
+				ethosBalance,
+				pathosBalance,
+				nameEthosStaked,
+				namePathosStaked,
+				nameLogosWithdrawn
+			});
+		}
 	}
 
 	render() {

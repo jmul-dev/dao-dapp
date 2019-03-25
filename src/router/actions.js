@@ -218,3 +218,11 @@ export const setTAOListener = (taoId, listenerId) => {
 		listenerId
 	};
 };
+
+export const setTAOSpeaker = (taoId, speakerId) => {
+	return {
+		type: actionsEnums.SET_TAO_SPEAKER,
+		taoId,
+		speakerId
+	};
+};
