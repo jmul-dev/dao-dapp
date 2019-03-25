@@ -160,6 +160,16 @@ const handleSetTAOAdvocate = (state, action) => {
 	};
 };
 
+const handleSetTAOListener = (state, action) => {
+	const _taoPositions = state.taoPositions.slice();
+	const taoIndex = _taoPositions.findIndex((tao) => tao.taoId === action.taoId);
+	_taoPositions[taoIndex].listenerId = action.listenerId;
+	return {
+		...state,
+		taoPositions: _taoPositions
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.PAST_EVENTS_RETRIEVED:
@@ -186,6 +196,8 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleAppendTAOPosition(state, action);
 		case actionsEnums.SET_TAO_ADVOCATE:
 			return handleSetTAOAdvocate(state, action);
+		case actionsEnums.SET_TAO_LISTENER:
+			return handleSetTAOListener(state, action);
 		default:
 			return state;
 	}

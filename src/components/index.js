@@ -216,6 +216,7 @@ export const FieldName = styled.div`
 export const FieldValue = styled.div`
 	display: inline-block;
 	vertical-align: top;
+	padding-right: 10px;
 	padding-left: 10px;
 	font-size: 0.875em;
 	color: #888888;

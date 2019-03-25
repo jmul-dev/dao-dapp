@@ -21,7 +21,8 @@ import {
 	updateLogosEarned,
 	nameWithdrawLogos,
 	appendTAOPosition,
-	setTAOAdvocate
+	setTAOAdvocate,
+	setTAOListener
 } from "./actions";
 
 // Contracts
@@ -337,6 +338,9 @@ const _parseNameTAOPositionEvent = (dispatch, log, nameId) => {
 	switch (log.event) {
 		case "SetAdvocate":
 			dispatch(setTAOAdvocate(log.args.taoId, log.args.newAdvocateId));
+			break;
+		case "SetListener":
+			dispatch(setTAOListener(log.args.taoId, log.args.newListenerId));
 			break;
 		default:
 			break;

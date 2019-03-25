@@ -28,6 +28,12 @@ export const setContracts = (contracts) => {
 	};
 };
 
+export const pastEventsRetrieved = () => {
+	return {
+		type: actionsEnums.PAST_EVENTS_RETRIEVED
+	};
+};
+
 export const setNames = (names) => {
 	return {
 		type: actionsEnums.SET_NAMES,
@@ -205,8 +211,10 @@ export const setTAOAdvocate = (taoId, advocateId) => {
 	};
 };
 
-export const pastEventsRetrieved = () => {
+export const setTAOListener = (taoId, listenerId) => {
 	return {
-		type: actionsEnums.PAST_EVENTS_RETRIEVED
+		type: actionsEnums.SET_TAO_LISTENER,
+		taoId,
+		listenerId
 	};
 };

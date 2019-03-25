@@ -87,8 +87,8 @@ class TAODetails extends React.Component {
 
 	async getTAOPosition() {
 		const { id } = this.props.params;
-		const { taoPositions, nameTAOPosition, names, aoLibrary } = this.props;
-		if (!taoPositions || !nameTAOPosition || !names || !aoLibrary || !id) {
+		const { taoPositions, names, nameTAOPosition, aoLibrary } = this.props;
+		if (!taoPositions || !names || !nameTAOPosition || !aoLibrary || !id) {
 			return;
 		}
 
@@ -110,10 +110,9 @@ class TAODetails extends React.Component {
 				isTAO: false
 			}
 		};
-
-		position.advocate.isTAO = await promisify(aoLibrary.isTAO)(position.advocate.id);
 		position.listener.isTAO = await promisify(aoLibrary.isTAO)(position.listener.id);
 		position.speaker.isTAO = await promisify(aoLibrary.isTAO)(position.speaker.id);
+
 		this.setState({ position });
 	}
 
