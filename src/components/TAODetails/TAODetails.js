@@ -44,7 +44,7 @@ class TAODetails extends React.Component {
 			if (this.props.stakedTAOs.find((tao) => tao.taoId === this.props.params.id)) {
 				await this.getTAOPool();
 			}
-		} else if (this.props.taoPositions !== prevProps.taoPositions && this.props.params.id) {
+		} else if (this.props.taoPositions !== prevProps.taoPositions) {
 			await this.getTAOPosition();
 		}
 	}
@@ -87,40 +87,29 @@ class TAODetails extends React.Component {
 
 	async getTAOPosition() {
 		const { id } = this.props.params;
-		const { taoPositions, names, aoLibrary } = this.props;
-		if (!taoPositions || !names || !aoLibrary || !id) {
+		const { taoPositions, nameTAOPosition, names, aoLibrary } = this.props;
+		if (!taoPositions || !nameTAOPosition || !names || !aoLibrary || !id) {
 			return;
 		}
 
-		const _position = taoPositions.find((tao) => tao.taoId === id);
-		if (!_position) {
-			return;
-		}
+		const _position = await promisify(nameTAOPosition.getPositionById)(id);
 		const position = {
 			advocate: {
-				name: "",
-				id: _position.advocateId,
+				name: _position[0],
+				id: _position[1],
 				isTAO: false
 			},
 			listener: {
-				name: "",
-				id: _position.listenerId,
+				name: _position[2],
+				id: _position[3],
 				isTAO: false
 			},
 			speaker: {
-				name: "",
-				id: _position.speakerId,
+				name: _position[4],
+				id: _position[5],
 				isTAO: false
 			}
 		};
-		const advocate = names.find((name) => name.nameId === _position.advocateId);
-		position.advocate.name = advocate.name;
-
-		const listener = names.find((name) => name.nameId === _position.listenerId);
-		position.listener.name = listener.name;
-
-		const speaker = names.find((name) => name.nameId === _position.speakerId);
-		position.speaker.name = speaker.name;
 
 		position.advocate.isTAO = await promisify(aoLibrary.isTAO)(position.advocate.id);
 		position.listener.isTAO = await promisify(aoLibrary.isTAO)(position.listener.id);

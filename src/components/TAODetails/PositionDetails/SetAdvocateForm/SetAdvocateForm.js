@@ -36,11 +36,11 @@ class SetAdvocateForm extends React.Component {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
 				waitForTransactionReceipt(transactionHash)
-					.then(() => {
+					.then(async () => {
+						await this.props.getTAOPosition();
 						this.setState({ error: false, errorMessage: "", formLoading: false });
 						this.props.setSuccess("Success!", `A new Advocate was set successfully`);
 						this.props.toggleShowForm();
-						this.props.getTAOPosition();
 					})
 					.catch((err) => {
 						this.setState({ error: true, errorMessage: err.message, formLoading: false });
