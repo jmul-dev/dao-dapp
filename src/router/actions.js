@@ -63,20 +63,6 @@ export const setSettingTAOId = (settingTAOId) => {
 	};
 };
 
-export const setNameTAOs = (taos) => {
-	return {
-		type: actionsEnums.SET_NAME_TAOS,
-		taos
-	};
-};
-
-export const appendNameTAO = (tao) => {
-	return {
-		type: actionsEnums.APPEND_NAME_TAO,
-		tao
-	};
-};
-
 export const setTAOsNeedApproval = (taosNeedApproval) => {
 	return {
 		type: actionsEnums.SET_TAOS_NEED_APPROVAL,
@@ -101,13 +87,6 @@ export const removeTAONeedApproval = (tao) => {
 export const setTAOAsChild = (tao) => {
 	return {
 		type: actionsEnums.SET_TAO_AS_CHILD,
-		tao
-	};
-};
-
-export const setNameTAOAsChild = (tao) => {
-	return {
-		type: actionsEnums.SET_NAME_TAO_AS_CHILD,
 		tao
 	};
 };
@@ -208,5 +187,19 @@ export const nameWithdrawLogos = (tao) => {
 	return {
 		type: actionsEnums.NAME_WITHDRAW_LOGOS,
 		tao
+	};
+};
+
+export const appendNameAdvocatedTAO = (taoId) => {
+	return {
+		type: actionsEnums.APPEND_NAME_ADVOCATED_TAO,
+		taoId
+	};
+};
+
+export const removeNameAdvocatedTAO = (taoId) => {
+	return {
+		type: actionsEnums.REMOVE_NAME_ADVOCATED_TAO,
+		taoId
 	};
 };

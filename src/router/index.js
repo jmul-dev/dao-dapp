@@ -50,7 +50,9 @@ import {
 	getLogosEvent,
 	watchLogosEvent,
 	getTAOPoolEvent,
-	watchTAOPoolEvent
+	watchTAOPoolEvent,
+	getNameTAOPositionEvent,
+	watchNameTAOPositionEvent
 } from "./events";
 
 import { EMPTY_ADDRESS } from "common/constants";
@@ -128,6 +130,9 @@ class AppRouter extends React.Component {
 
 			await getTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+
+			await getNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+			watchNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}

@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
 		taosNeedApproval: state.nameReducer.taosNeedApproval,
 		stakeEthos: state.nameReducer.stakeEthos,
 		stakePathos: state.nameReducer.stakePathos,
-		taos: state.globalReducer.taos
+		taos: state.globalReducer.taos,
+		advocatedTAOIds: state.nameReducer.advocatedTAOIds
 	};
 };
 

@@ -4,11 +4,9 @@ import { asyncForEach } from "utils/";
 import {
 	appendName,
 	appendTAO,
-	appendNameTAO,
 	appendTAONeedApproval,
 	removeTAONeedApproval,
 	setTAOAsChild,
-	setNameTAOAsChild,
 	positionLogosOn,
 	unpositionLogosOn,
 	positionLogosFrom,
@@ -21,7 +19,9 @@ import {
 	nameStakeEthos,
 	nameStakePathos,
 	updateLogosEarned,
-	nameWithdrawLogos
+	nameWithdrawLogos,
+	appendNameAdvocatedTAO,
+	removeNameAdvocatedTAO
 } from "./actions";
 
 // Contracts
@@ -30,6 +30,7 @@ import TAOFactory from "contracts/TAOFactory.json";
 import TAOAncestry from "contracts/TAOAncestry.json";
 import Logos from "contracts/Logos.json";
 import TAOPool from "contracts/TAOPool.json";
+import NameTAOPosition from "contracts/NameTAOPosition.json";
 
 const promisify = require("tiny-promisify");
 
@@ -115,7 +116,7 @@ const _parseTAOFactoryEvent = async (dispatch, taoAncestry, log, nameId) => {
 	}
 	dispatch(appendTAO({ ...log.args, isChild }));
 	if (log.args.advocateId === nameId) {
-		dispatch(appendNameTAO({ ...log.args, isChild }));
+		dispatch(appendNameAdvocatedTAO(log.args.taoId));
 	}
 };
 
@@ -170,7 +171,6 @@ const _parseTAOAncestryEvent = async (dispatch, taoFactory, log, nameId) => {
 				dispatch(removeTAONeedApproval(log.args));
 			}
 			dispatch(setTAOAsChild(log.args));
-			dispatch(setNameTAOAsChild(log.args));
 			break;
 		default:
 			break;
@@ -288,6 +288,54 @@ const _parseTAOPoolEvent = (dispatch, log, nameId) => {
 				dispatch(nameWithdrawLogos(log.args));
 			}
 			dispatch(withdrawLogos(log.args));
+			break;
+		default:
+			break;
+	}
+};
+
+export const getNameTAOPositionEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const nameTAOPosition = window.web3.eth.contract(NameTAOPosition.abi).at(NameTAOPosition.networks[networkId].address);
+			const receipt = await getTransactionReceipt(NameTAOPosition.networks[networkId].transactionHash);
+			nameTAOPosition.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+				if (!err) {
+					logs.forEach((log) => {
+						_parseNameTAOPositionEvent(dispatch, log, nameId);
+					});
+					resolve();
+				} else {
+					reject(err);
+				}
+			});
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+
+export const watchNameTAOPositionEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	try {
+		const nameTAOPosition = window.web3.eth.contract(NameTAOPosition.abi).at(NameTAOPosition.networks[networkId].address);
+		nameTAOPosition.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
+			if (!err) {
+				_parseNameTAOPositionEvent(dispatch, log, nameId);
+			}
+		});
+	} catch (e) {
+		console.log("error", e);
+	}
+};
+
+const _parseNameTAOPositionEvent = (dispatch, log, nameId) => {
+	switch (log.event) {
+		case "SetAdvocate":
+			if (log.args.oldAdvocateId === nameId) {
+				dispatch(removeNameAdvocatedTAO(log.args.taoId));
+			} else if (log.args.newAdvocateId === nameId) {
+				dispatch(appendNameAdvocatedTAO(log.args.taoId));
+			}
 			break;
 		default:
 			break;

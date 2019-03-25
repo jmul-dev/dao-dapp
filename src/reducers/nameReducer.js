@@ -7,12 +7,12 @@ class NameReducerState {
 		this.nameInfo = null;
 		this.profileImage = null;
 		this.taoCurrencyBalances = null;
-		this.taos = [];
 		this.taosNeedApproval = [];
 		this.positionLogosOn = [];
 		this.positionLogosFrom = [];
 		this.stakeEthos = [];
 		this.stakePathos = [];
+		this.advocatedTAOIds = [];
 	}
 }
 
@@ -44,17 +44,6 @@ const handleSetTAOCurrencyBalances = (state, action) => {
 	};
 };
 
-const handleAppendNameTAO = (state, action) => {
-	const _taos = state.taos.slice();
-	if (!_taos.find((tao) => tao.taoId === action.tao.taoId)) {
-		_taos.push(action.tao);
-	}
-	return {
-		...state,
-		taos: _taos
-	};
-};
-
 const handleAppendTAONeedApproval = (state, action) => {
 	const _taosNeedApproval = state.taosNeedApproval.slice();
 	if (!_taosNeedApproval.find((tao) => tao.childId === action.tao.childId)) {
@@ -71,21 +60,6 @@ const handleRemoveTAONeedApproval = (state, action) => {
 	return {
 		...state,
 		taosNeedApproval: _taosNeedApproval
-	};
-};
-
-const handleSetNameTAOAsChild = (state, action) => {
-	const { taos } = state;
-	const _taos = [];
-	taos.forEach((tao) => {
-		if (tao.taoId === action.tao.childId && tao.parent === action.tao.taoId) {
-			tao.isChild = true;
-		}
-		_taos.push(tao);
-	});
-	return {
-		...state,
-		taos: _taos
 	};
 };
 
@@ -208,6 +182,25 @@ const handleNameWithdrawLogos = (state, action) => {
 	};
 };
 
+const handleAppendNameAdvocatedTAO = (state, action) => {
+	const _advocatedTAOIds = state.advocatedTAOIds.slice();
+	if (!_advocatedTAOIds.find((taoId) => taoId === action.taoId)) {
+		_advocatedTAOIds.push(action.taoId);
+	}
+	return {
+		...state,
+		advocatedTAOIds: _advocatedTAOIds
+	};
+};
+
+const handleRemoveNameAdvocatedTAO = (state, action) => {
+	const _advocatedTAOIds = state.advocatedTAOIds.filter((taoId) => taoId !== action.taoId);
+	return {
+		...state,
+		advocatedTAOIds: _advocatedTAOIds
+	};
+};
+
 export const nameReducer = (state = new NameReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_NAME_ID:
@@ -218,14 +211,10 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleSetProfileImage(state, action);
 		case actionsEnums.SET_TAO_CURRENCY_BALANCES:
 			return handleSetTAOCurrencyBalances(state, action);
-		case actionsEnums.APPEND_NAME_TAO:
-			return handleAppendNameTAO(state, action);
 		case actionsEnums.APPEND_TAO_NEED_APPROVAL:
 			return handleAppendTAONeedApproval(state, action);
 		case actionsEnums.REMOVE_TAO_NEED_APPROVAL:
 			return handleRemoveTAONeedApproval(state, action);
-		case actionsEnums.SET_NAME_TAO_AS_CHILD:
-			return handleSetNameTAOAsChild(state, action);
 		case actionsEnums.POSITION_LOGOS_ON:
 			return handlePositionLogosOn(state, action);
 		case actionsEnums.UNPOSITION_LOGOS_ON:
@@ -242,6 +231,10 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleNameWithdrawLogos(state, action);
 		case actionsEnums.UPDATE_LOGOS_EARNED:
 			return handleUpdateLogosEarned(state, action);
+		case actionsEnums.APPEND_NAME_ADVOCATED_TAO:
+			return handleAppendNameAdvocatedTAO(state, action);
+		case actionsEnums.REMOVE_NAME_ADVOCATED_TAO:
+			return handleRemoveNameAdvocatedTAO(state, action);
 		default:
 			return state;
 	}

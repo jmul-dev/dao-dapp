@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer } from "components/";
 import { TAOName } from "./TAOName/";
-import { PositionDetails } from "./PositionDetails/";
+import { PositionDetailsContainer } from "./PositionDetails/";
 import { AncestryDetails } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
 import { get, encodeParams } from "utils/";
@@ -29,6 +29,7 @@ class TAODetails extends React.Component {
 		};
 		this.initialState = this.state;
 		this.getTAOPool = this.getTAOPool.bind(this);
+		this.getTAOPosition = this.getTAOPosition.bind(this);
 	}
 
 	async componentDidMount() {
@@ -43,6 +44,8 @@ class TAODetails extends React.Component {
 			if (this.props.stakedTAOs.find((tao) => tao.taoId === this.props.params.id)) {
 				await this.getTAOPool();
 			}
+		} else if (this.props.advocatedTAOIds !== prevProps.advocatedTAOIds && this.props.params.id) {
+			await this.getTAOPosition();
 		}
 	}
 
@@ -198,7 +201,7 @@ class TAODetails extends React.Component {
 				<TAOName id={id} name={taoInfo.name} />
 				<MediumEditor text={taoDescription} />
 				<LeftContainer>
-					<PositionDetails position={position} />
+					<PositionDetailsContainer id={id} position={position} getTAOPosition={this.getTAOPosition} />
 					<AncestryDetails ancestry={ancestry} />
 				</LeftContainer>
 				<RightContainer>

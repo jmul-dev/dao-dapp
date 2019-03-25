@@ -5,10 +5,16 @@ import "./style.css";
 
 class OwnTAO extends React.Component {
 	render() {
-		const { ownTAOs, taosNeedApproval, stakeEthos, stakePathos, taos } = this.props;
-		if (!ownTAOs || !taosNeedApproval || !stakeEthos || !stakePathos || !taos) {
+		const { advocatedTAOIds, taosNeedApproval, stakeEthos, stakePathos, taos } = this.props;
+		if (!advocatedTAOIds || !taosNeedApproval || !stakeEthos || !stakePathos || !taos) {
 			return null;
 		}
+
+		const advocatedTAOs = [];
+		advocatedTAOIds.forEach((taoId) => {
+			const tao = taos.find((tao) => tao.taoId === taoId);
+			advocatedTAOs.push(tao);
+		});
 
 		const stakedEthosTAOIds = stakeEthos.map((tao) => tao.taoId).filter((value, index, self) => self.indexOf(value) === index);
 		const stakedEthosTAOs = [];
@@ -65,14 +71,20 @@ class OwnTAO extends React.Component {
 							<Nav.Item>
 								<Nav.Link eventKey="staked-pathos">Staked Pathos TAOs</Nav.Link>
 							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link eventKey="listener">Listener TAOs</Nav.Link>
+							</Nav.Item>
+							<Nav.Item>
+								<Nav.Link eventKey="speaker">Speaker TAOs</Nav.Link>
+							</Nav.Item>
 						</Nav>
 					</LeftContainer>
 					<RightContainer className="width-80">
 						<Tab.Content>
 							<Tab.Pane eventKey="advocated">
 								<Title>Advocated TAOs</Title>
-								{ownTAOs.length ? (
-									<Table data={ownTAOs} columns={columns} defaultPageSize={5} filterable={true} />
+								{advocatedTAOs.length ? (
+									<Table data={advocatedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 								) : (
 									<Header>Currently, you have no TAO of which you are the Advocate</Header>
 								)}
@@ -105,6 +117,12 @@ class OwnTAO extends React.Component {
 								) : (
 									<Header>Currently, you have no TAO that is staked with Pathos</Header>
 								)}
+							</Tab.Pane>
+							<Tab.Pane eventKey="listener">
+								<Title>TAOs Where You are The Listener</Title>
+							</Tab.Pane>
+							<Tab.Pane eventKey="speaker">
+								<Title>TAOs Where You are The Speaker</Title>
 							</Tab.Pane>
 						</Tab.Content>
 					</RightContainer>

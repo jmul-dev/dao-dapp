@@ -206,7 +206,6 @@ export const FieldName = styled.div`
 	vertical-align: top;
 	font-size: 0.875em;
 	font-weight: 500;
-	margin-right: 10px;
 	width: 200px;
 
 	&.small {
@@ -217,8 +216,17 @@ export const FieldName = styled.div`
 export const FieldValue = styled.div`
 	display: inline-block;
 	vertical-align: top;
+	padding-left: 10px;
 	font-size: 0.875em;
 	color: #888888;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: calc(100% - 200px);
+
+	&.small {
+		width: calc(100% - 150px);
+	}
 `;
 
 export const MediumEditor = styled(Editor)`
