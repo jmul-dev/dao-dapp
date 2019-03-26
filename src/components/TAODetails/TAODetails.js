@@ -2,7 +2,7 @@ import * as React from "react";
 import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer } from "components/";
 import { Tab, Nav } from "react-bootstrap";
 import { Button } from "./styledComponents";
-import { TAOName } from "./TAOName/";
+import { TAONameContainer } from "./TAOName/";
 import { PositionDetailsContainer } from "./PositionDetails/";
 import { ListenedTAOContainer } from "./ListenedTAO/";
 import { SpokenTAOContainer } from "./SpokenTAO/";
@@ -202,7 +202,7 @@ class TAODetails extends React.Component {
 
 	render() {
 		const { id } = this.props.params;
-		const { pastEventsRetrieved } = this.props;
+		const { pastEventsRetrieved, taosNeedApproval } = this.props;
 		const {
 			singlePageView,
 			tabKey,
@@ -221,9 +221,11 @@ class TAODetails extends React.Component {
 			nameLogosWithdrawn,
 			dataPopulated
 		} = this.state;
-		if (!pastEventsRetrieved || !dataPopulated) {
+		if (!pastEventsRetrieved || !taosNeedApproval || !dataPopulated) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
+
+		const needApproval = taosNeedApproval.find((tao) => tao.taoId === id) ? true : false;
 
 		return (
 			<Wrapper className="padding-40">
@@ -254,8 +256,14 @@ class TAODetails extends React.Component {
 				</Wrapper>
 				{singlePageView ? (
 					<Wrapper>
-						<TAOName id={id} name={taoInfo.name} singlePageView={singlePageView} />
-						<MediumEditor text={taoDescription} singlePageView={singlePageView} />
+						<TAONameContainer
+							id={id}
+							name={taoInfo.name}
+							singlePageView={singlePageView}
+							needApproval={needApproval}
+							parentId={ancestry.parentId}
+						/>
+						<MediumEditor text={taoDescription} />
 						<LeftContainer>
 							<PositionDetailsContainer
 								id={id}
@@ -311,8 +319,14 @@ class TAODetails extends React.Component {
 						<RightContainer className="width-80">
 							<Tab.Content>
 								<Tab.Pane eventKey="tao-info">
-									<TAOName id={id} name={taoInfo.name} singlePageView={singlePageView} />
-									<MediumEditor text={taoDescription} singlePageView={singlePageView} />
+									<TAONameContainer
+										id={id}
+										name={taoInfo.name}
+										singlePageView={singlePageView}
+										needApproval={needApproval}
+										parentId={ancestry.parentId}
+									/>
+									<MediumEditor text={taoDescription} />
 								</Tab.Pane>
 								<Tab.Pane eventKey="position">
 									<PositionDetailsContainer

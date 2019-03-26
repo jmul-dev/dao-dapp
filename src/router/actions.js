@@ -83,10 +83,10 @@ export const appendTAONeedApproval = (tao) => {
 	};
 };
 
-export const removeTAONeedApproval = (tao) => {
+export const removeTAONeedApproval = (taoId) => {
 	return {
 		type: actionsEnums.REMOVE_TAO_NEED_APPROVAL,
-		tao
+		taoId
 	};
 };
 

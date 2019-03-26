@@ -45,7 +45,7 @@ const handleSetTAOCurrencyBalances = (state, action) => {
 
 const handleAppendTAONeedApproval = (state, action) => {
 	const _taosNeedApproval = state.taosNeedApproval.slice();
-	if (!_taosNeedApproval.find((tao) => tao.childId === action.tao.childId)) {
+	if (!_taosNeedApproval.find((tao) => tao.taoId === action.tao.taoId)) {
 		_taosNeedApproval.push(action.tao);
 	}
 	return {
@@ -55,7 +55,7 @@ const handleAppendTAONeedApproval = (state, action) => {
 };
 
 const handleRemoveTAONeedApproval = (state, action) => {
-	const _taosNeedApproval = state.taosNeedApproval.filter((tao) => tao.childId !== action.tao.childId);
+	const _taosNeedApproval = state.taosNeedApproval.filter((tao) => tao.taoId !== action.taoId);
 	return {
 		...state,
 		taosNeedApproval: _taosNeedApproval

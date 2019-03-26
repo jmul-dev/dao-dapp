@@ -57,18 +57,6 @@ class OwnTAO extends React.Component {
 			}
 		];
 
-		const taosNeedApprovalColumns = [
-			{
-				Header: "ID",
-				accessor: "childId",
-				Cell: (props) => <Ahref to={`/tao/${props.value}`}>{props.value}</Ahref>
-			},
-			{
-				Header: "Name",
-				accessor: "childName"
-			}
-		];
-
 		return (
 			<Wrapper className="padding-40">
 				<Tab.Container id="taos-table" defaultActiveKey="advocated">
@@ -107,12 +95,7 @@ class OwnTAO extends React.Component {
 							<Tab.Pane eventKey="need-approval">
 								<Title>Child TAOs That Need Approvals</Title>
 								{taosNeedApproval.length ? (
-									<Table
-										data={taosNeedApproval}
-										columns={taosNeedApprovalColumns}
-										defaultPageSize={5}
-										filterable={true}
-									/>
+									<Table data={taosNeedApproval} columns={columns} defaultPageSize={5} filterable={true} />
 								) : (
 									<Header>Currently, there is no child TAO that needs your approval</Header>
 								)}

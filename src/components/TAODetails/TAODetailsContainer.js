@@ -3,19 +3,20 @@ import { TAODetails } from "./TAODetails";
 
 const mapStateToProps = (state) => {
 	return {
-		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
-		nameId: state.nameReducer.nameId,
-		taoFactory: state.contractReducer.contracts.taoFactory,
-		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
 		aoLibrary: state.contractReducer.contracts.aoLibrary,
-		taoAncestry: state.contractReducer.contracts.taoAncestry,
-		taoPool: state.contractReducer.contracts.taoPool,
 		ethos: state.contractReducer.contracts.ethos,
-		pathos: state.contractReducer.contracts.pathos,
+		nameId: state.nameReducer.nameId,
+		names: state.globalReducer.names,
 		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup,
+		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
+		pathos: state.contractReducer.contracts.pathos,
 		stakedTAOs: state.globalReducer.stakedTAOs,
-		taoPositions: state.globalReducer.taoPositions,
-		names: state.globalReducer.names
+		taoAncestry: state.contractReducer.contracts.taoAncestry,
+		taoFactory: state.contractReducer.contracts.taoFactory,
+		taosNeedApproval: state.nameReducer.taosNeedApproval,
+		taoPool: state.contractReducer.contracts.taoPool,
+		taoPositions: state.globalReducer.taoPositions
 	};
 };
 

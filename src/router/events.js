@@ -170,12 +170,12 @@ const _parseTAOAncestryEvent = async (dispatch, taoFactory, log, nameId) => {
 		case "AddChild":
 			if (log.args.taoAdvocate === nameId) {
 				const [childName] = await promisify(taoFactory.getTAO)(log.args.childId);
-				dispatch(appendTAONeedApproval({ ...log.args, childName }));
+				dispatch(appendTAONeedApproval({ taoId: log.args.childId, name: childName }));
 			}
 			break;
 		case "ApproveChild":
 			if (log.args.taoAdvocate === nameId) {
-				dispatch(removeTAONeedApproval(log.args));
+				dispatch(removeTAONeedApproval(log.args.childId));
 			}
 			dispatch(setTAOAsChild(log.args));
 			break;
