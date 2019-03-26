@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { TAODetails } from "./TAODetails";
+import { toggleView } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
@@ -11,6 +12,7 @@ const mapStateToProps = (state) => {
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
 		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		pathos: state.contractReducer.contracts.pathos,
+		singlePageView: state.appReducer.singlePageView,
 		stakedTAOs: state.globalReducer.stakedTAOs,
 		taoAncestry: state.contractReducer.contracts.taoAncestry,
 		taoFactory: state.contractReducer.contracts.taoFactory,
@@ -21,7 +23,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		toggleView: () => dispatch(toggleView())
+	};
 };
 
 export const TAODetailsContainer = connect(

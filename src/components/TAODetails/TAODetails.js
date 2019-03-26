@@ -18,7 +18,6 @@ class TAODetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			singlePageView: true,
 			tabKey: "tao-info",
 			taoInfo: null,
 			taoDescription: null,
@@ -64,7 +63,7 @@ class TAODetails extends React.Component {
 	}
 
 	toggleView() {
-		this.setState({ singlePageView: !this.state.singlePageView });
+		this.props.toggleView();
 	}
 
 	async getData() {
@@ -202,9 +201,8 @@ class TAODetails extends React.Component {
 
 	render() {
 		const { id } = this.props.params;
-		const { pastEventsRetrieved, taosNeedApproval } = this.props;
+		const { pastEventsRetrieved, taosNeedApproval, singlePageView } = this.props;
 		const {
-			singlePageView,
 			tabKey,
 			taoInfo,
 			taoDescription,
@@ -221,7 +219,7 @@ class TAODetails extends React.Component {
 			nameLogosWithdrawn,
 			dataPopulated
 		} = this.state;
-		if (!pastEventsRetrieved || !taosNeedApproval || !dataPopulated) {
+		if (!pastEventsRetrieved || !taosNeedApproval || !dataPopulated || typeof singlePageView === "undefined") {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 
