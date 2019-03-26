@@ -1,19 +1,25 @@
 import { connect } from "react-redux";
 import { NameProfile } from "./NameProfile";
+import { toggleView } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
+		aoion: state.contractReducer.contracts.aoion,
+		logos: state.contractReducer.contracts.logos,
 		nameId: state.nameReducer.nameId,
+		namePublicKey: state.contractReducer.contracts.namePublicKey,
 		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
-		logos: state.contractReducer.contracts.logos,
-		namePublicKey: state.contractReducer.contracts.namePublicKey,
-		aoion: state.contractReducer.contracts.aoion
+		singlePageView: state.appReducer.singlePageView,
+		namePositions: state.globalReducer.namePositions,
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		toggleView: () => dispatch(toggleView())
+	};
 };
 
 export const NameProfileContainer = connect(

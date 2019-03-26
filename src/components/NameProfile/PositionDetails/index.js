@@ -3,14 +3,14 @@ import { Wrapper, Title, Ahref, FieldContainer, FieldName, FieldValue } from "co
 
 class PositionDetails extends React.Component {
 	render() {
-		const { position } = this.props;
+		const { position, singlePageView } = this.props;
 		if (!position) {
 			return null;
 		}
 
 		return (
 			<Wrapper>
-				<Title className="margin-top">Position</Title>
+				<Title className={singlePageView ? "margin-top" : ""}>Position</Title>
 				<FieldContainer>
 					<FieldName>Advocate</FieldName>
 					<FieldValue>

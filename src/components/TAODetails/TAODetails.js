@@ -35,7 +35,6 @@ class TAODetails extends React.Component {
 			dataPopulated: false
 		};
 		this.initialState = this.state;
-		this.toggleView = this.toggleView.bind(this);
 		this.getTAOPool = this.getTAOPool.bind(this);
 		this.getTAOPosition = this.getTAOPosition.bind(this);
 	}
@@ -60,10 +59,6 @@ class TAODetails extends React.Component {
 		} else if (this.props.taoPositions !== prevProps.taoPositions) {
 			await this.getTAOPosition();
 		}
-	}
-
-	toggleView() {
-		this.props.toggleView();
 	}
 
 	async getData() {
@@ -238,14 +233,14 @@ class TAODetails extends React.Component {
 							<Button
 								type="button"
 								className={`btn btn-default ${!singlePageView ? "selected" : ""}`}
-								onClick={this.toggleView}
+								onClick={this.props.toggleView}
 							>
 								Tab View
 							</Button>
 							<Button
 								type="button"
 								className={`btn btn-default ${singlePageView ? "selected" : ""}`}
-								onClick={this.toggleView}
+								onClick={this.props.toggleView}
 							>
 								Single Page View
 							</Button>

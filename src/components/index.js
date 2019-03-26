@@ -276,3 +276,17 @@ export const RightContainer = styled.div`
 		text-align: right;
 	}
 `;
+
+export const GroupButton = styled.button`
+	background-color: #333333;
+	color: #ffffff;
+
+	:hover {
+		background-color: #cccccc;
+		color: #191919;
+	}
+	&.selected {
+		background-color: #ffffff;
+		color: #191919;
+	}
+`;

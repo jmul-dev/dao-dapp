@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Wrapper, LeftContainer, RightContainer } from "components/";
+import { Wrapper, LeftContainer, RightContainer, GroupButton } from "components/";
+import { Tab, Nav } from "react-bootstrap";
 import { ProfileContainer } from "./Profile/";
 import { PositionDetails } from "./PositionDetails/";
 import { ProfileImage } from "./ProfileImage/";
@@ -10,15 +11,19 @@ import { encodeParams, get } from "utils/";
 const promisify = require("tiny-promisify");
 
 class NameProfile extends React.Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 		this.state = {
+			tabKey: "name-info",
 			isOwner: false,
 			nameInfo: null,
 			isListener: false,
 			isSpeaker: false,
 			position: null,
-			profileImage: null
+			profileImage: null,
+			dataPopulated: false
 		};
 		this.initialState = this.state;
 		this.getData = this.getData.bind(this);
@@ -28,32 +33,44 @@ class NameProfile extends React.Component {
 	}
 
 	async componentDidMount() {
-		await this.getData(this.props.params.id, this.props.nameId);
+		this._isMounted = true;
+		await this.getData();
+	}
+
+	async componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.params.id !== prevProps.params.id) {
 			this.setState(this.initialState);
-			await this.getData(this.props.params.id, this.props.nameId);
+			await this.getData();
+		} else if (this.props.namePositions !== prevProps.namePositions) {
+			await this.getNamePosition();
 		}
 	}
 
-	async getData(id, nameId) {
+	async getData() {
+		const { id } = this.props.params;
+		const { nameId } = this.props;
 		if (!id || !nameId) {
 			return;
 		}
-
-		await this.getNameInfo(id);
-		await this.getNamePosition(id);
-		await this.getProfileImage(id);
-		if (id === nameId) {
+		await this.getNameInfo();
+		await this.getNamePosition();
+		await this.getProfileImage();
+		if (id === nameId && this._isMounted) {
 			this.setState({ isOwner: true });
 		} else {
-			await this.checkListenerSpeaker(id);
+			await this.checkListenerSpeaker();
+		}
+		if (this._isMounted) {
+			this.setState({ dataPopulated: true });
 		}
 	}
 
-	async getNameInfo(id) {
+	async getNameInfo() {
+		const { id } = this.props.params;
 		const { nameTAOLookup } = this.props;
 		if (!nameTAOLookup || !id) {
 			return;
@@ -68,19 +85,25 @@ class NameProfile extends React.Component {
 			parentId: _nameInfo[4],
 			parentTypeId: _nameInfo[5]
 		};
-		this.setState({ nameInfo });
+		if (this._isMounted) {
+			this.setState({ nameInfo });
+		}
 	}
 
-	async checkListenerSpeaker(id) {
+	async checkListenerSpeaker() {
+		const { id } = this.props.params;
 		const { nameTAOPosition, nameId } = this.props;
 		if (!id || !nameTAOPosition || !nameId) {
 			return;
 		}
 		const _position = await promisify(nameTAOPosition.getPositionById)(nameId);
-		this.setState({ isListener: _position[3] === id, isSpeaker: _position[5] === id });
+		if (this._isMounted) {
+			this.setState({ isListener: _position[3] === id, isSpeaker: _position[5] === id });
+		}
 	}
 
-	async getNamePosition(id) {
+	async getNamePosition() {
+		const { id } = this.props.params;
 		const { nameTAOPosition } = this.props;
 		if (!nameTAOPosition || !id) {
 			return;
@@ -95,13 +118,19 @@ class NameProfile extends React.Component {
 			speakerName: _position[4],
 			speakerId: _position[5]
 		};
-		this.setState({ position });
+		if (this._isMounted) {
+			this.setState({ position });
+		}
 	}
 
-	async getProfileImage(id) {
+	async getProfileImage() {
+		const { id } = this.props.params;
+		if (!id) {
+			return;
+		}
 		try {
 			const response = await get(`https://localhost/api/get-profile-image?${encodeParams({ nameId: id })}`);
-			if (response.profileImage) {
+			if (response.profileImage && this._isMounted) {
 				this.setState({ profileImage: response.profileImage });
 			}
 		} catch (e) {}
@@ -120,32 +149,129 @@ class NameProfile extends React.Component {
 	}
 
 	render() {
-		const { isOwner, nameInfo, isListener, isSpeaker, position, profileImage } = this.state;
-		if (!nameInfo || !position) {
+		const { id } = this.props.params;
+		const { singlePageView, pastEventsRetrieved } = this.props;
+		const { tabKey, isOwner, nameInfo, isListener, isSpeaker, position, profileImage, dataPopulated } = this.state;
+		if (!pastEventsRetrieved || !dataPopulated || typeof singlePageView === "undefined") {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 
 		return (
 			<Wrapper className="padding-40">
-				<LeftContainer className="width-65">
-					<ProfileContainer
-						isOwner={isOwner}
-						nameInfo={nameInfo}
-						isListener={isListener}
-						isSpeaker={isSpeaker}
-						setListener={this.setListener}
-						setSpeaker={this.setSpeaker}
-					/>
-					<PositionDetails position={position} />
-				</LeftContainer>
-				<RightContainer className="width-35">
-					<ProfileImage isOwner={isOwner} profileImage={profileImage} refreshProfileImage={this.refreshProfileImage} />
-				</RightContainer>
-				{isOwner && (
-					<div>
-						<LogosDetailsContainer id={this.props.params.id} isOwner={isOwner} />
-						<PublicKeysContainer id={this.props.params.id} />
-					</div>
+				<Wrapper className="margin-bottom-40">
+					<LeftContainer />
+					<RightContainer className="right">
+						<div className="btn-group btn-group-sm" role="group">
+							<GroupButton
+								type="button"
+								className={`btn btn-default ${!singlePageView ? "selected" : ""}`}
+								onClick={this.props.toggleView}
+							>
+								Tab View
+							</GroupButton>
+							<GroupButton
+								type="button"
+								className={`btn btn-default ${singlePageView ? "selected" : ""}`}
+								onClick={this.props.toggleView}
+							>
+								Single Page View
+							</GroupButton>
+						</div>
+					</RightContainer>
+				</Wrapper>
+				{singlePageView ? (
+					<Wrapper>
+						<LeftContainer className="width-65">
+							<ProfileContainer
+								isOwner={isOwner}
+								nameInfo={nameInfo}
+								isListener={isListener}
+								isSpeaker={isSpeaker}
+								setListener={this.setListener}
+								setSpeaker={this.setSpeaker}
+							/>
+							<PositionDetails position={position} singlePageView={singlePageView} />
+						</LeftContainer>
+						<RightContainer className="width-35">
+							<ProfileImage isOwner={isOwner} profileImage={profileImage} refreshProfileImage={this.refreshProfileImage} />
+						</RightContainer>
+						{isOwner && (
+							<Wrapper>
+								<LogosDetailsContainer
+									id={id}
+									isOwner={isOwner}
+									singlePageView={singlePageView}
+									populateGraph={tabKey === "logos-details"}
+								/>
+								<PublicKeysContainer id={id} singlePageView={singlePageView} />
+							</Wrapper>
+						)}
+					</Wrapper>
+				) : (
+					<Tab.Container id="name-profile" defaultActiveKey="profile" onSelect={(key) => this.setState({ tabKey: key })}>
+						<LeftContainer className="width-20">
+							<Nav className="flex-column">
+								<Nav.Item>
+									<Nav.Link eventKey="profile">Profile</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="profile-image">Profile Image</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="position">Position</Nav.Link>
+								</Nav.Item>
+								{isOwner && (
+									<Nav.Item>
+										<Nav.Link eventKey="logos-details">Logos Details</Nav.Link>
+									</Nav.Item>
+								)}
+								{isOwner && (
+									<Nav.Item>
+										<Nav.Link eventKey="public-keys">Public Keys</Nav.Link>
+									</Nav.Item>
+								)}
+							</Nav>
+						</LeftContainer>
+						<RightContainer className="width-80">
+							<Tab.Content>
+								<Tab.Pane eventKey="profile">
+									<ProfileContainer
+										isOwner={isOwner}
+										nameInfo={nameInfo}
+										isListener={isListener}
+										isSpeaker={isSpeaker}
+										setListener={this.setListener}
+										setSpeaker={this.setSpeaker}
+									/>
+								</Tab.Pane>
+								<Tab.Pane eventKey="profile-image">
+									<ProfileImage
+										isOwner={isOwner}
+										profileImage={profileImage}
+										refreshProfileImage={this.refreshProfileImage}
+									/>
+								</Tab.Pane>
+								<Tab.Pane eventKey="position">
+									<PositionDetails position={position} singlePageView={singlePageView} />
+								</Tab.Pane>
+								{isOwner && (
+									<Tab.Pane eventKey="logos-details">
+										<LogosDetailsContainer
+											id={id}
+											isOwner={isOwner}
+											singlePageView={singlePageView}
+											populateGraph={tabKey === "logos-details"}
+										/>
+									</Tab.Pane>
+								)}
+								{isOwner && (
+									<Tab.Pane eventKey="public-keys">
+										<PublicKeysContainer id={id} singlePageView={singlePageView} />
+									</Tab.Pane>
+								)}
+							</Tab.Content>
+						</RightContainer>
+					</Tab.Container>
 				)}
 			</Wrapper>
 		);

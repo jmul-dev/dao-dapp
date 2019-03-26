@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
+import { Wrapper, Title, Header, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { waitForTransactionReceipt } from "utils/web3";
 
 class Profile extends React.Component {
@@ -68,41 +68,37 @@ class Profile extends React.Component {
 			return null;
 		}
 
-		let setListenerContent = null,
-			setSpeakerContent = null;
-
-		if (!isOwner) {
-			if (!isListener) {
-				setListenerContent = (
-					<Icon className="animated bounceIn" onClick={() => this.setListener(nameInfo.nameId)} disabled={processingTransaction}>
-						<img src={process.env.PUBLIC_URL + "/images/listener.png"} alt={"Set as Listener"} />
-						<div>Set as Listener</div>
-					</Icon>
-				);
-			}
-			if (!isSpeaker) {
-				setSpeakerContent = (
-					<Icon className="animated bounceIn" onClick={() => this.setSpeaker(nameInfo.nameId)} disabled={processingTransaction}>
-						<img src={process.env.PUBLIC_URL + "/images/speaker.png"} alt={"Set as Speaker"} />
-						<div>Set as Speaker</div>
-					</Icon>
-				);
-			}
-		}
-
 		return (
 			<Wrapper>
 				<Title>Profile</Title>
 				<FieldContainer>
 					<FieldName>Name</FieldName>
 					<FieldValue>
-						{nameInfo.name} ({nameInfo.nameId}) {!isOwner && isListener && "(Your Listener)"}{" "}
-						{!isOwner && isSpeaker && "(Your Speaker)"}
+						{nameInfo.name} ({nameInfo.nameId})
+						<p>
+							{!isOwner && isListener && "(Your Listener)"} {!isOwner && isSpeaker && "(Your Speaker)"}
+						</p>
 					</FieldValue>
-					<div>
-						{setListenerContent}
-						{setSpeakerContent}
-					</div>
+					{!isOwner && !isListener && (
+						<Icon
+							className="animated bounceIn"
+							onClick={() => this.setListener(nameInfo.nameId)}
+							disabled={processingTransaction}
+						>
+							<img src={process.env.PUBLIC_URL + "/images/listener.png"} alt={"Set as Listener"} />
+							<div>Set as Listener</div>
+						</Icon>
+					)}
+					{!isOwner && !isSpeaker && (
+						<Icon
+							className="animated bounceIn"
+							onClick={() => this.setSpeaker(nameInfo.nameId)}
+							disabled={processingTransaction}
+						>
+							<img src={process.env.PUBLIC_URL + "/images/speaker.png"} alt={"Set as Speaker"} />
+							<div>Set as Speaker</div>
+						</Icon>
+					)}
 				</FieldContainer>
 			</Wrapper>
 		);

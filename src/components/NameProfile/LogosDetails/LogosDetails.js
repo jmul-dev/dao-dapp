@@ -101,7 +101,7 @@ class LogosDetails extends React.Component {
 			showPositionLogosForm
 		} = this.state;
 
-		const { isOwner } = this.props;
+		const { isOwner, singlePageView, populateGraph } = this.props;
 
 		let showSumLogosChart = false,
 			sumLogosData = [];
@@ -126,7 +126,7 @@ class LogosDetails extends React.Component {
 
 		return (
 			<Wrapper>
-				<Title className="margin-top">Logos Details</Title>
+				<Title className={singlePageView ? "margin-top" : ""}>Logos Details</Title>
 				<ChartContainer>
 					<DetailsContainer>
 						<FieldContainer>
@@ -146,7 +146,7 @@ class LogosDetails extends React.Component {
 							<FieldValue>{totalAdvocatedTAOLogos.toNumber()}</FieldValue>
 						</FieldContainer>
 					</DetailsContainer>
-					{showSumLogosChart && <DoughnutChart data={sumLogosData} height={200} />}
+					{showSumLogosChart && (singlePageView || populateGraph) && <DoughnutChart data={sumLogosData} height={200} />}
 				</ChartContainer>
 				<ChartContainer>
 					<DetailsContainer>
@@ -166,7 +166,9 @@ class LogosDetails extends React.Component {
 						)}
 					</DetailsContainer>
 					{!showPositionLogosForm ? (
-						<div>{showPositionChart && <DoughnutChart data={positionData} height={200} />}</div>
+						<div>
+							{showPositionChart && (singlePageView || populateGraph) && <DoughnutChart data={positionData} height={200} />}
+						</div>
 					) : (
 						<PositionLogosFormContainer
 							togglePositionLogosForm={this.togglePositionLogosForm}

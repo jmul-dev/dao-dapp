@@ -226,3 +226,26 @@ export const setTAOSpeaker = (taoId, speakerId) => {
 		speakerId
 	};
 };
+
+export const appendNamePosition = (name) => {
+	return {
+		type: actionsEnums.APPEND_NAME_POSITION,
+		name
+	};
+};
+
+export const setNameListener = (nameId, listenerId) => {
+	return {
+		type: actionsEnums.SET_NAME_LISTENER,
+		nameId,
+		listenerId
+	};
+};
+
+export const setNameSpeaker = (nameId, speakerId) => {
+	return {
+		type: actionsEnums.SET_NAME_SPEAKER,
+		nameId,
+		speakerId
+	};
+};

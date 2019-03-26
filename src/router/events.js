@@ -23,7 +23,10 @@ import {
 	appendTAOPosition,
 	setTAOAdvocate,
 	setTAOListener,
-	setTAOSpeaker
+	setTAOSpeaker,
+	appendNamePosition,
+	setNameListener,
+	setNameSpeaker
 } from "./actions";
 
 // Contracts
@@ -33,6 +36,7 @@ import TAOAncestry from "contracts/TAOAncestry.json";
 import Logos from "contracts/Logos.json";
 import TAOPool from "contracts/TAOPool.json";
 import NameTAOPosition from "contracts/NameTAOPosition.json";
+import AOLibrary from "contracts/AOLibrary.json";
 
 const promisify = require("tiny-promisify");
 
@@ -46,6 +50,14 @@ export const getNameFactoryEvent = (dispatch, networkId, currentBlockNumber) => 
 				if (!err) {
 					logs.forEach((log) => {
 						dispatch(appendName({ nameId: log.args.nameId, name: log.args.name }));
+						dispatch(
+							appendNamePosition({
+								nameId: log.args.nameId,
+								advocateId: log.args.nameId,
+								listenerId: log.args.nameId,
+								speakerId: log.args.nameId
+							})
+						);
 						nameLookup[log.args.nameId] = log.args.name;
 					});
 					resolve(nameLookup);
@@ -305,11 +317,12 @@ export const getNameTAOPositionEvent = (dispatch, networkId, currentBlockNumber,
 	return new Promise(async (resolve, reject) => {
 		try {
 			const nameTAOPosition = window.web3.eth.contract(NameTAOPosition.abi).at(NameTAOPosition.networks[networkId].address);
+			const aoLibrary = window.web3.eth.contract(AOLibrary.abi).at(AOLibrary.networks[networkId].address);
 			const receipt = await getTransactionReceipt(NameTAOPosition.networks[networkId].transactionHash);
 			nameTAOPosition.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
 				if (!err) {
 					logs.forEach((log) => {
-						_parseNameTAOPositionEvent(dispatch, log, nameId);
+						_parseNameTAOPositionEvent(dispatch, aoLibrary, log, nameId);
 					});
 					resolve();
 				} else {
@@ -325,9 +338,10 @@ export const getNameTAOPositionEvent = (dispatch, networkId, currentBlockNumber,
 export const watchNameTAOPositionEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
 	try {
 		const nameTAOPosition = window.web3.eth.contract(NameTAOPosition.abi).at(NameTAOPosition.networks[networkId].address);
+		const aoLibrary = window.web3.eth.contract(AOLibrary.abi).at(AOLibrary.networks[networkId].address);
 		nameTAOPosition.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
 			if (!err) {
-				_parseNameTAOPositionEvent(dispatch, log, nameId);
+				_parseNameTAOPositionEvent(dispatch, aoLibrary, log, nameId);
 			}
 		});
 	} catch (e) {
@@ -335,16 +349,25 @@ export const watchNameTAOPositionEvent = (dispatch, networkId, currentBlockNumbe
 	}
 };
 
-const _parseNameTAOPositionEvent = (dispatch, log, nameId) => {
+const _parseNameTAOPositionEvent = async (dispatch, aoLibrary, log, nameId) => {
+	const isTAO = await promisify(aoLibrary.isTAO)(log.args.taoId);
 	switch (log.event) {
 		case "SetAdvocate":
 			dispatch(setTAOAdvocate(log.args.taoId, log.args.newAdvocateId));
 			break;
 		case "SetListener":
-			dispatch(setTAOListener(log.args.taoId, log.args.newListenerId));
+			if (isTAO) {
+				dispatch(setTAOListener(log.args.taoId, log.args.newListenerId));
+			} else {
+				dispatch(setNameListener(log.args.taoId, log.args.newListenerId));
+			}
 			break;
 		case "SetSpeaker":
-			dispatch(setTAOSpeaker(log.args.taoId, log.args.newSpeakerId));
+			if (isTAO) {
+				dispatch(setTAOSpeaker(log.args.taoId, log.args.newSpeakerId));
+			} else {
+				dispatch(setNameSpeaker(log.args.taoId, log.args.newSpeakerId));
+			}
 			break;
 		default:
 			break;

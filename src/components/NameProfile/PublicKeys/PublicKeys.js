@@ -187,6 +187,7 @@ class PublicKeys extends React.Component {
 			processingTransaction,
 			publicKeyInProcess
 		} = this.state;
+		const { singlePageView } = this.props;
 
 		let ownerFeatures = null,
 			publicKeysContent = null;
@@ -228,7 +229,7 @@ class PublicKeys extends React.Component {
 		}
 		ownerFeatures = (
 			<OwnerContent>
-				<Title className="margin-top">Public Keys</Title>
+				<Title className={singlePageView ? "margin-top" : ""}>Public Keys</Title>
 				<FieldContainer>
 					<FieldValue>{publicKeysContent}</FieldValue>
 				</FieldContainer>

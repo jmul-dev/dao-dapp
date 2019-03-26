@@ -10,6 +10,7 @@ class GlobalReducerState {
 		this.taos = [];
 		this.settingTAOId = null;
 		this.taoPositions = [];
+		this.namePositions = [];
 	}
 }
 
@@ -183,6 +184,37 @@ const handleSetTAOSpeaker = (state, action) => {
 	};
 };
 
+const handleAppendNamePosition = (state, action) => {
+	const _namePositions = state.namePositions.slice();
+	if (!_namePositions.find((name) => name.nameId === action.name.nameId)) {
+		_namePositions.push(action.name);
+	}
+	return {
+		...state,
+		namePositions: _namePositions
+	};
+};
+
+const handleSetNameListener = (state, action) => {
+	const _namePositions = state.namePositions.slice();
+	const nameIndex = _namePositions.findIndex((name) => name.nameId === action.nameId);
+	_namePositions[nameIndex].listenerId = action.listenerId;
+	return {
+		...state,
+		namePositions: _namePositions
+	};
+};
+
+const handleSetNameSpeaker = (state, action) => {
+	const _namePositions = state.namePositions.slice();
+	const nameIndex = _namePositions.findIndex((name) => name.nameId === action.nameId);
+	_namePositions[nameIndex].speakerId = action.speakerId;
+	return {
+		...state,
+		namePositions: _namePositions
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.PAST_EVENTS_RETRIEVED:
@@ -213,6 +245,12 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleSetTAOListener(state, action);
 		case actionsEnums.SET_TAO_SPEAKER:
 			return handleSetTAOSpeaker(state, action);
+		case actionsEnums.APPEND_NAME_POSITION:
+			return handleAppendNamePosition(state, action);
+		case actionsEnums.SET_NAME_LISTENER:
+			return handleSetNameListener(state, action);
+		case actionsEnums.SET_NAME_SPEAKER:
+			return handleSetNameSpeaker(state, action);
 		default:
 			return state;
 	}
