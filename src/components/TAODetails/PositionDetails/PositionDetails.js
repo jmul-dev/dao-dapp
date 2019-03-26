@@ -39,7 +39,7 @@ class PositionDetails extends React.Component {
 	}
 
 	render() {
-		const { id, nameId, position, getTAOPosition } = this.props;
+		const { id, nameId, position, getTAOPosition, singlePageView } = this.props;
 		const { showForm, showSetAdvocateForm, showSetListenerForm, showSetSpeakerForm } = this.state;
 		if (!id || !nameId || !position) {
 			return null;
@@ -48,7 +48,7 @@ class PositionDetails extends React.Component {
 		if (!showForm) {
 			return (
 				<Wrapper>
-					<Title className="margin-top">Position</Title>
+					<Title className={singlePageView ? "margin-top" : ""}>Position</Title>
 					<FieldContainer>
 						<FieldName className="small">Advocate</FieldName>
 						<FieldValue className="small">
@@ -95,14 +95,14 @@ class PositionDetails extends React.Component {
 			if (showSetAdvocateForm) {
 				return (
 					<Wrapper>
-						<Title className="margin-top">Set New Advocate</Title>
+						<Title className={singlePageView ? "margin-top" : ""}>Set New Advocate</Title>
 						<SetAdvocateFormContainer id={id} toggleShowForm={this.toggleShowForm} getTAOPosition={getTAOPosition} />
 					</Wrapper>
 				);
 			} else if (showSetListenerForm) {
 				return (
 					<Wrapper>
-						<Title className="margin-top">Set New Listener</Title>
+						<Title className={singlePageView ? "margin-top" : ""}>Set New Listener</Title>
 						<SetListenerFormContainer
 							id={id}
 							currentListenerId={position.listener.id}
@@ -114,7 +114,7 @@ class PositionDetails extends React.Component {
 			} else if (showSetSpeakerForm) {
 				return (
 					<Wrapper>
-						<Title className="margin-top">Set New Speaker</Title>
+						<Title className={singlePageView ? "margin-top" : ""}>Set New Speaker</Title>
 						<SetSpeakerFormContainer
 							id={id}
 							currentSpeakerId={position.speaker.id}

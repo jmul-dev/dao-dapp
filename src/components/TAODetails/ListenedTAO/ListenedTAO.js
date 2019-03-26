@@ -4,7 +4,7 @@ import "./style.css";
 
 class ListenedTAO extends React.Component {
 	render() {
-		const { id, taos, taoPositions } = this.props;
+		const { id, taos, taoPositions, singlePageView } = this.props;
 		if (!taos || !taoPositions) {
 			return null;
 		}
@@ -35,7 +35,7 @@ class ListenedTAO extends React.Component {
 
 		return (
 			<Wrapper>
-				<Title className="margin-top">Listened TAOs</Title>
+				<Title className={singlePageView ? "margin-top" : ""}>Listened TAOs</Title>
 				{listenedTAOs.length ? (
 					<Table data={listenedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 				) : (

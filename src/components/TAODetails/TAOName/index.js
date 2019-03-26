@@ -3,14 +3,14 @@ import { Wrapper, Title, Header, Ahref, Icon, LeftContainer, RightContainer } fr
 
 class TAOName extends React.Component {
 	render() {
-		const { id, name } = this.props;
+		const { id, name, singlePageView } = this.props;
 		if (!id || !name) {
 			return null;
 		}
 		return (
 			<Wrapper className="margin-bottom-20">
 				<LeftContainer>
-					<Title className="medium margin-top-20 margin-bottom-0">{name}</Title>
+					<Title className={`medium margin-bottom-0 ${singlePageView ? "margin-top-20" : ""}`}>{name}</Title>
 					<Header>{id}</Header>
 				</LeftContainer>
 				<RightContainer className="right">

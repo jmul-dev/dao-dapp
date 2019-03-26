@@ -14,6 +14,7 @@ class TAOPlot extends React.Component {
 		this.drawRadialCluster = this.drawRadialCluster.bind(this);
 		this.drawTree = this.drawTree.bind(this);
 		this.state = {
+			plotType: "forethought",
 			diameter: 500,
 			duration: 1500,
 			widthPadding: 100,
@@ -174,6 +175,7 @@ class TAOPlot extends React.Component {
 			.transition()
 			.duration(duration)
 			.style("stroke", Neon[2]);
+		this.setState({ plotType: "forethought" });
 	}
 
 	drawRadialTree() {
@@ -207,6 +209,7 @@ class TAOPlot extends React.Component {
 			.transition()
 			.duration(duration)
 			.style("stroke", Neon[0]);
+		this.setState({ plotType: "tao" });
 	}
 
 	drawRadialCluster() {
@@ -240,6 +243,7 @@ class TAOPlot extends React.Component {
 			.transition()
 			.duration(duration)
 			.style("stroke", Neon[1]);
+		this.setState({ plotType: "thought" });
 	}
 
 	drawTree() {
@@ -271,24 +275,42 @@ class TAOPlot extends React.Component {
 			.transition()
 			.duration(duration)
 			.style("stroke", Neon[3]);
+		this.setState({ plotType: "order" });
 	}
 
 	render() {
 		const { height, width } = this.props;
+		const { plotType } = this.state;
 		return (
 			<Wrapper className="dark-bg padding-20 center">
 				<form>
-					<div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
-						<Button type="button" className="btn btn-default" onClick={this.drawRadialTree}>
+					<div className="btn-group btn-group-sm" role="group">
+						<Button
+							type="button"
+							className={`btn btn-default ${plotType === "tao" ? "selected" : ""}`}
+							onClick={this.drawRadialTree}
+						>
 							TAO
 						</Button>
-						<Button type="button" className="btn btn-default" onClick={this.drawRadialCluster}>
+						<Button
+							type="button"
+							className={`btn btn-default ${plotType === "thought" ? "selected" : ""}`}
+							onClick={this.drawRadialCluster}
+						>
 							Thought
 						</Button>
-						<Button type="button" className="btn btn-default" onClick={this.drawTree}>
+						<Button
+							type="button"
+							className={`btn btn-default ${plotType === "order" ? "selected" : ""}`}
+							onClick={this.drawTree}
+						>
 							Order
 						</Button>
-						<Button type="button" className="btn btn-default" onClick={this.drawClusterTree}>
+						<Button
+							type="button"
+							className={`btn btn-default ${plotType === "forethought" ? "selected" : ""}`}
+							onClick={this.drawClusterTree}
+						>
 							ForeThought
 						</Button>
 					</div>

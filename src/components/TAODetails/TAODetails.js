@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer } from "components/";
+import { Tab, Nav } from "react-bootstrap";
+import { Button } from "./styledComponents";
 import { TAOName } from "./TAOName/";
 import { PositionDetailsContainer } from "./PositionDetails/";
 import { ListenedTAOContainer } from "./ListenedTAO/";
@@ -16,6 +18,8 @@ class TAODetails extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			singlePageView: true,
+			tabKey: "tao-info",
 			taoInfo: null,
 			taoDescription: null,
 			position: null,
@@ -32,6 +36,7 @@ class TAODetails extends React.Component {
 			dataPopulated: false
 		};
 		this.initialState = this.state;
+		this.toggleView = this.toggleView.bind(this);
 		this.getTAOPool = this.getTAOPool.bind(this);
 		this.getTAOPosition = this.getTAOPosition.bind(this);
 	}
@@ -56,6 +61,10 @@ class TAODetails extends React.Component {
 		} else if (this.props.taoPositions !== prevProps.taoPositions) {
 			await this.getTAOPosition();
 		}
+	}
+
+	toggleView() {
+		this.setState({ singlePageView: !this.state.singlePageView });
 	}
 
 	async getData() {
@@ -195,6 +204,8 @@ class TAODetails extends React.Component {
 		const { id } = this.props.params;
 		const { pastEventsRetrieved } = this.props;
 		const {
+			singlePageView,
+			tabKey,
 			taoInfo,
 			taoDescription,
 			position,
@@ -216,32 +227,131 @@ class TAODetails extends React.Component {
 
 		return (
 			<Wrapper className="padding-40">
-				<Ahref className="small" to="/">
-					Back to Dashboard
-				</Ahref>
-				<TAOName id={id} name={taoInfo.name} />
-				<MediumEditor text={taoDescription} />
-				<LeftContainer>
-					<PositionDetailsContainer id={id} position={position} getTAOPosition={this.getTAOPosition} />
-					<ListenedTAOContainer id={id} />
-					<SpokenTAOContainer id={id} />
-					<AncestryDetails ancestry={ancestry} />
-				</LeftContainer>
-				<RightContainer>
-					<Financials
-						id={id}
-						ethosCapStatus={ethosCapStatus}
-						ethosCapAmount={ethosCapAmount}
-						status={status}
-						poolTotalLogosWithdrawn={poolTotalLogosWithdrawn}
-						ethosBalance={ethosBalance}
-						pathosBalance={pathosBalance}
-						nameEthosStaked={nameEthosStaked}
-						namePathosStaked={namePathosStaked}
-						nameLogosWithdrawn={nameLogosWithdrawn}
-						getTAOPool={this.getTAOPool}
-					/>
-				</RightContainer>
+				<Wrapper className="margin-bottom-40">
+					<LeftContainer>
+						<Ahref className="small" to="/">
+							Back to Dashboard
+						</Ahref>
+					</LeftContainer>
+					<RightContainer className="right">
+						<div className="btn-group btn-group-sm" role="group">
+							<Button
+								type="button"
+								className={`btn btn-default ${!singlePageView ? "selected" : ""}`}
+								onClick={this.toggleView}
+							>
+								Tab View
+							</Button>
+							<Button
+								type="button"
+								className={`btn btn-default ${singlePageView ? "selected" : ""}`}
+								onClick={this.toggleView}
+							>
+								Single Page View
+							</Button>
+						</div>
+					</RightContainer>
+				</Wrapper>
+				{singlePageView ? (
+					<Wrapper>
+						<TAOName id={id} name={taoInfo.name} singlePageView={singlePageView} />
+						<MediumEditor text={taoDescription} singlePageView={singlePageView} />
+						<LeftContainer>
+							<PositionDetailsContainer
+								id={id}
+								position={position}
+								getTAOPosition={this.getTAOPosition}
+								singlePageView={singlePageView}
+							/>
+							<ListenedTAOContainer id={id} singlePageView={singlePageView} />
+							<SpokenTAOContainer id={id} singlePageView={singlePageView} />
+							<AncestryDetails ancestry={ancestry} singlePageView={singlePageView} />
+						</LeftContainer>
+						<RightContainer>
+							<Financials
+								id={id}
+								ethosCapStatus={ethosCapStatus}
+								ethosCapAmount={ethosCapAmount}
+								status={status}
+								poolTotalLogosWithdrawn={poolTotalLogosWithdrawn}
+								ethosBalance={ethosBalance}
+								pathosBalance={pathosBalance}
+								nameEthosStaked={nameEthosStaked}
+								namePathosStaked={namePathosStaked}
+								nameLogosWithdrawn={nameLogosWithdrawn}
+								getTAOPool={this.getTAOPool}
+								singlePageView={singlePageView}
+							/>
+						</RightContainer>
+					</Wrapper>
+				) : (
+					<Tab.Container id="tao-details" defaultActiveKey="tao-info" onSelect={(key) => this.setState({ tabKey: key })}>
+						<LeftContainer className="width-20">
+							<Nav className="flex-column">
+								<Nav.Item>
+									<Nav.Link eventKey="tao-info">TAO Info</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="position">Position</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="listened-tao">Listened TAOs</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="spoken-tao">Spoken TAOs</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="ancestry">Ancestry</Nav.Link>
+								</Nav.Item>
+								<Nav.Item>
+									<Nav.Link eventKey="financials">TAO Financials</Nav.Link>
+								</Nav.Item>
+							</Nav>
+						</LeftContainer>
+						<RightContainer className="width-80">
+							<Tab.Content>
+								<Tab.Pane eventKey="tao-info">
+									<TAOName id={id} name={taoInfo.name} singlePageView={singlePageView} />
+									<MediumEditor text={taoDescription} singlePageView={singlePageView} />
+								</Tab.Pane>
+								<Tab.Pane eventKey="position">
+									<PositionDetailsContainer
+										id={id}
+										position={position}
+										getTAOPosition={this.getTAOPosition}
+										singlePageView={singlePageView}
+									/>
+								</Tab.Pane>
+								<Tab.Pane eventKey="listened-tao">
+									<ListenedTAOContainer id={id} singlePageView={singlePageView} />
+								</Tab.Pane>
+								<Tab.Pane eventKey="spoken-tao">
+									<SpokenTAOContainer id={id} singlePageView={singlePageView} />
+								</Tab.Pane>
+								<Tab.Pane eventKey="ancestry">
+									<AncestryDetails ancestry={ancestry} singlePageView={singlePageView} />
+								</Tab.Pane>
+								<Tab.Pane eventKey="financials">
+									<Financials
+										id={id}
+										populateBar={tabKey === "financials"}
+										ethosCapStatus={ethosCapStatus}
+										ethosCapAmount={ethosCapAmount}
+										status={status}
+										poolTotalLogosWithdrawn={poolTotalLogosWithdrawn}
+										ethosBalance={ethosBalance}
+										pathosBalance={pathosBalance}
+										nameEthosStaked={nameEthosStaked}
+										namePathosStaked={namePathosStaked}
+										nameLogosWithdrawn={nameLogosWithdrawn}
+										getTAOPool={this.getTAOPool}
+										singlePageView={singlePageView}
+									/>
+								</Tab.Pane>
+							</Tab.Content>
+						</RightContainer>
+					</Tab.Container>
+				)}
 			</Wrapper>
 		);
 	}

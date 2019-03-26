@@ -3,14 +3,14 @@ import { Wrapper, Title, Ahref, FieldContainer, FieldName, FieldValue } from "co
 
 class AncestryDetails extends React.Component {
 	render() {
-		const { ancestry } = this.props;
+		const { ancestry, singlePageView } = this.props;
 		if (!ancestry) {
 			return null;
 		}
 
 		return (
 			<Wrapper>
-				<Title className="margin-top">Ancestry</Title>
+				<Title className={singlePageView ? "margin-top" : ""}>Ancestry</Title>
 				<FieldContainer>
 					<FieldName className="small">Parent</FieldName>
 					<FieldValue className="small">
