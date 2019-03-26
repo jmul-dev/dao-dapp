@@ -39,7 +39,7 @@ class SpokenTAO extends React.Component {
 				{spokenTAOs.length ? (
 					<Table data={spokenTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 				) : (
-					<Header>Currently, there is no TAO of which {selectedTAO.name} is the Speaker</Header>
+					<Header>Currently, {selectedTAO.name} is not a Speaker of any TAO</Header>
 				)}
 			</Wrapper>
 		);

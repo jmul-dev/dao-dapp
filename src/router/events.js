@@ -116,7 +116,7 @@ const _parseTAOFactoryEvent = async (dispatch, taoAncestry, log, nameId) => {
 	if (log.args.parentTypeId.toNumber() === 0) {
 		isChild = await promisify(taoAncestry.isChild)(log.args.parent, log.args.taoId);
 	}
-	dispatch(appendTAO({ ...log.args, isChild }));
+	dispatch(appendTAO({ ...log.args, isChild, children: [] }));
 	dispatch(
 		appendTAOPosition({
 			taoId: log.args.taoId,

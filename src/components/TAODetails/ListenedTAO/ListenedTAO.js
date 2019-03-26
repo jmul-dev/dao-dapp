@@ -39,7 +39,7 @@ class ListenedTAO extends React.Component {
 				{listenedTAOs.length ? (
 					<Table data={listenedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 				) : (
-					<Header>Currently, there is no TAO of which {selectedTAO.name} is the Listener</Header>
+					<Header>Currently, {selectedTAO.name} is not a Listener of any TAO</Header>
 				)}
 			</Wrapper>
 		);

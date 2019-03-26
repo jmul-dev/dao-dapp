@@ -89,7 +89,7 @@ class OwnTAO extends React.Component {
 								{advocatedTAOs.length ? (
 									<Table data={advocatedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 								) : (
-									<Header>Currently, you have no TAO of which you are the Advocate</Header>
+									<Header>Currently, you are not an Advocate of any TAO</Header>
 								)}
 							</Tab.Pane>
 							<Tab.Pane eventKey="need-approval">
@@ -121,7 +121,7 @@ class OwnTAO extends React.Component {
 								{listenedTAOs.length ? (
 									<Table data={listenedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 								) : (
-									<Header>Currently, you have no TAO of which you are the Listener</Header>
+									<Header>Currently, you are not a Listener of any TAO</Header>
 								)}
 							</Tab.Pane>
 							<Tab.Pane eventKey="speaker">
@@ -129,7 +129,7 @@ class OwnTAO extends React.Component {
 								{spokenTAOs.length ? (
 									<Table data={spokenTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 								) : (
-									<Header>Currently, you have no TAO of which you are the Speaker</Header>
+									<Header>Currently, you are not a Speaker of any TAO</Header>
 								)}
 							</Tab.Pane>
 						</Tab.Content>

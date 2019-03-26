@@ -6,7 +6,7 @@ import { TAONameContainer } from "./TAOName/";
 import { PositionDetailsContainer } from "./PositionDetails/";
 import { ListenedTAOContainer } from "./ListenedTAO/";
 import { SpokenTAOContainer } from "./SpokenTAO/";
-import { AncestryDetails } from "./AncestryDetails/";
+import { AncestryDetailsContainer } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
 import { get, encodeParams } from "utils/";
 
@@ -273,7 +273,7 @@ class TAODetails extends React.Component {
 							/>
 							<ListenedTAOContainer id={id} singlePageView={singlePageView} />
 							<SpokenTAOContainer id={id} singlePageView={singlePageView} />
-							<AncestryDetails ancestry={ancestry} singlePageView={singlePageView} />
+							<AncestryDetailsContainer id={id} ancestry={ancestry} singlePageView={singlePageView} />
 						</LeftContainer>
 						<RightContainer>
 							<Financials
@@ -343,7 +343,7 @@ class TAODetails extends React.Component {
 									<SpokenTAOContainer id={id} singlePageView={singlePageView} />
 								</Tab.Pane>
 								<Tab.Pane eventKey="ancestry">
-									<AncestryDetails ancestry={ancestry} singlePageView={singlePageView} />
+									<AncestryDetailsContainer id={id} ancestry={ancestry} singlePageView={singlePageView} />
 								</Tab.Pane>
 								<Tab.Pane eventKey="financials">
 									<Financials

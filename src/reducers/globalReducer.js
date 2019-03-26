@@ -60,6 +60,9 @@ const handleSetTAOAsChild = (state, action) => {
 		if (tao.taoId === action.tao.childId && tao.parent === action.tao.taoId) {
 			tao.isChild = true;
 		}
+		if (tao.taoId === action.tao.taoId && !tao.children.find((taoId) => taoId === action.tao.childId)) {
+			tao.children.push(action.tao.childId);
+		}
 		_taos.push(tao);
 	});
 	return {
