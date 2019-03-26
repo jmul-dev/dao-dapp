@@ -230,9 +230,7 @@ class PublicKeys extends React.Component {
 		ownerFeatures = (
 			<OwnerContent>
 				<Title className={singlePageView ? "margin-top" : ""}>Public Keys</Title>
-				<FieldContainer>
-					<FieldValue>{publicKeysContent}</FieldValue>
-				</FieldContainer>
+				{publicKeysContent}
 				{!showAddKeyForm && !showTransferIonForm && (
 					<div>
 						<Icon className="animated bounceIn" onClick={this.toggleAddKeyForm} disabled={processingTransaction}>

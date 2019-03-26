@@ -4,6 +4,8 @@ export const OwnerContent = styled.div``;
 
 export const PublicKeyContainer = styled.div`
 	margin-bottom: 5px;
+	font-size: 0.875em;
+	color: #888888;
 
 	&.default {
 		color: #ffffff;
