@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { NameProfile } from "./NameProfile";
-import { toggleView } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
@@ -17,9 +16,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		toggleView: () => dispatch(toggleView())
-	};
+	return {};
 };
 
 export const NameProfileContainer = connect(

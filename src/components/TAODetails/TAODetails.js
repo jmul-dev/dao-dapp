@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer, GroupButton, NavLink } from "components/";
+import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer, NavLink } from "components/";
+import { TogglePageViewContainer } from "widgets/TogglePageView/";
 import { Tab, Nav } from "react-bootstrap";
 import { TAONameContainer } from "./TAOName/";
 import { PositionDetailsContainer } from "./PositionDetails/";
@@ -228,22 +229,7 @@ class TAODetails extends React.Component {
 						</Ahref>
 					</LeftContainer>
 					<RightContainer className="right">
-						<div className="btn-group btn-group-sm" role="group">
-							<GroupButton
-								type="button"
-								className={`btn btn-default ${!singlePageView ? "selected" : ""}`}
-								onClick={this.props.toggleView}
-							>
-								Tab View
-							</GroupButton>
-							<GroupButton
-								type="button"
-								className={`btn btn-default ${singlePageView ? "selected" : ""}`}
-								onClick={this.props.toggleView}
-							>
-								Single Page View
-							</GroupButton>
-						</div>
+						<TogglePageViewContainer />
 					</RightContainer>
 				</Wrapper>
 				{singlePageView ? (

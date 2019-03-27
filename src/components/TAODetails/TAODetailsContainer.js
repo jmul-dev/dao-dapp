@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { TAODetails } from "./TAODetails";
-import { toggleView } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
@@ -23,9 +22,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		toggleView: () => dispatch(toggleView())
-	};
+	return {};
 };
 
 export const TAODetailsContainer = connect(

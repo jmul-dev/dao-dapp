@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Wrapper, LeftContainer, RightContainer, GroupButton, NavLink } from "components/";
+import { Wrapper, LeftContainer, RightContainer, NavLink } from "components/";
+import { TogglePageViewContainer } from "widgets/TogglePageView/";
 import { Tab, Nav } from "react-bootstrap";
 import { ProfileContainer } from "./Profile/";
 import { PositionDetails } from "./PositionDetails/";
@@ -161,22 +162,7 @@ class NameProfile extends React.Component {
 				<Wrapper className="margin-bottom-40">
 					<LeftContainer />
 					<RightContainer className="right">
-						<div className="btn-group btn-group-sm" role="group">
-							<GroupButton
-								type="button"
-								className={`btn btn-default ${!singlePageView ? "selected" : ""}`}
-								onClick={this.props.toggleView}
-							>
-								Tab View
-							</GroupButton>
-							<GroupButton
-								type="button"
-								className={`btn btn-default ${singlePageView ? "selected" : ""}`}
-								onClick={this.props.toggleView}
-							>
-								Single Page View
-							</GroupButton>
-						</div>
+						<TogglePageViewContainer />
 					</RightContainer>
 				</Wrapper>
 				{singlePageView ? (
