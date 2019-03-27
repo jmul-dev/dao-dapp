@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Wrapper, Title, Header, Ahref, Table } from "components/";
-import "./style.css";
 
 class ListenedTAO extends React.Component {
 	render() {

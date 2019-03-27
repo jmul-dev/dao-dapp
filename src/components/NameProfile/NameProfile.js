@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, LeftContainer, RightContainer, GroupButton } from "components/";
+import { Wrapper, LeftContainer, RightContainer, GroupButton, NavLink } from "components/";
 import { Tab, Nav } from "react-bootstrap";
 import { ProfileContainer } from "./Profile/";
 import { PositionDetails } from "./PositionDetails/";
@@ -212,22 +212,22 @@ class NameProfile extends React.Component {
 						<LeftContainer className="width-20">
 							<Nav className="flex-column">
 								<Nav.Item>
-									<Nav.Link eventKey="profile">Profile</Nav.Link>
+									<NavLink eventKey="profile">Profile</NavLink>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="profile-image">Profile Image</Nav.Link>
+									<NavLink eventKey="profile-image">Profile Image</NavLink>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="position">Position</Nav.Link>
+									<NavLink eventKey="position">Position</NavLink>
 								</Nav.Item>
 								{isOwner && (
 									<Nav.Item>
-										<Nav.Link eventKey="logos-details">Logos Details</Nav.Link>
+										<NavLink eventKey="logos-details">Logos Details</NavLink>
 									</Nav.Item>
 								)}
 								{isOwner && (
 									<Nav.Item>
-										<Nav.Link eventKey="public-keys">Public Keys</Nav.Link>
+										<NavLink eventKey="public-keys">Public Keys</NavLink>
 									</Nav.Item>
 								)}
 							</Nav>

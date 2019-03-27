@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as d3 from "d3";
-import { Wrapper } from "components/";
+import { Wrapper, GroupButton } from "components/";
 import { Neon, NeonStroke } from "css/color.json";
-import { Button } from "./styledComponents";
 import { hashHistory } from "react-router";
 
 class TAOPlot extends React.Component {
@@ -285,34 +284,34 @@ class TAOPlot extends React.Component {
 			<Wrapper className="dark-bg padding-20 center">
 				<form>
 					<div className="btn-group btn-group-sm" role="group">
-						<Button
+						<GroupButton
 							type="button"
 							className={`btn btn-default ${plotType === "tao" ? "selected" : ""}`}
 							onClick={this.drawRadialTree}
 						>
 							TAO
-						</Button>
-						<Button
+						</GroupButton>
+						<GroupButton
 							type="button"
 							className={`btn btn-default ${plotType === "thought" ? "selected" : ""}`}
 							onClick={this.drawRadialCluster}
 						>
 							Thought
-						</Button>
-						<Button
+						</GroupButton>
+						<GroupButton
 							type="button"
 							className={`btn btn-default ${plotType === "order" ? "selected" : ""}`}
 							onClick={this.drawTree}
 						>
 							Order
-						</Button>
-						<Button
+						</GroupButton>
+						<GroupButton
 							type="button"
 							className={`btn btn-default ${plotType === "forethought" ? "selected" : ""}`}
 							onClick={this.drawClusterTree}
 						>
 							ForeThought
-						</Button>
+						</GroupButton>
 					</div>
 				</form>
 				<svg ref={(node) => (this.node = node)} width={width} height={height} />

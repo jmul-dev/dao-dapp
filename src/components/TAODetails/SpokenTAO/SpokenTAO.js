@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Wrapper, Title, Header, Ahref, Table } from "components/";
-import "./style.css";
 
 class SpokenTAO extends React.Component {
 	render() {

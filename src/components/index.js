@@ -3,6 +3,7 @@ import Form from "react-jsonschema-form";
 import { Link } from "react-router";
 import ReactTable from "react-table";
 import Editor from "react-medium-editor";
+import { Nav } from "react-bootstrap";
 
 import "css/react-table.css";
 import "css/medium-editor.css";
@@ -288,5 +289,19 @@ export const GroupButton = styled.button`
 	&.selected {
 		background-color: #ffffff;
 		color: #191919;
+	}
+`;
+
+export const NavLink = styled(Nav.Link)`
+	color: rgba(255, 255, 255, 0.5);
+	padding: 0.5rem 0;
+
+	:hover {
+		color: rgba(255, 255, 255, 0.8);
+	}
+
+	&.active {
+		color: rgba(255, 255, 255, 1);
+		font-weight: 800;
 	}
 `;

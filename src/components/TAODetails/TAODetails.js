@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer } from "components/";
+import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer, GroupButton, NavLink } from "components/";
 import { Tab, Nav } from "react-bootstrap";
-import { Button } from "./styledComponents";
 import { TAONameContainer } from "./TAOName/";
 import { PositionDetailsContainer } from "./PositionDetails/";
 import { ListenedTAOContainer } from "./ListenedTAO/";
@@ -230,20 +229,20 @@ class TAODetails extends React.Component {
 					</LeftContainer>
 					<RightContainer className="right">
 						<div className="btn-group btn-group-sm" role="group">
-							<Button
+							<GroupButton
 								type="button"
 								className={`btn btn-default ${!singlePageView ? "selected" : ""}`}
 								onClick={this.props.toggleView}
 							>
 								Tab View
-							</Button>
-							<Button
+							</GroupButton>
+							<GroupButton
 								type="button"
 								className={`btn btn-default ${singlePageView ? "selected" : ""}`}
 								onClick={this.props.toggleView}
 							>
 								Single Page View
-							</Button>
+							</GroupButton>
 						</div>
 					</RightContainer>
 				</Wrapper>
@@ -290,22 +289,22 @@ class TAODetails extends React.Component {
 						<LeftContainer className="width-20">
 							<Nav className="flex-column">
 								<Nav.Item>
-									<Nav.Link eventKey="tao-info">TAO Info</Nav.Link>
+									<NavLink eventKey="tao-info">TAO Info</NavLink>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="position">Position</Nav.Link>
+									<NavLink eventKey="position">Position</NavLink>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="listened-tao">Listened TAOs</Nav.Link>
+									<NavLink eventKey="listened-tao">Listened TAOs</NavLink>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="spoken-tao">Spoken TAOs</Nav.Link>
+									<NavLink eventKey="spoken-tao">Spoken TAOs</NavLink>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="ancestry">Ancestry</Nav.Link>
+									<NavLink eventKey="ancestry">Ancestry</NavLink>
 								</Nav.Item>
 								<Nav.Item>
-									<Nav.Link eventKey="financials">TAO Financials</Nav.Link>
+									<NavLink eventKey="financials">TAO Financials</NavLink>
 								</Nav.Item>
 							</Nav>
 						</LeftContainer>

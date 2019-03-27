@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Wrapper, Title, Header, Ahref, Table, LeftContainer, RightContainer } from "components/";
+import { Wrapper, Title, Header, Ahref, Table, LeftContainer, RightContainer, NavLink } from "components/";
 import { Tab, Nav } from "react-bootstrap";
-import "./style.css";
 
 class OwnTAO extends React.Component {
 	render() {
@@ -63,22 +62,22 @@ class OwnTAO extends React.Component {
 					<LeftContainer className="width-20">
 						<Nav className="flex-column">
 							<Nav.Item>
-								<Nav.Link eventKey="advocated">Advocated TAOs</Nav.Link>
+								<NavLink eventKey="advocated">Advocated TAOs</NavLink>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="need-approval">TAOs Need Approval</Nav.Link>
+								<NavLink eventKey="need-approval">TAOs Need Approval</NavLink>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="staked-ethos">Staked Ethos TAOs</Nav.Link>
+								<NavLink eventKey="staked-ethos">Staked Ethos TAOs</NavLink>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="staked-pathos">Staked Pathos TAOs</Nav.Link>
+								<NavLink eventKey="staked-pathos">Staked Pathos TAOs</NavLink>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="listener">Listened TAOs</Nav.Link>
+								<NavLink eventKey="listener">Listened TAOs</NavLink>
 							</Nav.Item>
 							<Nav.Item>
-								<Nav.Link eventKey="speaker">Spoken TAOs</Nav.Link>
+								<NavLink eventKey="speaker">Spoken TAOs</NavLink>
 							</Nav.Item>
 						</Nav>
 					</LeftContainer>
