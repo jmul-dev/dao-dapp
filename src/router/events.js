@@ -39,28 +39,19 @@ import NameTAOPosition from "contracts/NameTAOPosition.json";
 import AOLibrary from "contracts/AOLibrary.json";
 
 const promisify = require("tiny-promisify");
+const nameLookup = {};
 
 export const getNameFactoryEvent = (dispatch, networkId, currentBlockNumber) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const nameLookup = {};
 			const nameFactory = window.web3.eth.contract(NameFactory.abi).at(NameFactory.networks[networkId].address);
 			const receipt = await getTransactionReceipt(NameFactory.networks[networkId].transactionHash);
 			nameFactory.CreateName({}, { fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
 				if (!err) {
 					logs.forEach((log) => {
-						dispatch(appendName({ nameId: log.args.nameId, name: log.args.name }));
-						dispatch(
-							appendNamePosition({
-								nameId: log.args.nameId,
-								advocateId: log.args.nameId,
-								listenerId: log.args.nameId,
-								speakerId: log.args.nameId
-							})
-						);
-						nameLookup[log.args.nameId] = log.args.name;
+						_parseNameFactoryEvent(dispatch, log);
 					});
-					resolve(nameLookup);
+					resolve(true);
 				} else {
 					reject(err);
 				}
@@ -76,12 +67,25 @@ export const watchNameFactoryEvent = (dispatch, networkId, currentBlockNumber) =
 		const nameFactory = window.web3.eth.contract(NameFactory.abi).at(NameFactory.networks[networkId].address);
 		nameFactory.CreateName({}, { fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
 			if (!err) {
-				dispatch(appendName({ nameId: log.args.nameId, name: log.args.name }));
+				_parseNameFactoryEvent(dispatch, log);
 			}
 		});
 	} catch (e) {
 		console.log("error", e);
 	}
+};
+
+const _parseNameFactoryEvent = async (dispatch, log) => {
+	dispatch(appendName({ nameId: log.args.nameId, name: log.args.name }));
+	dispatch(
+		appendNamePosition({
+			nameId: log.args.nameId,
+			advocateId: log.args.nameId,
+			listenerId: log.args.nameId,
+			speakerId: log.args.nameId
+		})
+	);
+	nameLookup[log.args.nameId] = log.args.name;
 };
 
 export const getTAOFactoryEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
@@ -196,7 +200,7 @@ const _parseTAOAncestryEvent = async (dispatch, taoFactory, log, nameId) => {
 	}
 };
 
-export const getLogosEvent = (dispatch, networkId, currentBlockNumber, nameLookup, nameId) => {
+export const getLogosEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
@@ -204,7 +208,7 @@ export const getLogosEvent = (dispatch, networkId, currentBlockNumber, nameLooku
 			logos.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
-						await _parseLogosEvent(dispatch, log, nameLookup, nameId);
+						await _parseLogosEvent(dispatch, log, nameId);
 					});
 					resolve();
 				} else {
@@ -217,12 +221,12 @@ export const getLogosEvent = (dispatch, networkId, currentBlockNumber, nameLooku
 	});
 };
 
-export const watchLogosEvent = (dispatch, networkId, currentBlockNumber, nameLookup, nameId) => {
+export const watchLogosEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
 	try {
 		const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
 		logos.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
 			if (!err) {
-				await _parseLogosEvent(dispatch, log, nameLookup, nameId);
+				await _parseLogosEvent(dispatch, log, nameId);
 			}
 		});
 	} catch (e) {
@@ -230,7 +234,7 @@ export const watchLogosEvent = (dispatch, networkId, currentBlockNumber, nameLoo
 	}
 };
 
-const _parseLogosEvent = async (dispatch, log, nameLookup, nameId) => {
+const _parseLogosEvent = async (dispatch, log, nameId) => {
 	switch (log.event) {
 		case "PositionFrom":
 			if (log.args.from === nameId) {

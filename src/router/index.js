@@ -62,7 +62,6 @@ const promisify = require("tiny-promisify");
 class AppRouter extends React.Component {
 	_web3 = null;
 	_networkId = null;
-	_nameLookup = {};
 	_currentBlockNumber = null;
 	_nameId = EMPTY_ADDRESS;
 
@@ -116,10 +115,10 @@ class AppRouter extends React.Component {
 			this._currentBlockNumber = await getCurrentBlockNumber();
 
 			// Get and watch events
-			this._nameLookup = await getNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
+			await getNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
 			await getTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			await getTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			await getLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameLookup, this._nameId);
+			await getLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			await getTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			await getNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			dispatch(pastEventsRetrieved());
@@ -127,7 +126,7 @@ class AppRouter extends React.Component {
 			watchNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
 			watchTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameLookup, this._nameId);
+			watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 		} catch (e) {
