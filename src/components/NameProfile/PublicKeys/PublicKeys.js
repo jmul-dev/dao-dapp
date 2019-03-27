@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, Button, Icon, FieldContainer, FieldValue } from "components/";
+import { Wrapper, Title, Button, Icon } from "components/";
 import {
 	OwnerContent,
 	PublicKeyContainer,

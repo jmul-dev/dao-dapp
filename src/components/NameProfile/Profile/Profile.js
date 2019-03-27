@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, Header, FieldContainer, FieldName, FieldValue, Icon } from "components/";
+import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { waitForTransactionReceipt } from "utils/web3";
 
 class Profile extends React.Component {
