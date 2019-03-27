@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
 		singlePageView: state.appReducer.singlePageView,
 		namePositions: state.globalReducer.namePositions,
-		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
+		nameAccountRecovery: state.contractReducer.contracts.nameAccountRecovery
 	};
 };
 

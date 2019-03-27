@@ -24,6 +24,7 @@ class NameProfile extends React.Component {
 			nameInfo: null,
 			isListener: false,
 			isSpeaker: false,
+			isCompromised: false,
 			position: null,
 			profileImage: null,
 			dataPopulated: false
@@ -33,6 +34,7 @@ class NameProfile extends React.Component {
 		this.refreshProfileImage = this.refreshProfileImage.bind(this);
 		this.setListener = this.setListener.bind(this);
 		this.setSpeaker = this.setSpeaker.bind(this);
+		this.setCompromised = this.setCompromised.bind(this);
 	}
 
 	async componentDidMount() {
@@ -66,6 +68,7 @@ class NameProfile extends React.Component {
 			this.setState({ isOwner: true });
 		} else {
 			await this.checkListenerSpeaker();
+			await this.checkCompromised();
 		}
 		if (this._isMounted) {
 			this.setState({ dataPopulated: true });
@@ -102,6 +105,18 @@ class NameProfile extends React.Component {
 		const _position = await promisify(nameTAOPosition.getPositionById)(nameId);
 		if (this._isMounted) {
 			this.setState({ isListener: _position[3] === id, isSpeaker: _position[5] === id });
+		}
+	}
+
+	async checkCompromised() {
+		const { id } = this.props.params;
+		const { nameAccountRecovery } = this.props;
+		if (!id || !nameAccountRecovery) {
+			return;
+		}
+		const isCompromised = await promisify(nameAccountRecovery.isCompromised)(id);
+		if (this._isMounted) {
+			this.setState({ isCompromised });
 		}
 	}
 
@@ -151,10 +166,14 @@ class NameProfile extends React.Component {
 		this.setState({ isSpeaker: true });
 	}
 
+	setCompromised() {
+		this.setState({ isCompromised: true });
+	}
+
 	render() {
 		const { id } = this.props.params;
 		const { singlePageView, pastEventsRetrieved } = this.props;
-		const { tabKey, isOwner, nameInfo, isListener, isSpeaker, position, profileImage, dataPopulated } = this.state;
+		const { tabKey, isOwner, nameInfo, isListener, isSpeaker, isCompromised, position, profileImage, dataPopulated } = this.state;
 		if (!pastEventsRetrieved || !dataPopulated || typeof singlePageView === "undefined") {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
@@ -171,12 +190,15 @@ class NameProfile extends React.Component {
 					<Wrapper>
 						<LeftContainer className="width-65">
 							<ProfileContainer
+								id={id}
 								isOwner={isOwner}
 								nameInfo={nameInfo}
 								isListener={isListener}
 								isSpeaker={isSpeaker}
+								isCompromised={isCompromised}
 								setListener={this.setListener}
 								setSpeaker={this.setSpeaker}
+								setCompromised={this.setCompromised}
 							/>
 							<PositionDetails position={position} singlePageView={singlePageView} />
 							{isOwner && (
@@ -236,6 +258,7 @@ class NameProfile extends React.Component {
 							<Tab.Content>
 								<Tab.Pane eventKey="profile">
 									<ProfileContainer
+										id={id}
 										isOwner={isOwner}
 										nameInfo={nameInfo}
 										isListener={isListener}
