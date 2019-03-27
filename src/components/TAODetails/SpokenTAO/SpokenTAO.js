@@ -34,7 +34,7 @@ class SpokenTAO extends React.Component {
 
 		return (
 			<Wrapper>
-				<Title className={singlePageView ? "margin-top" : ""}>Spoken TAOs</Title>
+				<Title className={singlePageView ? "margin-top" : ""}>TAOs Where This TAO is The Speaker</Title>
 				{spokenTAOs.length ? (
 					<Table data={spokenTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 				) : (

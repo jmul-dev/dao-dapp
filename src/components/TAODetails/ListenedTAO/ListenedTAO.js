@@ -34,7 +34,7 @@ class ListenedTAO extends React.Component {
 
 		return (
 			<Wrapper>
-				<Title className={singlePageView ? "margin-top" : ""}>Listened TAOs</Title>
+				<Title className={singlePageView ? "margin-top" : ""}>TAOs Where This TAO is The Listener</Title>
 				{listenedTAOs.length ? (
 					<Table data={listenedTAOs} columns={columns} defaultPageSize={5} filterable={true} />
 				) : (

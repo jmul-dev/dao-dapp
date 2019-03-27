@@ -4,6 +4,7 @@ import { TogglePageViewContainer } from "widgets/TogglePageView/";
 import { Tab, Nav } from "react-bootstrap";
 import { ProfileContainer } from "./Profile/";
 import { PositionDetails } from "./PositionDetails/";
+import { ListenedNameContainer } from "./ListenedName/";
 import { ProfileImage } from "./ProfileImage/";
 import { PublicKeysContainer } from "./PublicKeys/";
 import { LogosDetailsContainer } from "./LogosDetails/";
@@ -177,6 +178,7 @@ class NameProfile extends React.Component {
 								setSpeaker={this.setSpeaker}
 							/>
 							<PositionDetails position={position} singlePageView={singlePageView} />
+							{isOwner && <ListenedNameContainer id={id} singlePageView={singlePageView} />}
 						</LeftContainer>
 						<RightContainer className="width-35">
 							<ProfileImage isOwner={isOwner} profileImage={profileImage} refreshProfileImage={this.refreshProfileImage} />
@@ -207,14 +209,17 @@ class NameProfile extends React.Component {
 									<NavLink eventKey="position">Position</NavLink>
 								</Nav.Item>
 								{isOwner && (
-									<Nav.Item>
-										<NavLink eventKey="logos-details">Logos Details</NavLink>
-									</Nav.Item>
-								)}
-								{isOwner && (
-									<Nav.Item>
-										<NavLink eventKey="public-keys">Public Keys</NavLink>
-									</Nav.Item>
+									<Wrapper>
+										<Nav.Item>
+											<NavLink eventKey="listened-names">Listened Names</NavLink>
+										</Nav.Item>
+										<Nav.Item>
+											<NavLink eventKey="logos-details">Logos Details</NavLink>
+										</Nav.Item>
+										<Nav.Item>
+											<NavLink eventKey="public-keys">Public Keys</NavLink>
+										</Nav.Item>
+									</Wrapper>
 								)}
 							</Nav>
 						</LeftContainer>
@@ -240,6 +245,11 @@ class NameProfile extends React.Component {
 								<Tab.Pane eventKey="position">
 									<PositionDetails position={position} singlePageView={singlePageView} />
 								</Tab.Pane>
+								{isOwner && (
+									<Tab.Pane eventKey="listened-names">
+										<ListenedNameContainer id={id} singlePageView={singlePageView} />
+									</Tab.Pane>
+								)}
 								{isOwner && (
 									<Tab.Pane eventKey="logos-details">
 										<LogosDetailsContainer
