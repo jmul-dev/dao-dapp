@@ -5,6 +5,7 @@ import { Tab, Nav } from "react-bootstrap";
 import { ProfileContainer } from "./Profile/";
 import { PositionDetails } from "./PositionDetails/";
 import { ListenedNameContainer } from "./ListenedName/";
+import { SpokenNameContainer } from "./SpokenName/";
 import { ProfileImage } from "./ProfileImage/";
 import { PublicKeysContainer } from "./PublicKeys/";
 import { LogosDetailsContainer } from "./LogosDetails/";
@@ -178,7 +179,12 @@ class NameProfile extends React.Component {
 								setSpeaker={this.setSpeaker}
 							/>
 							<PositionDetails position={position} singlePageView={singlePageView} />
-							{isOwner && <ListenedNameContainer id={id} singlePageView={singlePageView} />}
+							{isOwner && (
+								<Wrapper>
+									<ListenedNameContainer id={id} singlePageView={singlePageView} />
+									<SpokenNameContainer id={id} singlePageView={singlePageView} />
+								</Wrapper>
+							)}
 						</LeftContainer>
 						<RightContainer className="width-35">
 							<ProfileImage isOwner={isOwner} profileImage={profileImage} refreshProfileImage={this.refreshProfileImage} />
@@ -212,6 +218,9 @@ class NameProfile extends React.Component {
 									<Wrapper>
 										<Nav.Item>
 											<NavLink eventKey="listened-names">Listened Names</NavLink>
+										</Nav.Item>
+										<Nav.Item>
+											<NavLink eventKey="spoken-names">Spoken Names</NavLink>
 										</Nav.Item>
 										<Nav.Item>
 											<NavLink eventKey="logos-details">Logos Details</NavLink>
@@ -248,6 +257,11 @@ class NameProfile extends React.Component {
 								{isOwner && (
 									<Tab.Pane eventKey="listened-names">
 										<ListenedNameContainer id={id} singlePageView={singlePageView} />
+									</Tab.Pane>
+								)}
+								{isOwner && (
+									<Tab.Pane eventKey="spoken-names">
+										<SpokenNameContainer id={id} singlePageView={singlePageView} />
 									</Tab.Pane>
 								)}
 								{isOwner && (
