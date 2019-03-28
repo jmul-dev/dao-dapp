@@ -52,7 +52,9 @@ import {
 	getTAOPoolEvent,
 	watchTAOPoolEvent,
 	getNameTAOPositionEvent,
-	watchNameTAOPositionEvent
+	watchNameTAOPositionEvent,
+	getNameAccountRecoveryEvent,
+	watchNameAccountRecoveryEvent
 } from "./events";
 
 import { EMPTY_ADDRESS } from "common/constants";
@@ -121,6 +123,7 @@ class AppRouter extends React.Component {
 			await getLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			await getTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			await getNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+			await getNameAccountRecoveryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			dispatch(pastEventsRetrieved());
 
 			watchNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
@@ -129,6 +132,7 @@ class AppRouter extends React.Component {
 			watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 			watchNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+			watchNameAccountRecoveryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}

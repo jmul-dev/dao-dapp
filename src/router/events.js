@@ -1,5 +1,6 @@
 import { getTransactionReceipt } from "utils/web3";
 import { asyncForEach } from "utils/";
+import { BigNumber } from "bignumber.js";
 
 import {
 	appendName,
@@ -26,7 +27,12 @@ import {
 	setTAOSpeaker,
 	appendNamePosition,
 	setNameListener,
-	setNameSpeaker
+	setNameSpeaker,
+	appendNameCompromised,
+	setNameCompromised,
+	setLoggedInNameCompromised,
+	resetNameCompromised,
+	resetLoggedInNameCompromised
 } from "./actions";
 
 // Contracts
@@ -37,6 +43,7 @@ import Logos from "contracts/Logos.json";
 import TAOPool from "contracts/TAOPool.json";
 import NameTAOPosition from "contracts/NameTAOPosition.json";
 import AOLibrary from "contracts/AOLibrary.json";
+import NameAccountRecovery from "contracts/NameAccountRecovery.json";
 
 const promisify = require("tiny-promisify");
 const nameLookup = {};
@@ -83,6 +90,14 @@ const _parseNameFactoryEvent = async (dispatch, log) => {
 			advocateId: log.args.nameId,
 			listenerId: log.args.nameId,
 			speakerId: log.args.nameId
+		})
+	);
+	dispatch(
+		appendNameCompromised({
+			nameId: log.args.nameId,
+			compromised: false,
+			submittedTimestamp: new BigNumber(0),
+			lockedUntilTimestamp: new BigNumber(0)
 		})
 	);
 	nameLookup[log.args.nameId] = log.args.name;
@@ -371,6 +386,64 @@ const _parseNameTAOPositionEvent = async (dispatch, aoLibrary, log, nameId) => {
 				dispatch(setTAOSpeaker(log.args.taoId, log.args.newSpeakerId));
 			} else {
 				dispatch(setNameSpeaker(log.args.taoId, log.args.newSpeakerId));
+			}
+			break;
+		default:
+			break;
+	}
+};
+
+export const getNameAccountRecoveryEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const nameAccountRecovery = window.web3.eth
+				.contract(NameAccountRecovery.abi)
+				.at(NameAccountRecovery.networks[networkId].address);
+			const receipt = await getTransactionReceipt(NameAccountRecovery.networks[networkId].transactionHash);
+			nameAccountRecovery.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+				if (!err) {
+					logs.forEach((log) => {
+						_parseNameAccountRecoveryEvent(dispatch, nameAccountRecovery, log, nameId);
+					});
+					resolve();
+				} else {
+					reject(err);
+				}
+			});
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+
+export const watchNameAccountRecoveryEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	try {
+		const nameAccountRecovery = window.web3.eth.contract(NameAccountRecovery.abi).at(NameAccountRecovery.networks[networkId].address);
+		nameAccountRecovery.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
+			if (!err) {
+				_parseNameAccountRecoveryEvent(dispatch, nameAccountRecovery, log, nameId);
+			}
+		});
+	} catch (e) {
+		console.log("error", e);
+	}
+};
+
+const _parseNameAccountRecoveryEvent = async (dispatch, nameAccountRecovery, log, nameId) => {
+	switch (log.event) {
+		case "SubmitAccountRecovery":
+			const isCompromised = await promisify(nameAccountRecovery.isCompromised)(log.args.nameId);
+			if (isCompromised) {
+				dispatch(setNameCompromised(log.args.nameId, log.args.submittedTimestamp, log.args.lockedUntilTimestamp));
+				if (log.args.nameId === nameId) {
+					dispatch(setLoggedInNameCompromised(log.args.submittedTimestamp, log.args.lockedUntilTimestamp));
+				}
+			}
+			break;
+		case "SetNameNewAddress":
+			dispatch(resetNameCompromised(log.args.nameId));
+			if (log.args.nameId === nameId) {
+				dispatch(resetLoggedInNameCompromised());
 			}
 			break;
 		default:

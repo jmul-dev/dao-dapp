@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
 		singlePageView: state.appReducer.singlePageView,
 		namePositions: state.globalReducer.namePositions,
 		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
-		nameAccountRecovery: state.contractReducer.contracts.nameAccountRecovery
+		nameAccountRecovery: state.contractReducer.contracts.nameAccountRecovery,
+		namesCompromised: state.globalReducer.namesCompromised
 	};
 };
 

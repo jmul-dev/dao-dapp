@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { App } from "./App";
-import { detectMobileBrowser, setNameId } from "./actions";
+import { detectMobileBrowser, setNameId, setLoggedInNameCompromised, resetLoggedInNameCompromised } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
@@ -8,14 +8,19 @@ const mapStateToProps = (state) => {
 		networkId: state.web3Reducer.networkId,
 		accounts: state.web3Reducer.accounts,
 		nameFactory: state.contractReducer.contracts.nameFactory,
-		nameId: state.nameReducer.nameId
+		nameId: state.nameReducer.nameId,
+		nameAccountRecovery: state.contractReducer.contracts.nameAccountRecovery,
+		nameCompromised: state.nameReducer.nameCompromised
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		detectMobileBrowser: (isMobileBrowser) => dispatch(detectMobileBrowser(isMobileBrowser)),
-		setNameId: (nameId) => dispatch(setNameId(nameId))
+		setNameId: (nameId) => dispatch(setNameId(nameId)),
+		setLoggedInNameCompromised: (submittedTimestamp, lockedUntilTimestamp) =>
+			dispatch(setLoggedInNameCompromised(submittedTimestamp, lockedUntilTimestamp)),
+		resetLoggedInNameCompromised: () => dispatch(resetLoggedInNameCompromised())
 	};
 };
 

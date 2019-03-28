@@ -53,16 +53,20 @@ class PositionLogosForm extends React.Component {
 
 	render() {
 		const { error, errorMessage, formLoading } = this.state;
-		const { names, nameId } = this.props;
-		if (!names || !nameId) {
+		const { names, namesCompromised, nameId } = this.props;
+		if (!names || !namesCompromised || !nameId) {
 			return null;
 		}
 		const _names = names.filter((_name) => _name.nameId !== nameId);
 		const _enum = [];
 		const _enumNames = [];
+		const _currentTimestamp = Math.round(new Date().getTime() / 1000);
 		_names.forEach((_name) => {
-			_enum.push(_name.nameId);
-			_enumNames.push(`${_name.name} (${_name.nameId})`);
+			const _compromised = namesCompromised.find((name) => name.nameId === _name.nameId);
+			if (!_compromised.compromised || (_compromised.compromised && _compromised.lockedUntilTimestamp.lte(_currentTimestamp))) {
+				_enum.push(_name.nameId);
+				_enumNames.push(`${_name.name} (${_name.nameId})`);
+			}
 		});
 		schema.properties.recipient.enum = _enum;
 		schema.properties.recipient.enumNames = _enumNames;

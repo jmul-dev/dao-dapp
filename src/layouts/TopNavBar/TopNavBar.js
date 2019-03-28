@@ -77,7 +77,7 @@ class TopNavBar extends React.Component {
 	}
 
 	render() {
-		const { nameId, nameInfo, taoCurrencyBalances, profileImage } = this.props;
+		const { nameId, nameInfo, taoCurrencyBalances, profileImage, compromised } = this.props;
 		if (!nameId || !nameInfo || !taoCurrencyBalances) return null;
 		return (
 			<Navbar bg="dark" variant="dark" sticky="top">
@@ -87,47 +87,53 @@ class TopNavBar extends React.Component {
 					</Link>
 				</Navbar.Brand>
 				<Navbar.Toggle />
-				<Nav className="mr-auto">
-					<Ahref to="/">
-						<Icon className="animated bounceIn navbar">
-							<img src={process.env.PUBLIC_URL + "/images/view_taos_plot.png"} alt={"TAO Map"} />
-							<div>TAO Map</div>
-						</Icon>
-					</Ahref>
-					<Ahref to="/view-own-taos">
-						<Icon className="animated bounceIn navbar">
-							<img src={process.env.PUBLIC_URL + "/images/view_own_taos.png"} alt={"Own TAOs"} />
-							<div>Own TAOs</div>
-						</Icon>
-					</Ahref>
-					<Ahref to="/names">
-						<Icon className="animated bounceIn navbar">
-							<img src={process.env.PUBLIC_URL + "/images/view_names.png"} alt={"View Names"} />
-							<div>View Names</div>
-						</Icon>
-					</Ahref>
-					<Ahref to="/create-tao">
-						<Icon className="animated bounceIn navbar">
-							<img src={process.env.PUBLIC_URL + "/images/create_tao.png"} alt={"Create TAO"} />
-							<div>Create TAO</div>
-						</Icon>
-					</Ahref>
-				</Nav>
+				{!compromised && (
+					<Nav className="mr-auto">
+						<Ahref to="/">
+							<Icon className="animated bounceIn navbar">
+								<img src={process.env.PUBLIC_URL + "/images/view_taos_plot.png"} alt={"TAO Map"} />
+								<div>TAO Map</div>
+							</Icon>
+						</Ahref>
+						<Ahref to="/view-own-taos">
+							<Icon className="animated bounceIn navbar">
+								<img src={process.env.PUBLIC_URL + "/images/view_own_taos.png"} alt={"Own TAOs"} />
+								<div>Own TAOs</div>
+							</Icon>
+						</Ahref>
+						<Ahref to="/names">
+							<Icon className="animated bounceIn navbar">
+								<img src={process.env.PUBLIC_URL + "/images/view_names.png"} alt={"View Names"} />
+								<div>View Names</div>
+							</Icon>
+						</Ahref>
+						<Ahref to="/create-tao">
+							<Icon className="animated bounceIn navbar">
+								<img src={process.env.PUBLIC_URL + "/images/create_tao.png"} alt={"Create TAO"} />
+								<div>Create TAO</div>
+							</Icon>
+						</Ahref>
+					</Nav>
+				)}
 				<Navbar.Collapse className="justify-content-end">
+					{!compromised && (
+						<div>
+							<Navbar.Text>
+								<CurrencyName className="ethos">Ethos</CurrencyName>
+								<CurrencyValue>{taoCurrencyBalances.ethos.toNumber()}</CurrencyValue>
+							</Navbar.Text>
+							<Navbar.Text>
+								<CurrencyName className="pathos">Pathos</CurrencyName>
+								<CurrencyValue>{taoCurrencyBalances.pathos.toNumber()}</CurrencyValue>
+							</Navbar.Text>
+							<Navbar.Text>
+								<CurrencyName className="logos">Logos</CurrencyName>
+								<CurrencyValue>{taoCurrencyBalances.logos.toNumber()}</CurrencyValue>
+							</Navbar.Text>
+						</div>
+					)}
 					<Navbar.Text>
-						<CurrencyName className="ethos">Ethos</CurrencyName>
-						<CurrencyValue>{taoCurrencyBalances.ethos.toNumber()}</CurrencyValue>
-					</Navbar.Text>
-					<Navbar.Text>
-						<CurrencyName className="pathos">Pathos</CurrencyName>
-						<CurrencyValue>{taoCurrencyBalances.pathos.toNumber()}</CurrencyValue>
-					</Navbar.Text>
-					<Navbar.Text>
-						<CurrencyName className="logos">Logos</CurrencyName>
-						<CurrencyValue>{taoCurrencyBalances.logos.toNumber()}</CurrencyValue>
-					</Navbar.Text>
-					<Navbar.Text>
-						<Ahref to={`/profile/${nameId}`}>
+						<Ahref to={!compromised ? `/profile/${nameId}` : "/"}>
 							{profileImage ? (
 								<div>
 									<BackgroundImage style={{ backgroundImage: `url(${profileImage})` }} />

@@ -5,6 +5,7 @@ class NameReducerState {
 	constructor() {
 		this.nameId = null;
 		this.nameInfo = null;
+		this.nameCompromised = { compromised: false, submittedTimestamp: new BigNumber(0), lockedUntilTimestamp: new BigNumber(0) };
 		this.profileImage = null;
 		this.taoCurrencyBalances = null;
 		this.taosNeedApproval = [];
@@ -26,6 +27,28 @@ const handleSetNameInfo = (state, action) => {
 	return {
 		...state,
 		nameInfo: action.nameInfo
+	};
+};
+
+const handleSetLoggedInNameCompromised = (state, action) => {
+	const { nameCompromised } = state;
+	nameCompromised.compromised = true;
+	nameCompromised.submittedTimestamp = action.submittedTimestamp;
+	nameCompromised.lockedUntilTimestamp = action.lockedUntilTimestamp;
+	return {
+		...state,
+		nameCompromised
+	};
+};
+
+const handleResetLoggedInNameCompromised = (state, action) => {
+	const { nameCompromised } = state;
+	nameCompromised.compromised = false;
+	nameCompromised.submittedTimestamp = new BigNumber(0);
+	nameCompromised.lockedUntilTimestamp = new BigNumber(0);
+	return {
+		...state,
+		nameCompromised
 	};
 };
 
@@ -187,6 +210,10 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleSetNameId(state, action);
 		case actionsEnums.SET_NAME_INFO:
 			return handleSetNameInfo(state, action);
+		case actionsEnums.SET_LOGGED_IN_NAME_COMPROMISED:
+			return handleSetLoggedInNameCompromised(state, action);
+		case actionsEnums.RESET_LOGGED_IN_NAME_COMPROMISED:
+			return handleResetLoggedInNameCompromised(state, action);
 		case actionsEnums.SET_PROFILE_IMAGE:
 			return handleSetProfileImage(state, action);
 		case actionsEnums.SET_TAO_CURRENCY_BALANCES:

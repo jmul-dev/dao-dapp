@@ -39,6 +39,9 @@ export const Wrapper = styled.div`
 	&.center {
 		text-align: center;
 	}
+	&.white {
+		color: #ffffff;
+	}
 `;
 
 export const Title = styled.div`
@@ -46,6 +49,9 @@ export const Title = styled.div`
 	font-weight: 500;
 	margin-bottom: 40px;
 
+	&.small {
+		font-size: 1em;
+	}
 	&.medium {
 		font-size: 2.5em;
 	}

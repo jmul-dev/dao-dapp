@@ -10,6 +10,7 @@ import { ProfileImage } from "./ProfileImage/";
 import { PublicKeysContainer } from "./PublicKeys/";
 import { LogosDetailsContainer } from "./LogosDetails/";
 import { encodeParams, get } from "utils/";
+import { BigNumber } from "bignumber.js";
 
 const promisify = require("tiny-promisify");
 
@@ -25,6 +26,7 @@ class NameProfile extends React.Component {
 			isListener: false,
 			isSpeaker: false,
 			isCompromised: false,
+			lockedUntilTimestamp: new BigNumber(0),
 			position: null,
 			profileImage: null,
 			dataPopulated: false
@@ -52,6 +54,9 @@ class NameProfile extends React.Component {
 			await this.getData();
 		} else if (this.props.namePositions !== prevProps.namePositions) {
 			await this.getNamePosition();
+			await this.checkListenerSpeaker();
+		} else if (this.props.namesCompromised !== prevProps.namesCompromised) {
+			await this.checkCompromised();
 		}
 	}
 
@@ -115,8 +120,9 @@ class NameProfile extends React.Component {
 			return;
 		}
 		const isCompromised = await promisify(nameAccountRecovery.isCompromised)(id);
+		const accountRecovery = await promisify(nameAccountRecovery.getAccountRecovery)(id);
 		if (this._isMounted) {
-			this.setState({ isCompromised });
+			this.setState({ isCompromised, lockedUntilTimestamp: accountRecovery[2] });
 		}
 	}
 
@@ -173,7 +179,18 @@ class NameProfile extends React.Component {
 	render() {
 		const { id } = this.props.params;
 		const { singlePageView, pastEventsRetrieved } = this.props;
-		const { tabKey, isOwner, nameInfo, isListener, isSpeaker, isCompromised, position, profileImage, dataPopulated } = this.state;
+		const {
+			tabKey,
+			isOwner,
+			nameInfo,
+			isListener,
+			isSpeaker,
+			isCompromised,
+			lockedUntilTimestamp,
+			position,
+			profileImage,
+			dataPopulated
+		} = this.state;
 		if (!pastEventsRetrieved || !dataPopulated || typeof singlePageView === "undefined") {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
@@ -196,6 +213,7 @@ class NameProfile extends React.Component {
 								isListener={isListener}
 								isSpeaker={isSpeaker}
 								isCompromised={isCompromised}
+								lockedUntilTimestamp={lockedUntilTimestamp}
 								setListener={this.setListener}
 								setSpeaker={this.setSpeaker}
 								setCompromised={this.setCompromised}

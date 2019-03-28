@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Wrapper, Title, FieldContainer, FieldName, FieldValue, Icon } from "components/";
 import { waitForTransactionReceipt } from "utils/web3";
+import { formatDate } from "utils/";
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -92,7 +93,7 @@ class Profile extends React.Component {
 	}
 
 	render() {
-		const { id, isOwner, nameInfo, isListener, isSpeaker, isCompromised, nameId, namePositions } = this.props;
+		const { id, isOwner, nameInfo, isListener, isSpeaker, isCompromised, lockedUntilTimestamp, nameId, namePositions } = this.props;
 		const { processingTransaction } = this.state;
 
 		if (!nameInfo || !nameId || !namePositions) {
@@ -115,7 +116,7 @@ class Profile extends React.Component {
 				</FieldContainer>
 				<FieldContainer>
 					<FieldName>Status</FieldName>
-					<FieldValue>{isCompromised ? "Compromised" : "Active"}</FieldValue>
+					<FieldValue>{isCompromised ? `Locked until ${formatDate(lockedUntilTimestamp.toNumber())}` : `Active`}</FieldValue>
 				</FieldContainer>
 				{!isOwner && !isListener && !isCompromised && (
 					<Icon className="animated bounceIn" onClick={this.setListener} disabled={processingTransaction}>

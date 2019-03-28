@@ -28,6 +28,13 @@ export const setContracts = (contracts) => {
 	};
 };
 
+export const setNameId = (nameId) => {
+	return {
+		type: actionsEnums.SET_NAME_ID,
+		nameId
+	};
+};
+
 export const pastEventsRetrieved = () => {
 	return {
 		type: actionsEnums.PAST_EVENTS_RETRIEVED
@@ -247,5 +254,42 @@ export const setNameSpeaker = (nameId, speakerId) => {
 		type: actionsEnums.SET_NAME_SPEAKER,
 		nameId,
 		speakerId
+	};
+};
+
+export const appendNameCompromised = (name) => {
+	return {
+		type: actionsEnums.APPEND_NAME_COMPROMISED,
+		name
+	};
+};
+
+export const setNameCompromised = (nameId, submittedTimestamp, lockedUntilTimestamp) => {
+	return {
+		type: actionsEnums.SET_NAME_COMPROMISED,
+		nameId,
+		submittedTimestamp,
+		lockedUntilTimestamp
+	};
+};
+
+export const setLoggedInNameCompromised = (submittedTimestamp, lockedUntilTimestamp) => {
+	return {
+		type: actionsEnums.SET_LOGGED_IN_NAME_COMPROMISED,
+		submittedTimestamp,
+		lockedUntilTimestamp
+	};
+};
+
+export const resetNameCompromised = (nameId) => {
+	return {
+		type: actionsEnums.RESET_NAME_COMPROMISED,
+		nameId
+	};
+};
+
+export const resetLoggedInNameCompromised = () => {
+	return {
+		type: actionsEnums.RESET_LOGGED_IN_NAME_COMPROMISED
 	};
 };

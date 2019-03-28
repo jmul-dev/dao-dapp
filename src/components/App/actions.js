@@ -13,3 +13,17 @@ export const setNameId = (nameId) => {
 		nameId
 	};
 };
+
+export const setLoggedInNameCompromised = (submittedTimestamp, lockedUntilTimestamp) => {
+	return {
+		type: actionsEnums.SET_LOGGED_IN_NAME_COMPROMISED,
+		submittedTimestamp,
+		lockedUntilTimestamp
+	};
+};
+
+export const resetLoggedInNameCompromised = () => {
+	return {
+		type: actionsEnums.RESET_LOGGED_IN_NAME_COMPROMISED
+	};
+};

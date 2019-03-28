@@ -11,6 +11,7 @@ class GlobalReducerState {
 		this.settingTAOId = null;
 		this.taoPositions = [];
 		this.namePositions = [];
+		this.namesCompromised = [];
 	}
 }
 
@@ -215,6 +216,41 @@ const handleSetNameSpeaker = (state, action) => {
 	};
 };
 
+const handleAppendNameCompromised = (state, action) => {
+	const _namesCompromised = state.namesCompromised.slice();
+	if (!_namesCompromised.find((name) => name.nameId === action.name.nameId)) {
+		_namesCompromised.push(action.name);
+	}
+	return {
+		...state,
+		namesCompromised: _namesCompromised
+	};
+};
+
+const handleSetNameCompromised = (state, action) => {
+	const _namesCompromised = state.namesCompromised.slice();
+	const nameIndex = _namesCompromised.findIndex((name) => name.nameId === action.nameId);
+	_namesCompromised[nameIndex].compromised = true;
+	_namesCompromised[nameIndex].submittedTimestamp = action.submittedTimestamp;
+	_namesCompromised[nameIndex].lockedUntilTimestamp = action.lockedUntilTimestamp;
+	return {
+		...state,
+		namesCompromised: _namesCompromised
+	};
+};
+
+const handleResetNameCompromised = (state, action) => {
+	const _namesCompromised = state.namesCompromised.slice();
+	const nameIndex = _namesCompromised.findIndex((name) => name.nameId === action.nameId);
+	_namesCompromised[nameIndex].compromised = false;
+	_namesCompromised[nameIndex].submittedTimestamp = new BigNumber(0);
+	_namesCompromised[nameIndex].lockedUntilTimestamp = new BigNumber(0);
+	return {
+		...state,
+		namesCompromised: _namesCompromised
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.PAST_EVENTS_RETRIEVED:
@@ -251,6 +287,12 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleSetNameListener(state, action);
 		case actionsEnums.SET_NAME_SPEAKER:
 			return handleSetNameSpeaker(state, action);
+		case actionsEnums.APPEND_NAME_COMPROMISED:
+			return handleAppendNameCompromised(state, action);
+		case actionsEnums.SET_NAME_COMPROMISED:
+			return handleSetNameCompromised(state, action);
+		case actionsEnums.RESET_NAME_COMPROMISED:
+			return handleResetNameCompromised(state, action);
 		default:
 			return state;
 	}
