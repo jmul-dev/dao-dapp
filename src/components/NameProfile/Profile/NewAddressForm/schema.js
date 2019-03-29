@@ -3,7 +3,7 @@ export const schema = {
 	required: ["address"],
 	properties: {
 		address: {
-			title: "ETH Address Replacement",
+			title: "New ETH Address For The Name",
 			type: "string"
 		}
 	}
