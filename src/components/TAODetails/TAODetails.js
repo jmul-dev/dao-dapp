@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Ahref, MediumEditor, LeftContainer, RightContainer, NavLink } from "components/";
+import { Wrapper, Ahref, LeftContainer, RightContainer, NavLink } from "components/";
 import { TogglePageViewContainer } from "widgets/TogglePageView/";
 import { Tab, Nav } from "react-bootstrap";
 import { TAONameContainer } from "./TAOName/";
@@ -50,7 +50,9 @@ class TAODetails extends React.Component {
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.params.id !== prevProps.params.id) {
-			this.setState(this.initialState);
+			if (this._isMounted) {
+				this.setState(this.initialState);
+			}
 			await this.getData();
 		} else if (this.props.stakedTAOs !== prevProps.stakedTAOs && this.props.params.id) {
 			if (this.props.stakedTAOs.find((tao) => tao.taoId === this.props.params.id)) {
@@ -241,7 +243,7 @@ class TAODetails extends React.Component {
 							needApproval={needApproval}
 							parentId={ancestry.parentId}
 						/>
-						<MediumEditor text={taoDescription} />
+						<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
 						<LeftContainer>
 							<PositionDetailsContainer
 								id={id}
@@ -271,7 +273,11 @@ class TAODetails extends React.Component {
 						</RightContainer>
 					</Wrapper>
 				) : (
-					<Tab.Container id="tao-details" defaultActiveKey="tao-info" onSelect={(key) => this.setState({ tabKey: key })}>
+					<Tab.Container
+						id="tao-details"
+						defaultActiveKey="tao-info"
+						onSelect={(key) => this._isMounted && this.setState({ tabKey: key })}
+					>
 						<LeftContainer className="width-20">
 							<Nav className="flex-column">
 								<Nav.Item>
@@ -304,7 +310,7 @@ class TAODetails extends React.Component {
 										needApproval={needApproval}
 										parentId={ancestry.parentId}
 									/>
-									<MediumEditor text={taoDescription} />
+									<Wrapper dangerouslySetInnerHTML={{ __html: taoDescription }} />
 								</Tab.Pane>
 								<Tab.Pane eventKey="position">
 									<PositionDetailsContainer

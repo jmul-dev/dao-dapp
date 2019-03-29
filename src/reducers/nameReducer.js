@@ -106,7 +106,9 @@ const handlePositionLogosOn = (state, action) => {
 const handleUnpositionLogosOn = (state, action) => {
 	const _positionLogosOn = state.positionLogosOn.slice();
 	const positionIndex = _positionLogosOn.findIndex((position) => position.nameId === action.nameId);
-	_positionLogosOn[positionIndex].value = _positionLogosOn[positionIndex].value.minus(action.value);
+	if (positionIndex >= 0) {
+		_positionLogosOn[positionIndex].value = _positionLogosOn[positionIndex].value.minus(action.value);
+	}
 	if (_positionLogosOn[positionIndex].value.eq(0)) {
 		delete _positionLogosOn[positionIndex];
 	}
@@ -137,7 +139,9 @@ const handlePositionLogosFrom = (state, action) => {
 const handleUnpositionLogosFrom = (state, action) => {
 	const _positionLogosFrom = state.positionLogosFrom.slice();
 	const positionIndex = _positionLogosFrom.findIndex((position) => position.nameId === action.nameId);
-	_positionLogosFrom[positionIndex].value = _positionLogosFrom[positionIndex].value.minus(action.value);
+	if (positionIndex >= 0) {
+		_positionLogosFrom[positionIndex].value = _positionLogosFrom[positionIndex].value.minus(action.value);
+	}
 	if (_positionLogosFrom[positionIndex].value.eq(0)) {
 		delete _positionLogosFrom[positionIndex];
 	}

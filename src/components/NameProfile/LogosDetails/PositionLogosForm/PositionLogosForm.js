@@ -63,7 +63,10 @@ class PositionLogosForm extends React.Component {
 		const _currentTimestamp = Math.round(new Date().getTime() / 1000);
 		_names.forEach((_name) => {
 			const _compromised = namesCompromised.find((name) => name.nameId === _name.nameId);
-			if (!_compromised.compromised || (_compromised.compromised && _compromised.lockedUntilTimestamp.lte(_currentTimestamp))) {
+			if (
+				_compromised &&
+				(!_compromised.compromised || (_compromised.compromised && _compromised.lockedUntilTimestamp.lte(_currentTimestamp)))
+			) {
 				_enum.push(_name.nameId);
 				_enumNames.push(`${_name.name} (${_name.nameId})`);
 			}

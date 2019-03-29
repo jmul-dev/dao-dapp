@@ -17,7 +17,9 @@ class SpokenTAO extends React.Component {
 		const spokenTAOIds = taoPositions.filter((tao) => tao.speakerId === id).map((tao) => tao.taoId);
 		spokenTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
-			spokenTAOs.push(tao);
+			if (tao) {
+				spokenTAOs.push(tao);
+			}
 		});
 
 		const columns = [

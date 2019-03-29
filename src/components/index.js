@@ -311,3 +311,5 @@ export const NavLink = styled(Nav.Link)`
 		font-weight: 800;
 	}
 `;
+
+export const Description = styled.div``;

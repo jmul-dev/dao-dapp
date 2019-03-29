@@ -63,6 +63,12 @@ class TAOName extends React.Component {
 							<div>Approve TAO</div>
 						</Icon>
 					)}
+					<Ahref className="white" to={`/view-thoughts/${id}/`}>
+						<Icon className="animated bounceIn">
+							<img src={process.env.PUBLIC_URL + "/images/view_thoughts.png"} alt={"View Thoughts"} />
+							<div>View Thoughts</div>
+						</Icon>
+					</Ahref>
 					<Ahref className="white" to={`/create-tao/${id}/`}>
 						<Icon className="animated bounceIn">
 							<img src={process.env.PUBLIC_URL + "/images/create_child_tao.png"} alt={"Create Child TAO"} />

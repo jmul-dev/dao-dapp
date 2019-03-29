@@ -17,7 +17,9 @@ class SpokenName extends React.Component {
 		const spokenNameIds = namePositions.filter((name) => name.speakerId === id).map((name) => name.nameId);
 		spokenNameIds.forEach((nameId) => {
 			const name = names.find((name) => name.nameId === nameId);
-			spokenNames.push(name);
+			if (name) {
+				spokenNames.push(name);
+			}
 		});
 
 		const columns = [

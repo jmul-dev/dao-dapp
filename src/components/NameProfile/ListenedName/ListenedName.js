@@ -17,7 +17,9 @@ class ListenedName extends React.Component {
 		const listenedNameIds = namePositions.filter((name) => name.listenerId === id).map((name) => name.nameId);
 		listenedNameIds.forEach((nameId) => {
 			const name = names.find((name) => name.nameId === nameId);
-			listenedNames.push(name);
+			if (name) {
+				listenedNames.push(name);
+			}
 		});
 
 		const columns = [

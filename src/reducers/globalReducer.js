@@ -158,7 +158,9 @@ const handleAppendTAOPosition = (state, action) => {
 const handleSetTAOAdvocate = (state, action) => {
 	const _taoPositions = state.taoPositions.slice();
 	const taoIndex = _taoPositions.findIndex((tao) => tao.taoId === action.taoId);
-	_taoPositions[taoIndex].advocateId = action.advocateId;
+	if (taoIndex >= 0) {
+		_taoPositions[taoIndex].advocateId = action.advocateId;
+	}
 	return {
 		...state,
 		taoPositions: _taoPositions
@@ -168,7 +170,9 @@ const handleSetTAOAdvocate = (state, action) => {
 const handleSetTAOListener = (state, action) => {
 	const _taoPositions = state.taoPositions.slice();
 	const taoIndex = _taoPositions.findIndex((tao) => tao.taoId === action.taoId);
-	_taoPositions[taoIndex].listenerId = action.listenerId;
+	if (taoIndex >= 0) {
+		_taoPositions[taoIndex].listenerId = action.listenerId;
+	}
 	return {
 		...state,
 		taoPositions: _taoPositions
@@ -178,7 +182,9 @@ const handleSetTAOListener = (state, action) => {
 const handleSetTAOSpeaker = (state, action) => {
 	const _taoPositions = state.taoPositions.slice();
 	const taoIndex = _taoPositions.findIndex((tao) => tao.taoId === action.taoId);
-	_taoPositions[taoIndex].speakerId = action.speakerId;
+	if (taoIndex >= 0) {
+		_taoPositions[taoIndex].speakerId = action.speakerId;
+	}
 	return {
 		...state,
 		taoPositions: _taoPositions
@@ -199,7 +205,9 @@ const handleAppendNamePosition = (state, action) => {
 const handleSetNameListener = (state, action) => {
 	const _namePositions = state.namePositions.slice();
 	const nameIndex = _namePositions.findIndex((name) => name.nameId === action.nameId);
-	_namePositions[nameIndex].listenerId = action.listenerId;
+	if (nameIndex >= 0) {
+		_namePositions[nameIndex].listenerId = action.listenerId;
+	}
 	return {
 		...state,
 		namePositions: _namePositions
@@ -209,7 +217,9 @@ const handleSetNameListener = (state, action) => {
 const handleSetNameSpeaker = (state, action) => {
 	const _namePositions = state.namePositions.slice();
 	const nameIndex = _namePositions.findIndex((name) => name.nameId === action.nameId);
-	_namePositions[nameIndex].speakerId = action.speakerId;
+	if (nameIndex >= 0) {
+		_namePositions[nameIndex].speakerId = action.speakerId;
+	}
 	return {
 		...state,
 		namePositions: _namePositions
@@ -230,9 +240,11 @@ const handleAppendNameCompromised = (state, action) => {
 const handleSetNameCompromised = (state, action) => {
 	const _namesCompromised = state.namesCompromised.slice();
 	const nameIndex = _namesCompromised.findIndex((name) => name.nameId === action.nameId);
-	_namesCompromised[nameIndex].compromised = true;
-	_namesCompromised[nameIndex].submittedTimestamp = action.submittedTimestamp;
-	_namesCompromised[nameIndex].lockedUntilTimestamp = action.lockedUntilTimestamp;
+	if (nameIndex >= 0) {
+		_namesCompromised[nameIndex].compromised = true;
+		_namesCompromised[nameIndex].submittedTimestamp = action.submittedTimestamp;
+		_namesCompromised[nameIndex].lockedUntilTimestamp = action.lockedUntilTimestamp;
+	}
 	return {
 		...state,
 		namesCompromised: _namesCompromised
@@ -242,9 +254,11 @@ const handleSetNameCompromised = (state, action) => {
 const handleResetNameCompromised = (state, action) => {
 	const _namesCompromised = state.namesCompromised.slice();
 	const nameIndex = _namesCompromised.findIndex((name) => name.nameId === action.nameId);
-	_namesCompromised[nameIndex].compromised = false;
-	_namesCompromised[nameIndex].submittedTimestamp = new BigNumber(0);
-	_namesCompromised[nameIndex].lockedUntilTimestamp = new BigNumber(0);
+	if (nameIndex >= 0) {
+		_namesCompromised[nameIndex].compromised = false;
+		_namesCompromised[nameIndex].submittedTimestamp = new BigNumber(0);
+		_namesCompromised[nameIndex].lockedUntilTimestamp = new BigNumber(0);
+	}
 	return {
 		...state,
 		namesCompromised: _namesCompromised

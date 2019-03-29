@@ -13,35 +13,45 @@ class OwnTAO extends React.Component {
 		const advocatedTAOIds = taoPositions.filter((tao) => tao.advocateId === nameId).map((tao) => tao.taoId);
 		advocatedTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
-			advocatedTAOs.push(tao);
+			if (tao) {
+				advocatedTAOs.push(tao);
+			}
 		});
 
 		const stakedEthosTAOIds = stakeEthos.map((tao) => tao.taoId).filter((value, index, self) => self.indexOf(value) === index);
 		const stakedEthosTAOs = [];
 		stakedEthosTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
-			stakedEthosTAOs.push(tao);
+			if (tao) {
+				stakedEthosTAOs.push(tao);
+			}
 		});
 
 		const stakedPathosTAOIds = stakePathos.map((tao) => tao.taoId).filter((value, index, self) => self.indexOf(value) === index);
 		const stakedPathosTAOs = [];
 		stakedPathosTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
-			stakedPathosTAOs.push(tao);
+			if (tao) {
+				stakedPathosTAOs.push(tao);
+			}
 		});
 
 		const listenedTAOs = [];
 		const listenedTAOIds = taoPositions.filter((tao) => tao.listenerId === nameId).map((tao) => tao.taoId);
 		listenedTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
-			listenedTAOs.push(tao);
+			if (tao) {
+				listenedTAOs.push(tao);
+			}
 		});
 
 		const spokenTAOs = [];
 		const spokenTAOIds = taoPositions.filter((tao) => tao.speakerId === nameId).map((tao) => tao.taoId);
 		spokenTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
-			spokenTAOs.push(tao);
+			if (tao) {
+				spokenTAOs.push(tao);
+			}
 		});
 
 		const columns = [

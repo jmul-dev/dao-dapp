@@ -168,7 +168,7 @@ export const getTAOAncestryEvent = (dispatch, networkId, currentBlockNumber, nam
 			taoAncestry.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get(async (err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
-						await _parseTAOAncestryEvent(dispatch, taoFactory, log, nameId);
+						await _parseTAOAncestryEvent(dispatch, taoAncestry, taoFactory, log, nameId);
 					});
 					resolve();
 				} else {
@@ -188,7 +188,7 @@ export const watchTAOAncestryEvent = (dispatch, networkId, currentBlockNumber, n
 
 		taoAncestry.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
 			if (!err) {
-				await _parseTAOAncestryEvent(dispatch, taoFactory, log, nameId);
+				await _parseTAOAncestryEvent(dispatch, taoAncestry, taoFactory, log, nameId);
 			}
 		});
 	} catch (e) {
@@ -196,12 +196,15 @@ export const watchTAOAncestryEvent = (dispatch, networkId, currentBlockNumber, n
 	}
 };
 
-const _parseTAOAncestryEvent = async (dispatch, taoFactory, log, nameId) => {
+const _parseTAOAncestryEvent = async (dispatch, taoAncestry, taoFactory, log, nameId) => {
 	switch (log.event) {
 		case "AddChild":
 			if (log.args.taoAdvocate === nameId) {
 				const [childName] = await promisify(taoFactory.getTAO)(log.args.childId);
-				dispatch(appendTAONeedApproval({ taoId: log.args.childId, name: childName }));
+				const isChild = await promisify(taoAncestry.isChild)(log.args.taoId, log.args.childId);
+				if (!isChild) {
+					dispatch(appendTAONeedApproval({ taoId: log.args.childId, name: childName }));
+				}
 			}
 			break;
 		case "ApproveChild":

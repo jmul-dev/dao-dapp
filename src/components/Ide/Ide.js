@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, Title, Header, Ahref, MediumEditor } from "components/";
+import { Wrapper, Title, Header, Ahref } from "components/";
 import { IframeContainer } from "./styledComponents";
 import { get, encodeParams } from "utils/";
 import Iframe from "react-iframe";
@@ -74,7 +74,7 @@ class Ide extends React.Component {
 					<Title className="medium margin-top-20 margin-bottom-0">{taoInfo.name}</Title>
 					<Header>{id}</Header>
 				</Wrapper>
-				<MediumEditor text={taoDescription} />
+				<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
 				{!loaded && <Header>Loading IDE module ..</Header>}
 				<IframeContainer>
 					<Iframe

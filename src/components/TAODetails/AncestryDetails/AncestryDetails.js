@@ -9,10 +9,15 @@ class AncestryDetails extends React.Component {
 		}
 
 		const _tao = taos.find((tao) => tao.taoId === id);
+		if (!_tao) {
+			return null;
+		}
 		const childTAOs = [];
 		_tao.children.forEach((childId) => {
 			const _childTAO = taos.find((tao) => tao.taoId === childId);
-			childTAOs.push(_childTAO);
+			if (_childTAO) {
+				childTAOs.push(_childTAO);
+			}
 		});
 
 		const columns = [

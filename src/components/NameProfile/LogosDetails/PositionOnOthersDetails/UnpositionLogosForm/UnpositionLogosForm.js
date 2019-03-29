@@ -23,9 +23,12 @@ class UnpositionLogosForm extends React.Component {
 		if (!positionLogosOn || !logos || !accounts || !nameId || !formData) {
 			return;
 		}
-		this.setState({ formLoading: true });
-
 		const _targetName = positionLogosOn.find((position) => position.nameId === targetNameId);
+		if (!_targetName) {
+			return;
+		}
+
+		this.setState({ formLoading: true });
 
 		// Validation
 		const availableToUnpositionAmount = await promisify(logos.positionOnOthers)(nameId, targetNameId);
@@ -64,6 +67,9 @@ class UnpositionLogosForm extends React.Component {
 			return null;
 		}
 		const _targetName = positionLogosOn.find((position) => position.nameId === targetNameId);
+		if (!_targetName) {
+			return null;
+		}
 		schema.properties.amount.maximum = _targetName.value.toNumber();
 		return (
 			<Wrapper>

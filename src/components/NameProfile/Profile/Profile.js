@@ -108,6 +108,9 @@ class Profile extends React.Component {
 		}
 
 		const namePosition = namePositions.find((name) => name.nameId === id);
+		if (!namePosition) {
+			return null;
+		}
 
 		if (!showNewAddressForm) {
 			return (

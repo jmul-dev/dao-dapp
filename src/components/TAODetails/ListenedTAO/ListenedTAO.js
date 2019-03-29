@@ -17,7 +17,9 @@ class ListenedTAO extends React.Component {
 		const listenedTAOIds = taoPositions.filter((tao) => tao.listenerId === id).map((tao) => tao.taoId);
 		listenedTAOIds.forEach((taoId) => {
 			const tao = taos.find((tao) => tao.taoId === taoId);
-			listenedTAOs.push(tao);
+			if (tao) {
+				listenedTAOs.push(tao);
+			}
 		});
 
 		const columns = [
