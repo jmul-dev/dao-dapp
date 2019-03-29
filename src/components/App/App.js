@@ -4,6 +4,7 @@ import { EMPTY_ADDRESS } from "common/constants";
 import { ImgContainer } from "./styledComponents";
 import { CompromisedName } from "components/CompromisedName/";
 import { BigNumber } from "bignumber.js";
+import { hashHistory } from "react-router";
 
 const promisify = require("tiny-promisify");
 
@@ -28,13 +29,11 @@ class App extends React.Component {
 
 	async componentDidMount() {
 		this.props.detectMobileBrowser(this.isMobileDevice());
-
+		await this.getName();
 		const checkAccountIntervalId = setInterval(async () => {
 			await this.checkAccount();
 		}, 1000);
 		this.setState({ checkAccountIntervalId });
-
-		await this.getName();
 	}
 
 	componentWillUnmount() {
@@ -49,11 +48,10 @@ class App extends React.Component {
 			this.props.nameFactory !== prevProps.nameFactory ||
 			this.props.nameAccountRecovery !== prevProps.nameAccountRecovery ||
 			this.props.networkId !== prevProps.networkId ||
-			this.props.nameId !== prevProps.nameId
+			this.props.nameId !== prevProps.nameId ||
+			this.props.namesCompromised !== prevProps.namesCompromised
 		) {
 			await this.getName();
-		} else if (this.props.nameCompromised !== prevProps.nameCompromised) {
-			await this.checkCompromised();
 		}
 	}
 
@@ -65,7 +63,7 @@ class App extends React.Component {
 
 		const latestAccounts = await promisify(web3.eth.getAccounts)();
 		if (
-			(accounts.length && latestAccounts.length && accounts.length && latestAccounts[0] !== accounts[0]) ||
+			(accounts.length > 0 && latestAccounts.length > 0 && latestAccounts[0] !== accounts[0]) ||
 			latestAccounts.length !== accounts.length
 		) {
 			window.location = "/";
@@ -73,7 +71,14 @@ class App extends React.Component {
 	}
 
 	async getName() {
-		const { nameFactory, nameAccountRecovery, accounts, setNameId, setLoggedInNameCompromised } = this.props;
+		const {
+			nameFactory,
+			nameAccountRecovery,
+			accounts,
+			setNameId,
+			setLoggedInNameCompromised,
+			resetLoggedInNameCompromised
+		} = this.props;
 		if (!nameFactory || !nameAccountRecovery || !accounts) {
 			return;
 		}
@@ -81,6 +86,7 @@ class App extends React.Component {
 		if (nameId !== EMPTY_ADDRESS) {
 			setNameId(nameId);
 			this.setState({ nameId });
+
 			const accountRecovery = await promisify(nameAccountRecovery.getAccountRecovery)(nameId);
 			const isCompromised = await promisify(nameAccountRecovery.isCompromised)(nameId);
 			if (isCompromised) {
@@ -96,15 +102,21 @@ class App extends React.Component {
 					await this.checkCompromised();
 				}, 10000);
 				this.setState({ checkCompromisedIntervalId });
+				if (this.props.location.pathname !== "/") {
+					hashHistory.push("/");
+				}
 			} else {
-				this.setState(this._notCompromised);
+				this.setState({ nameCompromised: this._notCompromised });
+				resetLoggedInNameCompromised();
 			}
+		} else {
+			this.resetName();
 		}
 		this.setState({ getNameCalled: true });
 	}
 
 	async checkCompromised() {
-		const { nameAccountRecovery, resetLoggedInNameCompromised } = this.props;
+		const { nameAccountRecovery } = this.props;
 		const { nameId } = this.state;
 		if (!nameAccountRecovery || !nameId) {
 			return;
@@ -112,8 +124,15 @@ class App extends React.Component {
 
 		const isCompromised = await promisify(nameAccountRecovery.isCompromised)(nameId);
 		if (!isCompromised) {
-			this.setState(this._notCompromised);
-			resetLoggedInNameCompromised();
+			this.resetName();
+		}
+	}
+
+	resetName() {
+		this.props.setNameId(null);
+		this.props.resetLoggedInNameCompromised();
+		this.setState({ nameId: null, nameCompromised: this._notCompromised });
+		if (this.state.checkCompromisedIntervalId) {
 			clearInterval(this.state.checkCompromisedIntervalId);
 		}
 	}

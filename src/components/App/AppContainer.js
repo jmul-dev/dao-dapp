@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
 		nameFactory: state.contractReducer.contracts.nameFactory,
 		nameId: state.nameReducer.nameId,
 		nameAccountRecovery: state.contractReducer.contracts.nameAccountRecovery,
-		nameCompromised: state.nameReducer.nameCompromised
+		namesCompromised: state.globalReducer.namesCompromised
 	};
 };
 

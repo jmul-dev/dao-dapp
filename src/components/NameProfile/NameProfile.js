@@ -172,8 +172,8 @@ class NameProfile extends React.Component {
 		this.setState({ isSpeaker: true });
 	}
 
-	setCompromised() {
-		this.setState({ isCompromised: true });
+	setCompromised(isCompromised) {
+		this.setState({ isCompromised });
 	}
 
 	render() {

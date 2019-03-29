@@ -5,6 +5,8 @@ import { TAOPlotContainer } from "components/TAOPlot/";
 import { buildTAOTreeData } from "utils/";
 
 class EnsureCreateName extends React.Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,16 +15,25 @@ class EnsureCreateName extends React.Component {
 	}
 
 	componentDidMount() {
+		this._isMounted = true;
 		if (this.props.taos) {
 			const taoTreeData = buildTAOTreeData(this.props.taos);
-			this.setState({ taoTreeData });
+			if (this._isMounted) {
+				this.setState({ taoTreeData });
+			}
 		}
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
 	}
 
 	componentDidUpdate(prevProps) {
 		if (this.props.taos !== prevProps.taos) {
 			const taoTreeData = buildTAOTreeData(this.props.taos);
-			this.setState({ taoTreeData });
+			if (this._isMounted) {
+				this.setState({ taoTreeData });
+			}
 		}
 	}
 
