@@ -18,7 +18,8 @@ class App extends React.Component {
 			checkAccountIntervalId: undefined,
 			checkCompromisedIntervalId: undefined,
 			nameId: null,
-			nameCompromised: this._notCompromised,
+			nameCompromised: null,
+			position: null,
 			getNameCalled: false
 		};
 	}
@@ -38,19 +39,25 @@ class App extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.state.checkAccountIntervalId);
-		if (this.state.checkCompromisedIntervalId) {
-			clearInterval(this.state.checkCompromisedIntervalId);
-		}
+		clearInterval(this.state.checkCompromisedIntervalId);
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (
 			this.props.nameFactory !== prevProps.nameFactory ||
 			this.props.nameAccountRecovery !== prevProps.nameAccountRecovery ||
-			this.props.networkId !== prevProps.networkId ||
 			this.props.nameId !== prevProps.nameId ||
 			this.props.namesCompromised !== prevProps.namesCompromised
 		) {
+			clearInterval(this.state.checkAccountIntervalId);
+			clearInterval(this.state.checkCompromisedIntervalId);
+			this.setState({
+				checkAccountIntervalId: undefined,
+				checkCompromisedIntervalId: undefined,
+				nameId: null,
+				nameCompromised: null,
+				position: null
+			});
 			await this.getName();
 		}
 	}
@@ -87,6 +94,8 @@ class App extends React.Component {
 			setNameId(nameId);
 			this.setState({ nameId });
 
+			await this.getNamePosition();
+
 			const accountRecovery = await promisify(nameAccountRecovery.getAccountRecovery)(nameId);
 			const isCompromised = await promisify(nameAccountRecovery.isCompromised)(nameId);
 			if (isCompromised) {
@@ -102,6 +111,7 @@ class App extends React.Component {
 					await this.checkCompromised();
 				}, 10000);
 				this.setState({ checkCompromisedIntervalId });
+
 				if (this.props.location.pathname !== "/") {
 					hashHistory.push("/");
 				}
@@ -128,17 +138,34 @@ class App extends React.Component {
 		}
 	}
 
+	async getNamePosition() {
+		const { nameTAOPosition } = this.props;
+		const { nameId } = this.state;
+		if (!nameTAOPosition || !nameId) {
+			return;
+		}
+
+		const _position = await promisify(nameTAOPosition.getPositionById)(nameId);
+		const position = {
+			advocateName: _position[0],
+			advocateId: _position[1],
+			listenerName: _position[2],
+			listenerId: _position[3],
+			speakerName: _position[4],
+			speakerId: _position[5]
+		};
+		this.setState({ position });
+	}
+
 	resetName() {
 		this.props.setNameId(null);
 		this.props.resetLoggedInNameCompromised();
-		this.setState({ nameId: null, nameCompromised: this._notCompromised });
-		if (this.state.checkCompromisedIntervalId) {
-			clearInterval(this.state.checkCompromisedIntervalId);
-		}
+		this.setState({ nameId: null, nameCompromised: this._notCompromised, position: null });
+		clearInterval(this.state.checkCompromisedIntervalId);
 	}
 
 	render() {
-		const { nameId, nameCompromised, getNameCalled } = this.state;
+		const { nameId, nameCompromised, getNameCalled, position } = this.state;
 		if (!getNameCalled) {
 			return (
 				<PageLayout>
@@ -150,10 +177,15 @@ class App extends React.Component {
 		}
 
 		const _currentTimestamp = Math.round(new Date().getTime() / 1000);
-		if (nameId && (nameCompromised.compromised || nameCompromised.lockedUntilTimestamp.gt(_currentTimestamp))) {
+		if (
+			nameId &&
+			nameCompromised &&
+			position &&
+			(nameCompromised.compromised || nameCompromised.lockedUntilTimestamp.gt(_currentTimestamp))
+		) {
 			return (
 				<PageLayout compromised={true}>
-					<CompromisedName nameId={nameId} nameCompromised={nameCompromised} />
+					<CompromisedName nameId={nameId} nameCompromised={nameCompromised} position={position} />
 				</PageLayout>
 			);
 		} else {

@@ -50,7 +50,7 @@ export const Title = styled.div`
 	margin-bottom: 40px;
 
 	&.small {
-		font-size: 1em;
+		font-size: 0.875em;
 	}
 	&.medium {
 		font-size: 2.5em;

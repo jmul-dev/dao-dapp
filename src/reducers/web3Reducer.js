@@ -3,7 +3,7 @@ import { actionsEnums } from "common/actionsEnums";
 class Web3ReducerState {
 	constructor() {
 		this.web3 = null;
-		this.accounts = [];
+		this.accounts = null;
 		this.networkId = null;
 	}
 }
