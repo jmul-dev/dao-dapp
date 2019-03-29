@@ -49,7 +49,6 @@ class App extends React.Component {
 			this.props.nameId !== prevProps.nameId ||
 			this.props.namesCompromised !== prevProps.namesCompromised
 		) {
-			clearInterval(this.state.checkAccountIntervalId);
 			clearInterval(this.state.checkCompromisedIntervalId);
 			this.setState({
 				checkAccountIntervalId: undefined,
