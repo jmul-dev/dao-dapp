@@ -1,33 +1,35 @@
 import * as React from "react";
-import { Wrapper, Title, Header, Ahref, MediumEditor, Button, Error, Hr } from "components/";
+import { Wrapper, Title, Header, Ahref, Hr } from "components/";
+import { AddThoughtContainer } from "./AddThought/";
+import { ListThoughtsContainer } from "./ListThoughts/";
 import { get, encodeParams } from "utils/";
-import { post } from "utils/";
 
 class ViewThoughts extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			taoDescription: null,
-			thought: "",
-			error: false,
-			errorMessage: "",
-			formLoading: false
+			thoughts: null
 		};
-		this.handleEditorChange = this.handleEditorChange.bind(this);
-		this.addThought = this.addThought.bind(this);
+		this.initialState = this.state;
+		this.getTAOThoughts = this.getTAOThoughts.bind(this);
 	}
 
 	async componentDidMount() {
-		await this.getTAODescription(this.props.params.id);
+		await this.getTAODescription();
+		await this.getTAOThoughts();
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.params.id !== prevProps.params.id) {
-			await this.getTAODescription(this.props.params.id);
+			this.setState(this.initialState);
+			await this.getTAODescription();
+			await this.getTAOThoughts();
 		}
 	}
 
-	async getTAODescription(id) {
+	async getTAODescription() {
+		const { id } = this.props.params;
 		if (!id) {
 			return;
 		}
@@ -39,56 +41,29 @@ class ViewThoughts extends React.Component {
 		} catch (e) {}
 	}
 
-	handleEditorChange(thought) {
-		this.setState({ thought });
-	}
-
-	async addThought() {
+	async getTAOThoughts() {
 		const { id } = this.props.params;
-		const { nameId } = this.props;
-		if (!id || !nameId) {
-			return;
-		}
-
-		const { thought } = this.state;
-		this.setState({ formLoading: true });
-		if (!thought) {
-			this.setState({ error: true, errorMessage: "Thoughts can not be empty", formLoading: false });
+		if (!id) {
 			return;
 		}
 		try {
-			const response = await post(`https://localhost/api/add-tao-thought`, {
-				nameId,
-				taoId: id,
-				parentThoughtId: 0,
-				thought
-			});
-			if (!response.error && !response.errorMessage) {
-				this.setState({
-					error: false,
-					errorMessage: "",
-					formLoading: false,
-					thought: ""
-				});
-				this.props.setSuccess("Success!", `Thought was added successfully`);
-			} else {
-				this.setState({ error: true, errorMessage: response.errorMessage, formLoading: false });
+			const response = await get(`https://localhost/api/get-tao-thoughts?${encodeParams({ taoId: id })}`);
+			if (response.thoughts) {
+				this.setState({ thoughts: response.thoughts });
 			}
-		} catch (e) {
-			this.setState({ error: true, errorMessage: e.message, formLoading: false });
-		}
+		} catch (e) {}
 	}
 
 	render() {
 		const { id } = this.props.params;
 		const { taos } = this.props;
-		const { taoDescription, thought, error, errorMessage, formLoading } = this.state;
+		const { taoDescription, thoughts } = this.state;
 
 		let tao = null;
 		if (taos) {
 			tao = taos.find((_tao) => _tao.taoId === id);
 		}
-		if (!tao || !taoDescription) {
+		if (!tao || !taoDescription || !thoughts) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 		return (
@@ -101,17 +76,9 @@ class ViewThoughts extends React.Component {
 					<Header>{id}</Header>
 				</Wrapper>
 				<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
-				<MediumEditor
-					className="margin-bottom-20"
-					text={thought}
-					onChange={this.handleEditorChange}
-					options={{ placeholder: { text: "What are your thoughts?" } }}
-				/>
-				<Button type="button" disabled={formLoading} onClick={this.addThought}>
-					{formLoading ? "Loading..." : "Comment"}
-				</Button>
-				{error && errorMessage && <Error>{errorMessage}</Error>}
+				<AddThoughtContainer taoId={id} getTAOThoughts={this.getTAOThoughts} />
 				<Hr />
+				<ListThoughtsContainer thoughts={thoughts} />
 			</Wrapper>
 		);
 	}

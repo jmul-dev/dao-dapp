@@ -42,6 +42,9 @@ export const Wrapper = styled.div`
 	&.white {
 		color: #ffffff;
 	}
+	&.small {
+		font-size: 0.875em;
+	}
 `;
 
 export const Title = styled.div`
