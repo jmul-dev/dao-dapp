@@ -1,3 +1,6 @@
+import { BigNumber } from "bignumber.js";
+BigNumber.config({ DECIMAL_PLACES: 2 });
+
 export const asyncForEach = async (array, callback) => {
 	for (let index = 0; index < array.length; index++) {
 		await callback(array[index], index, array);
@@ -122,4 +125,52 @@ export const timeSince = (timestamp) => {
 		return interval + " minutes";
 	}
 	return Math.floor(seconds) + " seconds";
+};
+
+export const toHighestDenomination = (value) => {
+	let _value = new BigNumber(value);
+	if (_value.eq(0)) {
+		return "0";
+	}
+	let _integer = _value.div(10 ** 24);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " yotta";
+	}
+	_integer = _value.div(10 ** 21);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " zetta";
+	}
+	_integer = _value.div(10 ** 18);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " exa";
+	}
+	_integer = _value.div(10 ** 15);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " peta";
+	}
+	_integer = _value.div(10 ** 12);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " tera";
+	}
+	_integer = _value.div(10 ** 9);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " giga";
+	}
+	_integer = _value.div(10 ** 6);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " mega";
+	}
+	_integer = _value.div(10 ** 3);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " kilo";
+	}
+	_integer = _value.div(10 ** 21);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " zetta";
+	}
+	_integer = _value.div(10 ** 21);
+	if (_integer.gte(1)) {
+		return _integer.toNumber() + " zetta";
+	}
+	return _value.toNumber();
 };

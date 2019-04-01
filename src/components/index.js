@@ -24,6 +24,9 @@ export const Wrapper = styled.div`
 	&.margin-bottom-20 {
 		margin-bottom: 20px;
 	}
+	&.margin-bottom-30 {
+		margin-bottom: 30px;
+	}
 	&.margin-bottom-40 {
 		margin-bottom: 40px;
 	}

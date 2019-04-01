@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Wrapper, Ahref } from "components/";
-import { NameLink, TimeContainer } from "./styledComponents";
-import { timeSince } from "utils/";
+import { NameLink, SumLogosContainer, Divider, TimeContainer } from "./styledComponents";
+import { toHighestDenomination, timeSince } from "utils/";
 
 class Thought extends React.Component {
 	render() {
@@ -14,13 +14,15 @@ class Thought extends React.Component {
 			return null;
 		}
 		return (
-			<Wrapper className="margin-bottom-20">
+			<Wrapper className="margin-bottom-40">
 				<Wrapper className="small">
 					<NameLink>
 						<Ahref className="white" to={`/profile/${thoughtInfo.nameId}/`}>
 							{nameInfo.name}
 						</Ahref>
 					</NameLink>
+					<SumLogosContainer>{toHighestDenomination(thoughtInfo.sumLogos)} logos</SumLogosContainer>
+					<Divider>&#183;</Divider>
 					<TimeContainer>{timeSince(thoughtInfo.timestamp)} ago</TimeContainer>
 				</Wrapper>
 				<Wrapper className="small" dangerouslySetInnerHTML={{ __html: thoughtInfo.thought }} />
