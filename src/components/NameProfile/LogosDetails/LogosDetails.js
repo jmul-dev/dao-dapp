@@ -43,12 +43,14 @@ class LogosDetails extends React.Component {
 	async componentDidUpdate(prevProps) {
 		if (this.props.id !== prevProps.id) {
 			this.setState(this.initialState);
-			const { logos, id } = this.props;
-			await this.getLogosBalance(logos, id);
+			await this.getLogosBalance();
+		} else if (this.props.namesSumLogos !== prevProps.namesSumLogos) {
+			await this.getLogosBalance();
 		}
 	}
 
-	async getLogosBalance(logos, id) {
+	async getLogosBalance() {
+		const { logos, id } = this.props;
 		if (!logos || !id) {
 			return;
 		}
@@ -148,34 +150,38 @@ class LogosDetails extends React.Component {
 					</DetailsContainer>
 					{showSumLogosChart && (singlePageView || populateGraph) && <DoughnutChart data={sumLogosData} height={200} />}
 				</ChartContainer>
-				<ChartContainer>
-					<DetailsContainer>
-						<FieldContainer>
-							<FieldName>Available to Position</FieldName>
-							<FieldValue>{availableToPositionAmount.toNumber()}</FieldValue>
-						</FieldContainer>
-						<FieldContainer>
-							<FieldName>Total Positioned on Others</FieldName>
-							<FieldValue>{totalPositionOnOthers.toNumber()}</FieldValue>
-						</FieldContainer>
-						{availableToPositionAmount.gt(0) && !showPositionLogosForm && (
-							<Icon className="animated bounceIn margin-top-10" onClick={this.togglePositionLogosForm}>
-								<img src={process.env.PUBLIC_URL + "/images/position.png"} alt={"Position Logos on Other Name"} />
-								<div>Position on Other</div>
-							</Icon>
+				{isOwner && (
+					<ChartContainer>
+						<DetailsContainer>
+							<FieldContainer>
+								<FieldName>Available to Position</FieldName>
+								<FieldValue>{availableToPositionAmount.toNumber()}</FieldValue>
+							</FieldContainer>
+							<FieldContainer>
+								<FieldName>Total Positioned on Others</FieldName>
+								<FieldValue>{totalPositionOnOthers.toNumber()}</FieldValue>
+							</FieldContainer>
+							{availableToPositionAmount.gt(0) && !showPositionLogosForm && (
+								<Icon className="animated bounceIn margin-top-10" onClick={this.togglePositionLogosForm}>
+									<img src={process.env.PUBLIC_URL + "/images/position.png"} alt={"Position Logos on Other Name"} />
+									<div>Position on Other</div>
+								</Icon>
+							)}
+						</DetailsContainer>
+						{!showPositionLogosForm ? (
+							<div>
+								{showPositionChart && (singlePageView || populateGraph) && (
+									<DoughnutChart data={positionData} height={200} />
+								)}
+							</div>
+						) : (
+							<PositionLogosFormContainer
+								togglePositionLogosForm={this.togglePositionLogosForm}
+								refreshPositionLogos={this.refreshPositionLogos}
+							/>
 						)}
-					</DetailsContainer>
-					{!showPositionLogosForm ? (
-						<div>
-							{showPositionChart && (singlePageView || populateGraph) && <DoughnutChart data={positionData} height={200} />}
-						</div>
-					) : (
-						<PositionLogosFormContainer
-							togglePositionLogosForm={this.togglePositionLogosForm}
-							refreshPositionLogos={this.refreshPositionLogos}
-						/>
-					)}
-				</ChartContainer>
+					</ChartContainer>
+				)}
 				{isOwner && (
 					<Wrapper>
 						<PositionOnOthersDetailsContainer refreshPositionLogos={this.refreshPositionLogos} />

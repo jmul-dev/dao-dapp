@@ -229,17 +229,13 @@ class NameProfile extends React.Component {
 						<RightContainer className="width-35">
 							<ProfileImage isOwner={isOwner} profileImage={profileImage} refreshProfileImage={this.refreshProfileImage} />
 						</RightContainer>
-						{isOwner && (
-							<Wrapper>
-								<LogosDetailsContainer
-									id={id}
-									isOwner={isOwner}
-									singlePageView={singlePageView}
-									populateGraph={tabKey === "logos-details"}
-								/>
-								<PublicKeysContainer id={id} singlePageView={singlePageView} />
-							</Wrapper>
-						)}
+						<LogosDetailsContainer
+							id={id}
+							isOwner={isOwner}
+							singlePageView={singlePageView}
+							populateGraph={tabKey === "logos-details"}
+						/>
+						<PublicKeysContainer id={id} singlePageView={singlePageView} />
 					</Wrapper>
 				) : (
 					<Tab.Container id="name-profile" defaultActiveKey="profile" onSelect={(key) => this.setState({ tabKey: key })}>
@@ -254,6 +250,9 @@ class NameProfile extends React.Component {
 								<Nav.Item>
 									<NavLink eventKey="position">Position</NavLink>
 								</Nav.Item>
+								<Nav.Item>
+									<NavLink eventKey="logos-details">Logos Details</NavLink>
+								</Nav.Item>
 								{isOwner && (
 									<Wrapper>
 										<Nav.Item>
@@ -261,9 +260,6 @@ class NameProfile extends React.Component {
 										</Nav.Item>
 										<Nav.Item>
 											<NavLink eventKey="spoken-names">Spoken Names</NavLink>
-										</Nav.Item>
-										<Nav.Item>
-											<NavLink eventKey="logos-details">Logos Details</NavLink>
 										</Nav.Item>
 										<Nav.Item>
 											<NavLink eventKey="public-keys">Public Keys</NavLink>
@@ -295,6 +291,14 @@ class NameProfile extends React.Component {
 								<Tab.Pane eventKey="position">
 									<PositionDetails position={position} singlePageView={singlePageView} />
 								</Tab.Pane>
+								<Tab.Pane eventKey="logos-details">
+									<LogosDetailsContainer
+										id={id}
+										isOwner={isOwner}
+										singlePageView={singlePageView}
+										populateGraph={tabKey === "logos-details"}
+									/>
+								</Tab.Pane>
 								{isOwner && (
 									<Tab.Pane eventKey="listened-names">
 										<ListenedNameContainer id={id} singlePageView={singlePageView} />
@@ -303,16 +307,6 @@ class NameProfile extends React.Component {
 								{isOwner && (
 									<Tab.Pane eventKey="spoken-names">
 										<SpokenNameContainer id={id} singlePageView={singlePageView} />
-									</Tab.Pane>
-								)}
-								{isOwner && (
-									<Tab.Pane eventKey="logos-details">
-										<LogosDetailsContainer
-											id={id}
-											isOwner={isOwner}
-											singlePageView={singlePageView}
-											populateGraph={tabKey === "logos-details"}
-										/>
 									</Tab.Pane>
 								)}
 								{isOwner && (

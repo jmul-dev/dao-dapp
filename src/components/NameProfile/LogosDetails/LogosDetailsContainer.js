@@ -3,7 +3,8 @@ import { LogosDetails } from "./LogosDetails";
 
 const mapStateToProps = (state) => {
 	return {
-		logos: state.contractReducer.contracts.logos
+		logos: state.contractReducer.contracts.logos,
+		namesSumLogos: state.globalReducer.namesSumLogos
 	};
 };
 

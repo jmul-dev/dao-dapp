@@ -481,10 +481,5 @@ const _parseNameAccountRecoveryEvent = async (dispatch, nameAccountRecovery, log
 
 const _updateNameSumLogos = async (dispatch, logos, nameId) => {
 	const sumLogos = await promisify(logos.sumBalanceOf)(nameId);
-	dispatch(
-		updateNameSumLogos({
-			nameId,
-			sumLogos
-		})
-	);
+	dispatch(updateNameSumLogos(nameId, sumLogos));
 };
