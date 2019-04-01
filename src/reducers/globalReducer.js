@@ -12,6 +12,7 @@ class GlobalReducerState {
 		this.taoPositions = [];
 		this.namePositions = [];
 		this.namesCompromised = [];
+		this.namesSumLogos = [];
 	}
 }
 
@@ -265,6 +266,29 @@ const handleResetNameCompromised = (state, action) => {
 	};
 };
 
+const handleAppendNameSumLogos = (state, action) => {
+	const _namesSumLogos = state.namesSumLogos.slice();
+	if (!_namesSumLogos.find((name) => name.nameId === action.name.nameId)) {
+		_namesSumLogos.push(action.name);
+	}
+	return {
+		...state,
+		namesSumLogos: _namesSumLogos
+	};
+};
+
+const handleUpdateNameSumLogos = (state, action) => {
+	const _namesSumLogos = state.namesSumLogos.slice();
+	const nameIndex = _namesSumLogos.findIndex((name) => name.nameId === action.nameId);
+	if (nameIndex >= 0) {
+		_namesSumLogos[nameIndex].sumLogos = action.sumLogos;
+	}
+	return {
+		...state,
+		namesSumLogos: _namesSumLogos
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.PAST_EVENTS_RETRIEVED:
@@ -307,6 +331,10 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleSetNameCompromised(state, action);
 		case actionsEnums.RESET_NAME_COMPROMISED:
 			return handleResetNameCompromised(state, action);
+		case actionsEnums.APPEND_NAME_SUM_LOGOS:
+			return handleAppendNameSumLogos(state, action);
+		case actionsEnums.UPDATE_NAME_SUM_LOGOS:
+			return handleUpdateNameSumLogos(state, action);
 		default:
 			return state;
 	}

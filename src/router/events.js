@@ -32,7 +32,9 @@ import {
 	setNameCompromised,
 	setLoggedInNameCompromised,
 	resetNameCompromised,
-	resetLoggedInNameCompromised
+	resetLoggedInNameCompromised,
+	appendNameSumLogos,
+	updateNameSumLogos
 } from "./actions";
 
 // Contracts
@@ -52,11 +54,12 @@ export const getNameFactoryEvent = (dispatch, networkId, currentBlockNumber) => 
 	return new Promise(async (resolve, reject) => {
 		try {
 			const nameFactory = window.web3.eth.contract(NameFactory.abi).at(NameFactory.networks[networkId].address);
+			const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
 			const receipt = await getTransactionReceipt(NameFactory.networks[networkId].transactionHash);
 			nameFactory.CreateName({}, { fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
 				if (!err) {
-					logs.forEach((log) => {
-						_parseNameFactoryEvent(dispatch, log);
+					asyncForEach(logs, async (log) => {
+						await _parseNameFactoryEvent(dispatch, logos, log);
 					});
 					resolve(true);
 				} else {
@@ -72,9 +75,10 @@ export const getNameFactoryEvent = (dispatch, networkId, currentBlockNumber) => 
 export const watchNameFactoryEvent = (dispatch, networkId, currentBlockNumber) => {
 	try {
 		const nameFactory = window.web3.eth.contract(NameFactory.abi).at(NameFactory.networks[networkId].address);
-		nameFactory.CreateName({}, { fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
+		const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
+		nameFactory.CreateName({}, { fromBlock: currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
 			if (!err) {
-				_parseNameFactoryEvent(dispatch, log);
+				_parseNameFactoryEvent(dispatch, logos, log);
 			}
 		});
 	} catch (e) {
@@ -82,7 +86,7 @@ export const watchNameFactoryEvent = (dispatch, networkId, currentBlockNumber) =
 	}
 };
 
-const _parseNameFactoryEvent = async (dispatch, log) => {
+const _parseNameFactoryEvent = async (dispatch, logos, log) => {
 	dispatch(appendName({ nameId: log.args.nameId, name: log.args.name }));
 	dispatch(
 		appendNamePosition({
@@ -98,6 +102,13 @@ const _parseNameFactoryEvent = async (dispatch, log) => {
 			compromised: false,
 			submittedTimestamp: new BigNumber(0),
 			lockedUntilTimestamp: new BigNumber(0)
+		})
+	);
+	const sumLogos = await promisify(logos.sumBalanceOf)(log.args.nameId);
+	dispatch(
+		appendNameSumLogos({
+			nameId: log.args.nameId,
+			sumLogos
 		})
 	);
 	nameLookup[log.args.nameId] = log.args.name;
@@ -226,7 +237,7 @@ export const getLogosEvent = (dispatch, networkId, currentBlockNumber, nameId) =
 			logos.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
-						await _parseLogosEvent(dispatch, log, nameId);
+						await _parseLogosEvent(dispatch, logos, log, nameId);
 					});
 					resolve();
 				} else {
@@ -244,7 +255,7 @@ export const watchLogosEvent = (dispatch, networkId, currentBlockNumber, nameId)
 		const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
 		logos.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
 			if (!err) {
-				await _parseLogosEvent(dispatch, log, nameId);
+				await _parseLogosEvent(dispatch, logos, log, nameId);
 			}
 		});
 	} catch (e) {
@@ -252,7 +263,7 @@ export const watchLogosEvent = (dispatch, networkId, currentBlockNumber, nameId)
 	}
 };
 
-const _parseLogosEvent = async (dispatch, log, nameId) => {
+const _parseLogosEvent = async (dispatch, logos, log, nameId) => {
 	switch (log.event) {
 		case "PositionFrom":
 			if (log.args.from === nameId) {
@@ -261,6 +272,8 @@ const _parseLogosEvent = async (dispatch, log, nameId) => {
 				dispatch(positionLogosFrom(log.args.from, nameLookup[log.args.from], log.args.value));
 			}
 			dispatch(addNamePositionLogos(log.args.to, log.args.value));
+			await _updateNameSumLogos(dispatch, logos, log.args.to);
+			await _updateNameSumLogos(dispatch, logos, log.args.from);
 			break;
 		case "UnpositionFrom":
 			if (log.args.from === nameId) {
@@ -269,6 +282,15 @@ const _parseLogosEvent = async (dispatch, log, nameId) => {
 				dispatch(unpositionLogosFrom(log.args.from, log.args.value));
 			}
 			dispatch(subtractNamePositionLogos(log.args.to, log.args.value));
+			await _updateNameSumLogos(dispatch, logos, log.args.to);
+			await _updateNameSumLogos(dispatch, logos, log.args.from);
+			break;
+		case "AddAdvocatedTAOLogos":
+			await _updateNameSumLogos(dispatch, logos, log.args.nameId);
+			break;
+		case "TransferAdvocatedTAOLogos":
+			await _updateNameSumLogos(dispatch, logos, log.args.fromNameId);
+			await _updateNameSumLogos(dispatch, logos, log.args.toNameId);
 			break;
 		default:
 			break;
@@ -279,11 +301,12 @@ export const getTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameId)
 	return new Promise(async (resolve, reject) => {
 		try {
 			const taoPool = window.web3.eth.contract(TAOPool.abi).at(TAOPool.networks[networkId].address);
+			const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
 			const receipt = await getTransactionReceipt(TAOPool.networks[networkId].transactionHash);
 			taoPool.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
 				if (!err) {
-					logs.forEach((log) => {
-						_parseTAOPoolEvent(dispatch, log, nameId);
+					asyncForEach(logs, async (log) => {
+						await _parseTAOPoolEvent(dispatch, logos, log, nameId);
 					});
 					resolve();
 				} else {
@@ -299,9 +322,10 @@ export const getTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameId)
 export const watchTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
 	try {
 		const taoPool = window.web3.eth.contract(TAOPool.abi).at(TAOPool.networks[networkId].address);
-		taoPool.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
+		const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
+		taoPool.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch(async (err, log) => {
 			if (!err) {
-				_parseTAOPoolEvent(dispatch, log, nameId);
+				await _parseTAOPoolEvent(dispatch, logos, log, nameId);
 			}
 		});
 	} catch (e) {
@@ -309,7 +333,7 @@ export const watchTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameI
 	}
 };
 
-const _parseTAOPoolEvent = (dispatch, log, nameId) => {
+const _parseTAOPoolEvent = async (dispatch, logos, log, nameId) => {
 	switch (log.event) {
 		case "StakeEthos":
 			if (log.args.nameId === nameId) {
@@ -329,6 +353,7 @@ const _parseTAOPoolEvent = (dispatch, log, nameId) => {
 				dispatch(nameWithdrawLogos(log.args));
 			}
 			dispatch(withdrawLogos(log.args));
+			await _updateNameSumLogos(dispatch, logos, log.args.nameId);
 			break;
 		default:
 			break;
@@ -452,4 +477,14 @@ const _parseNameAccountRecoveryEvent = async (dispatch, nameAccountRecovery, log
 		default:
 			break;
 	}
+};
+
+const _updateNameSumLogos = async (dispatch, logos, nameId) => {
+	const sumLogos = await promisify(logos.sumBalanceOf)(nameId);
+	dispatch(
+		updateNameSumLogos({
+			nameId,
+			sumLogos
+		})
+	);
 };

@@ -293,3 +293,18 @@ export const resetLoggedInNameCompromised = () => {
 		type: actionsEnums.RESET_LOGGED_IN_NAME_COMPROMISED
 	};
 };
+
+export const appendNameSumLogos = (name) => {
+	return {
+		type: actionsEnums.APPEND_NAME_SUM_LOGOS,
+		name
+	};
+};
+
+export const updateNameSumLogos = (nameId, sumLogos) => {
+	return {
+		type: actionsEnums.UPDATE_NAME_SUM_LOGOS,
+		nameId,
+		sumLogos
+	};
+};

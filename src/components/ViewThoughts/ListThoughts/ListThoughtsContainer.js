@@ -3,7 +3,9 @@ import { ListThoughts } from "./ListThoughts";
 
 const mapStateToProps = (state) => {
 	return {
-		names: state.globalReducer.names
+		names: state.globalReducer.names,
+		namesSumLogos: state.globalReducer.namesSumLogos,
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved
 	};
 };
 
