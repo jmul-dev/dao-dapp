@@ -14,6 +14,7 @@ import { MeetContainer } from "components/Meet/";
 import { IdeContainer } from "components/Ide/";
 import { OwnTAOContainer } from "components/OwnTAO/";
 import { NameStakeListContainer } from "components/NameStakeList/";
+import { ViewThoughtsContainer } from "components/ViewThoughts/";
 
 import { web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
 import { web3Errors } from "common/errors";
@@ -195,6 +196,7 @@ class AppRouter extends React.Component {
 					<Route path="/view-own-taos" component={OwnTAOContainer} />
 					<Route path="/name-stake-list/:id" component={NameStakeListContainer} />
 					<Route path="/view-own-taos" component={OwnTAOContainer} />
+					<Route path="/view-thoughts/:id" component={ViewThoughtsContainer} />
 				</Route>
 			</Router>
 		);

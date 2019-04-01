@@ -312,4 +312,6 @@ export const NavLink = styled(Nav.Link)`
 	}
 `;
 
-export const Description = styled.div``;
+export const Hr = styled.hr`
+	background-color: rgba(255, 255, 255, 0.2);
+`;

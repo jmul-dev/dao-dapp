@@ -63,14 +63,15 @@ class App extends React.Component {
 
 	async checkAccount() {
 		const { web3, accounts } = this.props;
-		if (!web3 || !accounts) {
+		if (!web3) {
 			return;
 		}
 
 		const latestAccounts = await promisify(web3.eth.getAccounts)();
 		if (
-			(accounts.length > 0 && latestAccounts.length > 0 && latestAccounts[0] !== accounts[0]) ||
-			latestAccounts.length !== accounts.length
+			(accounts && accounts.length > 0 && latestAccounts.length > 0 && latestAccounts[0] !== accounts[0]) ||
+			(accounts && latestAccounts.length !== accounts.length) ||
+			(latestAccounts.length && !accounts)
 		) {
 			window.location = "/";
 		}
