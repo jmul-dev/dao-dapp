@@ -6,7 +6,10 @@ const mapStateToProps = (state) => {
 	return {
 		nameId: state.nameReducer.nameId,
 		taos: state.globalReducer.taos,
-		taoFactory: state.contractReducer.contracts.taoFactory
+		taoFactory: state.contractReducer.contracts.taoFactory,
+		names: state.globalReducer.names,
+		namesSumLogos: state.globalReducer.namesSumLogos,
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved
 	};
 };
 

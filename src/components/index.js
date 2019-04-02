@@ -12,6 +12,9 @@ import "css/animate.min.css";
 export const Wrapper = styled.div`
 	font-size: 1em;
 
+	&.padding-left-20 {
+		padding-left: 20px;
+	}
 	&.margin-top-20 {
 		margin-top: 20px;
 	}

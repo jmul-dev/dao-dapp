@@ -1,18 +1,23 @@
 import * as React from "react";
 import { Wrapper, Title, Header, Ahref, Hr } from "components/";
 import { AddThoughtContainer } from "./AddThought/";
-import { ListThoughtsContainer } from "./ListThoughts/";
+import { ListThoughts } from "./ListThoughts/";
 import { get, encodeParams } from "utils/";
+import { buildThoughtsHierarchy } from "utils/";
+import { DropdownButton, Dropdown } from "react-bootstrap";
+import * as _ from "lodash";
 
 class ViewThoughts extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			taoDescription: null,
-			thoughts: null
+			thoughts: null,
+			sortBy: "logos"
 		};
 		this.initialState = this.state;
 		this.getTAOThoughts = this.getTAOThoughts.bind(this);
+		this.sortBy = this.sortBy.bind(this);
 	}
 
 	async componentDidMount() {
@@ -54,18 +59,41 @@ class ViewThoughts extends React.Component {
 		} catch (e) {}
 	}
 
+	sortBy(key) {
+		this.setState({ sortBy: key });
+	}
+
 	render() {
 		const { id } = this.props.params;
-		const { taos } = this.props;
-		const { taoDescription, thoughts } = this.state;
+		const { taos, names, namesSumLogos, pastEventsRetrieved } = this.props;
+		const { taoDescription, thoughts, sortBy } = this.state;
 
 		let tao = null;
 		if (taos) {
 			tao = taos.find((_tao) => _tao.taoId === id);
 		}
-		if (!tao || !taoDescription || !thoughts) {
+		if (!tao || !taoDescription || !thoughts || !names || !namesSumLogos || !pastEventsRetrieved) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
+		let _thoughtsHierarchy = [];
+		if (thoughts.length) {
+			const _thoughts = [];
+			thoughts.forEach((thought) => {
+				const _name = names.find((name) => name.nameId === thought.value.nameId);
+				const _nameSumLogos = namesSumLogos.find((name) => name.nameId === thought.value.nameId);
+				if (_name && _nameSumLogos) {
+					_thoughts.push({
+						name: _name.name,
+						thoughtId: thought.splitKey[6],
+						sumLogos: _nameSumLogos.sumLogos,
+						...thought.value
+					});
+				}
+			});
+			const _sortedThoughts = _.orderBy(_thoughts, ["thoughtId"], ["asc"]);
+			_thoughtsHierarchy = buildThoughtsHierarchy(_sortedThoughts);
+		}
+
 		return (
 			<Wrapper className="padding-40">
 				<Ahref className="small" to={`/tao/${id}`}>
@@ -78,7 +106,21 @@ class ViewThoughts extends React.Component {
 				<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
 				<AddThoughtContainer taoId={id} getTAOThoughts={this.getTAOThoughts} />
 				<Hr />
-				<ListThoughtsContainer taoId={id} getTAOThoughts={this.getTAOThoughts} thoughts={thoughts} />
+				{_thoughtsHierarchy.length && (
+					<Wrapper>
+						<Wrapper className="margin-bottom-20">
+							<DropdownButton id="sort-button" title="Sort By" size="sm">
+								<Dropdown.Item as="button" onSelect={() => this.sortBy("logos")}>
+									Logos
+								</Dropdown.Item>
+								<Dropdown.Item as="button" onSelect={() => this.sortBy("timestamp")}>
+									Timestamp
+								</Dropdown.Item>
+							</DropdownButton>
+						</Wrapper>
+						<ListThoughts taoId={id} getTAOThoughts={this.getTAOThoughts} thoughts={_thoughtsHierarchy} sortBy={sortBy} />
+					</Wrapper>
+				)}
 			</Wrapper>
 		);
 	}

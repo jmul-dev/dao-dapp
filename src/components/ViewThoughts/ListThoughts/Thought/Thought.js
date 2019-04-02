@@ -26,7 +26,7 @@ class Thought extends React.Component {
 			return null;
 		}
 		return (
-			<Wrapper className="margin-bottom-40">
+			<Wrapper className="margin-bottom-20">
 				<Wrapper className="small">
 					<NameLink>
 						<Ahref className="white" to={`/profile/${thoughtInfo.nameId}/`}>

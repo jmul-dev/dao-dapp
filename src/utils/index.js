@@ -174,3 +174,42 @@ export const toHighestDenomination = (value) => {
 	}
 	return _value.toNumber();
 };
+
+export const buildThoughtsHierarchy = (thoughts) => {
+	if (!thoughts.length) {
+		return [];
+	}
+
+	const _thoughts = [];
+	thoughts.forEach((thought) => {
+		_thoughts.push({ ...thought, children: [] });
+	});
+
+	const treeData = _thoughts.reduce((r, a) => {
+		const getParent = (s, b) => {
+			return b.thoughtId === a.parentThoughtId ? b : b.children && b.children.reduce(getParent, s);
+		};
+
+		let index = 0,
+			node;
+		if (a.parentThoughtId > 0) {
+			node = r.reduce(getParent, {});
+		}
+		if (node && Object.keys(node).length) {
+			node.children = node.children || [];
+			node.children.push(a);
+		} else {
+			while (index < r.length) {
+				if (r[index].parentThoughtId === a.thoughtId) {
+					a.children = (a.children || []).concat(r.splice(index, 1));
+				} else {
+					index++;
+				}
+			}
+			r.push(a);
+		}
+		return r;
+	}, []);
+
+	return treeData;
+};
