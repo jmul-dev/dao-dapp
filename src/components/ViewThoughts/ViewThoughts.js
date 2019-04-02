@@ -106,7 +106,7 @@ class ViewThoughts extends React.Component {
 				<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
 				<AddThoughtContainer taoId={id} getTAOThoughts={this.getTAOThoughts} />
 				<Hr />
-				{_thoughtsHierarchy.length && (
+				{_thoughtsHierarchy.length > 0 && (
 					<Wrapper>
 						<Wrapper className="margin-bottom-20">
 							<DropdownButton id="sort-button" title="Sort By" size="sm">
