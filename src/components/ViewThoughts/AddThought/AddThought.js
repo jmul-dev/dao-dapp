@@ -70,7 +70,7 @@ class AddThought extends React.Component {
 					options={{ placeholder: { text: "What are your thoughts?" } }}
 				/>
 				<Button type="button" disabled={formLoading} onClick={this.addThought}>
-					{formLoading ? "Loading..." : "Comment"}
+					{formLoading ? "Loading..." : "Think"}
 				</Button>
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>

@@ -1,11 +1,23 @@
 import * as React from "react";
 import { Wrapper } from "components/";
 import { ThoughtContainer } from "./Thought/";
+import { DropdownButton, Dropdown } from "react-bootstrap";
 import * as _ from "lodash";
 
 class ListThoughts extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { sortBy: "logos" };
+		this.sortBy = this.sortBy.bind(this);
+	}
+
+	sortBy(key) {
+		this.setState({ sortBy: key });
+	}
+
 	render() {
 		const { names, namesSumLogos, pastEventsRetrieved, thoughts } = this.props;
+		const { sortBy } = this.state;
 		if (!names || !namesSumLogos || !pastEventsRetrieved) {
 			return <Wrapper className="small">Loading thoughts...</Wrapper>;
 		}
@@ -27,18 +39,38 @@ class ListThoughts extends React.Component {
 			}
 		});
 
-		const _sortedThoughts = _.orderBy(
-			_thoughts,
-			[
-				(t) => {
-					return t.sumLogos.toNumber();
-				},
-				"timestamp"
-			],
-			["desc", "desc"]
-		);
+		const _sortFields =
+			sortBy === "logos"
+				? [
+						(t) => {
+							return t.sumLogos.toNumber();
+						},
+						"timestamp"
+				  ]
+				: [
+						"timestamp",
+						(t) => {
+							return t.sumLogos.toNumber();
+						}
+				  ];
+
+		const _sortedThoughts = _.orderBy(_thoughts, _sortFields, ["desc", "desc"]);
 		const ThoughtContent = _sortedThoughts.map((thought) => <ThoughtContainer key={thought.key} thoughtInfo={thought} />);
-		return <Wrapper>{ThoughtContent}</Wrapper>;
+		return (
+			<Wrapper>
+				<Wrapper className="margin-bottom-20">
+					<DropdownButton id="sort-button" title="Sort By" size="sm">
+						<Dropdown.Item as="button" onSelect={() => this.sortBy("logos")}>
+							Logos
+						</Dropdown.Item>
+						<Dropdown.Item as="button" onSelect={() => this.sortBy("timestamp")}>
+							Timestamp
+						</Dropdown.Item>
+					</DropdownButton>
+				</Wrapper>
+				{ThoughtContent}
+			</Wrapper>
+		);
 	}
 }
 
