@@ -16,7 +16,7 @@ class ListThoughts extends React.Component {
 	}
 
 	render() {
-		const { names, namesSumLogos, pastEventsRetrieved, thoughts } = this.props;
+		const { names, namesSumLogos, pastEventsRetrieved, taoId, getTAOThoughts, thoughts } = this.props;
 		const { sortBy } = this.state;
 		if (!names || !namesSumLogos || !pastEventsRetrieved) {
 			return <Wrapper className="small">Loading thoughts...</Wrapper>;
@@ -32,7 +32,7 @@ class ListThoughts extends React.Component {
 			if (_name && _nameSumLogos) {
 				_thoughts.push({
 					name: _name.name,
-					key: thought.splitKey[6],
+					thoughtId: thought.splitKey[6],
 					sumLogos: _nameSumLogos.sumLogos,
 					...thought.value
 				});
@@ -55,7 +55,9 @@ class ListThoughts extends React.Component {
 				  ];
 
 		const _sortedThoughts = _.orderBy(_thoughts, _sortFields, ["desc", "desc"]);
-		const ThoughtContent = _sortedThoughts.map((thought) => <ThoughtContainer key={thought.key} thoughtInfo={thought} />);
+		const ThoughtContent = _sortedThoughts.map((thought) => (
+			<ThoughtContainer key={thought.thoughtId} taoId={taoId} getTAOThoughts={getTAOThoughts} thoughtInfo={thought} />
+		));
 		return (
 			<Wrapper>
 				<Wrapper className="margin-bottom-20">

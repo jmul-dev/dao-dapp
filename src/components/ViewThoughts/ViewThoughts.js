@@ -78,7 +78,7 @@ class ViewThoughts extends React.Component {
 				<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
 				<AddThoughtContainer taoId={id} getTAOThoughts={this.getTAOThoughts} />
 				<Hr />
-				<ListThoughtsContainer thoughts={thoughts} />
+				<ListThoughtsContainer taoId={id} getTAOThoughts={this.getTAOThoughts} thoughts={thoughts} />
 			</Wrapper>
 		);
 	}

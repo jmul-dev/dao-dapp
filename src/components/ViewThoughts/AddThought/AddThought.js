@@ -20,7 +20,7 @@ class AddThought extends React.Component {
 	}
 
 	async addThought() {
-		const { taoId, nameId } = this.props;
+		const { taoId, nameId, parentThoughtId } = this.props;
 		const { thought } = this.state;
 		if (!taoId || !nameId) {
 			return;
@@ -35,7 +35,7 @@ class AddThought extends React.Component {
 			const response = await post(`https://localhost/api/add-tao-thought`, {
 				nameId,
 				taoId,
-				parentThoughtId: 0,
+				parentThoughtId: parentThoughtId || 0,
 				thought
 			});
 			if (!response.error && !response.errorMessage) {
@@ -46,7 +46,10 @@ class AddThought extends React.Component {
 					thought: ""
 				});
 				this.props.getTAOThoughts();
-				this.props.setSuccess("Success!", `Thought was added successfully`);
+				//this.props.setSuccess("Success!", `Thought was added successfully`);
+				if (parentThoughtId) {
+					this.props.toggleShowForm();
+				}
 			} else {
 				this.setState({ error: true, errorMessage: response.errorMessage, formLoading: false });
 			}
@@ -56,7 +59,7 @@ class AddThought extends React.Component {
 	}
 
 	render() {
-		const { taoId } = this.props;
+		const { taoId, parentThoughtId } = this.props;
 		const { thought, error, errorMessage, formLoading } = this.state;
 		if (!taoId) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
@@ -72,6 +75,11 @@ class AddThought extends React.Component {
 				<Button type="button" disabled={formLoading} onClick={this.addThought}>
 					{formLoading ? "Loading..." : "Think"}
 				</Button>
+				{parentThoughtId > 0 && (
+					<Button className="no-bg margin-left" type="button" disabled={formLoading} onClick={this.props.toggleShowForm}>
+						Cancel
+					</Button>
+				)}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);
