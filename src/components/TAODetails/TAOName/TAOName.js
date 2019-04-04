@@ -72,16 +72,22 @@ class TAOName extends React.Component {
 						<div>Approve TAO</div>
 					</Icon>
 				)}
+				<Ahref className="white" to={`/create-tao/${id}/`}>
+					<Icon className="animated bounceIn">
+						<img src={process.env.PUBLIC_URL + "/images/create_child_tao.png"} alt={"Create Child TAO"} />
+						<div>Create Child TAO</div>
+					</Icon>
+				</Ahref>
 				<Ahref className="white" to={`/view-thoughts/${id}/`}>
 					<Icon className="animated bounceIn">
 						<img src={process.env.PUBLIC_URL + "/images/view_thoughts.png"} alt={"View Thoughts"} />
 						<div>View Thoughts</div>
 					</Icon>
 				</Ahref>
-				<Ahref className="white" to={`/create-tao/${id}/`}>
+				<Ahref className="white" to={`/view-timeline/${id}/`}>
 					<Icon className="animated bounceIn">
-						<img src={process.env.PUBLIC_URL + "/images/create_child_tao.png"} alt={"Create Child TAO"} />
-						<div>Create Child TAO</div>
+						<img src={process.env.PUBLIC_URL + "/images/timeline.png"} alt={"View Timeline"} />
+						<div>View Timeline</div>
 					</Icon>
 				</Ahref>
 				<Ahref className="white" to={`/meet/${id}/`}>
@@ -91,7 +97,7 @@ class TAOName extends React.Component {
 					</Icon>
 				</Ahref>
 				<Ahref className="white" to={`/ide/${id}/`}>
-					<Icon className="animated bounceIn">
+					<Icon className="animated bounceIn last-child">
 						<img src={process.env.PUBLIC_URL + "/images/open_ide.png"} alt={"Open IDE"} />
 						<div>Open IDE</div>
 					</Icon>

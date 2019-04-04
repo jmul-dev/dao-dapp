@@ -11,7 +11,7 @@ class ViewThoughts extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			taoDescription: null,
+			taoDescriptions: null,
 			thoughts: null,
 			sortBy: "logos"
 		};
@@ -21,27 +21,30 @@ class ViewThoughts extends React.Component {
 	}
 
 	async componentDidMount() {
-		await this.getTAODescription();
+		await this.getTAODescriptions();
 		await this.getTAOThoughts();
 	}
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.params.id !== prevProps.params.id) {
 			this.setState(this.initialState);
-			await this.getTAODescription();
+			await this.getTAODescriptions();
 			await this.getTAOThoughts();
 		}
 	}
 
-	async getTAODescription() {
+	async getTAODescriptions() {
 		const { id } = this.props.params;
 		if (!id) {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-tao-description?${encodeParams({ taoId: id })}`);
-			if (response.description) {
-				this.setState({ taoDescription: response.description });
+			const response = await get(`https://localhost/api/get-tao-descriptions?${encodeParams({ taoId: id })}`);
+			if (response.descriptions) {
+				const _descriptions = response.descriptions.map((desc) => {
+					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.value };
+				});
+				this.setState({ taoDescriptions: _.orderBy(_descriptions, ["timestamp"], ["desc"]) });
 			}
 		} catch (e) {}
 	}
@@ -66,13 +69,13 @@ class ViewThoughts extends React.Component {
 	render() {
 		const { id } = this.props.params;
 		const { taos, names, namesSumLogos, pastEventsRetrieved } = this.props;
-		const { taoDescription, thoughts, sortBy } = this.state;
+		const { taoDescriptions, thoughts, sortBy } = this.state;
 
 		let tao = null;
 		if (taos) {
 			tao = taos.find((_tao) => _tao.taoId === id);
 		}
-		if (!tao || !taoDescription || !thoughts || !names || !namesSumLogos || !pastEventsRetrieved) {
+		if (!tao || !taoDescriptions || !thoughts || !names || !namesSumLogos || !pastEventsRetrieved) {
 			return <Wrapper className="padding-40">Loading...</Wrapper>;
 		}
 		let _thoughtsHierarchy = [];
@@ -103,7 +106,9 @@ class ViewThoughts extends React.Component {
 					<Title className="medium margin-top-20 margin-bottom-0">{tao.name}</Title>
 					<Header>{id}</Header>
 				</Wrapper>
-				<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
+				{taoDescriptions.length > 0 && (
+					<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescriptions[0].value }} />
+				)}
 				<AddThoughtContainer taoId={id} getTAOThoughts={this.getTAOThoughts} />
 				<Hr />
 				{_thoughtsHierarchy.length > 0 && (

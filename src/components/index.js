@@ -170,7 +170,7 @@ export const Icon = styled.div`
 	display: inline-block;
 	cursor: pointer;
 	text-align: center;
-	font-size: 0.8em;
+	font-size: 0.7em;
 	margin: 30px 20px 0 0;
 
 	&.navbar {
@@ -192,7 +192,7 @@ export const Icon = styled.div`
 	}
 
 	> img {
-		max-height: 25px;
+		max-height: 20px;
 	}
 
 	> div {
@@ -201,6 +201,9 @@ export const Icon = styled.div`
 
 	:hover {
 		opacity: 0.7;
+	}
+	&.last-child {
+		margin-right: 0;
 	}
 `;
 

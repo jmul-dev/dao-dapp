@@ -8,7 +8,7 @@ import { ListenedTAOContainer } from "./ListenedTAO/";
 import { SpokenTAOContainer } from "./SpokenTAO/";
 import { AncestryDetailsContainer } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
-import { get, encodeParams, formatDate } from "utils/";
+import { get, encodeParams } from "utils/";
 import * as _ from "lodash";
 
 const promisify = require("tiny-promisify");
