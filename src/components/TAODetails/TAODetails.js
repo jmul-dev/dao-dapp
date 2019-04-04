@@ -8,7 +8,8 @@ import { ListenedTAOContainer } from "./ListenedTAO/";
 import { SpokenTAOContainer } from "./SpokenTAO/";
 import { AncestryDetailsContainer } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
-import { get, encodeParams } from "utils/";
+import { get, encodeParams, formatDate } from "utils/";
+import * as _ from "lodash";
 
 const promisify = require("tiny-promisify");
 
@@ -20,7 +21,7 @@ class TAODetails extends React.Component {
 		this.state = {
 			tabKey: "tao-info",
 			taoInfo: null,
-			taoDescription: null,
+			taoDescriptions: null,
 			position: null,
 			ancestry: null,
 			ethosCapStatus: null,
@@ -32,11 +33,13 @@ class TAODetails extends React.Component {
 			nameEthosStaked: null,
 			namePathosStaked: null,
 			nameLogosWithdrawn: null,
+			isAdvocate: null,
 			dataPopulated: false
 		};
 		this.initialState = this.state;
 		this.getTAOPool = this.getTAOPool.bind(this);
 		this.getTAOPosition = this.getTAOPosition.bind(this);
+		this.getTAODescriptions = this.getTAODescriptions.bind(this);
 	}
 
 	async componentDidMount() {
@@ -65,7 +68,7 @@ class TAODetails extends React.Component {
 
 	async getData() {
 		await this.getTAOInfo();
-		await this.getTAODescription();
+		await this.getTAODescriptions();
 		await this.getTAOPosition();
 		await this.getTAOAncestry();
 		await this.getTAOPool();
@@ -90,23 +93,26 @@ class TAODetails extends React.Component {
 		}
 	}
 
-	async getTAODescription() {
+	async getTAODescriptions() {
 		const { id } = this.props.params;
 		if (!id) {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-tao-description?${encodeParams({ taoId: id })}`);
-			if (response.description && this._isMounted) {
-				this.setState({ taoDescription: response.description });
+			const response = await get(`https://localhost/api/get-tao-descriptions?${encodeParams({ taoId: id })}`);
+			if (response.descriptions && this._isMounted) {
+				const _descriptions = response.descriptions.map((desc) => {
+					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.value };
+				});
+				this.setState({ taoDescriptions: _.orderBy(_descriptions, ["timestamp"], ["desc"]) });
 			}
 		} catch (e) {}
 	}
 
 	async getTAOPosition() {
 		const { id } = this.props.params;
-		const { taoPositions, names, nameTAOPosition, aoLibrary } = this.props;
-		if (!taoPositions || !names || !nameTAOPosition || !aoLibrary || !id) {
+		const { taoPositions, names, nameTAOPosition, aoLibrary, nameId } = this.props;
+		if (!taoPositions || !names || !nameTAOPosition || !aoLibrary || !id || !nameId) {
 			return;
 		}
 
@@ -131,8 +137,9 @@ class TAODetails extends React.Component {
 		position.listener.isTAO = await promisify(aoLibrary.isTAO)(position.listener.id);
 		position.speaker.isTAO = await promisify(aoLibrary.isTAO)(position.speaker.id);
 
+		const isAdvocate = _position[1] === nameId;
 		if (this._isMounted) {
-			this.setState({ position });
+			this.setState({ position, isAdvocate });
 		}
 	}
 
@@ -202,7 +209,7 @@ class TAODetails extends React.Component {
 		const {
 			tabKey,
 			taoInfo,
-			taoDescription,
+			taoDescriptions,
 			position,
 			ancestry,
 			ethosCapStatus,
@@ -214,6 +221,7 @@ class TAODetails extends React.Component {
 			nameEthosStaked,
 			namePathosStaked,
 			nameLogosWithdrawn,
+			isAdvocate,
 			dataPopulated
 		} = this.state;
 		if (!pastEventsRetrieved || !taosNeedApproval || !dataPopulated || typeof singlePageView === "undefined") {
@@ -242,8 +250,10 @@ class TAODetails extends React.Component {
 							singlePageView={singlePageView}
 							needApproval={needApproval}
 							parentId={ancestry.parentId}
+							taoDescriptions={taoDescriptions}
+							getTAODescriptions={this.getTAODescriptions}
+							isAdvocate={isAdvocate}
 						/>
-						<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescription }} />
 						<LeftContainer>
 							<PositionDetailsContainer
 								id={id}
@@ -309,8 +319,10 @@ class TAODetails extends React.Component {
 										singlePageView={singlePageView}
 										needApproval={needApproval}
 										parentId={ancestry.parentId}
+										taoDescriptions={taoDescriptions}
+										getTAODescriptions={this.getTAODescriptions}
+										isAdvocate={isAdvocate}
 									/>
-									<Wrapper dangerouslySetInnerHTML={{ __html: taoDescription }} />
 								</Tab.Pane>
 								<Tab.Pane eventKey="position">
 									<PositionDetailsContainer
