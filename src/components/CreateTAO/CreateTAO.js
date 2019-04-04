@@ -143,7 +143,7 @@ class CreateTAO extends React.Component {
 							const taoId = taoIdArgs[0].value;
 
 							try {
-								const response = await post(`https://localhost/api/set-tao-description`, {
+								const response = await post(`https://localhost/api/add-tao-description`, {
 									taoId,
 									description: taoDescription
 								});
