@@ -21,21 +21,21 @@ import { web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId
 import { web3Errors } from "common/errors";
 
 // Contracts
-import NameAccountRecovery from "contracts/NameAccountRecovery.json";
-import NameFactory from "contracts/NameFactory.json";
-import NamePublicKey from "contracts/NamePublicKey.json";
-import NameTAOLookup from "contracts/NameTAOLookup.json";
-import NameTAOPosition from "contracts/NameTAOPosition.json";
-import NameTAOVault from "contracts/NameTAOVault.json";
-import Ethos from "contracts/Ethos.json";
-import Pathos from "contracts/Pathos.json";
-import Logos from "contracts/Logos.json";
-import AOIon from "contracts/AOIon.json";
-import TAOAncestry from "contracts/TAOAncestry.json";
-import TAOFactory from "contracts/TAOFactory.json";
-import TAOPool from "contracts/TAOPool.json";
-import AOSetting from "contracts/AOSetting.json";
-import AOLibrary from "contracts/AOLibrary.json";
+import NameAccountRecovery from "ao-contracts/build/contracts/NameAccountRecovery.json";
+import NameFactory from "ao-contracts/build/contracts/NameFactory.json";
+import NamePublicKey from "ao-contracts/build/contracts/NamePublicKey.json";
+import NameTAOLookup from "ao-contracts/build/contracts/NameTAOLookup.json";
+import NameTAOPosition from "ao-contracts/build/contracts/NameTAOPosition.json";
+import NameTAOVault from "ao-contracts/build/contracts/NameTAOVault.json";
+import Ethos from "ao-contracts/build/contracts/Ethos.json";
+import Pathos from "ao-contracts/build/contracts/Pathos.json";
+import Logos from "ao-contracts/build/contracts/Logos.json";
+import AOIon from "ao-contracts/build/contracts/AOIon.json";
+import TAOAncestry from "ao-contracts/build/contracts/TAOAncestry.json";
+import TAOFactory from "ao-contracts/build/contracts/TAOFactory.json";
+import TAOPool from "ao-contracts/build/contracts/TAOPool.json";
+import AOSetting from "ao-contracts/build/contracts/AOSetting.json";
+import AOLibrary from "ao-contracts/build/contracts/AOLibrary.json";
 
 import { setError } from "widgets/Toast/actions";
 

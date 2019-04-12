@@ -38,14 +38,14 @@ import {
 } from "./actions";
 
 // Contracts
-import NameFactory from "contracts/NameFactory.json";
-import TAOFactory from "contracts/TAOFactory.json";
-import TAOAncestry from "contracts/TAOAncestry.json";
-import Logos from "contracts/Logos.json";
-import TAOPool from "contracts/TAOPool.json";
-import NameTAOPosition from "contracts/NameTAOPosition.json";
-import AOLibrary from "contracts/AOLibrary.json";
-import NameAccountRecovery from "contracts/NameAccountRecovery.json";
+import NameFactory from "ao-contracts/build/contracts/NameFactory.json";
+import TAOFactory from "ao-contracts/build/contracts/TAOFactory.json";
+import TAOAncestry from "ao-contracts/build/contracts/TAOAncestry.json";
+import Logos from "ao-contracts/build/contracts/Logos.json";
+import TAOPool from "ao-contracts/build/contracts/TAOPool.json";
+import NameTAOPosition from "ao-contracts/build/contracts/NameTAOPosition.json";
+import AOLibrary from "ao-contracts/build/contracts/AOLibrary.json";
+import NameAccountRecovery from "ao-contracts/build/contracts/NameAccountRecovery.json";
 
 const promisify = require("tiny-promisify");
 const nameLookup = {};

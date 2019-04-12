@@ -3,7 +3,7 @@ import { Wrapper, Title, SchemaForm, Error, MediumEditor, Button, Ahref } from "
 import { FieldWrapper, Label, Select, MinLogos, SelectedParent } from "./styledComponents";
 import { schema } from "./schema";
 import { getTransactionReceipt, waitForTransactionReceipt } from "utils/web3";
-import { abi as TAOFactoryABI } from "contracts/TAOFactory.json";
+import { abi as TAOFactoryABI } from "ao-contracts/build/contracts/TAOFactory.json";
 import { post } from "utils/";
 
 const promisify = require("tiny-promisify");
