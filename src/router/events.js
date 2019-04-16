@@ -34,7 +34,8 @@ import {
 	resetNameCompromised,
 	resetLoggedInNameCompromised,
 	appendNameSumLogos,
-	updateNameSumLogos
+	updateNameSumLogos,
+	setNameWriterKey
 } from "./actions";
 
 // Contracts
@@ -46,6 +47,7 @@ import TAOPool from "ao-contracts/build/contracts/TAOPool.json";
 import NameTAOPosition from "ao-contracts/build/contracts/NameTAOPosition.json";
 import AOLibrary from "ao-contracts/build/contracts/AOLibrary.json";
 import NameAccountRecovery from "ao-contracts/build/contracts/NameAccountRecovery.json";
+import NamePublicKey from "ao-contracts/build/contracts/NamePublicKey.json";
 
 const promisify = require("tiny-promisify");
 const nameLookup = {};
@@ -482,4 +484,50 @@ const _parseNameAccountRecoveryEvent = async (dispatch, nameAccountRecovery, log
 const _updateNameSumLogos = async (dispatch, logos, nameId) => {
 	const sumLogos = await promisify(logos.sumBalanceOf)(nameId);
 	dispatch(updateNameSumLogos(nameId, sumLogos));
+};
+
+export const getNamePublicKeyEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const namePublicKey = window.web3.eth.contract(NamePublicKey.abi).at(NamePublicKey.networks[networkId].address);
+			const receipt = await getTransactionReceipt(NamePublicKey.networks[networkId].transactionHash);
+			namePublicKey.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+				if (!err) {
+					logs.forEach((log) => {
+						_parseNamePublicKeyEvent(dispatch, namePublicKey, log, nameId);
+					});
+					resolve();
+				} else {
+					reject(err);
+				}
+			});
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+
+export const watchNamePublicKeyEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+	try {
+		const namePublicKey = window.web3.eth.contract(NamePublicKey.abi).at(NamePublicKey.networks[networkId].address);
+		namePublicKey.allEvents({ fromBlock: currentBlockNumber, toBlock: "latest" }).watch((err, log) => {
+			if (!err) {
+				_parseNamePublicKeyEvent(dispatch, namePublicKey, log, nameId);
+			}
+		});
+	} catch (e) {
+		console.log("error", e);
+	}
+};
+
+const _parseNamePublicKeyEvent = async (dispatch, namePublicKey, log, nameId) => {
+	switch (log.event) {
+		case "SetWriterKey":
+			if (log.args.nameId === nameId) {
+				dispatch(setNameWriterKey(log.args.publicKey));
+			}
+			break;
+		default:
+			break;
+	}
 };

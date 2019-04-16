@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
 		namesCompromised: state.globalReducer.namesCompromised,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
 		localWriterKey: state.nameReducer.localWriterKey,
-		namePublicKey: state.contractReducer.contracts.namePublicKey
+		namePublicKey: state.contractReducer.contracts.namePublicKey,
+		nameWriterKey: state.nameReducer.nameWriterKey
 	};
 };
 

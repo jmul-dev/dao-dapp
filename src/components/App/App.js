@@ -3,6 +3,7 @@ import { PageLayout } from "layouts/PageLayout/";
 import { EMPTY_ADDRESS } from "common/constants";
 import { ImgContainer } from "./styledComponents";
 import { CompromisedName } from "components/CompromisedName/";
+import { UpdateWriterKeyContainer } from "components/UpdateWriterKey/";
 import { BigNumber } from "bignumber.js";
 import { hashHistory } from "react-router";
 
@@ -23,8 +24,10 @@ class App extends React.Component {
 			position: null,
 			getNameCalled: false,
 			writerKeyChecked: false,
+			contractWriterKey: null,
 			writerKeyMatch: null
 		};
+		this.initialState = this.state;
 	}
 
 	isMobileDevice() {
@@ -48,13 +51,22 @@ class App extends React.Component {
 	}
 
 	async componentDidUpdate(prevProps) {
-		if (this.props.namesCompromised !== prevProps.namesCompromised) {
+		if (this.props.nameId !== prevProps.nameId) {
+			clearInterval(this.state.checkCompromisedIntervalId);
+			clearInterval(this.state.checkAccountIntervalId);
+			if (this._isMounted) {
+				this.setState(this.initialState);
+			}
+			await this.getName();
+		} else if (this.props.namesCompromised !== prevProps.namesCompromised) {
 			clearInterval(this.state.checkCompromisedIntervalId);
 			if (this._isMounted) {
 				this.setState({
 					checkCompromisedIntervalId: undefined
 				});
 			}
+			await this.getName();
+		} else if (this.props.nameWriterKey !== prevProps.nameWriterKey) {
 			await this.getName();
 		}
 	}
@@ -174,9 +186,10 @@ class App extends React.Component {
 		if (!nameId || !localWriterKey || !namePublicKey) {
 			return;
 		}
+		const contractWriterKey = await promisify(namePublicKey.getWriterKey)(nameId);
 		const writerKeyMatch = await promisify(namePublicKey.isNameWriterKey)(nameId, localWriterKey);
 		if (this._isMounted) {
-			this.setState({ writerKeyChecked: true, writerKeyMatch });
+			this.setState({ writerKeyChecked: true, contractWriterKey, writerKeyMatch });
 		}
 	}
 
@@ -184,14 +197,21 @@ class App extends React.Component {
 		this.props.setNameId(null);
 		this.props.resetLoggedInNameCompromised();
 		if (this._isMounted) {
-			this.setState({ nameId: null, nameCompromised: this._notCompromised, position: null, writerKeyMatch: null });
+			this.setState({
+				nameId: null,
+				nameCompromised: this._notCompromised,
+				position: null,
+				contractWriterKey: null,
+				writerKeyMatch: null
+			});
 		}
 		clearInterval(this.state.checkCompromisedIntervalId);
 	}
 
 	render() {
-		const { nameId, nameCompromised, getNameCalled, position, writerKeyChecked, writerKeyMatch } = this.state;
-		if (!getNameCalled) {
+		const { localWriterKey } = this.props;
+		const { nameId, nameCompromised, getNameCalled, position, writerKeyChecked, contractWriterKey, writerKeyMatch } = this.state;
+		if (!localWriterKey || !getNameCalled) {
 			return (
 				<PageLayout>
 					<ImgContainer>
@@ -214,10 +234,14 @@ class App extends React.Component {
 				</PageLayout>
 			);
 		} else if (nameId && writerKeyChecked && writerKeyMatch === false) {
-			return <div>Write key not match</div>;
+			return (
+				<PageLayout compromised={true}>
+					<UpdateWriterKeyContainer nameId={nameId} localWriterKey={localWriterKey} contractWriterKey={contractWriterKey} />
+				</PageLayout>
+			);
 		} else {
 			return (
-				<PageLayout>
+				<PageLayout compromised={false}>
 					<div>{this.props.children}</div>
 				</PageLayout>
 			);

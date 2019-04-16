@@ -315,3 +315,10 @@ export const updateNameSumLogos = (nameId, sumLogos) => {
 		sumLogos
 	};
 };
+
+export const setNameWriterKey = (nameWriterKey) => {
+	return {
+		type: actionsEnums.SET_NAME_WRITER_KEY,
+		nameWriterKey
+	};
+};
