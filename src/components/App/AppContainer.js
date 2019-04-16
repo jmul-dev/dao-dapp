@@ -11,7 +11,9 @@ const mapStateToProps = (state) => {
 		nameId: state.nameReducer.nameId,
 		nameAccountRecovery: state.contractReducer.contracts.nameAccountRecovery,
 		namesCompromised: state.globalReducer.namesCompromised,
-		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition
+		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
+		localWriterKey: state.nameReducer.localWriterKey,
+		namePublicKey: state.contractReducer.contracts.namePublicKey
 	};
 };
 

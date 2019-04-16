@@ -9,6 +9,7 @@ import { hashHistory } from "react-router";
 const promisify = require("tiny-promisify");
 
 class App extends React.Component {
+	_isMounted = false;
 	_notCompromised = { compromised: false, submittedTimestamp: new BigNumber(0), lockedUntilTimestamp: new BigNumber(0) };
 
 	constructor(props) {
@@ -20,7 +21,9 @@ class App extends React.Component {
 			nameId: null,
 			nameCompromised: null,
 			position: null,
-			getNameCalled: false
+			getNameCalled: false,
+			writerKeyChecked: false,
+			writerKeyMatch: null
 		};
 	}
 
@@ -29,6 +32,7 @@ class App extends React.Component {
 	}
 
 	async componentDidMount() {
+		this._isMounted = true;
 		this.props.detectMobileBrowser(this.isMobileDevice());
 		await this.getName();
 		const checkAccountIntervalId = setInterval(async () => {
@@ -38,25 +42,19 @@ class App extends React.Component {
 	}
 
 	componentWillUnmount() {
+		this._isMounted = false;
 		clearInterval(this.state.checkAccountIntervalId);
 		clearInterval(this.state.checkCompromisedIntervalId);
 	}
 
 	async componentDidUpdate(prevProps) {
-		if (
-			this.props.nameFactory !== prevProps.nameFactory ||
-			this.props.nameAccountRecovery !== prevProps.nameAccountRecovery ||
-			this.props.nameId !== prevProps.nameId ||
-			this.props.namesCompromised !== prevProps.namesCompromised
-		) {
+		if (this.props.namesCompromised !== prevProps.namesCompromised) {
 			clearInterval(this.state.checkCompromisedIntervalId);
-			this.setState({
-				checkAccountIntervalId: undefined,
-				checkCompromisedIntervalId: undefined,
-				nameId: null,
-				nameCompromised: null,
-				position: null
-			});
+			if (this._isMounted) {
+				this.setState({
+					checkCompromisedIntervalId: undefined
+				});
+			}
 			await this.getName();
 		}
 	}
@@ -92,9 +90,12 @@ class App extends React.Component {
 		const nameId = await promisify(nameFactory.ethAddressToNameId)(accounts[0]);
 		if (nameId !== EMPTY_ADDRESS) {
 			setNameId(nameId);
-			this.setState({ nameId });
+			if (this._isMounted) {
+				this.setState({ nameId });
+			}
 
 			await this.getNamePosition();
+			await this.checkWriterKey();
 
 			const accountRecovery = await promisify(nameAccountRecovery.getAccountRecovery)(nameId);
 			const isCompromised = await promisify(nameAccountRecovery.isCompromised)(nameId);
@@ -105,24 +106,32 @@ class App extends React.Component {
 					lockedUntilTimestamp: accountRecovery[2]
 				};
 				setLoggedInNameCompromised(accountRecovery[1], accountRecovery[2]);
-				this.setState({ nameCompromised });
+				if (this._isMounted) {
+					this.setState({ nameCompromised });
+				}
 
 				const checkCompromisedIntervalId = setInterval(async () => {
 					await this.checkCompromised();
 				}, 10000);
-				this.setState({ checkCompromisedIntervalId });
+				if (this._isMounted) {
+					this.setState({ checkCompromisedIntervalId });
+				}
 
 				if (this.props.location.pathname !== "/") {
 					hashHistory.push("/");
 				}
 			} else {
-				this.setState({ nameCompromised: this._notCompromised });
+				if (this._isMounted) {
+					this.setState({ nameCompromised: this._notCompromised });
+				}
 				resetLoggedInNameCompromised();
 			}
 		} else {
 			this.resetName();
 		}
-		this.setState({ getNameCalled: true });
+		if (this._isMounted) {
+			this.setState({ getNameCalled: true });
+		}
 	}
 
 	async checkCompromised() {
@@ -154,18 +163,34 @@ class App extends React.Component {
 			speakerName: _position[4],
 			speakerId: _position[5]
 		};
-		this.setState({ position });
+		if (this._isMounted) {
+			this.setState({ position });
+		}
+	}
+
+	async checkWriterKey() {
+		const { localWriterKey, namePublicKey } = this.props;
+		const { nameId } = this.state;
+		if (!nameId || !localWriterKey || !namePublicKey) {
+			return;
+		}
+		const writerKeyMatch = await promisify(namePublicKey.isNameWriterKey)(nameId, localWriterKey);
+		if (this._isMounted) {
+			this.setState({ writerKeyChecked: true, writerKeyMatch });
+		}
 	}
 
 	resetName() {
 		this.props.setNameId(null);
 		this.props.resetLoggedInNameCompromised();
-		this.setState({ nameId: null, nameCompromised: this._notCompromised, position: null });
+		if (this._isMounted) {
+			this.setState({ nameId: null, nameCompromised: this._notCompromised, position: null, writerKeyMatch: null });
+		}
 		clearInterval(this.state.checkCompromisedIntervalId);
 	}
 
 	render() {
-		const { nameId, nameCompromised, getNameCalled, position } = this.state;
+		const { nameId, nameCompromised, getNameCalled, position, writerKeyChecked, writerKeyMatch } = this.state;
 		if (!getNameCalled) {
 			return (
 				<PageLayout>
@@ -188,6 +213,8 @@ class App extends React.Component {
 					<CompromisedName nameId={nameId} nameCompromised={nameCompromised} position={position} />
 				</PageLayout>
 			);
+		} else if (nameId && writerKeyChecked && writerKeyMatch === false) {
+			return <div>Write key not match</div>;
 		} else {
 			return (
 				<PageLayout>
