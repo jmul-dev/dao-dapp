@@ -87,7 +87,7 @@ class TopNavBar extends React.Component {
 					</Link>
 				</Navbar.Brand>
 				<Navbar.Toggle />
-				{!compromised && (
+				{compromised === false && (
 					<Nav className="mr-auto">
 						<Ahref to="/">
 							<Icon className="animated bounceIn navbar">
@@ -116,7 +116,7 @@ class TopNavBar extends React.Component {
 					</Nav>
 				)}
 				<Navbar.Collapse className="justify-content-end">
-					{!compromised && (
+					{compromised === false && (
 						<div>
 							<Navbar.Text>
 								<CurrencyName className="ethos">Ethos</CurrencyName>
@@ -133,7 +133,7 @@ class TopNavBar extends React.Component {
 						</div>
 					)}
 					<Navbar.Text>
-						<Ahref to={!compromised ? `/profile/${nameId}` : "/"}>
+						<Ahref to={compromised === false ? `/profile/${nameId}` : "/"}>
 							{profileImage ? (
 								<div>
 									<BackgroundImage style={{ backgroundImage: `url(${profileImage})` }} />
