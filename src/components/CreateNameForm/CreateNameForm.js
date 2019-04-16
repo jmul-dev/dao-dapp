@@ -24,8 +24,8 @@ class CreateNameForm extends React.Component {
 
 	async handleSubmit(data) {
 		const { formData } = data;
-		const { nameFactory, nameTAOLookup, accounts, writerKey } = this.props;
-		if (!nameFactory || !nameTAOLookup || !accounts || !writerKey || !formData) {
+		const { nameFactory, nameTAOLookup, accounts, localWriterKey } = this.props;
+		if (!nameFactory || !nameTAOLookup || !accounts || !localWriterKey || !formData) {
 			return;
 		}
 		if (this._isMounted) {
@@ -38,7 +38,7 @@ class CreateNameForm extends React.Component {
 			}
 			return;
 		}
-		nameFactory.createName(formData.username, "", "", "", "", writerKey, { from: accounts[0] }, (err, transactionHash) => {
+		nameFactory.createName(formData.username, "", "", "", "", localWriterKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				if (this._isMounted) {
 					this.setState({ error: true, errorMessage: err.message, formLoading: false });

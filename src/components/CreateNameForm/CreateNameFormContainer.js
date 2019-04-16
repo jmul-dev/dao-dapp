@@ -4,7 +4,7 @@ import { setNameId } from "./actions";
 
 const mapStateToProps = (state) => {
 	return {
-		writerKey: state.nameReducer.writerKey,
+		localWriterKey: state.nameReducer.localWriterKey,
 		accounts: state.web3Reducer.accounts,
 		nameFactory: state.contractReducer.contracts.nameFactory,
 		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup

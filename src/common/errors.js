@@ -10,4 +10,4 @@ export const web3Errors = {
 	UNSUPPORTED_NETWORK: sls`The TAO smart contracts are not available on the Ethereum network you're on.`
 };
 
-export const WRITER_KEY_ERROR = sls`Unable to determine local writer key for this node.`;
+export const LOCAL_WRITER_KEY_ERROR = sls`Unable to determine local writer key for this node.`;

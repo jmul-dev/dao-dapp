@@ -1,9 +1,9 @@
 import { actionsEnums } from "common/actionsEnums";
 
-export const setWriterKey = (writerKey) => {
+export const setLocalWriterKey = (localWriterKey) => {
 	return {
-		type: actionsEnums.SET_WRITER_KEY,
-		writerKey
+		type: actionsEnums.SET_LOCAL_WRITER_KEY,
+		localWriterKey
 	};
 };
 

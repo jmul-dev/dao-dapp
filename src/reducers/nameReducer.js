@@ -5,7 +5,7 @@ class NameReducerState {
 	constructor() {
 		this.nameId = null;
 		this.nameInfo = null;
-		this.writerKey = null;
+		this.localWriterKey = null;
 		this.nameCompromised = { compromised: false, submittedTimestamp: new BigNumber(0), lockedUntilTimestamp: new BigNumber(0) };
 		this.profileImage = null;
 		this.taoCurrencyBalances = null;
@@ -31,10 +31,10 @@ const handleSetNameInfo = (state, action) => {
 	};
 };
 
-const handleSetWriterKey = (state, action) => {
+const handleSetLocalWriterKey = (state, action) => {
 	return {
 		...state,
-		writerKey: action.writerKey
+		localWriterKey: action.localWriterKey
 	};
 };
 
@@ -222,8 +222,8 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleSetNameId(state, action);
 		case actionsEnums.SET_NAME_INFO:
 			return handleSetNameInfo(state, action);
-		case actionsEnums.SET_WRITER_KEY:
-			return handleSetWriterKey(state, action);
+		case actionsEnums.SET_LOCAL_WRITER_KEY:
+			return handleSetLocalWriterKey(state, action);
 		case actionsEnums.SET_LOGGED_IN_NAME_COMPROMISED:
 			return handleSetLoggedInNameCompromised(state, action);
 		case actionsEnums.RESET_LOGGED_IN_NAME_COMPROMISED:

@@ -18,8 +18,8 @@ import { NameStakeListContainer } from "components/NameStakeList/";
 import { ViewThoughtsContainer } from "components/ViewThoughts/";
 import { ViewTimelineContainer } from "components/ViewTimeline/";
 
-import { setWriterKey, web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
-import { web3Errors, WRITER_KEY_ERROR } from "common/errors";
+import { setLocalWriterKey, web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
+import { web3Errors, LOCAL_WRITER_KEY_ERROR } from "common/errors";
 
 // Contracts
 import NameAccountRecovery from "ao-contracts/build/contracts/NameAccountRecovery.json";
@@ -65,7 +65,7 @@ import { EMPTY_ADDRESS } from "common/constants";
 const promisify = require("tiny-promisify");
 
 class AppRouter extends React.Component {
-	_writerKey = null;
+	_localWriterKey = null;
 	_web3 = null;
 	_networkId = null;
 	_currentBlockNumber = null;
@@ -78,10 +78,10 @@ class AppRouter extends React.Component {
 		try {
 			const response = await get(`https://localhost/api/get-writer-key`);
 			if (response.writerKey) {
-				this._writerKey = response.writerKey;
-				dispatch(setWriterKey(response.writerKey));
+				this._localWriterKey = response.writerKey;
+				dispatch(setLocalWriterKey(response.writerKey));
 			} else {
-				throw new Error(WRITER_KEY_ERROR);
+				throw new Error(LOCAL_WRITER_KEY_ERROR);
 			}
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
