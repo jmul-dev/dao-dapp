@@ -2,6 +2,7 @@ import * as React from "react";
 import * as Web3 from "web3";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
+import { get } from "utils/";
 
 // Router
 import { AppContainer } from "components/App/";
@@ -17,8 +18,8 @@ import { NameStakeListContainer } from "components/NameStakeList/";
 import { ViewThoughtsContainer } from "components/ViewThoughts/";
 import { ViewTimelineContainer } from "components/ViewTimeline/";
 
-import { web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
-import { web3Errors } from "common/errors";
+import { setWriterKey, web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
+import { web3Errors, WRITER_KEY_ERROR } from "common/errors";
 
 // Contracts
 import NameAccountRecovery from "ao-contracts/build/contracts/NameAccountRecovery.json";
@@ -64,6 +65,7 @@ import { EMPTY_ADDRESS } from "common/constants";
 const promisify = require("tiny-promisify");
 
 class AppRouter extends React.Component {
+	_writerKey = null;
 	_web3 = null;
 	_networkId = null;
 	_currentBlockNumber = null;
@@ -72,6 +74,19 @@ class AppRouter extends React.Component {
 	async componentDidMount() {
 		const { store, env } = this.props;
 		const dispatch = store.dispatch;
+
+		try {
+			const response = await get(`https://localhost/api/get-writer-key`);
+			if (response.writerKey) {
+				this._writerKey = response.writerKey;
+				dispatch(setWriterKey(response.writerKey));
+			} else {
+				throw new Error(WRITER_KEY_ERROR);
+			}
+		} catch (e) {
+			dispatch(setError("Oops!", e.message, true));
+			return;
+		}
 
 		try {
 			this._web3 = await this.instantiateWeb3(env);

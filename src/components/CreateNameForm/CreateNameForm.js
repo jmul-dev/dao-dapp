@@ -6,36 +6,56 @@ import { waitForTransactionReceipt } from "utils/web3";
 const promisify = require("tiny-promisify");
 
 class CreateNameForm extends React.Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 		this.state = { error: false, errorMessage: "", formLoading: false };
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	componentDidMount() {
+		this._isMounted = true;
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
 	async handleSubmit(data) {
 		const { formData } = data;
-		const { nameFactory, nameTAOLookup, accounts } = this.props;
-		if (!nameFactory || !nameTAOLookup || !accounts || !formData) {
+		const { nameFactory, nameTAOLookup, accounts, writerKey } = this.props;
+		if (!nameFactory || !nameTAOLookup || !accounts || !writerKey || !formData) {
 			return;
 		}
-		this.setState({ formLoading: true });
+		if (this._isMounted) {
+			this.setState({ formLoading: true });
+		}
 		const isExist = await promisify(nameTAOLookup.isExist)(formData.username);
 		if (isExist) {
-			this.setState({ error: true, errorMessage: "Username has been taken", formLoading: false });
+			if (this._isMounted) {
+				this.setState({ error: true, errorMessage: "Username has been taken", formLoading: false });
+			}
 			return;
 		}
-		nameFactory.createName(formData.username, "", "", "", "", { from: accounts[0] }, (err, transactionHash) => {
+		nameFactory.createName(formData.username, "", "", "", "", writerKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
-				this.setState({ error: true, errorMessage: err.message, formLoading: false });
+				if (this._isMounted) {
+					this.setState({ error: true, errorMessage: err.message, formLoading: false });
+				}
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
-						this.setState({ error: false, errorMessage: "", formLoading: false });
+						if (this._isMounted) {
+							this.setState({ error: false, errorMessage: "", formLoading: false });
+						}
 						const nameId = await promisify(nameFactory.ethAddressToNameId)(accounts[0]);
 						this.props.setNameId(nameId);
 					})
 					.catch((err) => {
-						this.setState({ error: true, errorMessage: err.message, formLoading: false });
+						if (this._isMounted) {
+							this.setState({ error: true, errorMessage: err.message, formLoading: false });
+						}
 					});
 			}
 		});

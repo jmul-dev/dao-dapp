@@ -1,5 +1,12 @@
 import { actionsEnums } from "common/actionsEnums";
 
+export const setWriterKey = (writerKey) => {
+	return {
+		type: actionsEnums.SET_WRITER_KEY,
+		writerKey
+	};
+};
+
 export const web3Connected = (web3) => {
 	return {
 		type: actionsEnums.WEB3_CONNECTED,
