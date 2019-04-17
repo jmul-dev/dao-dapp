@@ -24,6 +24,7 @@ class PublicKeys extends React.Component {
 		super(props);
 		this.state = {
 			defaultPublicKey: null,
+			writerPublicKey: null,
 			publicKeys: null,
 			publicKeysBalance: {},
 			showAddKeyForm: false,
@@ -64,6 +65,7 @@ class PublicKeys extends React.Component {
 			return;
 		}
 		const defaultPublicKey = await promisify(namePublicKey.getDefaultKey)(id);
+		const writerPublicKey = await promisify(namePublicKey.getWriterKey)(id);
 		const totalPublicKeys = await promisify(namePublicKey.getTotalPublicKeysCount)(id);
 		const _publicKeys = await promisify(namePublicKey.getKeys)(id, 0, totalPublicKeys.toNumber());
 		const publicKeys = _publicKeys.filter((_publicKey) => _publicKey !== EMPTY_ADDRESS);
@@ -74,7 +76,7 @@ class PublicKeys extends React.Component {
 			publicKeysBalance[publicKey] = { networkBalance, primordialBalance };
 		});
 		if (this._isMounted) {
-			this.setState({ defaultPublicKey, publicKeys, publicKeysBalance });
+			this.setState({ defaultPublicKey, writerPublicKey, publicKeys, publicKeysBalance });
 		}
 	}
 
@@ -180,6 +182,7 @@ class PublicKeys extends React.Component {
 	render() {
 		const {
 			defaultPublicKey,
+			writerPublicKey,
 			publicKeys,
 			publicKeysBalance,
 			showAddKeyForm,
@@ -193,39 +196,45 @@ class PublicKeys extends React.Component {
 			publicKeysContent = null;
 
 		if (publicKeys) {
-			publicKeysContent = publicKeys.map((publicKey) => (
-				<PublicKeyContainer key={publicKey} className={publicKey === defaultPublicKey && "default"}>
-					<PublicKeyValue>{publicKey}</PublicKeyValue>
-					<PublicKeyBalance>{publicKeysBalance[publicKey].networkBalance.toNumber()} AO</PublicKeyBalance>
-					<PublicKeyBalance>{publicKeysBalance[publicKey].primordialBalance.toNumber()} AO+</PublicKeyBalance>
-					<PublicKeyAction>
-						{publicKey === defaultPublicKey
-							? "(default)"
-							: [
-									processingTransaction && publicKey === publicKeyInProcess ? (
-										"Loading..."
-									) : (
-										<NonDefaultKeyAction key={publicKey}>
-											<Button
-												className="small"
-												onClick={() => this.setDefaultPublicKey(publicKey)}
-												disabled={processingTransaction}
-											>
-												Set Default
-											</Button>
-											<Button
-												className="small red margin-left"
-												onClick={() => this.removePublicKey(publicKey)}
-												disabled={processingTransaction}
-											>
-												Remove
-											</Button>
-										</NonDefaultKeyAction>
-									)
-							  ]}
-					</PublicKeyAction>
-				</PublicKeyContainer>
-			));
+			publicKeysContent = publicKeys.map((publicKey) => {
+				let className, publicKeyAction;
+				if (publicKey === defaultPublicKey || publicKey === writerPublicKey) {
+					className = "default";
+					publicKeyAction = publicKey === defaultPublicKey ? "(default)" : "(writer)";
+				} else {
+					if (processingTransaction && publicKey === publicKeyInProcess) {
+						publicKeyAction = "Loading...";
+					} else {
+						publicKeyAction = (
+							<NonDefaultKeyAction key={publicKey}>
+								<Button
+									className="small"
+									onClick={() => this.setDefaultPublicKey(publicKey)}
+									disabled={processingTransaction}
+								>
+									Set Default
+								</Button>
+								<Button
+									className="small red margin-left"
+									onClick={() => this.removePublicKey(publicKey)}
+									disabled={processingTransaction}
+								>
+									Remove
+								</Button>
+							</NonDefaultKeyAction>
+						);
+					}
+				}
+
+				return (
+					<PublicKeyContainer key={publicKey} className={className}>
+						<PublicKeyValue>{publicKey}</PublicKeyValue>
+						<PublicKeyBalance>{publicKeysBalance[publicKey].networkBalance.toNumber()} AO</PublicKeyBalance>
+						<PublicKeyBalance>{publicKeysBalance[publicKey].primordialBalance.toNumber()} AO+</PublicKeyBalance>
+						<PublicKeyAction>{publicKeyAction}</PublicKeyAction>
+					</PublicKeyContainer>
+				);
+			});
 		}
 		ownerFeatures = (
 			<OwnerContent>

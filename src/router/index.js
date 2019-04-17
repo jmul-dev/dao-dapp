@@ -78,19 +78,6 @@ class AppRouter extends React.Component {
 		const dispatch = store.dispatch;
 
 		try {
-			const response = await get(`https://localhost/api/get-writer-key`);
-			if (response.writerKey) {
-				this._localWriterKey = response.writerKey;
-				dispatch(setLocalWriterKey(response.writerKey));
-			} else {
-				throw new Error(LOCAL_WRITER_KEY_ERROR);
-			}
-		} catch (e) {
-			dispatch(setError("Oops!", e.message, true));
-			return;
-		}
-
-		try {
 			this._web3 = await this.instantiateWeb3(env);
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
@@ -125,6 +112,19 @@ class AppRouter extends React.Component {
 				aoLibrary: this.instantiateContract(AOLibrary)
 			};
 			dispatch(setContracts(contracts));
+
+			try {
+				const response = await get(`https://localhost/api/get-writer-key`);
+				if (response.writerKey) {
+					this._localWriterKey = response.writerKey;
+					dispatch(setLocalWriterKey(response.writerKey));
+				} else {
+					throw new Error(LOCAL_WRITER_KEY_ERROR);
+				}
+			} catch (e) {
+				dispatch(setError("Oops!", LOCAL_WRITER_KEY_ERROR, true));
+				return;
+			}
 
 			if (accounts.length) {
 				this._nameId = await promisify(contracts.nameFactory.ethAddressToNameId)(accounts[0]);
