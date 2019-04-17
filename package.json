@@ -1,5 +1,5 @@
 {
-	"name": "react-boilerplate",
+	"name": "the-ao",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -58,5 +58,6 @@
 		"hooks": {
 			"pre-commit": "pretty-quick --staged"
 		}
-	}
+	},
+	"homepage": "./"
 }
