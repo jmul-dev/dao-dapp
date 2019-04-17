@@ -52,10 +52,10 @@ class App extends React.Component {
 
 	async componentDidUpdate(prevProps) {
 		if (this.props.nameId !== prevProps.nameId) {
+			const { checkAccountIntervalId } = this.state;
 			clearInterval(this.state.checkCompromisedIntervalId);
-			clearInterval(this.state.checkAccountIntervalId);
 			if (this._isMounted) {
-				this.setState(this.initialState);
+				this.setState({ checkAccountIntervalId, ...this.initialState });
 			}
 			await this.getName();
 		} else if (this.props.namesCompromised !== prevProps.namesCompromised) {
