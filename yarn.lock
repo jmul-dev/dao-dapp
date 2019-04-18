@@ -1512,9 +1512,9 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-"ao-contracts@git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.12":
+"ao-contracts@git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.14":
   version "1.0.10"
-  resolved "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#10b6b96ba545da25b85e65c89b85aa95e117884a"
+  resolved "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#07ed093f91dfadab5e8ab54a827a4779cb42b5dd"
   dependencies:
     bignumber.js "^7.2.1"
     eth-crypto "^1.2.3"

@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
-		"ao-contracts": "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.12",
+		"ao-contracts": "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.14",
 		"@babel/runtime": "^7.3.1",
 		"abi-decoder": "^1.2.0",
 		"bignumber.js": "^8.0.1",
