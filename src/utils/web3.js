@@ -12,11 +12,13 @@ export const waitForTransactionReceipt = (transactionHash) => {
 		const intervalId = setInterval(async () => {
 			try {
 				const receipt = await getTransactionReceipt(transactionHash);
-				clearInterval(intervalId);
-				if (receipt.status === "0x0") {
-					reject(new Error("Transaction failed"));
-				} else {
-					resolve();
+				if (receipt) {
+					clearInterval(intervalId);
+					if (receipt.status === "0x0") {
+						reject(new Error("Transaction failed"));
+					} else {
+						resolve();
+					}
 				}
 			} catch (e) {
 				clearInterval(intervalId);
