@@ -4,6 +4,7 @@ import { IframeContainer } from "./styledComponents";
 import { get, encodeParams } from "utils/";
 import Iframe from "react-iframe";
 import * as _ from "lodash";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 const promisify = require("tiny-promisify");
 
@@ -66,8 +67,9 @@ class Meet extends React.Component {
 	render() {
 		const { id } = this.props.params;
 		const { taoInfo, taoDescriptions, loaded } = this.state;
-		if (!taoInfo || !taoDescriptions) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+		const { pastEventsRetrieved } = this.props;
+		if (!taoInfo || !taoDescriptions || !pastEventsRetrieved) {
+			return <ProgressLoaderContainer />;
 		}
 		return (
 			<Wrapper className="padding-40">

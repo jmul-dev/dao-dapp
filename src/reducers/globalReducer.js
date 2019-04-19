@@ -3,6 +3,7 @@ import { BigNumber } from "bignumber.js";
 
 class GlobalReducerState {
 	constructor() {
+		this.pastEventsProgress = 0;
 		this.pastEventsRetrieved = false;
 		this.names = [];
 		this.namesPositionLogos = [];
@@ -15,6 +16,13 @@ class GlobalReducerState {
 		this.namesSumLogos = [];
 	}
 }
+
+const handleSetPastEventsProgress = (state, action) => {
+	return {
+		...state,
+		pastEventsProgress: action.pastEventsProgress
+	};
+};
 
 const handlePastEventsRetrieved = (state, action) => {
 	return {
@@ -291,6 +299,8 @@ const handleUpdateNameSumLogos = (state, action) => {
 
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
+		case actionsEnums.SET_PAST_EVENTS_PROGRESS:
+			return handleSetPastEventsProgress(state, action);
 		case actionsEnums.PAST_EVENTS_RETRIEVED:
 			return handlePastEventsRetrieved(state, action);
 		case actionsEnums.ADD_NAME_POSITION_LOGOS:

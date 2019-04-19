@@ -18,7 +18,16 @@ import { NameStakeListContainer } from "components/NameStakeList/";
 import { ViewThoughtsContainer } from "components/ViewThoughts/";
 import { ViewTimelineContainer } from "components/ViewTimeline/";
 
-import { setLocalWriterKey, web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
+import {
+	setLocalWriterKey,
+	web3Connected,
+	setAccounts,
+	setNetworkId,
+	setContracts,
+	setSettingTAOId,
+	setPastEventsProgress,
+	pastEventsRetrieved
+} from "./actions";
 import { web3Errors, LOCAL_WRITER_KEY_ERROR } from "common/errors";
 
 // Contracts
@@ -158,6 +167,8 @@ class AppRouter extends React.Component {
 					await getNameTAOPositionEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
 					await getNameAccountRecoveryEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
 					await getNamePublicKeyEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					const percentDone = parseInt(((toBlock - receipt.blockNumber) * 100) / (upperBlockLimit - receipt.blockNumber));
+					dispatch(setPastEventsProgress(percentDone));
 				}
 			).done(() => {
 				// Get and watch events

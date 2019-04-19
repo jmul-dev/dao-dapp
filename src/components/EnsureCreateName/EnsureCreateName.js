@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Wrapper } from "components/";
 import { CreateNameFormContainer } from "components/CreateNameForm/";
 import { TAOPlotContainer } from "components/TAOPlot/";
 import { buildTAOTreeData } from "utils/";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 class EnsureCreateName extends React.Component {
 	_isMounted = false;
@@ -43,7 +43,7 @@ class EnsureCreateName extends React.Component {
 		if (!nameId) {
 			return <CreateNameFormContainer />;
 		} else if (!pastEventsRetrieved) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		} else {
 			return <TAOPlotContainer taoData={taoTreeData} width={1200} height={800} />;
 		}

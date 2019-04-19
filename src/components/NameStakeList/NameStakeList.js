@@ -4,6 +4,7 @@ import { TAOName } from "./TAOName/";
 import { Financials } from "./Financials/";
 import { StakeEthosListContainer } from "./StakeEthosList/";
 import { StakePathosList } from "./StakePathosList/";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 const promisify = require("tiny-promisify");
 
@@ -51,14 +52,14 @@ class NameStakeList extends React.Component {
 
 	render() {
 		const { id } = this.props.params;
-		const { taos, nameStakeEthos, nameStakePathos } = this.props;
+		const { taos, nameStakeEthos, nameStakePathos, pastEventsRetrieved } = this.props;
 		const { ethosStaked, pathosStaked, logosWithdrawn, dataPopulated } = this.state;
 		const taoInfo = taos.find((tao) => tao.taoId === id);
 		const _nameStakeEthos = nameStakeEthos.filter((tao) => tao.taoId === id);
 		const _nameStakePathos = nameStakePathos.filter((tao) => tao.taoId === id);
 
-		if (!taoInfo || !id || !dataPopulated) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+		if (!taoInfo || !id || !dataPopulated || !pastEventsRetrieved) {
+			return <ProgressLoaderContainer />;
 		}
 
 		return (

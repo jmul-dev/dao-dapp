@@ -5,6 +5,7 @@ import { schema } from "./schema";
 import { getTransactionReceipt, waitForTransactionReceipt } from "utils/web3";
 import { abi as TAOFactoryABI } from "ao-contracts/build/contracts/TAOFactory.json";
 import { post } from "utils/";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 const promisify = require("tiny-promisify");
 const abiDecoder = require("abi-decoder");
@@ -175,7 +176,7 @@ class CreateTAO extends React.Component {
 		const { error, errorMessage, formLoading, parentMinLogos, parentId, formData, taoDescription } = this.state;
 		const { pastEventsRetrieved, nameId, nameInfo, taos, taoCurrencyBalances } = this.props;
 		if (!pastEventsRetrieved || !nameId || !nameInfo || !taos || !taoCurrencyBalances || !parentMinLogos) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		}
 		const { id } = this.props.params;
 		const taoOptions = taos.map((tao) => (

@@ -10,6 +10,7 @@ import { AncestryDetailsContainer } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
 import { get, encodeParams } from "utils/";
 import * as _ from "lodash";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 const promisify = require("tiny-promisify");
 
@@ -225,7 +226,7 @@ class TAODetails extends React.Component {
 			dataPopulated
 		} = this.state;
 		if (!pastEventsRetrieved || !taosNeedApproval || !dataPopulated || typeof singlePageView === "undefined") {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		}
 
 		const needApproval = taosNeedApproval.find((tao) => tao.taoId === id) ? true : false;

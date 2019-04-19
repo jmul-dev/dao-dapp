@@ -58,7 +58,6 @@ export const getNameFactoryEvent = (dispatch, networkId, fromBlock, toBlock) => 
 			const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
 			nameFactory.CreateName({}, { fromBlock, toBlock }).get((err, logs) => {
 				if (!err) {
-					console.log("get name factory", fromBlock, toBlock);
 					asyncForEach(logs, async (log) => {
 						await _parseNameFactoryEvent(dispatch, logos, log);
 					});
