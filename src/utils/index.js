@@ -1,4 +1,7 @@
 import { BigNumber } from "bignumber.js";
+const Q = require("q");
+const asap = require("asap");
+
 BigNumber.config({ DECIMAL_PLACES: 2 });
 
 export const asyncForEach = async (array, callback) => {
@@ -212,4 +215,14 @@ export const buildThoughtsHierarchy = (thoughts) => {
 	}, []);
 
 	return treeData;
+};
+
+export const promiseWhile = (condition, body) => {
+	const done = Q.defer();
+	const loop = () => {
+		if (!condition()) return done.resolve();
+		Q.when(body(), loop, done.reject);
+	};
+	asap(loop);
+	return done.promise;
 };
