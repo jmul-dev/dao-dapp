@@ -25,64 +25,11 @@ const graphql = (query, variables) => {
 
 export const getWriterKey = () => {
 	const query = `
-		query() {
-			writerKey() {
-				key
-			}
+		query {
+			writerKey
 		}
 	`;
 	const variables = {};
-	return graphql(query, variables);
-};
-
-export const getWriterKeySignature = (nameId, nonce) => {
-	const query = `
-		query($nameId: ID!, $nonce: Integer!) {
-			writerKeySignature(nameId: $nameId, nonce: $nonce) {
-				signature
-			}
-		}
-	`;
-	const variables = { nameId, nonce };
-	return graphql(query, variables);
-};
-
-export const getNameProfileImage = (nameId) => {
-	const query = `
-		query($nameId: ID!) {
-			nameProfile(nameId: $nameId) {
-				nameId,
-				imageString
-			}
-		}
-	`;
-	const variables = { nameId };
-	return graphql(query, variables);
-};
-
-export const setNameProfileImage = (nameId, imageString) => {
-	const query = `
-		mutation($nameId: ID!, $imageString: String!) {
-		submitNameProfile(inputs: {nameId: $nameId, imageString: $imageString}) {
-			nameId,
-			imageString
-		}
-	}
-	`;
-	const variables = { nameId, imageString };
-	return graphql(query, variables);
-};
-
-export const insertTAODescription = (taoId, description) => {
-	const query = `
-        mutation($taoId: ID!, $description: String!) {
-            submitTaoDescription(inputs: {taoId: $taoId, description: $description}) {
-                taoId,
-                description
-            }
-        }
-    `;
-	const variables = { taoId, description };
 	return graphql(query, variables);
 };
 
@@ -90,8 +37,12 @@ export const getTAODescriptions = (taoId) => {
 	const query = `
 		query($taoId: ID!) {
 			taoDescriptions(taoId: $taoId) {
-				taoId,
-				descriptions
+				key
+				schemaKey
+				splitKey
+				writerAddress
+				writerSignature
+				description: value
 			}
 		}
 	`;
@@ -102,10 +53,7 @@ export const getTAODescriptions = (taoId) => {
 export const getTAOThoughtsCount = (taoId) => {
 	const query = `
 		query($taoId: ID!) {
-			taoThoughtsCount(taoId: $taoId) {
-				taoId,
-				count
-			}
+			taoThoughtsCount(taoId: $taoId)
 		}
 	`;
 	const variables = { taoId };
@@ -116,8 +64,17 @@ export const getTAOThoughts = (taoId) => {
 	const query = `
 		query($taoId: ID!) {
 			taoThoughts(taoId: $taoId) {
-				taoId,
-				thoughts
+				key
+				schemaKey
+				splitKey
+				writerAddress
+				writerSignature
+				thought: value {
+					nameId
+					parentThoughtId
+					thought
+					timestamp
+				}
 			}
 		}
 	`;
@@ -129,13 +86,62 @@ export const insertTAOThought = (nameId, taoId, parentThoughtId, thought) => {
 	const query = `
         mutation($nameId: ID!, $taoId: ID!, $parentThoughtId: ID, $thought: String!) {
             submitTaoThought(inputs: {nameId: $nameId, taoId: $taoId, parentThoughtId: $parentThoughtId, thought: $thought}) {
-				nameId,
-                taoId,
-				parentThoughtId,
 				thought
+				timestamp
+				nameId
+				parentThoughtId
             }
         }
 	`;
 	const variables = { nameId, taoId, parentThoughtId, thought };
+	return graphql(query, variables);
+};
+
+export const getWriterKeySignature = (nameId, nonce) => {
+	const query = `
+		query($nameId: ID!, $nonce: String!) {
+			writerKeySignature(nameId: $nameId, nonce: $nonce)
+		}
+	`;
+	const variables = { nameId, nonce };
+	return graphql(query, variables);
+};
+
+export const setNameProfileImage = (nameId, imageString) => {
+	const query = `
+		mutation($nameId: ID!, $imageString: String!) {
+		submitNameProfile(inputs: {nameId: $nameId, imageString: $imageString}) {
+			nameId
+			imageString
+		}
+	}
+	`;
+	const variables = { nameId, imageString };
+	return graphql(query, variables);
+};
+
+export const getNameProfileImage = (nameId) => {
+	const query = `
+		query($nameId: ID!) {
+			nameProfile(nameId: $nameId) {
+				nameId
+				imageString
+			}
+		}
+	`;
+	const variables = { nameId };
+	return graphql(query, variables);
+};
+
+export const insertTAODescription = (taoId, description) => {
+	const query = `
+        mutation($taoId: ID!, $description: String!) {
+            submitTaoDescription(inputs: {taoId: $taoId, description: $description}) {
+                taoId
+                description
+            }
+        }
+    `;
+	const variables = { taoId, description };
 	return graphql(query, variables);
 };

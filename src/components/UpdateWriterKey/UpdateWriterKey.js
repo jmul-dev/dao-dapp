@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Wrapper, Title, Header, FieldContainer, FieldName, FieldValue, Error, Button } from "components/";
-import { get, encodeParams } from "utils/";
+import { getWriterKeySignature } from "utils/graphql";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
 
@@ -40,16 +40,23 @@ class UpdateWriterKey extends React.Component {
 			return;
 		}
 		const nonce = await promisify(nameFactory.nonces)(nameId);
-		const response = await get(
-			`https://localhost/api/get-writer-key-signature?${encodeParams({ nameId, nonce: nonce.plus(1).toNumber() })}`
-		);
-		if (!response.signature) {
+		let signature;
+		try {
+			const response = await getWriterKeySignature(nameId, nonce.plus(1).toNumber());
+			if (!response.data.writerKeySignature) {
+				if (this._isMounted) {
+					this.setState({ error: true, errorMessage: "Unable to get the writer key signature", formLoading: false });
+				}
+				return;
+			}
+			signature = response.data.writerKeySignature;
+		} catch (e) {
 			if (this._isMounted) {
 				this.setState({ error: true, errorMessage: "Unable to get the writer key signature", formLoading: false });
 			}
 			return;
 		}
-		const vrs = EthCrypto.vrs.fromString(response.signature);
+		const vrs = EthCrypto.vrs.fromString(signature);
 		namePublicKey.addSetWriterKey(
 			nameId,
 			localWriterKey,

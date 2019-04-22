@@ -9,7 +9,7 @@ import { SpokenNameContainer } from "./SpokenName/";
 import { ProfileImage } from "./ProfileImage/";
 import { PublicKeysContainer } from "./PublicKeys/";
 import { LogosDetailsContainer } from "./LogosDetails/";
-import { encodeParams, get } from "utils/";
+import { getNameProfileImage as graphqlGetNameProfileImage } from "utils/graphql";
 import { BigNumber } from "bignumber.js";
 import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
@@ -154,9 +154,9 @@ class NameProfile extends React.Component {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-profile-image?${encodeParams({ nameId: id })}`);
-			if (response.profileImage && this._isMounted) {
-				this.setState({ profileImage: response.profileImage });
+			const response = await graphqlGetNameProfileImage(id);
+			if (response.data.nameProfile.imageString && this._isMounted) {
+				this.setState({ profileImage: response.data.nameProfile.imageString });
 			}
 		} catch (e) {}
 	}

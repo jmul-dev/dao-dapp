@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Wrapper, Title, Header, Ahref } from "components/";
-import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
-import { get, encodeParams, formatDate } from "utils/";
-import * as _ from "lodash";
 import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
+import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
+import { formatDate } from "utils/";
+import { getTAODescriptions as graphqlGetTAODescriptions } from "utils/graphql";
+import * as _ from "lodash";
 
 class ViewTimeline extends React.Component {
 	constructor(props) {
@@ -31,10 +32,10 @@ class ViewTimeline extends React.Component {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-tao-descriptions?${encodeParams({ taoId: id })}`);
-			if (response.descriptions) {
-				const _descriptions = response.descriptions.map((desc) => {
-					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.value };
+			const response = await graphqlGetTAODescriptions(id);
+			if (response.data.taoDescriptions) {
+				const _descriptions = response.data.taoDescriptions.map((desc) => {
+					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.description };
 				});
 				this.setState({ taoDescriptions: _.orderBy(_descriptions, ["timestamp"], ["desc"]) });
 			}

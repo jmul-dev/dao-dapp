@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Wrapper, Title, Header, Ahref, Hr } from "components/";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 import { AddThoughtContainer } from "./AddThought/";
 import { ListThoughts } from "./ListThoughts/";
-import { get, encodeParams } from "utils/";
+import { getTAODescriptions as graphqlGetTAODescriptions, getTAOThoughts as graphqlGetTAOThoughts } from "utils/graphql";
 import { buildThoughtsHierarchy } from "utils/";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import * as _ from "lodash";
-import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 class ViewThoughts extends React.Component {
 	constructor(props) {
@@ -40,10 +40,10 @@ class ViewThoughts extends React.Component {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-tao-descriptions?${encodeParams({ taoId: id })}`);
-			if (response.descriptions) {
-				const _descriptions = response.descriptions.map((desc) => {
-					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.value };
+			const response = await graphqlGetTAODescriptions(id);
+			if (response.data.taoDescriptions) {
+				const _descriptions = response.data.taoDescriptions.map((desc) => {
+					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.description };
 				});
 				this.setState({ taoDescriptions: _.orderBy(_descriptions, ["timestamp"], ["desc"]) });
 			}
@@ -56,9 +56,9 @@ class ViewThoughts extends React.Component {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-tao-thoughts?${encodeParams({ taoId: id })}`);
-			if (response.thoughts) {
-				this.setState({ thoughts: response.thoughts });
+			const response = await graphqlGetTAOThoughts(id);
+			if (response.data.taoThoughts) {
+				this.setState({ thoughts: response.data.taoThoughts });
 			}
 		} catch (e) {}
 	}
@@ -82,15 +82,15 @@ class ViewThoughts extends React.Component {
 		let _thoughtsHierarchy = [];
 		if (thoughts.length) {
 			const _thoughts = [];
-			thoughts.forEach((thought) => {
-				const _name = names.find((name) => name.nameId === thought.value.nameId);
-				const _nameSumLogos = namesSumLogos.find((name) => name.nameId === thought.value.nameId);
+			thoughts.forEach((_thought) => {
+				const _name = names.find((name) => name.nameId === _thought.thought.nameId);
+				const _nameSumLogos = namesSumLogos.find((name) => name.nameId === _thought.thought.nameId);
 				if (_name && _nameSumLogos) {
 					_thoughts.push({
 						name: _name.name,
-						thoughtId: thought.splitKey[6],
+						thoughtId: _thought.splitKey[6],
 						sumLogos: _nameSumLogos.sumLogos,
-						...thought.value
+						..._thought.thought
 					});
 				}
 			});

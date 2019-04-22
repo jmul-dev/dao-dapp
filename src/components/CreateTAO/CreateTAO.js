@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Wrapper, Title, SchemaForm, Error, MediumEditor, Button, Ahref } from "components/";
 import { FieldWrapper, Label, Select, MinLogos, SelectedParent } from "./styledComponents";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 import { schema } from "./schema";
 import { getTransactionReceipt, waitForTransactionReceipt } from "utils/web3";
 import { abi as TAOFactoryABI } from "ao-contracts/build/contracts/TAOFactory.json";
-import { post } from "utils/";
-import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
+import { insertTAODescription as graphqlInsertTAODescription } from "utils/graphql";
 
 const promisify = require("tiny-promisify");
 const abiDecoder = require("abi-decoder");
@@ -144,11 +144,8 @@ class CreateTAO extends React.Component {
 							const taoId = taoIdArgs[0].value;
 
 							try {
-								const response = await post(`https://localhost/api/add-tao-description`, {
-									taoId,
-									description: taoDescription
-								});
-								if (!response.error && !response.errorMessage) {
+								const response = await graphqlInsertTAODescription(taoId, taoDescription);
+								if (!response.errors) {
 									this.setState({
 										error: false,
 										errorMessage: "",
@@ -158,7 +155,7 @@ class CreateTAO extends React.Component {
 									});
 									this.props.setSuccess("Success!", `TAO # ${taoId} has been created`);
 								} else {
-									this.setState({ error: true, errorMessage: response.errorMessage, formLoading: false });
+									this.setState({ error: true, errorMessage: response.errors[0].message, formLoading: false });
 								}
 							} catch (e) {
 								this.setState({ error: true, errorMessage: e.message, formLoading: false });

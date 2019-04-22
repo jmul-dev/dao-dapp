@@ -2,7 +2,7 @@ import * as React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Ahref as Link, Icon } from "components/";
 import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage } from "./styledComponents";
-import { get, encodeParams } from "utils/";
+import { getNameProfileImage as graphqlGetNameProfileImage } from "utils/graphql";
 import "./style.css";
 
 const promisify = require("tiny-promisify");
@@ -52,9 +52,9 @@ class TopNavBar extends React.Component {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-profile-image?${encodeParams({ nameId })}`);
-			if (response.profileImage) {
-				setProfileImage(response.profileImage);
+			const response = await graphqlGetNameProfileImage(nameId);
+			if (response.data.nameProfile.imageString) {
+				setProfileImage(response.data.nameProfile.imageString);
 			}
 		} catch (e) {}
 	}

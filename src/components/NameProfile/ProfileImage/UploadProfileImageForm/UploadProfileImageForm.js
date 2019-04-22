@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
-import { post } from "utils/";
+import { setNameProfileImage as graphqlSetNameProfileImage } from "utils/graphql";
 
 class UploadProfileImageForm extends React.Component {
 	constructor(props) {
@@ -39,14 +39,14 @@ class UploadProfileImageForm extends React.Component {
 		this.setState({ formLoading: true });
 
 		try {
-			const response = await post(`https://localhost/api/upload-profile-image`, { nameId, imageString: formData.imageFile });
+			const response = await graphqlSetNameProfileImage(nameId, formData.imageFile);
 			this.setState({ formLoading: false });
-			if (!response.error && !response.errorMessage) {
+			if (!response.errors) {
 				this.props.refreshProfileImage(formData.imageFile);
 				this.props.toggleUploadProfileImageForm();
 				this.props.setProfileImage(formData.imageFile);
 			} else {
-				this.setState({ error: true, errorMessage: response.errorMessage });
+				this.setState({ error: true, errorMessage: response.errors[0].message });
 			}
 		} catch (e) {
 			this.setState({ error: true, errorMessage: e.message, formLoading: false });

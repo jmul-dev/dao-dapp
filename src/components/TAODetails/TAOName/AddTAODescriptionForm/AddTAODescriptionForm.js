@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Wrapper, Title, Error, MediumEditor, Button } from "components/";
-import { post } from "utils/";
+import { insertTAODescription as graphqlInsertTAODescription } from "utils/graphql";
 
 const promisify = require("tiny-promisify");
 
@@ -45,11 +45,8 @@ class AddTAODescriptionForm extends React.Component {
 		}
 
 		try {
-			const response = await post(`https://localhost/api/add-tao-description`, {
-				taoId: id,
-				description: taoDescription
-			});
-			if (!response.error && !response.errorMessage) {
+			const response = await graphqlInsertTAODescription(id, taoDescription);
+			if (!response.errors) {
 				this.setState({
 					error: false,
 					errorMessage: "",
@@ -59,7 +56,7 @@ class AddTAODescriptionForm extends React.Component {
 				await this.props.getTAODescriptions();
 				this.props.toggleAddTAODescriptionForm();
 			} else {
-				this.setState({ error: true, errorMessage: response.errorMessage, formLoading: false });
+				this.setState({ error: true, errorMessage: response.errors[0].message, formLoading: false });
 			}
 		} catch (e) {
 			this.setState({ error: true, errorMessage: e.message, formLoading: false });

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Wrapper, Ahref, LeftContainer, RightContainer, NavLink } from "components/";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 import { TogglePageViewContainer } from "widgets/TogglePageView/";
 import { Tab, Nav } from "react-bootstrap";
 import { TAONameContainer } from "./TAOName/";
@@ -8,9 +9,8 @@ import { ListenedTAOContainer } from "./ListenedTAO/";
 import { SpokenTAOContainer } from "./SpokenTAO/";
 import { AncestryDetailsContainer } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
-import { get, encodeParams } from "utils/";
+import { getTAODescriptions as graphqlGetTAODescriptions } from "utils/graphql";
 import * as _ from "lodash";
-import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 const promisify = require("tiny-promisify");
 
@@ -100,10 +100,10 @@ class TAODetails extends React.Component {
 			return;
 		}
 		try {
-			const response = await get(`https://localhost/api/get-tao-descriptions?${encodeParams({ taoId: id })}`);
-			if (response.descriptions && this._isMounted) {
-				const _descriptions = response.descriptions.map((desc) => {
-					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.value };
+			const response = await graphqlGetTAODescriptions(id);
+			if (response.data.taoDescriptions) {
+				const _descriptions = response.data.taoDescriptions.map((desc) => {
+					return { timestamp: desc.splitKey[desc.splitKey.length - 1] * 1, value: desc.description };
 				});
 				this.setState({ taoDescriptions: _.orderBy(_descriptions, ["timestamp"], ["desc"]) });
 			}

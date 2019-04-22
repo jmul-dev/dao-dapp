@@ -2,7 +2,6 @@ import * as React from "react";
 import * as Web3 from "web3";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
-import { get, promiseWhile } from "utils/";
 
 // Router
 import { AppContainer } from "components/App/";
@@ -49,7 +48,9 @@ import AOLibrary from "ao-contracts/build/contracts/AOLibrary.json";
 
 import { setError } from "widgets/Toast/actions";
 
+import { promiseWhile } from "utils/";
 import { getCurrentBlockNumber, getTransactionReceipt } from "utils/web3";
+import { getWriterKey } from "utils/graphql";
 
 // Events
 import {
@@ -123,10 +124,12 @@ class AppRouter extends React.Component {
 			dispatch(setContracts(contracts));
 
 			try {
-				const response = await get(`https://localhost/api/get-writer-key`);
-				if (response.writerKey) {
-					this._localWriterKey = response.writerKey;
-					dispatch(setLocalWriterKey(response.writerKey));
+				const response = await getWriterKey();
+				if (response.data.writerKey) {
+					this._localWriterKey = response.data.writerKey;
+					// writerKey from graphql should be an address
+					// this._localWriterKey = response.data.writerKey;
+					dispatch(setLocalWriterKey(this._localWriterKey));
 				} else {
 					throw new Error(LOCAL_WRITER_KEY_ERROR);
 				}
