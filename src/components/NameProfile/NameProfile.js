@@ -11,6 +11,7 @@ import { PublicKeysContainer } from "./PublicKeys/";
 import { LogosDetailsContainer } from "./LogosDetails/";
 import { encodeParams, get } from "utils/";
 import { BigNumber } from "bignumber.js";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 const promisify = require("tiny-promisify");
 
@@ -192,7 +193,7 @@ class NameProfile extends React.Component {
 			dataPopulated
 		} = this.state;
 		if (!pastEventsRetrieved || !dataPopulated || typeof singlePageView === "undefined") {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		}
 
 		return (

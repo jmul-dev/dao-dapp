@@ -322,3 +322,10 @@ export const setNameWriterKey = (nameWriterKey) => {
 		nameWriterKey
 	};
 };
+
+export const setPastEventsProgress = (pastEventsProgress) => {
+	return {
+		type: actionsEnums.SET_PAST_EVENTS_PROGRESS,
+		pastEventsProgress
+	};
+};

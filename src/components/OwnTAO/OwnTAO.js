@@ -1,12 +1,13 @@
 import * as React from "react";
 import { Wrapper, Title, Header, Ahref, Table, LeftContainer, RightContainer, NavLink } from "components/";
 import { Tab, Nav } from "react-bootstrap";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 class OwnTAO extends React.Component {
 	render() {
 		const { pastEventsRetrieved, nameId, taoPositions, taosNeedApproval, stakeEthos, stakePathos, taos } = this.props;
 		if (!pastEventsRetrieved || !nameId || !taoPositions || !taosNeedApproval || !stakeEthos || !stakePathos || !taos) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		}
 
 		const advocatedTAOs = [];

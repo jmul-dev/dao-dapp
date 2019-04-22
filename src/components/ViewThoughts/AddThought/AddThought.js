@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Wrapper, MediumEditor, Button, Error } from "components/";
 import { post } from "utils/";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 class AddThought extends React.Component {
 	constructor(props) {
@@ -59,10 +60,10 @@ class AddThought extends React.Component {
 	}
 
 	render() {
-		const { taoId, parentThoughtId } = this.props;
+		const { taoId, parentThoughtId, pastEventsRetrieved } = this.props;
 		const { thought, error, errorMessage, formLoading } = this.state;
-		if (!taoId) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+		if (!taoId || !pastEventsRetrieved) {
+			return <ProgressLoaderContainer />;
 		}
 		return (
 			<Wrapper>

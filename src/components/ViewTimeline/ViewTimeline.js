@@ -3,6 +3,7 @@ import { Wrapper, Title, Header, Ahref } from "components/";
 import { Timeline, TimelineItem } from "vertical-timeline-component-for-react";
 import { get, encodeParams, formatDate } from "utils/";
 import * as _ from "lodash";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 class ViewTimeline extends React.Component {
 	constructor(props) {
@@ -50,7 +51,7 @@ class ViewTimeline extends React.Component {
 			tao = taos.find((_tao) => _tao.taoId === id);
 		}
 		if (!tao || !taoDescriptions || !pastEventsRetrieved) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		}
 
 		const taoDescriptionsContent = taoDescriptions.map((desc) => (

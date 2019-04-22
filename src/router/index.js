@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Web3 from "web3";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
-import { get } from "utils/";
+import { get, promiseWhile } from "utils/";
 
 // Router
 import { AppContainer } from "components/App/";
@@ -18,7 +18,16 @@ import { NameStakeListContainer } from "components/NameStakeList/";
 import { ViewThoughtsContainer } from "components/ViewThoughts/";
 import { ViewTimelineContainer } from "components/ViewTimeline/";
 
-import { setLocalWriterKey, web3Connected, setAccounts, setNetworkId, setContracts, setSettingTAOId, pastEventsRetrieved } from "./actions";
+import {
+	setLocalWriterKey,
+	web3Connected,
+	setAccounts,
+	setNetworkId,
+	setContracts,
+	setSettingTAOId,
+	setPastEventsProgress,
+	pastEventsRetrieved
+} from "./actions";
 import { web3Errors, LOCAL_WRITER_KEY_ERROR } from "common/errors";
 
 // Contracts
@@ -40,7 +49,7 @@ import AOLibrary from "ao-contracts/build/contracts/AOLibrary.json";
 
 import { setError } from "widgets/Toast/actions";
 
-import { getCurrentBlockNumber } from "utils/web3";
+import { getCurrentBlockNumber, getTransactionReceipt } from "utils/web3";
 
 // Events
 import {
@@ -62,7 +71,7 @@ import {
 	watchNamePublicKeyEvent
 } from "./events";
 
-import { EMPTY_ADDRESS } from "common/constants";
+import { EMPTY_ADDRESS, BLOCKS_PER_EVENT_GET } from "common/constants";
 
 const promisify = require("tiny-promisify");
 
@@ -135,25 +144,45 @@ class AppRouter extends React.Component {
 
 			this._currentBlockNumber = await getCurrentBlockNumber();
 
-			// Get and watch events
-			await getNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
-			await getTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			await getTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			await getLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			await getTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			await getNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			await getNameAccountRecoveryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			await getNamePublicKeyEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			dispatch(pastEventsRetrieved());
+			// Get past events
+			const receipt = await getTransactionReceipt(NameFactory.networks[this._networkId].transactionHash);
+			let fromBlock = receipt.blockNumber >= 1 ? receipt.blockNumber - 1 : 0;
+			let toBlock = fromBlock;
+			const upperBlockLimit = this._currentBlockNumber - 1;
+			promiseWhile(
+				() => {
+					return toBlock < upperBlockLimit;
+				},
+				async () => {
+					fromBlock = toBlock + 1;
+					toBlock += BLOCKS_PER_EVENT_GET;
+					if (toBlock > upperBlockLimit) {
+						toBlock = upperBlockLimit;
+					}
+					await getNameFactoryEvent(dispatch, this._networkId, fromBlock, toBlock);
+					await getTAOFactoryEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					await getTAOAncestryEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					await getLogosEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					await getTAOPoolEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					await getNameTAOPositionEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					await getNameAccountRecoveryEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					await getNamePublicKeyEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
+					const percentDone = parseInt(((toBlock - receipt.blockNumber) * 100) / (upperBlockLimit - receipt.blockNumber));
+					dispatch(setPastEventsProgress(percentDone));
+				}
+			).done(() => {
+				// Get and watch events
+				dispatch(pastEventsRetrieved());
 
-			watchNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
-			watchTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchNameAccountRecoveryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
-			watchNamePublicKeyEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+				watchNameFactoryEvent(dispatch, this._networkId, this._currentBlockNumber);
+				watchTAOFactoryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+				watchTAOAncestryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+				watchLogosEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+				watchTAOPoolEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+				watchNameTAOPositionEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+				watchNameAccountRecoveryEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+				watchNamePublicKeyEvent(dispatch, this._networkId, this._currentBlockNumber, this._nameId);
+			});
 		} catch (e) {
 			dispatch(setError("Oops!", e.message, true));
 		}

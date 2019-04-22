@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Wrapper, Title, Ahref, Table } from "components/";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 class NameList extends React.Component {
 	render() {
 		const { pastEventsRetrieved, names } = this.props;
 		if (!pastEventsRetrieved || !names) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		}
 
 		const columns = [

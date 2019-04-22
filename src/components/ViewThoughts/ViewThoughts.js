@@ -6,6 +6,7 @@ import { get, encodeParams } from "utils/";
 import { buildThoughtsHierarchy } from "utils/";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import * as _ from "lodash";
+import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 
 class ViewThoughts extends React.Component {
 	constructor(props) {
@@ -76,7 +77,7 @@ class ViewThoughts extends React.Component {
 			tao = taos.find((_tao) => _tao.taoId === id);
 		}
 		if (!tao || !taoDescriptions || !thoughts || !names || !namesSumLogos || !pastEventsRetrieved) {
-			return <Wrapper className="padding-40">Loading...</Wrapper>;
+			return <ProgressLoaderContainer />;
 		}
 		let _thoughtsHierarchy = [];
 		if (thoughts.length) {

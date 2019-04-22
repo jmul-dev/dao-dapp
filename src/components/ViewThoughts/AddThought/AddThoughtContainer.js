@@ -4,6 +4,7 @@ import { setSuccess } from "widgets/Toast/actions";
 
 const mapStateToProps = (state) => {
 	return {
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		nameId: state.nameReducer.nameId
 	};
 };

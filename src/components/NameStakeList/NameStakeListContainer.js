@@ -3,6 +3,7 @@ import { NameStakeList } from "./NameStakeList";
 
 const mapStateToProps = (state) => {
 	return {
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		nameId: state.nameReducer.nameId,
 		taos: state.globalReducer.taos,
 		taoPool: state.contractReducer.contracts.taoPool,

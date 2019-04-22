@@ -1,4 +1,3 @@
-import { getTransactionReceipt } from "utils/web3";
 import { asyncForEach } from "utils/";
 import { BigNumber } from "bignumber.js";
 
@@ -52,13 +51,12 @@ import NamePublicKey from "ao-contracts/build/contracts/NamePublicKey.json";
 const promisify = require("tiny-promisify");
 const nameLookup = {};
 
-export const getNameFactoryEvent = (dispatch, networkId, currentBlockNumber) => {
+export const getNameFactoryEvent = (dispatch, networkId, fromBlock, toBlock) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const nameFactory = window.web3.eth.contract(NameFactory.abi).at(NameFactory.networks[networkId].address);
 			const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
-			const receipt = await getTransactionReceipt(NameFactory.networks[networkId].transactionHash);
-			nameFactory.CreateName({}, { fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+			nameFactory.CreateName({}, { fromBlock, toBlock }).get((err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
 						await _parseNameFactoryEvent(dispatch, logos, log);
@@ -116,14 +114,12 @@ const _parseNameFactoryEvent = async (dispatch, logos, log) => {
 	nameLookup[log.args.nameId] = log.args.name;
 };
 
-export const getTAOFactoryEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+export const getTAOFactoryEvent = (dispatch, networkId, fromBlock, toBlock, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const taoFactory = window.web3.eth.contract(TAOFactory.abi).at(TAOFactory.networks[networkId].address);
 			const taoAncestry = window.web3.eth.contract(TAOAncestry.abi).at(TAOAncestry.networks[networkId].address);
-			const receipt = await getTransactionReceipt(TAOFactory.networks[networkId].transactionHash);
-
-			taoFactory.CreateTAO({}, { fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get(async (err, logs) => {
+			taoFactory.CreateTAO({}, { fromBlock, toBlock }).get(async (err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
 						await _parseTAOFactoryEvent(dispatch, taoAncestry, log, nameId);
@@ -171,14 +167,12 @@ const _parseTAOFactoryEvent = async (dispatch, taoAncestry, log, nameId) => {
 	);
 };
 
-export const getTAOAncestryEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+export const getTAOAncestryEvent = (dispatch, networkId, fromBlock, toBlock, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const taoFactory = window.web3.eth.contract(TAOFactory.abi).at(TAOFactory.networks[networkId].address);
 			const taoAncestry = window.web3.eth.contract(TAOAncestry.abi).at(TAOAncestry.networks[networkId].address);
-			const receipt = await getTransactionReceipt(TAOAncestry.networks[networkId].transactionHash);
-
-			taoAncestry.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get(async (err, logs) => {
+			taoAncestry.allEvents({ fromBlock, toBlock }).get(async (err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
 						await _parseTAOAncestryEvent(dispatch, taoAncestry, taoFactory, log, nameId);
@@ -231,12 +225,11 @@ const _parseTAOAncestryEvent = async (dispatch, taoAncestry, taoFactory, log, na
 	}
 };
 
-export const getLogosEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+export const getLogosEvent = (dispatch, networkId, fromBlock, toBlock, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
-			const receipt = await getTransactionReceipt(Logos.networks[networkId].transactionHash);
-			logos.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+			logos.allEvents({ fromBlock, toBlock }).get((err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
 						await _parseLogosEvent(dispatch, logos, log, nameId);
@@ -299,13 +292,12 @@ const _parseLogosEvent = async (dispatch, logos, log, nameId) => {
 	}
 };
 
-export const getTAOPoolEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+export const getTAOPoolEvent = (dispatch, networkId, fromBlock, toBlock, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const taoPool = window.web3.eth.contract(TAOPool.abi).at(TAOPool.networks[networkId].address);
 			const logos = window.web3.eth.contract(Logos.abi).at(Logos.networks[networkId].address);
-			const receipt = await getTransactionReceipt(TAOPool.networks[networkId].transactionHash);
-			taoPool.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+			taoPool.allEvents({ fromBlock, toBlock }).get((err, logs) => {
 				if (!err) {
 					asyncForEach(logs, async (log) => {
 						await _parseTAOPoolEvent(dispatch, logos, log, nameId);
@@ -362,13 +354,12 @@ const _parseTAOPoolEvent = async (dispatch, logos, log, nameId) => {
 	}
 };
 
-export const getNameTAOPositionEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+export const getNameTAOPositionEvent = (dispatch, networkId, fromBlock, toBlock, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const nameTAOPosition = window.web3.eth.contract(NameTAOPosition.abi).at(NameTAOPosition.networks[networkId].address);
 			const aoLibrary = window.web3.eth.contract(AOLibrary.abi).at(AOLibrary.networks[networkId].address);
-			const receipt = await getTransactionReceipt(NameTAOPosition.networks[networkId].transactionHash);
-			nameTAOPosition.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+			nameTAOPosition.allEvents({ fromBlock, toBlock }).get((err, logs) => {
 				if (!err) {
 					logs.forEach((log) => {
 						_parseNameTAOPositionEvent(dispatch, aoLibrary, log, nameId);
@@ -423,14 +414,13 @@ const _parseNameTAOPositionEvent = async (dispatch, aoLibrary, log, nameId) => {
 	}
 };
 
-export const getNameAccountRecoveryEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+export const getNameAccountRecoveryEvent = (dispatch, networkId, fromBlock, toBlock, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const nameAccountRecovery = window.web3.eth
 				.contract(NameAccountRecovery.abi)
 				.at(NameAccountRecovery.networks[networkId].address);
-			const receipt = await getTransactionReceipt(NameAccountRecovery.networks[networkId].transactionHash);
-			nameAccountRecovery.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+			nameAccountRecovery.allEvents({ fromBlock, toBlock }).get((err, logs) => {
 				if (!err) {
 					logs.forEach((log) => {
 						_parseNameAccountRecoveryEvent(dispatch, nameAccountRecovery, log, nameId);
@@ -486,12 +476,11 @@ const _updateNameSumLogos = async (dispatch, logos, nameId) => {
 	dispatch(updateNameSumLogos(nameId, sumLogos));
 };
 
-export const getNamePublicKeyEvent = (dispatch, networkId, currentBlockNumber, nameId) => {
+export const getNamePublicKeyEvent = (dispatch, networkId, fromBlock, toBlock, nameId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const namePublicKey = window.web3.eth.contract(NamePublicKey.abi).at(NamePublicKey.networks[networkId].address);
-			const receipt = await getTransactionReceipt(NamePublicKey.networks[networkId].transactionHash);
-			namePublicKey.allEvents({ fromBlock: receipt.blockNumber, toBlock: currentBlockNumber - 1 }).get((err, logs) => {
+			namePublicKey.allEvents({ fromBlock, toBlock }).get((err, logs) => {
 				if (!err) {
 					logs.forEach((log) => {
 						_parseNamePublicKeyEvent(dispatch, namePublicKey, log, nameId);
