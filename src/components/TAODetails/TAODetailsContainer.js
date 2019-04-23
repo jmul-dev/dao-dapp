@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
 		names: state.globalReducer.names,
 		nameTAOLookup: state.contractReducer.contracts.nameTAOLookup,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
+		nameTAOVault: state.contractReducer.contracts.nameTAOVault,
 		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		pathos: state.contractReducer.contracts.pathos,
 		singlePageView: state.appReducer.singlePageView,

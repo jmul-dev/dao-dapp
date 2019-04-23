@@ -9,6 +9,7 @@ import { ListenedTAOContainer } from "./ListenedTAO/";
 import { SpokenTAOContainer } from "./SpokenTAO/";
 import { AncestryDetailsContainer } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
+import { Resources } from "./Resources/";
 import { getTAODescriptions as graphqlGetTAODescriptions } from "utils/graphql";
 import * as _ from "lodash";
 
@@ -35,12 +36,14 @@ class TAODetails extends React.Component {
 			namePathosStaked: null,
 			nameLogosWithdrawn: null,
 			isAdvocate: null,
+			resources: null,
 			dataPopulated: false
 		};
 		this.initialState = this.state;
 		this.getTAOPool = this.getTAOPool.bind(this);
 		this.getTAOPosition = this.getTAOPosition.bind(this);
 		this.getTAODescriptions = this.getTAODescriptions.bind(this);
+		this.getTAOResources = this.getTAOResources.bind(this);
 	}
 
 	async componentDidMount() {
@@ -73,6 +76,7 @@ class TAODetails extends React.Component {
 		await this.getTAOPosition();
 		await this.getTAOAncestry();
 		await this.getTAOPool();
+		await this.getTAOResources();
 		if (this._isMounted) {
 			this.setState({ dataPopulated: true });
 		}
@@ -204,6 +208,28 @@ class TAODetails extends React.Component {
 		}
 	}
 
+	async getTAOResources() {
+		const { id } = this.props.params;
+		const { nameTAOVault } = this.props;
+		if (!nameTAOVault || !id) {
+			return;
+		}
+
+		const ethBalance = await promisify(nameTAOVault.ethBalanceOf)(id);
+		const aoBalance = await promisify(nameTAOVault.AOBalanceOf)(id);
+		const primordialAOBalance = await promisify(nameTAOVault.primordialAOBalanceOf)(id);
+
+		if (this._isMounted) {
+			this.setState({
+				resources: {
+					ethBalance,
+					aoBalance,
+					primordialAOBalance
+				}
+			});
+		}
+	}
+
 	render() {
 		const { id } = this.props.params;
 		const { pastEventsRetrieved, taosNeedApproval, singlePageView } = this.props;
@@ -223,6 +249,7 @@ class TAODetails extends React.Component {
 			namePathosStaked,
 			nameLogosWithdrawn,
 			isAdvocate,
+			resources,
 			dataPopulated
 		} = this.state;
 		if (!pastEventsRetrieved || !taosNeedApproval || !dataPopulated || typeof singlePageView === "undefined") {
@@ -281,6 +308,14 @@ class TAODetails extends React.Component {
 								getTAOPool={this.getTAOPool}
 								singlePageView={singlePageView}
 							/>
+							{isAdvocate && (
+								<Resources
+									id={id}
+									resources={resources}
+									getTAOResources={this.getTAOResources}
+									singlePageView={singlePageView}
+								/>
+							)}
 						</RightContainer>
 					</Wrapper>
 				) : (
@@ -309,6 +344,11 @@ class TAODetails extends React.Component {
 								<Nav.Item>
 									<NavLink eventKey="financials">TAO Financials</NavLink>
 								</Nav.Item>
+								{isAdvocate && (
+									<Nav.Item>
+										<NavLink eventKey="resources">TAO Resources</NavLink>
+									</Nav.Item>
+								)}
 							</Nav>
 						</LeftContainer>
 						<RightContainer className="width-80">
@@ -359,6 +399,16 @@ class TAODetails extends React.Component {
 										singlePageView={singlePageView}
 									/>
 								</Tab.Pane>
+								{isAdvocate && (
+									<Tab.Pane eventKey="resources">
+										<Resources
+											id={id}
+											resources={resources}
+											getTAOResources={this.getTAOResources}
+											singlePageView={singlePageView}
+										/>
+									</Tab.Pane>
+								)}
 							</Tab.Content>
 						</RightContainer>
 					</Tab.Container>
