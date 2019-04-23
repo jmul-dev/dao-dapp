@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, SchemaForm, Button, Error } from "components/";
+import { Wrapper, Title, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import TokenERC20 from "ao-contracts/build/contracts/TokenERC20.json";
@@ -185,6 +185,7 @@ class TransferResources extends React.Component {
 		const { error, errorMessage, formLoading } = this.state;
 		return (
 			<Wrapper className="margin-top-30">
+				<Title>Transfer Resources</Title>
 				<SchemaForm schema={schema} showErrorList={false} onSubmit={this.handleSubmit}>
 					<Button type="submit" disabled={formLoading}>
 						{formLoading ? "Loading..." : "Transfer"}
