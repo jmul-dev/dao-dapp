@@ -7,6 +7,7 @@ import { PositionDetails } from "./PositionDetails/";
 import { ListenedNameContainer } from "./ListenedName/";
 import { SpokenNameContainer } from "./SpokenName/";
 import { ProfileImage } from "./ProfileImage/";
+import { Resources } from "./Resources/";
 import { PublicKeysContainer } from "./PublicKeys/";
 import { LogosDetailsContainer } from "./LogosDetails/";
 import { getNameProfileImage as graphqlGetNameProfileImage } from "utils/graphql";
@@ -30,6 +31,7 @@ class NameProfile extends React.Component {
 			lockedUntilTimestamp: new BigNumber(0),
 			position: null,
 			profileImage: null,
+			resources: null,
 			dataPopulated: false
 		};
 		this.initialState = this.state;
@@ -38,6 +40,7 @@ class NameProfile extends React.Component {
 		this.setListener = this.setListener.bind(this);
 		this.setSpeaker = this.setSpeaker.bind(this);
 		this.setCompromised = this.setCompromised.bind(this);
+		this.getNameResources = this.getNameResources.bind(this);
 	}
 
 	async componentDidMount() {
@@ -71,6 +74,7 @@ class NameProfile extends React.Component {
 		await this.getNamePosition();
 		await this.getProfileImage();
 		if (id === nameId && this._isMounted) {
+			await this.getNameResources();
 			this.setState({ isOwner: true });
 		} else {
 			await this.checkListenerSpeaker();
@@ -177,6 +181,28 @@ class NameProfile extends React.Component {
 		this.setState({ isCompromised });
 	}
 
+	async getNameResources() {
+		const { id } = this.props.params;
+		const { nameTAOVault } = this.props;
+		if (!nameTAOVault || !id) {
+			return;
+		}
+
+		const ethBalance = await promisify(nameTAOVault.ethBalanceOf)(id);
+		const aoBalance = await promisify(nameTAOVault.AOBalanceOf)(id);
+		const primordialAOBalance = await promisify(nameTAOVault.primordialAOBalanceOf)(id);
+
+		if (this._isMounted) {
+			this.setState({
+				resources: {
+					ethBalance,
+					aoBalance,
+					primordialAOBalance
+				}
+			});
+		}
+	}
+
 	render() {
 		const { id } = this.props.params;
 		const { singlePageView, pastEventsRetrieved } = this.props;
@@ -190,6 +216,7 @@ class NameProfile extends React.Component {
 			lockedUntilTimestamp,
 			position,
 			profileImage,
+			resources,
 			dataPopulated
 		} = this.state;
 		if (!pastEventsRetrieved || !dataPopulated || typeof singlePageView === "undefined") {
@@ -236,7 +263,15 @@ class NameProfile extends React.Component {
 							singlePageView={singlePageView}
 							populateGraph={tabKey === "logos-details"}
 						/>
-						<PublicKeysContainer id={id} singlePageView={singlePageView} />
+						{isOwner && (
+							<Resources
+								id={id}
+								resources={resources}
+								getNameResources={this.getNameResources}
+								singlePageView={singlePageView}
+							/>
+						)}
+						{isOwner && <PublicKeysContainer id={id} singlePageView={singlePageView} />}
 					</Wrapper>
 				) : (
 					<Tab.Container id="name-profile" defaultActiveKey="profile" onSelect={(key) => this.setState({ tabKey: key })}>
@@ -261,6 +296,9 @@ class NameProfile extends React.Component {
 										</Nav.Item>
 										<Nav.Item>
 											<NavLink eventKey="spoken-names">Spoken Names</NavLink>
+										</Nav.Item>
+										<Nav.Item>
+											<NavLink eventKey="resources">Name Resources</NavLink>
 										</Nav.Item>
 										<Nav.Item>
 											<NavLink eventKey="public-keys">Public Keys</NavLink>
@@ -308,6 +346,16 @@ class NameProfile extends React.Component {
 								{isOwner && (
 									<Tab.Pane eventKey="spoken-names">
 										<SpokenNameContainer id={id} singlePageView={singlePageView} />
+									</Tab.Pane>
+								)}
+								{isOwner && (
+									<Tab.Pane eventKey="resources">
+										<Resources
+											id={id}
+											resources={resources}
+											getNameResources={this.getNameResources}
+											singlePageView={singlePageView}
+										/>
 									</Tab.Pane>
 								)}
 								{isOwner && (
