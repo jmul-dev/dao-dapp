@@ -221,6 +221,10 @@ export const Table = styled(ReactTable)`
 
 export const FieldContainer = styled.div`
 	margin-bottom: 5px;
+
+	&.margin-top-20 {
+		margin-top: 20px;
+	}
 `;
 
 export const FieldName = styled.div`
@@ -232,6 +236,9 @@ export const FieldName = styled.div`
 
 	&.small {
 		width: 150px;
+	}
+	&.big {
+		width: 300px;
 	}
 `;
 
@@ -249,6 +256,9 @@ export const FieldValue = styled.div`
 
 	&.small {
 		width: calc(100% - 150px);
+	}
+	&.big {
+		width: calc(100% - 300px);
 	}
 `;
 

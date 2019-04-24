@@ -16,6 +16,7 @@ import { OwnTAOContainer } from "components/OwnTAO/";
 import { NameStakeListContainer } from "components/NameStakeList/";
 import { ViewThoughtsContainer } from "components/ViewThoughts/";
 import { ViewTimelineContainer } from "components/ViewTimeline/";
+import { ChallengeTAOAdvocateContainer } from "components/ChallengeTAOAdvocate/";
 
 import {
 	setLocalWriterKey,
@@ -250,6 +251,7 @@ class AppRouter extends React.Component {
 					<Route path="/view-own-taos" component={OwnTAOContainer} />
 					<Route path="/view-thoughts/:id" component={ViewThoughtsContainer} />
 					<Route path="/view-timeline/:id" component={ViewTimelineContainer} />
+					<Route path="/challenge-tao-advocate/:id" component={ChallengeTAOAdvocateContainer} />
 				</Route>
 			</Router>
 		);
