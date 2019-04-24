@@ -1,14 +1,15 @@
 import { connect } from "react-redux";
-import { ChallengeTAOAdvocate } from "./ChallengeTAOAdvocate";
+import { ChallengeForm } from "./ChallengeForm";
 
 const mapStateToProps = (state) => {
 	return {
 		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
+		names: state.globalReducer.names,
+		nameId: state.nameReducer.nameId,
 		taoCurrencyBalances: state.nameReducer.taoCurrencyBalances,
 		accounts: state.web3Reducer.accounts,
-		taoFactory: state.contractReducer.contracts.taoFactory,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
-		challengeTAOAdvocates: state.nameReducer.challengeTAOAdvocates
+		logos: state.contractReducer.contracts.logos
 	};
 };
 
@@ -16,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export const ChallengeTAOAdvocateContainer = connect(
+export const ChallengeFormContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ChallengeTAOAdvocate);
+)(ChallengeForm);

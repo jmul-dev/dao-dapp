@@ -14,6 +14,7 @@ class GlobalReducerState {
 		this.namePositions = [];
 		this.namesCompromised = [];
 		this.namesSumLogos = [];
+		this.challengeTAOAdvocates = [];
 	}
 }
 
@@ -297,6 +298,17 @@ const handleUpdateNameSumLogos = (state, action) => {
 	};
 };
 
+const handleChallengeTAOAdvocate = (state, action) => {
+	const _challengeTAOAdvocates = state.challengeTAOAdvocates.slice();
+	if (!_challengeTAOAdvocates.find((challenge) => challenge.challengeId === action.challenge.challengeId)) {
+		_challengeTAOAdvocates.push(action.challenge);
+	}
+	return {
+		...state,
+		challengeTAOAdvocates: _challengeTAOAdvocates
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_PAST_EVENTS_PROGRESS:
@@ -345,6 +357,8 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleAppendNameSumLogos(state, action);
 		case actionsEnums.UPDATE_NAME_SUM_LOGOS:
 			return handleUpdateNameSumLogos(state, action);
+		case actionsEnums.CHALLENGE_TAO_ADVOCATE:
+			return handleChallengeTAOAdvocate(state, action);
 		default:
 			return state;
 	}

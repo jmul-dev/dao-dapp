@@ -34,7 +34,9 @@ import {
 	resetLoggedInNameCompromised,
 	appendNameSumLogos,
 	updateNameSumLogos,
-	setNameWriterKey
+	setNameWriterKey,
+	challengeTAOAdvocate,
+	nameChallengeTAOAdvocate
 } from "./actions";
 
 // Contracts
@@ -408,6 +410,12 @@ const _parseNameTAOPositionEvent = async (dispatch, aoLibrary, log, nameId) => {
 			} else {
 				dispatch(setNameSpeaker(log.args.taoId, log.args.newSpeakerId));
 			}
+			break;
+		case "ChallengeTAOAdvocate":
+			if (log.args.challengerAdvocateId === nameId) {
+				dispatch(nameChallengeTAOAdvocate(log.args));
+			}
+			dispatch(challengeTAOAdvocate(log.args));
 			break;
 		default:
 			break;

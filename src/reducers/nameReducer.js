@@ -15,6 +15,7 @@ class NameReducerState {
 		this.positionLogosFrom = [];
 		this.stakeEthos = [];
 		this.stakePathos = [];
+		this.challengeTAOAdvocates = [];
 	}
 }
 
@@ -224,6 +225,17 @@ const handleNameWithdrawLogos = (state, action) => {
 	};
 };
 
+const handleNameChallengeTAOAdvocate = (state, action) => {
+	const _challengeTAOAdvocates = state.challengeTAOAdvocates.slice();
+	if (!_challengeTAOAdvocates.find((challenge) => challenge.challengeId === action.challenge.challengeId)) {
+		_challengeTAOAdvocates.push(action.challenge);
+	}
+	return {
+		...state,
+		challengeTAOAdvocates: _challengeTAOAdvocates
+	};
+};
+
 export const nameReducer = (state = new NameReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_NAME_ID:
@@ -262,6 +274,8 @@ export const nameReducer = (state = new NameReducerState(), action) => {
 			return handleNameWithdrawLogos(state, action);
 		case actionsEnums.UPDATE_LOGOS_EARNED:
 			return handleUpdateLogosEarned(state, action);
+		case actionsEnums.NAME_CHALLENGE_TAO_ADVOCATE:
+			return handleNameChallengeTAOAdvocate(state, action);
 		default:
 			return state;
 	}

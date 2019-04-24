@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Wrapper, Title, Ahref, FieldContainer, FieldName, FieldValue, Button, Error } from "components/";
+import { Wrapper, Title, Ahref } from "components/";
 import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
-import { waitForTransactionReceipt } from "utils/web3";
+import { ChallengeFormContainer } from "./ChallengeForm/";
+import { ViewActiveChallenge } from "./ViewActiveChallenge/";
+import * as _ from "lodash";
 
 const promisify = require("tiny-promisify");
 
@@ -12,15 +14,10 @@ class ChallengeTAOAdvocate extends React.Component {
 		super(props);
 		this.state = {
 			taoInfo: null,
-			advocateId: null,
-			advocateLogos: null,
-			dataPopulated: false,
-			error: false,
-			errorMessage: "",
-			formLoading: false
+			activeChallenge: null,
+			dataPopulated: false
 		};
 		this.initialState = this.state;
-		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	async componentDidMount() {
@@ -38,12 +35,14 @@ class ChallengeTAOAdvocate extends React.Component {
 				this.setState(this.initialState);
 			}
 			await this.getData();
+		} else if (this.props.challengeTAOAdvocates !== prevProps.challengeTAOAdvocates) {
+			await this.getActiveChallenge();
 		}
 	}
 
 	async getData() {
 		await this.getTAOInfo();
-		await this.getTAOAdvocate();
+		await this.getActiveChallenge();
 		if (this._isMounted) {
 			this.setState({ dataPopulated: true });
 		}
@@ -65,73 +64,37 @@ class ChallengeTAOAdvocate extends React.Component {
 		}
 	}
 
-	async getTAOAdvocate() {
+	async getActiveChallenge() {
 		const { id } = this.props.params;
-		const { nameTAOPosition, logos } = this.props;
-		if (!nameTAOPosition || !logos || !id) {
+		const { nameTAOPosition, challengeTAOAdvocates, accounts } = this.props;
+		if (!nameTAOPosition || !challengeTAOAdvocates || !accounts || !id) {
 			return;
 		}
 
-		const advocateId = await promisify(nameTAOPosition.getAdvocate)(id);
-		const advocateLogos = await promisify(logos.sumBalanceOf)(advocateId);
-		if (this._isMounted) {
-			this.setState({ advocateId, advocateLogos });
+		const challenges = challengeTAOAdvocates.filter((challenge) => challenge.taoId === id);
+		if (challenges.length) {
+			const sortedChallenges = _.orderBy(challenges, ["createdTimestamp"], ["desc"]);
+			const challengeStatus = await promisify(nameTAOPosition.getChallengeStatus)(sortedChallenges[0].challengeId, accounts[0]);
+			const currentTimestamp = Math.round(new Date().getTime() / 1000);
+			if (
+				(sortedChallenges[0].lockedUntilTimestamp.gte(currentTimestamp) ||
+					sortedChallenges[0].completeBeforeTimestamp.lte(currentTimestamp)) &&
+				challengeStatus.eq(4) &&
+				this._isMounted
+			) {
+				this.setState({ activeChallenge: sortedChallenges[0] });
+			}
 		}
 	}
 
-	async handleSubmit() {
-		const { nameTAOPosition, logos, accounts, nameId } = this.props;
-		const { id } = this.props.params;
-		const { advocateId } = this.state;
-		if (!nameTAOPosition || !logos || !accounts || !nameId || !id || !advocateId) {
-			return;
-		}
-		if (this._isMounted) {
-			this.setState({ formLoading: true });
-		}
-		const advocateLogos = await promisify(logos.sumBalanceOf)(advocateId);
-		const challengerLogos = await promisify(logos.sumBalanceOf)(nameId);
-		if (advocateLogos.gt(challengerLogos)) {
-			if (this._isMounted) {
-				this.setState({
-					error: true,
-					errorMessage: "You don't have enough Logos to challenge this TAO's Advocate",
-					formLoading: false
-				});
-			}
-			return;
-		}
-		nameTAOPosition.challengeTAOAdvocate(id, { from: accounts[0] }, (err, transactionHash) => {
-			if (err) {
-				if (this._isMounted) {
-					this.setState({ error: true, errorMessage: err.message, formLoading: false });
-				}
-			} else {
-				waitForTransactionReceipt(transactionHash)
-					.then(async () => {
-						if (this._isMounted) {
-							this.setState({ error: false, errorMessage: "", formLoading: false });
-						}
-						console.log("Challenge created");
-					})
-					.catch((err) => {
-						if (this._isMounted) {
-							this.setState({ error: true, errorMessage: err.message, formLoading: false });
-						}
-					});
-			}
-		});
-	}
 	render() {
 		const { id } = this.props.params;
-		const { taoInfo, advocateId, advocateLogos, dataPopulated, error, errorMessage, formLoading } = this.state;
-		const { pastEventsRetrieved, names, nameId, taoCurrencyBalances } = this.props;
-		if (!pastEventsRetrieved || !names || !nameId || !taoCurrencyBalances || !dataPopulated) {
+		const { taoInfo, activeChallenge, dataPopulated } = this.state;
+		const { pastEventsRetrieved } = this.props;
+		if (!pastEventsRetrieved || !dataPopulated) {
 			return <ProgressLoaderContainer />;
 		}
 
-		const advocate = names.find((name) => name.nameId === advocateId);
-		const challenger = names.find((name) => name.nameId === nameId);
 		return (
 			<Wrapper className="padding-40">
 				<Ahref className="small" to={`/tao/${id}`}>
@@ -140,28 +103,11 @@ class ChallengeTAOAdvocate extends React.Component {
 				<Wrapper className="margin-bottom-20">
 					<Title className="medium margin-top-20 margin-bottom-0">Challenge {taoInfo.name}'s Advocate</Title>
 				</Wrapper>
-				<Wrapper>
-					In order to challenge and replace {taoInfo.name} as the new Advocate, you need to have more Logos than it's current
-					Advocate ({advocate.name}).
-				</Wrapper>
-				<FieldContainer className="margin-top-20">
-					<FieldName className="big">{advocate.name}'s Logos (Current Advocate)</FieldName>
-					<FieldValue className="big">{advocateLogos.toNumber()}</FieldValue>
-				</FieldContainer>
-				<FieldContainer>
-					<FieldName className="big">{challenger.name}'s Logos (Challenger)</FieldName>
-					<FieldValue className="big">{taoCurrencyBalances.logos.toNumber()}</FieldValue>
-				</FieldContainer>
-				<Wrapper className="margin-top-20">
-					{taoCurrencyBalances.logos.gt(advocateLogos) ? (
-						<Button type="button" onClick={this.handleSubmit}>
-							{formLoading ? "Loading..." : "Challenge"}
-						</Button>
-					) : (
-						<Wrapper>You don't have enough Logos to challenge this TAO's Advocate</Wrapper>
-					)}
-				</Wrapper>
-				{error && errorMessage && <Error>{errorMessage}</Error>}
+				{!activeChallenge ? (
+					<ChallengeFormContainer id={id} taoInfo={taoInfo} />
+				) : (
+					<ViewActiveChallenge id={id} taoInfo={taoInfo} activeChallenge={activeChallenge} />
+				)}
 			</Wrapper>
 		);
 	}

@@ -329,3 +329,17 @@ export const setPastEventsProgress = (pastEventsProgress) => {
 		pastEventsProgress
 	};
 };
+
+export const challengeTAOAdvocate = (challenge) => {
+	return {
+		type: actionsEnums.CHALLENGE_TAO_ADVOCATE,
+		challenge
+	};
+};
+
+export const nameChallengeTAOAdvocate = (challenge) => {
+	return {
+		type: actionsEnums.NAME_CHALLENGE_TAO_ADVOCATE,
+		challenge
+	};
+};
