@@ -66,6 +66,14 @@ class TAOName extends React.Component {
 						<div>Write New Description</div>
 					</Icon>
 				)}
+				{!isAdvocate && (
+					<Ahref className="white" to={`/challenge-tao-advocate/${id}/`}>
+						<Icon className="animated bounceIn">
+							<img src={process.env.PUBLIC_URL + "/images/challenge-advocate.png"} alt={"Challenge Advocate"} />
+							<div>Challenge Advocate</div>
+						</Icon>
+					</Ahref>
+				)}
 				{needApproval && (
 					<Icon className="animated bounceIn" onClick={this.approveTAO}>
 						<img src={process.env.PUBLIC_URL + "/images/approve_child_tao.png"} alt={"Approve TAO"} />
@@ -116,7 +124,7 @@ class TAOName extends React.Component {
 							</LeftContainer>
 							<RightContainer className="right">{actionContent}</RightContainer>
 						</Wrapper>
-						{taoDescriptions.length > 0 && (
+						{taoDescriptions && taoDescriptions.length > 0 && (
 							<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescriptions[0].value }} />
 						)}
 					</Wrapper>
@@ -128,7 +136,7 @@ class TAOName extends React.Component {
 							<Title className={`medium margin-bottom-0 ${singlePageView ? "margin-top-20" : ""}`}>{name}</Title>
 							<Header>{id}</Header>
 						</Wrapper>
-						{taoDescriptions.length > 0 && (
+						{taoDescriptions && taoDescriptions.length > 0 && (
 							<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescriptions[0].value }} />
 						)}
 						{actionContent}
