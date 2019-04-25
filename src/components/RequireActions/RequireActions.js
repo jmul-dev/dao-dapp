@@ -5,8 +5,6 @@ import { DateColumn, TypeColumn, MessageColumn } from "./styledComponents";
 import { formatDate } from "utils/";
 import * as _ from "lodash";
 
-const promisify = require("tiny-promisify");
-
 class RequireActions extends React.Component {
 	render() {
 		const { pastEventsRetrieved, names, taos, challengedTAOAdvocates } = this.props;
