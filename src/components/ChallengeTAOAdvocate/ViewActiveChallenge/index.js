@@ -46,7 +46,7 @@ class ViewActiveChallenge extends React.Component {
 							</FieldValue>
 						</FieldContainer>
 						<Wrapper className="margin-top-20">
-							<Title>Response period will end in</Title>
+							<Title>Challenge period will end in</Title>
 							<Countdown date={formatDate(activeChallenge.lockedUntilTimestamp.toNumber())} />
 						</Wrapper>
 					</LeftContainer>
