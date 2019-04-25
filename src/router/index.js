@@ -17,6 +17,7 @@ import { NameStakeListContainer } from "components/NameStakeList/";
 import { ViewThoughtsContainer } from "components/ViewThoughts/";
 import { ViewTimelineContainer } from "components/ViewTimeline/";
 import { ChallengeTAOAdvocateContainer } from "components/ChallengeTAOAdvocate/";
+import { ViewChallengedTAOContainer } from "components/ViewChallengedTAO/";
 
 import {
 	setLocalWriterKey,
@@ -252,6 +253,7 @@ class AppRouter extends React.Component {
 					<Route path="/view-thoughts/:id" component={ViewThoughtsContainer} />
 					<Route path="/view-timeline/:id" component={ViewTimelineContainer} />
 					<Route path="/challenge-tao-advocate/:id" component={ChallengeTAOAdvocateContainer} />
+					<Route path="/view-challenged-tao/:challengeId" component={ViewChallengedTAOContainer} />
 				</Route>
 			</Router>
 		);

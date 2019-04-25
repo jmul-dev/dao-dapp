@@ -36,7 +36,8 @@ import {
 	updateNameSumLogos,
 	setNameWriterKey,
 	challengeTAOAdvocate,
-	nameChallengeTAOAdvocate
+	nameChallengeTAOAdvocate,
+	nameChallengedTAOAdvocate
 } from "./actions";
 
 // Contracts
@@ -414,6 +415,9 @@ const _parseNameTAOPositionEvent = async (dispatch, aoLibrary, log, nameId) => {
 		case "ChallengeTAOAdvocate":
 			if (log.args.challengerAdvocateId === nameId) {
 				dispatch(nameChallengeTAOAdvocate(log.args));
+			}
+			if (log.args.currentAdvocateId === nameId) {
+				dispatch(nameChallengedTAOAdvocate(log.args));
 			}
 			dispatch(challengeTAOAdvocate(log.args));
 			break;

@@ -343,3 +343,10 @@ export const nameChallengeTAOAdvocate = (challenge) => {
 		challenge
 	};
 };
+
+export const nameChallengedTAOAdvocate = (challenge) => {
+	return {
+		type: actionsEnums.NAME_CHALLENGED_TAO_ADVOCATE,
+		challenge
+	};
+};
