@@ -14,6 +14,8 @@ class ChallengeTAOAdvocate extends React.Component {
 		super(props);
 		this.state = {
 			taoInfo: null,
+			advocateId: null,
+			advocateLogos: null,
 			activeChallenge: null,
 			dataPopulated: false
 		};
@@ -42,6 +44,7 @@ class ChallengeTAOAdvocate extends React.Component {
 
 	async getData() {
 		await this.getTAOInfo();
+		await this.getTAOAdvocate();
 		await this.getActiveChallenge();
 		if (this._isMounted) {
 			this.setState({ dataPopulated: true });
@@ -64,6 +67,20 @@ class ChallengeTAOAdvocate extends React.Component {
 		}
 	}
 
+	async getTAOAdvocate() {
+		const { id } = this.props.params;
+		const { nameTAOPosition, logos } = this.props;
+		if (!nameTAOPosition || !logos || !id) {
+			return;
+		}
+
+		const advocateId = await promisify(nameTAOPosition.getAdvocate)(id);
+		const advocateLogos = await promisify(logos.sumBalanceOf)(advocateId);
+		if (this._isMounted) {
+			this.setState({ advocateId, advocateLogos });
+		}
+	}
+
 	async getActiveChallenge() {
 		const { id } = this.props.params;
 		const { nameTAOPosition, challengeTAOAdvocates, accounts } = this.props;
@@ -76,12 +93,7 @@ class ChallengeTAOAdvocate extends React.Component {
 			const sortedChallenges = _.orderBy(challenges, ["createdTimestamp"], ["desc"]);
 			const challengeStatus = await promisify(nameTAOPosition.getChallengeStatus)(sortedChallenges[0].challengeId, accounts[0]);
 			const currentTimestamp = Math.round(new Date().getTime() / 1000);
-			if (
-				(sortedChallenges[0].lockedUntilTimestamp.gte(currentTimestamp) ||
-					sortedChallenges[0].completeBeforeTimestamp.lte(currentTimestamp)) &&
-				challengeStatus.eq(4) &&
-				this._isMounted
-			) {
+			if (sortedChallenges[0].lockedUntilTimestamp.gte(currentTimestamp) && challengeStatus.eq(4) && this._isMounted) {
 				this.setState({ activeChallenge: sortedChallenges[0] });
 			}
 		}
@@ -89,11 +101,14 @@ class ChallengeTAOAdvocate extends React.Component {
 
 	render() {
 		const { id } = this.props.params;
-		const { taoInfo, activeChallenge, dataPopulated } = this.state;
-		const { pastEventsRetrieved } = this.props;
-		if (!pastEventsRetrieved || !dataPopulated) {
+		const { taoInfo, advocateId, advocateLogos, activeChallenge, dataPopulated } = this.state;
+		const { pastEventsRetrieved, names, nameId, taoCurrencyBalances } = this.props;
+		if (!pastEventsRetrieved || !names || !nameId || !taoCurrencyBalances || !dataPopulated) {
 			return <ProgressLoaderContainer />;
 		}
+
+		const advocate = names.find((name) => name.nameId === advocateId);
+		const challenger = names.find((name) => name.nameId === nameId);
 
 		return (
 			<Wrapper className="padding-40">
@@ -104,9 +119,20 @@ class ChallengeTAOAdvocate extends React.Component {
 					<Title className="medium margin-top-20 margin-bottom-0">Challenge {taoInfo.name}'s Advocate</Title>
 				</Wrapper>
 				{!activeChallenge ? (
-					<ChallengeFormContainer id={id} taoInfo={taoInfo} />
+					<ChallengeFormContainer
+						id={id}
+						taoInfo={taoInfo}
+						advocate={{ ...advocate, logos: advocateLogos }}
+						challenger={{ ...challenger, logos: taoCurrencyBalances.logos }}
+					/>
 				) : (
-					<ViewActiveChallenge id={id} taoInfo={taoInfo} activeChallenge={activeChallenge} />
+					<ViewActiveChallenge
+						id={id}
+						taoInfo={taoInfo}
+						advocate={{ ...advocate, logos: advocateLogos }}
+						challenger={{ ...challenger, logos: taoCurrencyBalances.logos }}
+						activeChallenge={activeChallenge}
+					/>
 				)}
 			</Wrapper>
 		);

@@ -260,6 +260,9 @@ export const FieldValue = styled.div`
 	&.big {
 		width: calc(100% - 300px);
 	}
+	&.green {
+		color: #00cc47;
+	}
 `;
 
 export const MediumEditor = styled(Editor)`
