@@ -340,3 +340,12 @@ export const NavLink = styled(Nav.Link)`
 export const Hr = styled.hr`
 	background-color: rgba(255, 255, 255, 0.2);
 `;
+
+export const Badge = styled.div`
+	border-radius: 50%;
+	background-color: #f44336;
+	position: absolute;
+	padding: 2px 6px;
+	top: 0px;
+	left: 72px;
+`;

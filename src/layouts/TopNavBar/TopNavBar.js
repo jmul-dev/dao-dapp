@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { Ahref as Link, Icon } from "components/";
+import { Ahref as Link, Icon, Badge } from "components/";
 import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage } from "./styledComponents";
 import { getNameProfileImage as graphqlGetNameProfileImage } from "utils/graphql";
 import "./style.css";
@@ -77,8 +77,22 @@ class TopNavBar extends React.Component {
 	}
 
 	render() {
-		const { nameId, nameInfo, taoCurrencyBalances, profileImage, compromised } = this.props;
-		if (!nameId || !nameInfo || !taoCurrencyBalances) return null;
+		const {
+			pastEventsRetrieved,
+			nameId,
+			nameInfo,
+			taoCurrencyBalances,
+			profileImage,
+			compromised,
+			challengedTAOAdvocates
+		} = this.props;
+		if (!pastEventsRetrieved || !nameId || !nameInfo || !taoCurrencyBalances) return null;
+
+		let activeChallenges = [];
+		if (challengedTAOAdvocates && challengedTAOAdvocates.length) {
+			const currentTimestamp = Math.round(new Date().getTime() / 1000);
+			activeChallenges = challengedTAOAdvocates.filter((challenge) => challenge.lockedUntilTimestamp.gt(currentTimestamp));
+		}
 		return (
 			<Navbar bg="dark" variant="dark" sticky="top">
 				<Navbar.Brand>
@@ -111,6 +125,13 @@ class TopNavBar extends React.Component {
 							<Icon className="animated bounceIn navbar">
 								<img src={process.env.PUBLIC_URL + "/images/create_tao.png"} alt={"Create TAO"} />
 								<div>Create TAO</div>
+							</Icon>
+						</Ahref>
+						<Ahref to="/require-actions">
+							<Icon className="animated bounceIn navbar">
+								<img src={process.env.PUBLIC_URL + "/images/notification.png"} alt={"Require Actions"} />
+								<div>Require Actions</div>
+								{activeChallenges.length && <Badge>{activeChallenges.length}</Badge>}
 							</Icon>
 						</Ahref>
 					</Nav>

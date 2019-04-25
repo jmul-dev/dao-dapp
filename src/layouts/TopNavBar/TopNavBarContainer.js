@@ -4,6 +4,7 @@ import { setNameInfo, setProfileImage, setTAOCurrencyBalances } from "./actions"
 
 const mapStateToProps = (state) => {
 	return {
+		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		nameId: state.nameReducer.nameId,
 		nameInfo: state.nameReducer.nameInfo,
 		profileImage: state.nameReducer.profileImage,
@@ -13,7 +14,8 @@ const mapStateToProps = (state) => {
 		pathos: state.contractReducer.contracts.pathos,
 		logos: state.contractReducer.contracts.logos,
 		stakedTAOs: state.globalReducer.stakedTAOs,
-		namesPositionLogos: state.globalReducer.namesPositionLogos
+		namesPositionLogos: state.globalReducer.namesPositionLogos,
+		challengedTAOAdvocates: state.nameReducer.challengedTAOAdvocates
 	};
 };
 
