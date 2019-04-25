@@ -131,7 +131,7 @@ class TopNavBar extends React.Component {
 							<Icon className="animated bounceIn navbar">
 								<img src={process.env.PUBLIC_URL + "/images/notification.png"} alt={"Require Actions"} />
 								<div>Require Actions</div>
-								{activeChallenges.length && <Badge>{activeChallenges.length}</Badge>}
+								{activeChallenges.length > 0 && <Badge>{activeChallenges.length}</Badge>}
 							</Icon>
 						</Ahref>
 					</Nav>
