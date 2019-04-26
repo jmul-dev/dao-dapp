@@ -347,5 +347,5 @@ export const Badge = styled.div`
 	position: absolute;
 	padding: 2px 6px;
 	top: 0px;
-	left: 72px;
+	left: 52px;
 `;
