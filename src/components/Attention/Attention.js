@@ -5,7 +5,7 @@ import { DateColumn, TypeColumn, MessageColumn } from "./styledComponents";
 import { formatDate } from "utils/";
 import * as _ from "lodash";
 
-class RequireActions extends React.Component {
+class Attention extends React.Component {
 	render() {
 		const { pastEventsRetrieved, names, taos, challengeTAOAdvocates, nameId } = this.props;
 		if (!pastEventsRetrieved || !names || !taos || !challengeTAOAdvocates || !nameId) {
@@ -32,12 +32,12 @@ class RequireActions extends React.Component {
 		if (!activeChallenges.length) {
 			return (
 				<Wrapper className="padding-40">
-					<Title>Require Actions</Title>
-					<Wrapper className="margin-top-20">Currently, there is nothing that requires your action</Wrapper>
+					<Title>Attention</Title>
+					<Wrapper className="margin-top-20">Currently, there is no item that requires your attention</Wrapper>
 				</Wrapper>
 			);
 		} else {
-			const requireActionsContent = activeChallenges.map((challenge) => {
+			const attentionsContent = activeChallenges.map((challenge) => {
 				const advocate = names.find((name) => name.nameId === challenge.currentAdvocateId);
 				const challenger = names.find((name) => name.nameId === challenge.challengerAdvocateId);
 				const tao = taos.find((_tao) => _tao.taoId === challenge.taoId);
@@ -66,18 +66,18 @@ class RequireActions extends React.Component {
 			return (
 				<Wrapper className="padding-40">
 					<Wrapper className="margin-bottom-20">
-						<Title>Require Actions</Title>
+						<Title>Attention</Title>
 					</Wrapper>
 					<Wrapper className="margin-bottom-20">
 						<DateColumn className="header">Date</DateColumn>
 						<TypeColumn className="header">Type</TypeColumn>
 						<MessageColumn className="header">Message</MessageColumn>
 					</Wrapper>
-					{requireActionsContent}
+					{attentionsContent}
 				</Wrapper>
 			);
 		}
 	}
 }
 
-export { RequireActions };
+export { Attention };

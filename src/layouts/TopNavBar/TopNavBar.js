@@ -124,10 +124,10 @@ class TopNavBar extends React.Component {
 								<div>Create TAO</div>
 							</Icon>
 						</Ahref>
-						<Ahref to="/require-actions">
+						<Ahref to="/attention">
 							<Icon className="animated bounceIn navbar">
-								<img src={process.env.PUBLIC_URL + "/images/notification.png"} alt={"Require Actions"} />
-								<div>Require Actions</div>
+								<img src={process.env.PUBLIC_URL + "/images/attention.png"} alt={"Attention"} />
+								<div>Attention</div>
 								{activeChallenges.length > 0 && <Badge>{activeChallenges.length}</Badge>}
 							</Icon>
 						</Ahref>

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { RequireActions } from "./RequireActions";
+import { Attention } from "./Attention";
 
 const mapStateToProps = (state) => {
 	return {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export const RequireActionsContainer = connect(
+export const AttentionContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(RequireActions);
+)(Attention);

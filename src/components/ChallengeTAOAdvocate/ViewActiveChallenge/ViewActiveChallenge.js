@@ -30,8 +30,8 @@ class ViewActiveChallenge extends React.Component {
 	}
 
 	async handleSubmit() {
-		const { nameTAOPosition, accounts, nameId, activeChallenge } = this.props;
-		if (!nameTAOPosition || !accounts || !nameId || !activeChallenge) {
+		const { nameTAOPosition, accounts, nameId, activeChallenge, taoInfo } = this.props;
+		if (!nameTAOPosition || !accounts || !nameId || !activeChallenge || !taoInfo) {
 			return;
 		}
 		if (this._isMounted) {
@@ -93,7 +93,9 @@ class ViewActiveChallenge extends React.Component {
 						if (this._isMounted) {
 							this.setState({ error: false, errorMessage: "", formLoading: false });
 						}
-						hashHistory.push(`/tao/${activeChallenge.taoId}`);
+						setTimeout(() => {
+							hashHistory.push(`/tao/${activeChallenge.taoId}`);
+						}, 2000);
 					})
 					.catch((err) => {
 						if (this._isMounted) {
@@ -105,8 +107,19 @@ class ViewActiveChallenge extends React.Component {
 	}
 
 	render() {
-		const { taoInfo, advocate, challenger, activeChallenge, challengeStatus } = this.props;
+		const { taoInfo, advocate, challenger, activeChallenge, challengeStatus, nameId } = this.props;
 		const { error, errorMessage, formLoading } = this.state;
+
+		if (!nameId) {
+			return null;
+		}
+		if (advocate.nameId === nameId) {
+			return (
+				<Wrapper>
+					<Title>You are the Advocate of {taoInfo.name}</Title>
+				</Wrapper>
+			);
+		}
 
 		const losingColor = "rgba(220, 220, 220, 0.2)";
 		const winningColor = "rgba(0, 204, 71, 0.8)";
