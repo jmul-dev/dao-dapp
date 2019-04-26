@@ -6,12 +6,12 @@ const mapStateToProps = (state) => {
 		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		names: state.globalReducer.names,
 		nameId: state.nameReducer.nameId,
-		taoCurrencyBalances: state.nameReducer.taoCurrencyBalances,
 		accounts: state.web3Reducer.accounts,
 		taoFactory: state.contractReducer.contracts.taoFactory,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
 		challengedTAOAdvocates: state.nameReducer.challengedTAOAdvocates,
-		logos: state.contractReducer.contracts.logos
+		logos: state.contractReducer.contracts.logos,
+		taoPositions: state.globalReducer.taoPositions
 	};
 };
 

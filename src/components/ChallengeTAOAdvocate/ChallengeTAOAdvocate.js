@@ -39,6 +39,8 @@ class ChallengeTAOAdvocate extends React.Component {
 			await this.getData();
 		} else if (this.props.challengeTAOAdvocates !== prevProps.challengeTAOAdvocates) {
 			await this.getActiveChallenge();
+		} else if (this.props.taoPositions !== prevProps.taoPositions) {
+			await this.getTAOAdvocate();
 		}
 	}
 

@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 		taoFactory: state.contractReducer.contracts.taoFactory,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
 		challengeTAOAdvocates: state.nameReducer.challengeTAOAdvocates,
-		logos: state.contractReducer.contracts.logos
+		logos: state.contractReducer.contracts.logos,
+		taoPositions: state.globalReducer.taoPositions
 	};
 };
 

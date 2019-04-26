@@ -5,6 +5,8 @@ import { waitForTransactionReceipt } from "utils/web3";
 const promisify = require("tiny-promisify");
 
 class ChallengeForm extends React.Component {
+	_isMounted = false;
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,15 +17,25 @@ class ChallengeForm extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	componentDidMount() {
+		this._isMounted = true;
+	}
+
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
+
 	async handleSubmit() {
 		const { nameTAOPosition, advocate, logos, accounts, nameId, id } = this.props;
 		if (!nameTAOPosition || !logos || !accounts || !nameId || !id || !advocate) {
 			return;
 		}
-		this.setState({ formLoading: true });
+		if (this._isMounted) {
+			this.setState({ formLoading: true });
+		}
 		const advocateLogos = await promisify(logos.sumBalanceOf)(advocate.nameId);
 		const challengerLogos = await promisify(logos.sumBalanceOf)(nameId);
-		if (advocateLogos.gt(challengerLogos)) {
+		if (advocateLogos.gt(challengerLogos) && this._isMounted) {
 			this.setState({
 				error: true,
 				errorMessage: "You don't have enough Logos to challenge this TAO's Advocate",
@@ -32,15 +44,19 @@ class ChallengeForm extends React.Component {
 			return;
 		}
 		nameTAOPosition.challengeTAOAdvocate(id, { from: accounts[0] }, (err, transactionHash) => {
-			if (err) {
+			if (err && this._isMounted) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
-						this.setState({ error: false, errorMessage: "", formLoading: false });
+						if (this._isMounted) {
+							this.setState({ error: false, errorMessage: "", formLoading: false });
+						}
 					})
 					.catch((err) => {
-						this.setState({ error: true, errorMessage: err.message, formLoading: false });
+						if (this._isMounted) {
+							this.setState({ error: true, errorMessage: err.message, formLoading: false });
+						}
 					});
 			}
 		});

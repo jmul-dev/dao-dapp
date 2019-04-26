@@ -15,6 +15,7 @@ class ViewChallengedTAO extends React.Component {
 		this.state = {
 			taoInfo: null,
 			advocateId: null,
+			advocateLogos: null,
 			challengeInfo: null,
 			challengerLogos: null,
 			dataPopulated: false
@@ -37,7 +38,10 @@ class ViewChallengedTAO extends React.Component {
 				this.setState(this.initialState);
 			}
 			await this.getData();
-		} else if (this.props.challengedTAOAdvocates !== prevProps.challengedTAOAdvocates) {
+		} else if (
+			this.props.challengedTAOAdvocates !== prevProps.challengedTAOAdvocates ||
+			this.props.taoPositions !== prevProps.taoPositions
+		) {
 			await this.getData();
 		}
 	}
@@ -53,6 +57,7 @@ class ViewChallengedTAO extends React.Component {
 			const _challenge = await promisify(nameTAOPosition.getTAOAdvocateChallengeById)(challengeId);
 			const _taoInfo = await promisify(taoFactory.getTAO)(_challenge[1]);
 			const advocateId = await promisify(nameTAOPosition.getAdvocate)(_challenge[1]);
+			const advocateLogos = await promisify(logos.sumBalanceOf)(advocateId);
 			const challengerLogos = await promisify(logos.sumBalanceOf)(_challenge[0]);
 			const taoInfo = {
 				id: _challenge[1],
@@ -65,7 +70,7 @@ class ViewChallengedTAO extends React.Component {
 				lockedUntilTimestamp: _challenge[4]
 			};
 			if (this._isMounted) {
-				this.setState({ taoInfo, advocateId, challengeInfo, challengerLogos, dataPopulated: true });
+				this.setState({ taoInfo, advocateId, advocateLogos, challengeInfo, challengerLogos, dataPopulated: true });
 			}
 		} catch (e) {
 			if (this._isMounted) {
@@ -76,9 +81,9 @@ class ViewChallengedTAO extends React.Component {
 
 	render() {
 		const { challengeId } = this.props.params;
-		const { taoInfo, advocateId, challengeInfo, challengerLogos, dataPopulated } = this.state;
-		const { pastEventsRetrieved, names, nameId, taoCurrencyBalances } = this.props;
-		if (!pastEventsRetrieved || !names || !nameId || !taoCurrencyBalances || !dataPopulated) {
+		const { taoInfo, advocateId, advocateLogos, challengeInfo, challengerLogos, dataPopulated } = this.state;
+		const { pastEventsRetrieved, names, nameId } = this.props;
+		if (!pastEventsRetrieved || !names || !nameId || !dataPopulated) {
 			return <ProgressLoaderContainer />;
 		}
 
@@ -89,12 +94,6 @@ class ViewChallengedTAO extends React.Component {
 					<Title>Unable to find this challenge</Title>
 				</Wrapper>
 			);
-		} else if (advocateId !== nameId) {
-			return (
-				<Wrapper>
-					<Title>You're not the current Advocate of the challenged TAO</Title>
-				</Wrapper>
-			);
 		} else if (challengeInfo.completed || challengeInfo.lockedUntilTimestamp.lt(currentTimestamp)) {
 			return (
 				<Wrapper>
@@ -103,7 +102,7 @@ class ViewChallengedTAO extends React.Component {
 			);
 		}
 
-		const advocate = names.find((name) => name.nameId === nameId);
+		const advocate = names.find((name) => name.nameId === advocateId);
 		const challenger = names.find((name) => name.nameId === challengeInfo.challengerId);
 
 		const losingColor = "rgba(220, 220, 220, 0.2)";
@@ -113,10 +112,10 @@ class ViewChallengedTAO extends React.Component {
 			datasets: [
 				{
 					fillColor: [
-						taoCurrencyBalances.logos.gt(challengerLogos) ? winningColor : losingColor,
-						challengerLogos.gt(taoCurrencyBalances.logos) ? winningColor : losingColor
+						advocateLogos.gt(challengerLogos) ? winningColor : losingColor,
+						challengerLogos.gt(advocateLogos) ? winningColor : losingColor
 					],
-					data: [taoCurrencyBalances.logos.toNumber(), challengerLogos.toNumber()]
+					data: [advocateLogos.toNumber(), challengerLogos.toNumber()]
 				}
 			]
 		};
@@ -132,22 +131,31 @@ class ViewChallengedTAO extends React.Component {
 				</Wrapper>
 				<Header>
 					A challenge to be {taoInfo.name}'s new Advocate was submitted by {challenger.name} on{" "}
-					{formatDate(challengeInfo.createdTimestamp.toNumber())}. You have the opportunity to keep your position as the Advocate
-					of {taoInfo.name} by surpassing the challenger's Logos balance before{" "}
-					{formatDate(challengeInfo.lockedUntilTimestamp.toNumber())}. The one with higher Logos will be the new Advocate of{" "}
-					{taoInfo.name}.
+					{formatDate(challengeInfo.createdTimestamp.toNumber())}.
+					{advocateId === nameId
+						? ` You have the opportunity to keep your position as the Advocate of ${
+								taoInfo.name
+						  } by surpassing the challenger's Logos balance before ${formatDate(
+								challengeInfo.lockedUntilTimestamp.toNumber()
+						  )}.`
+						: ` Both challenger and the current Advocate of ${
+								taoInfo.name
+						  } will have the opportunity to respond to this challenge before ${formatDate(
+								challengeInfo.lockedUntilTimestamp.toNumber()
+						  )}.`}{" "}
+					The one with higher Logos will be the new Advocate of {taoInfo.name}.
 				</Header>
 				<Wrapper className="margin-top-20">
 					<LeftContainer>
 						<FieldContainer>
 							<FieldName className="big">{advocate.name}'s Logos (Current Advocate)</FieldName>
-							<FieldValue className={taoCurrencyBalances.logos.gt(challengerLogos) ? "big green" : "big"}>
-								{taoCurrencyBalances.logos.toNumber()}
+							<FieldValue className={advocateLogos.gt(challengerLogos) ? "big green" : "big"}>
+								{advocateLogos.toNumber()}
 							</FieldValue>
 						</FieldContainer>
 						<FieldContainer>
 							<FieldName className="big">{challenger.name}'s Logos (Challenger)</FieldName>
-							<FieldValue className={challengerLogos.gt(taoCurrencyBalances.logos) ? "big green" : "big"}>
+							<FieldValue className={challengerLogos.gt(advocateLogos) ? "big green" : "big"}>
 								{challengerLogos.toNumber()}
 							</FieldValue>
 						</FieldContainer>
