@@ -4,6 +4,7 @@ import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 import { Countdown } from "widgets/Countdown/";
 import { formatDate } from "utils/";
 import { BarChart } from "widgets/BarChart/";
+import { hashHistory } from "react-router";
 
 const promisify = require("tiny-promisify");
 
@@ -67,7 +68,8 @@ class ViewChallengedTAO extends React.Component {
 				challengerId: _challenge[0],
 				completed: _challenge[2],
 				createdTimestamp: _challenge[3],
-				lockedUntilTimestamp: _challenge[4]
+				lockedUntilTimestamp: _challenge[4],
+				completeBeforeTimestamp: _challenge[5]
 			};
 			if (this._isMounted) {
 				this.setState({ taoInfo, advocateId, advocateLogos, challengeInfo, challengerLogos, dataPopulated: true });
@@ -94,7 +96,13 @@ class ViewChallengedTAO extends React.Component {
 					<Title>Unable to find this challenge</Title>
 				</Wrapper>
 			);
-		} else if (challengeInfo.completed || challengeInfo.lockedUntilTimestamp.lt(currentTimestamp)) {
+		} else if (challengeInfo.completed) {
+			return (
+				<Wrapper>
+					<Title>This challenge has been completed</Title>
+				</Wrapper>
+			);
+		} else if (challengeInfo.completeBeforeTimestamp.lt(currentTimestamp)) {
 			return (
 				<Wrapper>
 					<Title>This challenge has expired</Title>
@@ -120,16 +128,10 @@ class ViewChallengedTAO extends React.Component {
 			]
 		};
 
-		return (
-			<Wrapper className="padding-40">
-				<Ahref className="small" to={`/tao/${taoInfo.id}`}>
-					View TAO Details
-				</Ahref>
-				<Wrapper className="margin-bottom-20">
-					<Title className="medium margin-top-20 margin-bottom-0">{taoInfo.name}'s Advocate Challenge</Title>
-					<Header>{challengeId}</Header>
-				</Wrapper>
-				<Header>
+		let challengeMessage, countdownContent;
+		if (challengeInfo.lockedUntilTimestamp.gte(currentTimestamp)) {
+			challengeMessage = (
+				<Wrapper>
 					A challenge to be {taoInfo.name}'s new Advocate was submitted by {challenger.name} on{" "}
 					{formatDate(challengeInfo.createdTimestamp.toNumber())}.
 					{advocateId === nameId
@@ -144,7 +146,47 @@ class ViewChallengedTAO extends React.Component {
 								challengeInfo.lockedUntilTimestamp.toNumber()
 						  )}.`}{" "}
 					The one with higher Logos will be the new Advocate of {taoInfo.name}.
-				</Header>
+				</Wrapper>
+			);
+			countdownContent = (
+				<Wrapper className="margin-top-20">
+					<Title>Challenge period will end in</Title>
+					<Countdown date={formatDate(challengeInfo.lockedUntilTimestamp.toNumber())} />
+				</Wrapper>
+			);
+		} else {
+			if (challengeInfo.challengerId === nameId) {
+				hashHistory.push(`/challenge-tao-advocate/${taoInfo.id}`);
+			}
+			challengeMessage = (
+				<Wrapper>
+					Challenge was won by{" "}
+					{advocateLogos.gt(challengerLogos)
+						? `${advocate.name} (current Advocate)`
+						: `${challenger.name} (challenger) and is waiting for the winner to claim the position before ${formatDate(
+								challengeInfo.completeBeforeTimestamp
+						  )}`}
+					.
+				</Wrapper>
+			);
+			countdownContent = (
+				<Wrapper className="margin-top-20">
+					<Title>Claim period will end in</Title>
+					<Countdown date={formatDate(challengeInfo.completeBeforeTimestamp.toNumber())} />
+				</Wrapper>
+			);
+		}
+
+		return (
+			<Wrapper className="padding-40">
+				<Ahref className="small" to={`/tao/${taoInfo.id}`}>
+					View TAO Details
+				</Ahref>
+				<Wrapper className="margin-bottom-20">
+					<Title className="medium margin-top-20 margin-bottom-0">{taoInfo.name}'s Advocate Challenge</Title>
+					<Header>{challengeId}</Header>
+				</Wrapper>
+				<Header>{challengeMessage}</Header>
 				<Wrapper className="margin-top-20">
 					<LeftContainer>
 						<FieldContainer>
@@ -159,10 +201,7 @@ class ViewChallengedTAO extends React.Component {
 								{challengerLogos.toNumber()}
 							</FieldValue>
 						</FieldContainer>
-						<Wrapper className="margin-top-20">
-							<Title>Challenge period will end in</Title>
-							<Countdown date={formatDate(challengeInfo.lockedUntilTimestamp.toNumber())} />
-						</Wrapper>
+						{countdownContent}
 					</LeftContainer>
 					<RightContainer>
 						<BarChart title={`Logos Chart`} data={logosData} height={300} />
