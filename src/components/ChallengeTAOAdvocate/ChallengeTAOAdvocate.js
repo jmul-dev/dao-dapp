@@ -2,7 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, Ahref } from "components/";
 import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 import { ChallengeFormContainer } from "./ChallengeForm/";
-import { ViewActiveChallenge } from "./ViewActiveChallenge/";
+import { ViewActiveChallengeContainer } from "./ViewActiveChallenge/";
 import * as _ from "lodash";
 
 const promisify = require("tiny-promisify");
@@ -17,6 +17,7 @@ class ChallengeTAOAdvocate extends React.Component {
 			advocateId: null,
 			advocateLogos: null,
 			activeChallenge: null,
+			challengeStatus: null,
 			dataPopulated: false
 		};
 		this.initialState = this.state;
@@ -103,15 +104,19 @@ class ChallengeTAOAdvocate extends React.Component {
 			);
 			const challengeStatus = await promisify(nameTAOPosition.getChallengeStatus)(sortedChallenges[0].challengeId, accounts[0]);
 			const currentTimestamp = Math.round(new Date().getTime() / 1000);
-			if (sortedChallenges[0].lockedUntilTimestamp.gte(currentTimestamp) && challengeStatus.eq(4) && this._isMounted) {
-				this.setState({ activeChallenge: sortedChallenges[0] });
+			if (
+				((sortedChallenges[0].lockedUntilTimestamp.gte(currentTimestamp) && challengeStatus.eq(4)) ||
+					(sortedChallenges[0].completeBeforeTimestamp.gte(currentTimestamp) && challengeStatus.eq(1))) &&
+				this._isMounted
+			) {
+				this.setState({ activeChallenge: sortedChallenges[0], challengeStatus });
 			}
 		}
 	}
 
 	render() {
 		const { id } = this.props.params;
-		const { taoInfo, advocateId, advocateLogos, activeChallenge, dataPopulated } = this.state;
+		const { taoInfo, advocateId, advocateLogos, activeChallenge, challengeStatus, dataPopulated } = this.state;
 		const { pastEventsRetrieved, names, nameId, taoCurrencyBalances } = this.props;
 		if (!pastEventsRetrieved || !names || !nameId || !taoCurrencyBalances || !dataPopulated) {
 			return <ProgressLoaderContainer />;
@@ -136,12 +141,13 @@ class ChallengeTAOAdvocate extends React.Component {
 						challenger={{ ...challenger, logos: taoCurrencyBalances.logos }}
 					/>
 				) : (
-					<ViewActiveChallenge
+					<ViewActiveChallengeContainer
 						id={id}
 						taoInfo={taoInfo}
 						advocate={{ ...advocate, logos: advocateLogos }}
 						challenger={{ ...challenger, logos: taoCurrencyBalances.logos }}
 						activeChallenge={activeChallenge}
+						challengeStatus={challengeStatus}
 					/>
 				)}
 			</Wrapper>
