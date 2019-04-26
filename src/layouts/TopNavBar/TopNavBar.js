@@ -77,22 +77,17 @@ class TopNavBar extends React.Component {
 	}
 
 	render() {
-		const {
-			pastEventsRetrieved,
-			nameId,
-			nameInfo,
-			taoCurrencyBalances,
-			profileImage,
-			compromised,
-			challengedTAOAdvocates
-		} = this.props;
+		const { pastEventsRetrieved, nameId, nameInfo, taoCurrencyBalances, profileImage, compromised, challengeTAOAdvocates } = this.props;
 		if (!pastEventsRetrieved || !nameId || !nameInfo || !taoCurrencyBalances) return null;
 
 		let activeChallenges = [];
-		if (challengedTAOAdvocates && challengedTAOAdvocates.length) {
+		if (challengeTAOAdvocates && challengeTAOAdvocates.length) {
 			const currentTimestamp = Math.round(new Date().getTime() / 1000);
-			activeChallenges = challengedTAOAdvocates.filter((challenge) => challenge.lockedUntilTimestamp.gt(currentTimestamp));
+			activeChallenges = challengeTAOAdvocates.filter(
+				(challenge) => challenge.currentAdvocateId === nameId && challenge.lockedUntilTimestamp.gt(currentTimestamp)
+			);
 		}
+
 		return (
 			<Navbar bg="dark" variant="dark" sticky="top">
 				<Navbar.Brand>

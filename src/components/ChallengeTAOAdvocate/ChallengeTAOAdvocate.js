@@ -85,12 +85,12 @@ class ChallengeTAOAdvocate extends React.Component {
 
 	async getActiveChallenge() {
 		const { id } = this.props.params;
-		const { nameTAOPosition, challengeTAOAdvocates, accounts } = this.props;
-		if (!nameTAOPosition || !challengeTAOAdvocates || !accounts || !id) {
+		const { nameTAOPosition, challengeTAOAdvocates, accounts, nameId } = this.props;
+		if (!nameTAOPosition || !challengeTAOAdvocates || !accounts || !nameId || !id) {
 			return;
 		}
 
-		const challenges = challengeTAOAdvocates.filter((challenge) => challenge.taoId === id);
+		const challenges = challengeTAOAdvocates.filter((challenge) => challenge.taoId === id && challenge.challengerAdvocateId === nameId);
 		if (challenges.length) {
 			const sortedChallenges = _.orderBy(
 				challenges,

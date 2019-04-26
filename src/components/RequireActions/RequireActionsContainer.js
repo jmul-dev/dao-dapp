@@ -6,7 +6,8 @@ const mapStateToProps = (state) => {
 		pastEventsRetrieved: state.globalReducer.pastEventsRetrieved,
 		names: state.globalReducer.names,
 		taos: state.globalReducer.taos,
-		challengedTAOAdvocates: state.nameReducer.challengedTAOAdvocates
+		challengeTAOAdvocates: state.globalReducer.challengeTAOAdvocates,
+		nameId: state.nameReducer.nameId
 	};
 };
 

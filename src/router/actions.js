@@ -337,16 +337,10 @@ export const challengeTAOAdvocate = (challenge) => {
 	};
 };
 
-export const nameChallengeTAOAdvocate = (challenge) => {
+export const updateChallengeCurrentAdvocate = (taoId, advocateId) => {
 	return {
-		type: actionsEnums.NAME_CHALLENGE_TAO_ADVOCATE,
-		challenge
-	};
-};
-
-export const nameChallengedTAOAdvocate = (challenge) => {
-	return {
-		type: actionsEnums.NAME_CHALLENGED_TAO_ADVOCATE,
-		challenge
+		type: actionsEnums.UPDATE_CHALLENGE_CURRENT_ADVOCATE,
+		taoId,
+		advocateId
 	};
 };

@@ -36,8 +36,7 @@ import {
 	updateNameSumLogos,
 	setNameWriterKey,
 	challengeTAOAdvocate,
-	nameChallengeTAOAdvocate,
-	nameChallengedTAOAdvocate
+	updateChallengeCurrentAdvocate
 } from "./actions";
 
 // Contracts
@@ -397,6 +396,7 @@ const _parseNameTAOPositionEvent = async (dispatch, aoLibrary, log, nameId) => {
 	switch (log.event) {
 		case "SetAdvocate":
 			dispatch(setTAOAdvocate(log.args.taoId, log.args.newAdvocateId));
+			dispatch(updateChallengeCurrentAdvocate(log.args.taoId, log.args.newAdvocateId));
 			break;
 		case "SetListener":
 			if (isTAO) {
@@ -413,12 +413,6 @@ const _parseNameTAOPositionEvent = async (dispatch, aoLibrary, log, nameId) => {
 			}
 			break;
 		case "ChallengeTAOAdvocate":
-			if (log.args.challengerAdvocateId === nameId) {
-				dispatch(nameChallengeTAOAdvocate(log.args));
-			}
-			if (log.args.currentAdvocateId === nameId) {
-				dispatch(nameChallengedTAOAdvocate(log.args));
-			}
 			dispatch(challengeTAOAdvocate(log.args));
 			break;
 		default:

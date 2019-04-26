@@ -7,16 +7,18 @@ import * as _ from "lodash";
 
 class RequireActions extends React.Component {
 	render() {
-		const { pastEventsRetrieved, names, taos, challengedTAOAdvocates } = this.props;
-		if (!pastEventsRetrieved || !names || !taos || !challengedTAOAdvocates) {
+		const { pastEventsRetrieved, names, taos, challengeTAOAdvocates, nameId } = this.props;
+		if (!pastEventsRetrieved || !names || !taos || !challengeTAOAdvocates || !nameId) {
 			return <ProgressLoaderContainer />;
 		}
 
 		let activeChallenges = [];
-		if (challengedTAOAdvocates && challengedTAOAdvocates.length) {
+		if (challengeTAOAdvocates && challengeTAOAdvocates.length) {
 			const currentTimestamp = Math.round(new Date().getTime() / 1000);
 			activeChallenges = _.orderBy(
-				challengedTAOAdvocates.filter((challenge) => challenge.lockedUntilTimestamp.gt(currentTimestamp)),
+				challengeTAOAdvocates.filter(
+					(challenge) => challenge.currentAdvocateId === nameId && challenge.lockedUntilTimestamp.gt(currentTimestamp)
+				),
 				[
 					(c) => {
 						return c.lockedUntilTimestamp.toNumber();

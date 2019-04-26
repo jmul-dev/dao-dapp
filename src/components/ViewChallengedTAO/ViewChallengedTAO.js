@@ -39,7 +39,7 @@ class ViewChallengedTAO extends React.Component {
 			}
 			await this.getData();
 		} else if (
-			this.props.challengedTAOAdvocates !== prevProps.challengedTAOAdvocates ||
+			this.props.challengeTAOAdvocates !== prevProps.challengeTAOAdvocates ||
 			this.props.taoPositions !== prevProps.taoPositions
 		) {
 			await this.getData();

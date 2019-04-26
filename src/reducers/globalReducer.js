@@ -309,6 +309,25 @@ const handleChallengeTAOAdvocate = (state, action) => {
 	};
 };
 
+const handleUpdateChallengeCurrentAdvocate = (state, action) => {
+	const _challengeTAOAdvocates = state.challengeTAOAdvocates.slice();
+	const _otherTAOChallenges = _challengeTAOAdvocates.filter((challenge) => challenge.taoId !== action.taoId);
+	const _taoChallenges = _challengeTAOAdvocates.filter(
+		(challenge) => challenge.taoId === action.taoId && challenge.challengerAdvocateId !== action.advocateId
+	);
+
+	if (_taoChallenges.length) {
+		_taoChallenges.forEach((challenge, index) => {
+			_taoChallenges[index].currentAdvocateId = action.advocateId;
+		});
+	}
+
+	return {
+		...state,
+		challengeTAOAdvocates: [..._otherTAOChallenges, ..._taoChallenges]
+	};
+};
+
 export const globalReducer = (state = new GlobalReducerState(), action) => {
 	switch (action.type) {
 		case actionsEnums.SET_PAST_EVENTS_PROGRESS:
@@ -359,6 +378,8 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleUpdateNameSumLogos(state, action);
 		case actionsEnums.CHALLENGE_TAO_ADVOCATE:
 			return handleChallengeTAOAdvocate(state, action);
+		case actionsEnums.UPDATE_CHALLENGE_CURRENT_ADVOCATE:
+			return handleUpdateChallengeCurrentAdvocate(state, action);
 		default:
 			return state;
 	}

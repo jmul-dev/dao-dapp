@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 		accounts: state.web3Reducer.accounts,
 		taoFactory: state.contractReducer.contracts.taoFactory,
 		nameTAOPosition: state.contractReducer.contracts.nameTAOPosition,
-		challengedTAOAdvocates: state.nameReducer.challengedTAOAdvocates,
+		challengeTAOAdvocates: state.globalReducer.challengeTAOAdvocates,
 		logos: state.contractReducer.contracts.logos,
 		taoPositions: state.globalReducer.taoPositions
 	};
