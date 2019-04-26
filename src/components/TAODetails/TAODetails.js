@@ -6,6 +6,7 @@ import { Tab, Nav } from "react-bootstrap";
 import { TAONameContainer } from "./TAOName/";
 import { PositionDetailsContainer } from "./PositionDetails/";
 import { ListenedTAOContainer } from "./ListenedTAO/";
+import { AdvocateChallengeContainer } from "./AdvocateChallenge/";
 import { SpokenTAOContainer } from "./SpokenTAO/";
 import { AncestryDetailsContainer } from "./AncestryDetails/";
 import { Financials } from "./Financials/";
@@ -292,6 +293,7 @@ class TAODetails extends React.Component {
 							<ListenedTAOContainer id={id} singlePageView={singlePageView} />
 							<SpokenTAOContainer id={id} singlePageView={singlePageView} />
 							<AncestryDetailsContainer id={id} ancestry={ancestry} singlePageView={singlePageView} />
+							<AdvocateChallengeContainer id={id} singlePageView={singlePageView} />
 						</LeftContainer>
 						<RightContainer>
 							<Financials
@@ -342,6 +344,9 @@ class TAODetails extends React.Component {
 									<NavLink eventKey="ancestry">Ancestry</NavLink>
 								</Nav.Item>
 								<Nav.Item>
+									<NavLink eventKey="advocate-challenge">Advocate Challenges</NavLink>
+								</Nav.Item>
+								<Nav.Item>
 									<NavLink eventKey="financials">TAO Financials</NavLink>
 								</Nav.Item>
 								{isAdvocate && (
@@ -381,6 +386,9 @@ class TAODetails extends React.Component {
 								</Tab.Pane>
 								<Tab.Pane eventKey="ancestry">
 									<AncestryDetailsContainer id={id} ancestry={ancestry} singlePageView={singlePageView} />
+								</Tab.Pane>
+								<Tab.Pane eventKey="advocate-challenge">
+									<AdvocateChallengeContainer id={id} singlePageView={singlePageView} />
 								</Tab.Pane>
 								<Tab.Pane eventKey="financials">
 									<Financials

@@ -92,7 +92,15 @@ class ChallengeTAOAdvocate extends React.Component {
 
 		const challenges = challengeTAOAdvocates.filter((challenge) => challenge.taoId === id);
 		if (challenges.length) {
-			const sortedChallenges = _.orderBy(challenges, ["createdTimestamp"], ["desc"]);
+			const sortedChallenges = _.orderBy(
+				challenges,
+				[
+					(c) => {
+						return c.createdTimestamp.toNumber();
+					}
+				],
+				["desc"]
+			);
 			const challengeStatus = await promisify(nameTAOPosition.getChallengeStatus)(sortedChallenges[0].challengeId, accounts[0]);
 			const currentTimestamp = Math.round(new Date().getTime() / 1000);
 			if (sortedChallenges[0].lockedUntilTimestamp.gte(currentTimestamp) && challengeStatus.eq(4) && this._isMounted) {

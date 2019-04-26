@@ -29,7 +29,7 @@ class RequireActions extends React.Component {
 			return (
 				<Wrapper className="padding-40">
 					<Title>Require Actions</Title>
-					<Wrapper className="margin-top-20">Currently, there is 0 item that requires your action</Wrapper>
+					<Wrapper className="margin-top-20">Currently, there is nothing that requires your action</Wrapper>
 				</Wrapper>
 			);
 		} else {
