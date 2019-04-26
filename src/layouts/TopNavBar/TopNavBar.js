@@ -84,7 +84,9 @@ class TopNavBar extends React.Component {
 		if (challengeTAOAdvocates && challengeTAOAdvocates.length) {
 			const currentTimestamp = Math.round(new Date().getTime() / 1000);
 			activeChallenges = challengeTAOAdvocates.filter(
-				(challenge) => challenge.currentAdvocateId === nameId && challenge.lockedUntilTimestamp.gt(currentTimestamp)
+				(challenge) =>
+					(challenge.currentAdvocateId === nameId && challenge.lockedUntilTimestamp.gt(currentTimestamp)) ||
+					(challenge.challengerAdvocateId === nameId && challenge.completeBeforeTimestamp.gt(currentTimestamp))
 			);
 		}
 

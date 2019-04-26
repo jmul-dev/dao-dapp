@@ -17,7 +17,9 @@ class RequireActions extends React.Component {
 			const currentTimestamp = Math.round(new Date().getTime() / 1000);
 			activeChallenges = _.orderBy(
 				challengeTAOAdvocates.filter(
-					(challenge) => challenge.currentAdvocateId === nameId && challenge.lockedUntilTimestamp.gt(currentTimestamp)
+					(challenge) =>
+						(challenge.currentAdvocateId === nameId && challenge.lockedUntilTimestamp.gt(currentTimestamp)) ||
+						(challenge.challengerAdvocateId === nameId && challenge.completeBeforeTimestamp.gt(currentTimestamp))
 				),
 				[
 					(c) => {
@@ -36,9 +38,10 @@ class RequireActions extends React.Component {
 			);
 		} else {
 			const requireActionsContent = activeChallenges.map((challenge) => {
+				const advocate = names.find((name) => name.nameId === challenge.currentAdvocateId);
 				const challenger = names.find((name) => name.nameId === challenge.challengerAdvocateId);
 				const tao = taos.find((_tao) => _tao.taoId === challenge.taoId);
-				if (!challenger || !tao) {
+				if (!advocate || !challenger || !tao) {
 					return null;
 				} else {
 					return (
@@ -46,9 +49,15 @@ class RequireActions extends React.Component {
 							<DateColumn>{formatDate(challenge.createdTimestamp.toNumber())}</DateColumn>
 							<TypeColumn>TAO Advocate Challenge</TypeColumn>
 							<MessageColumn>
-								<Ahref to={`/view-challenged-tao/${challenge.challengeId}`}>
-									{challenger.name} challenged you to be {tao.name}'s new Advocate
-								</Ahref>
+								{challenge.currentAdvocateId === nameId ? (
+									<Ahref to={`/view-challenged-tao/${challenge.challengeId}`}>
+										{challenger.name} challenged you to be {tao.name}'s new Advocate
+									</Ahref>
+								) : (
+									<Ahref to={`/challenge-tao-advocate/${challenge.taoId}`}>
+										You challenged {advocate.name} to be {tao.name}'s new Advocate
+									</Ahref>
+								)}
 							</MessageColumn>
 						</Wrapper>
 					);
