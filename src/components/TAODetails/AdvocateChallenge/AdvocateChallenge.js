@@ -51,7 +51,7 @@ class AdvocateChallenge extends React.Component {
 				{activeChallenges.length ? (
 					<Table data={activeChallenges} columns={columns} defaultPageSize={5} filterable={true} />
 				) : (
-					<Header>Currently, there is no active challenge.</Header>
+					<Header>Currently, there is no active challenges</Header>
 				)}
 			</Wrapper>
 		);
