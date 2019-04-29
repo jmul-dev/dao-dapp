@@ -5,7 +5,7 @@
 	"dependencies": {
 		"@babel/runtime": "^7.3.1",
 		"abi-decoder": "^1.2.0",
-		"ao-contracts": "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.14",
+		"ao-contracts": "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.15",
 		"asap": "^2.0.6",
 		"bignumber.js": "^8.0.1",
 		"bootstrap": "^4.2.1",
