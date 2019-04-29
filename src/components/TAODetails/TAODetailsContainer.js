@@ -4,6 +4,7 @@ import { TAODetails } from "./TAODetails";
 const mapStateToProps = (state) => {
 	return {
 		aoLibrary: state.contractReducer.contracts.aoLibrary,
+		accounts: state.web3Reducer.accounts,
 		ethos: state.contractReducer.contracts.ethos,
 		nameId: state.nameReducer.nameId,
 		names: state.globalReducer.names,

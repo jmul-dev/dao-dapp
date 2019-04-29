@@ -19,6 +19,7 @@ import { ViewTimelineContainer } from "components/ViewTimeline/";
 import { ChallengeTAOAdvocateContainer } from "components/ChallengeTAOAdvocate/";
 import { ViewChallengedTAOContainer } from "components/ViewChallengedTAO/";
 import { AttentionContainer } from "components/Attention/";
+import { ParentReplaceTAOAdvocateContainer } from "components/ParentReplaceTAOAdvocate/";
 
 import {
 	setLocalWriterKey,
@@ -256,6 +257,7 @@ class AppRouter extends React.Component {
 					<Route path="/challenge-tao-advocate/:id" component={ChallengeTAOAdvocateContainer} />
 					<Route path="/view-challenged-tao/:challengeId" component={ViewChallengedTAOContainer} />
 					<Route path="/attention" component={AttentionContainer} />
+					<Route path="/parent-replace-tao-advocate/:id" component={ParentReplaceTAOAdvocateContainer} />
 				</Route>
 			</Router>
 		);

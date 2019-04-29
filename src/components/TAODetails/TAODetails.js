@@ -38,6 +38,7 @@ class TAODetails extends React.Component {
 			nameLogosWithdrawn: null,
 			isAdvocate: null,
 			resources: null,
+			isAdvocateOfParent: null,
 			dataPopulated: false
 		};
 		this.initialState = this.state;
@@ -117,8 +118,8 @@ class TAODetails extends React.Component {
 
 	async getTAOPosition() {
 		const { id } = this.props.params;
-		const { taoPositions, names, nameTAOPosition, aoLibrary, nameId } = this.props;
-		if (!taoPositions || !names || !nameTAOPosition || !aoLibrary || !id || !nameId) {
+		const { taoPositions, names, nameTAOPosition, aoLibrary, nameId, accounts } = this.props;
+		if (!taoPositions || !names || !nameTAOPosition || !aoLibrary || !id || !nameId || !accounts) {
 			return;
 		}
 
@@ -144,8 +145,9 @@ class TAODetails extends React.Component {
 		position.speaker.isTAO = await promisify(aoLibrary.isTAO)(position.speaker.id);
 
 		const isAdvocate = _position[1] === nameId;
+		const isAdvocateOfParent = await promisify(nameTAOPosition.senderIsAdvocateOfParent)(accounts[0], id);
 		if (this._isMounted) {
-			this.setState({ position, isAdvocate });
+			this.setState({ position, isAdvocate, isAdvocateOfParent });
 		}
 	}
 
@@ -250,6 +252,7 @@ class TAODetails extends React.Component {
 			namePathosStaked,
 			nameLogosWithdrawn,
 			isAdvocate,
+			isAdvocateOfParent,
 			resources,
 			dataPopulated
 		} = this.state;
@@ -282,6 +285,7 @@ class TAODetails extends React.Component {
 							taoDescriptions={taoDescriptions}
 							getTAODescriptions={this.getTAODescriptions}
 							isAdvocate={isAdvocate}
+							isAdvocateOfParent={isAdvocateOfParent}
 						/>
 						<LeftContainer>
 							<PositionDetailsContainer
@@ -368,6 +372,7 @@ class TAODetails extends React.Component {
 										taoDescriptions={taoDescriptions}
 										getTAODescriptions={this.getTAODescriptions}
 										isAdvocate={isAdvocate}
+										isAdvocateOfParent={isAdvocateOfParent}
 									/>
 								</Tab.Pane>
 								<Tab.Pane eventKey="position">

@@ -53,7 +53,7 @@ class TAOName extends React.Component {
 	}
 
 	render() {
-		const { id, name, singlePageView, needApproval, taoDescriptions, isAdvocate } = this.props;
+		const { id, name, singlePageView, needApproval, taoDescriptions, isAdvocate, isAdvocateOfParent } = this.props;
 		const { showAddTAODescriptionForm } = this.state;
 		if (!id || !name) {
 			return null;
@@ -66,14 +66,23 @@ class TAOName extends React.Component {
 						<div>Write New Description</div>
 					</Icon>
 				)}
-				{!isAdvocate && (
-					<Ahref className="white" to={`/challenge-tao-advocate/${id}/`}>
-						<Icon className="animated bounceIn">
-							<img src={process.env.PUBLIC_URL + "/images/challenge-advocate.png"} alt={"Challenge Advocate"} />
-							<div>Challenge Advocate</div>
-						</Icon>
-					</Ahref>
-				)}
+				{!isAdvocate && [
+					!isAdvocateOfParent ? (
+						<Ahref className="white" to={`/challenge-tao-advocate/${id}/`} key="challenge">
+							<Icon className="animated bounceIn">
+								<img src={process.env.PUBLIC_URL + "/images/challenge-advocate.png"} alt={"Challenge Advocate"} />
+								<div>Challenge Advocate</div>
+							</Icon>
+						</Ahref>
+					) : (
+						<Ahref className="white" to={`/parent-replace-tao-advocate/${id}/`} key="parent-replace">
+							<Icon className="animated bounceIn">
+								<img src={process.env.PUBLIC_URL + "/images/challenge-advocate.png"} alt={"Parent Replace Advocate"} />
+								<div>Parent Replace Advocate</div>
+							</Icon>
+						</Ahref>
+					)
+				]}
 				{needApproval && (
 					<Icon className="animated bounceIn" onClick={this.approveTAO}>
 						<img src={process.env.PUBLIC_URL + "/images/approve_child_tao.png"} alt={"Approve TAO"} />
