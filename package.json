@@ -2,6 +2,7 @@
 	"name": "the-ao",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "./",
 	"dependencies": {
 		"@babel/runtime": "^7.3.1",
 		"abi-decoder": "^1.2.0",
