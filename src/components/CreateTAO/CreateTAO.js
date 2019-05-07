@@ -6,6 +6,7 @@ import { schema } from "./schema";
 import { getTransactionReceipt, waitForTransactionReceipt } from "utils/web3";
 import { abi as TAOFactoryABI } from "ao-contracts/build/contracts/TAOFactory.json";
 import { insertTAODescription as graphqlInsertTAODescription } from "utils/graphql";
+import { metamaskPopup } from "../../utils/electron";
 
 const promisify = require("tiny-promisify");
 const abiDecoder = require("abi-decoder");
@@ -120,6 +121,7 @@ class CreateTAO extends React.Component {
 			this.setState({ error: true, errorMessage: "Description is too short (min. 30 chars)", formLoading: false });
 			return;
 		}
+		metamaskPopup();
 		taoFactory.createTAO(
 			formData.taoName,
 			"",

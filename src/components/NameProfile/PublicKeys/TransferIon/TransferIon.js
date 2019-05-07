@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -43,6 +44,7 @@ class TransferIon extends React.Component {
 				return;
 			}
 		}
+		metamaskPopup();
 		if (formData.type === "AO") {
 			aoion.transferBetweenPublicKeys(
 				nameId,

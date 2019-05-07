@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, SchemaForm, Error, Button } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -38,6 +39,7 @@ class CreateNameForm extends React.Component {
 			}
 			return;
 		}
+		metamaskPopup();
 		nameFactory.createName(formData.username, "", "", "", "", localWriterKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				if (this._isMounted) {

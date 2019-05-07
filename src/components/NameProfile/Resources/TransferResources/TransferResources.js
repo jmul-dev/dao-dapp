@@ -3,6 +3,7 @@ import { Wrapper, Title, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import TokenERC20 from "ao-contracts/build/contracts/TokenERC20.json";
+import { metamaskPopup } from "../../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -41,6 +42,7 @@ class TransferResources extends React.Component {
 					this.setState({ error: true, errorMessage: "Name has insufficient ETH balance", formLoading: false });
 					return false;
 				}
+				metamaskPopup();
 				nameTAOVault.transferEth(id, formData.recipient, formData.amount, { from: accounts[0] }, (err, transactionHash) => {
 					if (err) {
 						this.setState({ error: true, errorMessage: err.message, formLoading: false });
@@ -67,6 +69,7 @@ class TransferResources extends React.Component {
 					this.setState({ error: true, errorMessage: "Name has insufficient AO balance", formLoading: false });
 					return false;
 				}
+				metamaskPopup();
 				nameTAOVault.transferAO(id, formData.recipient, formData.amount, { from: accounts[0] }, (err, transactionHash) => {
 					if (err) {
 						this.setState({ error: true, errorMessage: err.message, formLoading: false });
@@ -93,6 +96,7 @@ class TransferResources extends React.Component {
 					this.setState({ error: true, errorMessage: "Name has insufficient AO+ balance", formLoading: false });
 					return false;
 				}
+				metamaskPopup();
 				nameTAOVault.transferPrimordialAO(
 					id,
 					formData.recipient,

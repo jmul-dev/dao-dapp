@@ -5,6 +5,7 @@ import { formatDate } from "utils/";
 import { BarChart } from "widgets/BarChart/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { hashHistory } from "react-router";
+import { metamaskPopup } from "../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -84,6 +85,7 @@ class ViewActiveChallenge extends React.Component {
 			default:
 				break;
 		}
+		metamaskPopup();
 		nameTAOPosition.completeTAOAdvocateChallenge(activeChallenge.challengeId, { from: accounts[0] }, (err, transactionHash) => {
 			if (err && this._isMounted) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });

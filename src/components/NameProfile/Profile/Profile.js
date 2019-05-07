@@ -3,6 +3,7 @@ import { Wrapper, Title, Header, FieldContainer, FieldName, FieldValue, Icon } f
 import { NewAddressFormContainer } from "./NewAddressForm/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { formatDate } from "utils/";
+import { metamaskPopup } from "../../../utils/electron";
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -24,6 +25,7 @@ class Profile extends React.Component {
 		}
 
 		this.setState({ processingTransaction: true });
+		metamaskPopup();
 		nameTAOPosition.setListener(nameId, id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false });
@@ -50,6 +52,7 @@ class Profile extends React.Component {
 		}
 
 		this.setState({ processingTransaction: true });
+		metamaskPopup();
 		nameTAOPosition.setSpeaker(nameId, id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false });
@@ -76,6 +79,7 @@ class Profile extends React.Component {
 		}
 
 		this.setState({ processingTransaction: true });
+		metamaskPopup();
 		nameAccountRecovery.submitAccountRecovery(id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false });

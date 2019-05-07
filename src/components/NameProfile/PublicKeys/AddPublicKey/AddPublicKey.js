@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../../utils/electron";
 
 const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
@@ -73,7 +74,7 @@ class AddPublicKey extends React.Component {
 		]);
 		const signature = EthCrypto.sign(formData.privateKey, signHash);
 		const vrs = EthCrypto.vrs.fromString(signature);
-
+		metamaskPopup();
 		namePublicKey.addKey(
 			nameId,
 			formData.publicKey,

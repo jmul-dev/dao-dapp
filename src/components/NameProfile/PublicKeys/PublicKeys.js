@@ -13,6 +13,7 @@ import { TransferIonContainer } from "./TransferIon/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
 import { asyncForEach } from "utils/";
+import { metamaskPopup } from "../../../utils/electron";
 
 const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
@@ -125,6 +126,7 @@ class PublicKeys extends React.Component {
 				this.setState({ processingTransaction: false, publicKeyInProcess: null });
 			} else {
 				const vrs = EthCrypto.vrs.fromString(signature);
+				metamaskPopup();
 				namePublicKey.setDefaultKey(id, publicKey, vrs.v, vrs.r, vrs.s, { from: accounts[0] }, (err, transactionHash) => {
 					if (err) {
 						this.setState({ processingTransaction: false, publicKeyInProcess: null });
@@ -150,6 +152,7 @@ class PublicKeys extends React.Component {
 			return;
 		}
 		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey });
+		metamaskPopup();
 		namePublicKey.removeKey(id, publicKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false, publicKeyInProcess: null });

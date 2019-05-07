@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -31,6 +32,7 @@ class SetAdvocateForm extends React.Component {
 			this.setState({ error: true, errorMessage: "You are currently not the Advocate of this TAO", formLoading: false });
 			return;
 		}
+		metamaskPopup();
 		nameTAOPosition.setAdvocate(id, formData.advocateId, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });

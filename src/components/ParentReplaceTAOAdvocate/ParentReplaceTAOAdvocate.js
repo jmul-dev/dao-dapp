@@ -16,6 +16,7 @@ import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
 import { BarChart } from "widgets/BarChart/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { hashHistory } from "react-router";
+import { metamaskPopup } from "../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -127,6 +128,7 @@ class ParentReplaceTAOAdvocate extends React.Component {
 			});
 			return;
 		}
+		metamaskPopup();
 		nameTAOPosition.parentReplaceChildAdvocate(id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err && this._isMounted) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });

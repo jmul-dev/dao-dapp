@@ -3,6 +3,7 @@ import { Wrapper, Title, Header, FieldContainer, FieldName, FieldValue, Error, B
 import { getWriterKeySignature } from "utils/graphql";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
+import { metamaskPopup } from "../../utils/electron";
 
 const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
@@ -57,6 +58,7 @@ class UpdateWriterKey extends React.Component {
 			return;
 		}
 		const vrs = EthCrypto.vrs.fromString(signature);
+		metamaskPopup();
 		namePublicKey.addSetWriterKey(
 			nameId,
 			localWriterKey,

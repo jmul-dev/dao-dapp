@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, FieldContainer, FieldName, FieldValue, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../../utils/electron";
 
 class StakeEthosForm extends React.Component {
 	constructor(props) {
@@ -28,6 +29,7 @@ class StakeEthosForm extends React.Component {
 			this.setState({ error: true, errorMessage: "Insufficient Ethos balance", formLoading: false });
 			return;
 		}
+		metamaskPopup();
 		taoPool.stakeEthos(id, formData.amount, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });

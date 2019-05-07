@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, Header, Ahref, Icon, LeftContainer, RightContainer } from "components/";
 import { AddTAODescriptionFormContainer } from "./AddTAODescriptionForm/";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -34,6 +35,7 @@ class TAOName extends React.Component {
 			this.props.setError("Error!", `${name} no longer needs approval`);
 			return;
 		}
+		metamaskPopup();
 		taoAncestry.approveChild(parentId, id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ formLoading: false });

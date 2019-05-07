@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, Table, Button } from "components/";
 import { formatDate } from "utils/";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -40,7 +41,7 @@ class StakeEthosList extends React.Component {
 			this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
 			return;
 		}
-
+		metamaskPopup();
 		taoPool.withdrawLogos(ethosLotId, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.props.setError("Error!", err.message);

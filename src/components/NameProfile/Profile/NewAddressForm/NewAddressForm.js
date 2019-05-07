@@ -3,6 +3,7 @@ import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
+import { metamaskPopup } from "../../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -45,7 +46,7 @@ class NewAddressForm extends React.Component {
 			});
 			return;
 		}
-
+		metamaskPopup();
 		nameAccountRecovery.setNameNewAddress(id, formData.address, { from: accounts[0], gas: 250000 }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });

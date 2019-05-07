@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Button, Error } from "components/";
 import { FieldWrapper, Label, Select, ButtonWrapper } from "./styledComponents";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -43,6 +44,7 @@ class SetSpeakerForm extends React.Component {
 			this.setState({ error: true, errorMessage: "You are currently not the Advocate of this TAO", formLoading: false });
 			return;
 		}
+		metamaskPopup();
 		nameTAOPosition.setSpeaker(id, speakerId, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });

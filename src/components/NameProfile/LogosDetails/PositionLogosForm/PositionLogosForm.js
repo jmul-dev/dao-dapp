@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -31,6 +32,7 @@ class PositionLogosForm extends React.Component {
 			this.setState({ error: true, errorMessage: "Insufficient Logos balance", formLoading: false });
 			return;
 		}
+		metamaskPopup();
 		logos.positionFrom(nameId, formData.recipient, formData.amount, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });

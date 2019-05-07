@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Wrapper, FieldContainer, FieldName, FieldValue, Button, Error } from "components/";
 import { waitForTransactionReceipt } from "utils/web3";
+import { metamaskPopup } from "../../../utils/electron";
 
 const promisify = require("tiny-promisify");
 
@@ -43,6 +44,7 @@ class ChallengeForm extends React.Component {
 			});
 			return;
 		}
+		metamaskPopup();
 		nameTAOPosition.challengeTAOAdvocate(id, { from: accounts[0] }, (err, transactionHash) => {
 			if (err && this._isMounted) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
