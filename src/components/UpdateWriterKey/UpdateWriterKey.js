@@ -57,15 +57,15 @@ class UpdateWriterKey extends React.Component {
 			}
 			return;
 		}
-		const vrs = EthCrypto.vrs.fromString(signature);
+		const { v, r, s } = signature;
 		metamaskPopup();
 		namePublicKey.addSetWriterKey(
 			nameId,
 			localWriterKey,
 			nonce.plus(1).toNumber(),
-			vrs.v,
-			vrs.r,
-			vrs.s,
+			v,
+			r,
+			s,
 			{ from: accounts[0] },
 			(err, transactionHash) => {
 				if (err) {

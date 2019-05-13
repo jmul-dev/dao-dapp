@@ -100,7 +100,11 @@ export const insertTAOThought = (nameId, taoId, parentThoughtId, thought) => {
 export const getWriterKeySignature = (nameId, nonce) => {
 	const query = `
 		query($nameId: ID!, $nonce: String!) {
-			writerKeySignature(nameId: $nameId, nonce: $nonce)
+			writerKeySignature(nameId: $nameId, nonce: $nonce) {
+				v
+				r
+				s
+			}
 		}
 	`;
 	const variables = { nameId, nonce };
