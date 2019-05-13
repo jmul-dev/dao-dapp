@@ -72,7 +72,6 @@ class NameProfile extends React.Component {
 		}
 		await this.getNameInfo();
 		await this.getNamePosition();
-		await this.getProfileImage();
 		if (id === nameId && this._isMounted) {
 			await this.getNameResources();
 			this.setState({ isOwner: true });
@@ -83,6 +82,7 @@ class NameProfile extends React.Component {
 		if (this._isMounted) {
 			this.setState({ dataPopulated: true });
 		}
+		await this.getProfileImage();
 	}
 
 	async getNameInfo() {

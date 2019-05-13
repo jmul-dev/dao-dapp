@@ -76,11 +76,11 @@ class ViewThoughts extends React.Component {
 		if (taos) {
 			tao = taos.find((_tao) => _tao.taoId === id);
 		}
-		if (!tao || !taoDescriptions || !thoughts || !names || !namesSumLogos || !pastEventsRetrieved) {
+		if (!tao || !names || !namesSumLogos || !pastEventsRetrieved) {
 			return <ProgressLoaderContainer />;
 		}
 		let _thoughtsHierarchy = [];
-		if (thoughts.length) {
+		if (thoughts && thoughts.length) {
 			const _thoughts = [];
 			thoughts.forEach((_thought) => {
 				const _name = names.find((name) => name.nameId === _thought.thought.nameId);
@@ -107,7 +107,7 @@ class ViewThoughts extends React.Component {
 					<Title className="medium margin-top-20 margin-bottom-0">{tao.name}</Title>
 					<Header>{id}</Header>
 				</Wrapper>
-				{taoDescriptions.length > 0 && (
+				{taoDescriptions && taoDescriptions.length > 0 && (
 					<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescriptions[0].value }} />
 				)}
 				<AddThoughtContainer taoId={id} getTAOThoughts={this.getTAOThoughts} />

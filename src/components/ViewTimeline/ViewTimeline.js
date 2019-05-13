@@ -51,20 +51,23 @@ class ViewTimeline extends React.Component {
 		if (taos) {
 			tao = taos.find((_tao) => _tao.taoId === id);
 		}
-		if (!tao || !taoDescriptions || !pastEventsRetrieved) {
+		if (!tao || !pastEventsRetrieved) {
 			return <ProgressLoaderContainer />;
 		}
 
-		const taoDescriptionsContent = taoDescriptions.map((desc) => (
-			<TimelineItem
-				key={desc.timestamp}
-				dateText={formatDate(desc.timestamp)}
-				dateInnerStyle={{ background: "#000000" }}
-				bodyContainerStyle={{ color: "#FFFFFF" }}
-			>
-				<Wrapper dangerouslySetInnerHTML={{ __html: desc.value }} />
-			</TimelineItem>
-		));
+		let taoDescriptionsContent;
+		if (taoDescriptions && taoDescriptions.length) {
+			taoDescriptionsContent = taoDescriptions.map((desc) => (
+				<TimelineItem
+					key={desc.timestamp}
+					dateText={formatDate(desc.timestamp)}
+					dateInnerStyle={{ background: "#000000" }}
+					bodyContainerStyle={{ color: "#FFFFFF" }}
+				>
+					<Wrapper dangerouslySetInnerHTML={{ __html: desc.value }} />
+				</TimelineItem>
+			));
+		}
 
 		return (
 			<Wrapper className="padding-40">
@@ -75,7 +78,7 @@ class ViewTimeline extends React.Component {
 					<Title className="medium margin-top-20 margin-bottom-0">{tao.name}</Title>
 					<Header>{id}</Header>
 				</Wrapper>
-				{taoDescriptions.length > 0 && <Timeline lineColor={"#444"}>{taoDescriptionsContent}</Timeline>}
+				{taoDescriptions && taoDescriptions.length > 0 && <Timeline lineColor={"#444"}>{taoDescriptionsContent}</Timeline>}
 			</Wrapper>
 		);
 	}

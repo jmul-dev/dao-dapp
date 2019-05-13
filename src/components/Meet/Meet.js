@@ -68,7 +68,7 @@ class Meet extends React.Component {
 		const { id } = this.props.params;
 		const { taoInfo, taoDescriptions, loaded } = this.state;
 		const { pastEventsRetrieved } = this.props;
-		if (!taoInfo || !taoDescriptions || !pastEventsRetrieved) {
+		if (!taoInfo || !pastEventsRetrieved) {
 			return <ProgressLoaderContainer />;
 		}
 		return (
@@ -80,7 +80,7 @@ class Meet extends React.Component {
 					<Title className="medium margin-top-20 margin-bottom-0">{taoInfo.name}</Title>
 					<Header>{id}</Header>
 				</Wrapper>
-				{taoDescriptions.length > 0 && (
+				{taoDescriptions && taoDescriptions.length > 0 && (
 					<Wrapper className="margin-bottom-20" dangerouslySetInnerHTML={{ __html: taoDescriptions[0].value }} />
 				)}
 				{!loaded && <Header>Loading video chat module ... this will take a moment ...</Header>}
