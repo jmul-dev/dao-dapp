@@ -102,11 +102,11 @@ class AppRouter extends React.Component {
 			this.validateConnection();
 			dispatch(web3Connected(this._web3));
 
-			this._networkId = await this.getNetworkId();
-			dispatch(setNetworkId(this._networkId));
-
 			const accounts = await this.getAccounts();
 			dispatch(setAccounts(accounts));
+
+			this._networkId = await this.getNetworkId();
+			dispatch(setNetworkId(this._networkId));
 
 			const contracts = {
 				nameAccountRecovery: this.instantiateContract(NameAccountRecovery),
@@ -196,15 +196,23 @@ class AppRouter extends React.Component {
 	}
 
 	async instantiateWeb3(env) {
-		let web3;
-		if (typeof window.web3 !== "undefined") {
-			web3 = await new Web3(window.web3.currentProvider);
+		if (typeof window.ethereum !== "undefined") {
+			window.web3 = await new Web3(window.ethereum);
+			try {
+				// Request account access if needed
+				await window.ethereum.enable();
+			} catch (e) {
+				// User denied account access
+				console.log("User denied account access");
+			}
+		} else if (typeof window.web3 !== "undefined") {
+			window.web3 = new Web3(window.web3.currentProvider);
 		} else if (env === "development" || env === "test") {
-			web3 = await new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+			window.web3 = await new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 		} else {
 			throw new Error(web3Errors.UNABLE_TO_FIND_WEB3_PROVIDER);
 		}
-		return web3;
+		return window.web3;
 	}
 
 	validateConnection() {
