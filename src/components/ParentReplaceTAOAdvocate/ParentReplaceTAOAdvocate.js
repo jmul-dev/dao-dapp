@@ -17,6 +17,7 @@ import { BarChart } from "widgets/BarChart/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { hashHistory } from "react-router";
 import { metamaskPopup } from "../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -33,7 +34,8 @@ class ParentReplaceTAOAdvocate extends React.Component {
 			dataPopulated: false,
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.initialState = this.state;
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -133,6 +135,7 @@ class ParentReplaceTAOAdvocate extends React.Component {
 			if (err && this._isMounted) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
 						if (this._isMounted) {
@@ -154,7 +157,17 @@ class ParentReplaceTAOAdvocate extends React.Component {
 
 	render() {
 		const { id } = this.props.params;
-		const { taoInfo, advocateId, advocateLogos, isAdvocateOfParent, dataPopulated, error, errorMessage, formLoading } = this.state;
+		const {
+			taoInfo,
+			advocateId,
+			advocateLogos,
+			isAdvocateOfParent,
+			dataPopulated,
+			error,
+			errorMessage,
+			formLoading,
+			txHash
+		} = this.state;
 		const { pastEventsRetrieved, names, nameId, taoCurrencyBalances } = this.props;
 		if (!pastEventsRetrieved || !names || !nameId || !taoCurrencyBalances || !dataPopulated) {
 			return <ProgressLoaderContainer />;
@@ -233,6 +246,7 @@ class ParentReplaceTAOAdvocate extends React.Component {
 								) : (
 									<Wrapper>You don't have enough Logos to replace this TAO's Advocate</Wrapper>
 								)}
+								{txHash && <TxHashContainer txHash={txHash} />}
 							</Wrapper>
 							{error && errorMessage && <Error>{errorMessage}</Error>}
 						</LeftContainer>
