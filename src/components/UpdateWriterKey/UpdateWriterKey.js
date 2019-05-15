@@ -4,6 +4,7 @@ import { getWriterKeySignature } from "utils/graphql";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
 import { metamaskPopup } from "../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -12,7 +13,7 @@ class UpdateWriterKey extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { error: false, errorMessage: "", formLoading: false };
+		this.state = { error: false, errorMessage: "", formLoading: false, txHash: null };
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -72,6 +73,9 @@ class UpdateWriterKey extends React.Component {
 						this.setState({ error: true, errorMessage: err.message, formLoading: false });
 					}
 				} else {
+					if (this._isMounted) {
+						this.setState({ txHash: transactionHash });
+					}
 					waitForTransactionReceipt(transactionHash)
 						.then(async () => {
 							if (this._isMounted) {
@@ -89,7 +93,7 @@ class UpdateWriterKey extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		const { localWriterKey, contractWriterKey } = this.props;
 		if (!localWriterKey || !contractWriterKey) {
 			return null;
@@ -114,6 +118,7 @@ class UpdateWriterKey extends React.Component {
 						{formLoading ? "Loading..." : "Add Current Node's Writer Key"}
 					</Button>
 				</Wrapper>
+				{txHash && <TxHashContainer txHash={txHash} />}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);
