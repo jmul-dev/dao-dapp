@@ -10,8 +10,9 @@ class TxHash extends React.Component {
 		}
 		return (
 			<Wrapper className={!this.props.small ? "tx-hash" : "tx-hash-small"}>
+				tx:{" "}
 				<A href={`${etherscan}/tx/${txHash}`} target="_blank" rel="noopener noreferrer">
-					Tx Hash {txHash}
+					{txHash}
 				</A>
 			</Wrapper>
 		);
