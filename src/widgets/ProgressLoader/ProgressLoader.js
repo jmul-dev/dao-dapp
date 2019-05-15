@@ -3,10 +3,14 @@ import { Wrapper } from "components/";
 
 class ProgressLoader extends React.Component {
 	render() {
-		const { pastEventsProgress } = this.props;
+		const { pastEventsProgress, latestBlockNumber, blockNumberProcessed } = this.props;
 		return (
 			<Wrapper className="padding-40">
-				Loading {pastEventsProgress === 100 || !pastEventsProgress ? "" : "initial data " + pastEventsProgress + "%"} ...
+				Loading{" "}
+				{pastEventsProgress === 100 || !pastEventsProgress
+					? ``
+					: `block #${blockNumberProcessed} out of #${latestBlockNumber} - (${pastEventsProgress}%)`}{" "}
+				...
 			</Wrapper>
 		);
 	}

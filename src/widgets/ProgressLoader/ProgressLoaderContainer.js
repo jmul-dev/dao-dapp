@@ -3,7 +3,9 @@ import { ProgressLoader } from "./ProgressLoader";
 
 const mapStateToProps = (state) => {
 	return {
-		pastEventsProgress: state.globalReducer.pastEventsProgress
+		pastEventsProgress: state.globalReducer.pastEventsProgress,
+		latestBlockNumber: state.globalReducer.latestBlockNumber,
+		blockNumberProcessed: state.globalReducer.blockNumberProcessed
 	};
 };
 

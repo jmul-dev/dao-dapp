@@ -29,7 +29,9 @@ import {
 	setContracts,
 	setSettingTAOId,
 	setPastEventsProgress,
-	pastEventsRetrieved
+	pastEventsRetrieved,
+	setLatestBlockNumber,
+	setBlockNumberProcessed
 } from "./actions";
 import { web3Errors, LOCAL_WRITER_KEY_ERROR } from "common/errors";
 
@@ -150,6 +152,7 @@ class AppRouter extends React.Component {
 			dispatch(setSettingTAOId(settingTAOId));
 
 			this._currentBlockNumber = await getCurrentBlockNumber();
+			dispatch(setLatestBlockNumber(this._currentBlockNumber));
 
 			// Get past events
 			const receipt = await getTransactionReceipt(NameFactory.networks[this._networkId].transactionHash);
@@ -176,6 +179,7 @@ class AppRouter extends React.Component {
 					await getNamePublicKeyEvent(dispatch, this._networkId, fromBlock, toBlock, this._nameId);
 					const percentDone = parseInt(((toBlock - receipt.blockNumber) * 100) / (upperBlockLimit - receipt.blockNumber));
 					dispatch(setPastEventsProgress(percentDone));
+					dispatch(setBlockNumberProcessed(fromBlock));
 				}
 			).done(() => {
 				// Get and watch events

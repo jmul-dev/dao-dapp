@@ -344,3 +344,17 @@ export const updateChallengeCurrentAdvocate = (taoId, advocateId) => {
 		advocateId
 	};
 };
+
+export const setLatestBlockNumber = (blockNumber) => {
+	return {
+		type: actionsEnums.SET_LATEST_BLOCK_NUMBER,
+		blockNumber
+	};
+};
+
+export const setBlockNumberProcessed = (blockNumber) => {
+	return {
+		type: actionsEnums.SET_BLOCK_NUMBER_PROCESSED,
+		blockNumber
+	};
+};

@@ -4,6 +4,8 @@ import { BigNumber } from "bignumber.js";
 class GlobalReducerState {
 	constructor() {
 		this.pastEventsProgress = 0;
+		this.latestBlockNumber = null;
+		this.blockNumberProcessed = null;
 		this.pastEventsRetrieved = false;
 		this.names = [];
 		this.namesPositionLogos = [];
@@ -22,6 +24,20 @@ const handleSetPastEventsProgress = (state, action) => {
 	return {
 		...state,
 		pastEventsProgress: action.pastEventsProgress
+	};
+};
+
+const handleSetLatestBlockNumber = (state, action) => {
+	return {
+		...state,
+		latestBlockNumber: action.blockNumber
+	};
+};
+
+const handleSetBlockNumberProcessed = (state, action) => {
+	return {
+		...state,
+		blockNumberProcessed: action.blockNumber
 	};
 };
 
@@ -380,6 +396,10 @@ export const globalReducer = (state = new GlobalReducerState(), action) => {
 			return handleChallengeTAOAdvocate(state, action);
 		case actionsEnums.UPDATE_CHALLENGE_CURRENT_ADVOCATE:
 			return handleUpdateChallengeCurrentAdvocate(state, action);
+		case actionsEnums.SET_LATEST_BLOCK_NUMBER:
+			return handleSetLatestBlockNumber(state, action);
+		case actionsEnums.SET_BLOCK_NUMBER_PROCESSED:
+			return handleSetBlockNumberProcessed(state, action);
 		default:
 			return state;
 	}
