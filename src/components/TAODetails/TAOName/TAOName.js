@@ -3,6 +3,7 @@ import { Wrapper, Title, Header, Ahref, Icon, LeftContainer, RightContainer } fr
 import { AddTAODescriptionFormContainer } from "./AddTAODescriptionForm/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -11,7 +12,8 @@ class TAOName extends React.Component {
 		super(props);
 		this.state = {
 			showAddTAODescriptionForm: false,
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.approveTAO = this.approveTAO.bind(this);
 		this.toggleAddTAODescriptionForm = this.toggleAddTAODescriptionForm.bind(this);
@@ -41,6 +43,7 @@ class TAOName extends React.Component {
 				this.setState({ formLoading: false });
 				this.props.setError("Error!", err.message);
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						this.setState({ formLoading: false });
@@ -56,7 +59,7 @@ class TAOName extends React.Component {
 
 	render() {
 		const { id, name, singlePageView, needApproval, taoDescriptions, isAdvocate, isAdvocateOfParent } = this.props;
-		const { showAddTAODescriptionForm } = this.state;
+		const { showAddTAODescriptionForm, txHash } = this.state;
 		if (!id || !name) {
 			return null;
 		}
@@ -121,6 +124,7 @@ class TAOName extends React.Component {
 						<div>Open IDE</div>
 					</Icon>
 				</Ahref>
+				{txHash && <TxHashContainer txHash={txHash} />}
 			</Wrapper>
 		);
 

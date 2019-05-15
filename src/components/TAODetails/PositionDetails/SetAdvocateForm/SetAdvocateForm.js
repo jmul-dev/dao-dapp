@@ -3,6 +3,7 @@ import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -12,7 +13,8 @@ class SetAdvocateForm extends React.Component {
 		this.state = {
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.cancelSet = this.cancelSet.bind(this);
@@ -37,6 +39,7 @@ class SetAdvocateForm extends React.Component {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
 						await this.props.getTAOPosition();
@@ -56,7 +59,7 @@ class SetAdvocateForm extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		const { names, nameId } = this.props;
 		if (!names || !nameId) {
 			return null;
@@ -80,6 +83,7 @@ class SetAdvocateForm extends React.Component {
 						Cancel
 					</Button>
 				</SchemaForm>
+				{txHash && <TxHashContainer txHash={txHash} />}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);

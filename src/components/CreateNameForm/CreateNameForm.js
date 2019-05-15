@@ -3,6 +3,7 @@ import { Wrapper, Title, SchemaForm, Error, Button } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -11,7 +12,7 @@ class CreateNameForm extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { error: false, errorMessage: "", formLoading: false };
+		this.state = { error: false, errorMessage: "", formLoading: false, txHash: null };
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -46,6 +47,9 @@ class CreateNameForm extends React.Component {
 					this.setState({ error: true, errorMessage: err.message, formLoading: false });
 				}
 			} else {
+				if (this._isMounted) {
+					this.setState({ txHash: transactionHash });
+				}
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
 						if (this._isMounted) {
@@ -64,7 +68,7 @@ class CreateNameForm extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		return (
 			<Wrapper className="padding-40">
 				<Title className="big">Choose a Username</Title>
@@ -72,6 +76,7 @@ class CreateNameForm extends React.Component {
 					<Button type="submit" disabled={formLoading}>
 						{formLoading ? "Loading..." : "Enter"}
 					</Button>
+					{txHash && <TxHashContainer txHash={txHash} />}
 				</SchemaForm>
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>

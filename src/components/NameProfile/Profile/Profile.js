@@ -4,13 +4,15 @@ import { NewAddressFormContainer } from "./NewAddressForm/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { formatDate } from "utils/";
 import { metamaskPopup } from "../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 class Profile extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			showNewAddressForm: false,
-			processingTransaction: true
+			processingTransaction: true,
+			txHash: null
 		};
 		this.setListener = this.setListener.bind(this);
 		this.setSpeaker = this.setSpeaker.bind(this);
@@ -31,6 +33,7 @@ class Profile extends React.Component {
 				this.setState({ processingTransaction: false });
 				this.props.setError("Error", err.message, false);
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						this.props.setListener();
@@ -58,6 +61,7 @@ class Profile extends React.Component {
 				this.setState({ processingTransaction: false });
 				this.props.setError("Error", err.message, false);
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						this.props.setSpeaker();
@@ -85,6 +89,7 @@ class Profile extends React.Component {
 				this.setState({ processingTransaction: false });
 				this.props.setError("Error", err.message, false);
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						this.props.setCompromised(true);
@@ -105,7 +110,7 @@ class Profile extends React.Component {
 
 	render() {
 		const { id, isOwner, nameInfo, isListener, isSpeaker, isCompromised, lockedUntilTimestamp, nameId, namePositions } = this.props;
-		const { processingTransaction, showNewAddressForm } = this.state;
+		const { processingTransaction, showNewAddressForm, txHash } = this.state;
 
 		if (!nameInfo || !nameId || !namePositions) {
 			return null;
@@ -157,6 +162,7 @@ class Profile extends React.Component {
 							<div>Complete Account Recovery</div>
 						</Icon>
 					)}
+					{txHash && <TxHashContainer txHash={txHash} />}
 				</Wrapper>
 			);
 		} else {

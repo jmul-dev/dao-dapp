@@ -14,6 +14,7 @@ import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
 import { asyncForEach } from "utils/";
 import { metamaskPopup } from "../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
@@ -31,7 +32,8 @@ class PublicKeys extends React.Component {
 			showAddKeyForm: false,
 			showTransferIonForm: false,
 			processingTransaction: false,
-			publicKeyInProcess: null
+			publicKeyInProcess: null,
+			txHash: null
 		};
 		this.initialState = this.state;
 		this.toggleAddKeyForm = this.toggleAddKeyForm.bind(this);
@@ -120,7 +122,7 @@ class PublicKeys extends React.Component {
 				value: publicKey
 			}
 		]);
-		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey });
+		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey, txHash: null });
 		web3.eth.sign(accounts[0], signHash, async (err, signature) => {
 			if (err) {
 				this.setState({ processingTransaction: false, publicKeyInProcess: null });
@@ -132,6 +134,7 @@ class PublicKeys extends React.Component {
 						this.setState({ processingTransaction: false, publicKeyInProcess: null });
 						this.props.setError("Error", err.message, false);
 					} else {
+						this.setState({ txHash: transactionHash });
 						waitForTransactionReceipt(transactionHash)
 							.then(() => {
 								this.setState({ processingTransaction: false, publicKeyInProcess: null, defaultPublicKey: publicKey });
@@ -151,13 +154,14 @@ class PublicKeys extends React.Component {
 		if (!namePublicKey || !id || !accounts) {
 			return;
 		}
-		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey });
+		this.setState({ processingTransaction: true, publicKeyInProcess: publicKey, txHash: null });
 		metamaskPopup();
 		namePublicKey.removeKey(id, publicKey, { from: accounts[0] }, (err, transactionHash) => {
 			if (err) {
 				this.setState({ processingTransaction: false, publicKeyInProcess: null });
 				this.props.setError("Error", err.message, false);
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						const publicKeys = this.state.publicKeys.filter((_publicKey) => _publicKey !== publicKey);
@@ -191,7 +195,8 @@ class PublicKeys extends React.Component {
 			showAddKeyForm,
 			showTransferIonForm,
 			processingTransaction,
-			publicKeyInProcess
+			publicKeyInProcess,
+			txHash
 		} = this.state;
 		const { singlePageView } = this.props;
 
@@ -206,7 +211,12 @@ class PublicKeys extends React.Component {
 					publicKeyAction = publicKey === defaultPublicKey ? "(default)" : "(writer)";
 				} else {
 					if (processingTransaction && publicKey === publicKeyInProcess) {
-						publicKeyAction = "Loading...";
+						publicKeyAction = (
+							<Wrapper>
+								<div>Loading...</div>
+								{txHash && <TxHashContainer txHash={txHash} small={true} />}
+							</Wrapper>
+						);
 					} else {
 						publicKeyAction = (
 							<NonDefaultKeyAction key={publicKey}>

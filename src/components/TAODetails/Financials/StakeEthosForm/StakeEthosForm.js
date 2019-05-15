@@ -3,6 +3,7 @@ import { Wrapper, FieldContainer, FieldName, FieldValue, SchemaForm, Button, Err
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 class StakeEthosForm extends React.Component {
 	constructor(props) {
@@ -10,7 +11,8 @@ class StakeEthosForm extends React.Component {
 		this.state = {
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.cancelStake = this.cancelStake.bind(this);
@@ -34,6 +36,7 @@ class StakeEthosForm extends React.Component {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						this.setState({ error: false, errorMessage: "", formLoading: false });
@@ -52,7 +55,7 @@ class StakeEthosForm extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		const { ethosCapStatus, ethosCapAmount, ethosBalance } = this.props;
 		if (ethosCapStatus && ethosCapAmount) {
 			schema.properties.amount.maximum = ethosCapAmount.minus(ethosBalance).toNumber();
@@ -79,6 +82,7 @@ class StakeEthosForm extends React.Component {
 						Cancel
 					</Button>
 				</SchemaForm>
+				{txHash && <TxHashContainer txHash={txHash} />}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);

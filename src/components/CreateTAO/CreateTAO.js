@@ -7,6 +7,7 @@ import { getTransactionReceipt, waitForTransactionReceipt } from "utils/web3";
 import { abi as TAOFactoryABI } from "ao-contracts/build/contracts/TAOFactory.json";
 import { insertTAODescription as graphqlInsertTAODescription } from "utils/graphql";
 import { metamaskPopup } from "../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 const abiDecoder = require("abi-decoder");
@@ -30,7 +31,8 @@ class CreateTAO extends React.Component {
 			createChildTAOMinLogos: null,
 			parentMinLogos: null,
 			formData: this.formData,
-			taoDescription: ""
+			taoDescription: "",
+			txHash: null
 		};
 		this.initialState = this.state;
 		this.handleParentChange = this.handleParentChange.bind(this);
@@ -137,6 +139,7 @@ class CreateTAO extends React.Component {
 				if (err) {
 					this.setState({ error: true, errorMessage: err.message, formLoading: false });
 				} else {
+					this.setState({ txHash: transactionHash });
 					waitForTransactionReceipt(transactionHash)
 						.then(async () => {
 							const receipt = await getTransactionReceipt(transactionHash);
@@ -172,7 +175,7 @@ class CreateTAO extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading, parentMinLogos, parentId, formData, taoDescription } = this.state;
+		const { error, errorMessage, formLoading, parentMinLogos, parentId, formData, taoDescription, txHash } = this.state;
 		const { pastEventsRetrieved, nameId, nameInfo, taos, taoCurrencyBalances } = this.props;
 		if (!pastEventsRetrieved || !nameId || !nameInfo || !taos || !taoCurrencyBalances || !parentMinLogos) {
 			return <ProgressLoaderContainer />;
@@ -253,6 +256,7 @@ class CreateTAO extends React.Component {
 								Back to Dashboard
 							</Ahref>
 						</SchemaForm>
+						{txHash && <TxHashContainer txHash={txHash} />}
 						{error && errorMessage && <Error>{errorMessage}</Error>}
 					</div>
 				) : (

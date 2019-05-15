@@ -3,6 +3,7 @@ import { Wrapper, FieldContainer, FieldName, FieldValue, SchemaForm, Button, Err
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -12,7 +13,8 @@ class UnpositionLogosForm extends React.Component {
 		this.state = {
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.cancelUnposition = this.cancelUnposition.bind(this);
@@ -42,6 +44,7 @@ class UnpositionLogosForm extends React.Component {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						this.setState({ error: false, errorMessage: "", formLoading: false });
@@ -63,7 +66,7 @@ class UnpositionLogosForm extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		const { positionLogosOn, nameId, targetNameId } = this.props;
 		if (!positionLogosOn || !nameId || !targetNameId) {
 			return null;
@@ -93,6 +96,7 @@ class UnpositionLogosForm extends React.Component {
 						Cancel
 					</Button>
 				</SchemaForm>
+				{txHash && <TxHashContainer txHash={txHash} />}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);

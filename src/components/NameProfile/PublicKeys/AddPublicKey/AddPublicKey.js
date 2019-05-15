@@ -3,6 +3,7 @@ import { Wrapper, SchemaForm, Button, Error } from "components/";
 import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const EthCrypto = require("eth-crypto");
 const promisify = require("tiny-promisify");
@@ -13,7 +14,8 @@ class AddPublicKey extends React.Component {
 		this.state = {
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.validate = this.validate.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -87,6 +89,7 @@ class AddPublicKey extends React.Component {
 				if (err) {
 					this.setState({ error: true, errorMessage: err.message, formLoading: false });
 				} else {
+					this.setState({ txHash: transactionHash });
 					waitForTransactionReceipt(transactionHash)
 						.then(() => {
 							this.setState({ error: false, errorMessage: "", formLoading: false });
@@ -105,7 +108,7 @@ class AddPublicKey extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		return (
 			<Wrapper className="margin-top-30">
 				<SchemaForm schema={schema} showErrorList={false} validate={this.validate} onSubmit={this.handleSubmit}>
@@ -116,6 +119,7 @@ class AddPublicKey extends React.Component {
 						Cancel
 					</Button>
 				</SchemaForm>
+				{txHash && <TxHashContainer txHash={txHash} />}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);

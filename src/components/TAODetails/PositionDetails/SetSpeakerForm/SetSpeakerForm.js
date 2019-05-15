@@ -3,6 +3,7 @@ import { Wrapper, Button, Error } from "components/";
 import { FieldWrapper, Label, Select, ButtonWrapper } from "./styledComponents";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -13,7 +14,8 @@ class SetSpeakerForm extends React.Component {
 			speakerId: null,
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.handleSpeakerChange = this.handleSpeakerChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,6 +51,7 @@ class SetSpeakerForm extends React.Component {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
 						await this.props.getTAOPosition();
@@ -68,7 +71,7 @@ class SetSpeakerForm extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		const { names, taos, nameId, currentSpeakerId, id } = this.props;
 		if (!names || !taos || !nameId) {
 			return null;
@@ -106,6 +109,7 @@ class SetSpeakerForm extends React.Component {
 						Cancel
 					</Button>
 				</ButtonWrapper>
+				{txHash && <TxHashContainer txHash={txHash} />}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);

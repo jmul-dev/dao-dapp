@@ -155,7 +155,7 @@ class AppRouter extends React.Component {
 			const receipt = await getTransactionReceipt(NameFactory.networks[this._networkId].transactionHash);
 			let fromBlock = receipt.blockNumber >= 1 ? receipt.blockNumber - 1 : 0;
 			let toBlock = fromBlock;
-			const upperBlockLimit = this._currentBlockNumber;
+			const upperBlockLimit = this._currentBlockNumber - 1;
 			promiseWhile(
 				() => {
 					return toBlock < upperBlockLimit;

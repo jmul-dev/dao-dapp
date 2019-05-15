@@ -3,6 +3,7 @@ import { Wrapper, Title, Table, Button } from "components/";
 import { formatDate } from "utils/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -12,7 +13,8 @@ class StakeEthosList extends React.Component {
 		this.state = {
 			nameStakeEthos: null,
 			processingWithdrawLogos: false,
-			processingEthosLotId: null
+			processingEthosLotId: null,
+			txHash: null
 		};
 		this.withdrawLogos = this.withdrawLogos.bind(this);
 	}
@@ -47,11 +49,17 @@ class StakeEthosList extends React.Component {
 				this.props.setError("Error!", err.message);
 				this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
-						this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
-						this.props.getTAOPoolBalance();
-						this.props.setSuccess("Success!", `You have successfully withdrawn ${logosAvailableToWithdraw.toNumber()} Logos`);
+						setTimeout(() => {
+							this.setState({ processingWithdrawLogos: false, processingEthosLotId: null });
+							this.props.getTAOPoolBalance();
+							this.props.setSuccess(
+								"Success!",
+								`You have successfully withdrawn ${logosAvailableToWithdraw.toNumber()} Logos`
+							);
+						}, 15000);
 					})
 					.catch((err) => {
 						this.props.setError("Error!", err.message);
@@ -62,7 +70,7 @@ class StakeEthosList extends React.Component {
 	}
 
 	render() {
-		const { nameStakeEthos, processingWithdrawLogos, processingEthosLotId } = this.state;
+		const { nameStakeEthos, processingWithdrawLogos, processingEthosLotId, txHash } = this.state;
 		if (!nameStakeEthos) {
 			return null;
 		}
@@ -102,14 +110,19 @@ class StakeEthosList extends React.Component {
 				Cell: (props) => {
 					if (props.original.logosEarned.minus(props.original.logosWithdrawn).gt(0)) {
 						return (
-							<Button
-								type="button"
-								className="btn small"
-								disabled={processingWithdrawLogos}
-								onClick={async () => await this.withdrawLogos(props.original.ethosLotId)}
-							>
-								{processingEthosLotId !== props.original.ethosLotId ? "Withdraw Logos" : "Processing..."}
-							</Button>
+							<Wrapper>
+								<Button
+									type="button"
+									className="btn small"
+									disabled={processingWithdrawLogos}
+									onClick={async () => await this.withdrawLogos(props.original.ethosLotId)}
+								>
+									{processingEthosLotId !== props.original.ethosLotId ? "Withdraw Logos" : "Processing..."}
+								</Button>
+								{txHash && processingEthosLotId === props.original.ethosLotId && (
+									<TxHashContainer txHash={txHash} small={true} />
+								)}
+							</Wrapper>
 						);
 					} else {
 						return null;

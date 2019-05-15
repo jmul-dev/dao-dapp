@@ -6,6 +6,7 @@ import { BarChart } from "widgets/BarChart/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { hashHistory } from "react-router";
 import { metamaskPopup } from "../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -17,7 +18,8 @@ class ViewActiveChallenge extends React.Component {
 		this.state = {
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -90,6 +92,7 @@ class ViewActiveChallenge extends React.Component {
 			if (err && this._isMounted) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
 						if (this._isMounted) {
@@ -110,7 +113,7 @@ class ViewActiveChallenge extends React.Component {
 
 	render() {
 		const { taoInfo, advocate, challenger, activeChallenge, challengeStatus, nameId } = this.props;
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 
 		if (!nameId) {
 			return null;
@@ -177,6 +180,7 @@ class ViewActiveChallenge extends React.Component {
 					<Button type="button" onClick={this.handleSubmit}>
 						{formLoading ? "Loading..." : "Claim Advocate Position"}
 					</Button>
+					{txHash && <TxHashContainer txHash={txHash} />}
 					{error && errorMessage && <Error>{errorMessage}</Error>}
 				</Wrapper>
 			);

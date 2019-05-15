@@ -5,6 +5,7 @@ class Web3ReducerState {
 		this.web3 = null;
 		this.accounts = null;
 		this.networkId = null;
+		this.etherscan = null;
 	}
 }
 
@@ -23,9 +24,22 @@ const handleSetAccounts = (state, action) => {
 };
 
 const handleSetNetworkId = (state, action) => {
+	let etherscan;
+	switch (action.networkId) {
+		case 1:
+			etherscan = "https://etherscan.io";
+			break;
+		case 4:
+			etherscan = "https://rinkeby.etherscan.io";
+			break;
+		default:
+			etherscan = "http://localhost";
+			break;
+	}
 	return {
 		...state,
-		networkId: action.networkId
+		networkId: action.networkId,
+		etherscan
 	};
 };
 

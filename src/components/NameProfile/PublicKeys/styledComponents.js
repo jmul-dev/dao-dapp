@@ -16,6 +16,7 @@ export const PublicKeyContainer = styled.div`
 export const PublicKeyValue = styled.div`
 	display: inline-block;
 	width: 370px;
+	vertical-align: top;
 `;
 
 export const PublicKeyBalance = styled.div`
@@ -23,12 +24,15 @@ export const PublicKeyBalance = styled.div`
 	text-align: right;
 	width: 100px;
 	margin-right: 20px;
+	vertical-align: top;
 `;
 
 export const PublicKeyAction = styled.div`
 	display: inline-block;
+	vertical-align: top;
 `;
 
 export const NonDefaultKeyAction = styled.div`
 	display: inline-block;
+	vertical-align: top;
 `;

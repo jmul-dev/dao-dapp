@@ -4,6 +4,7 @@ import { schema } from "./schema";
 import { waitForTransactionReceipt } from "utils/web3";
 import { EMPTY_ADDRESS } from "common/constants";
 import { metamaskPopup } from "../../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -13,7 +14,8 @@ class NewAddressForm extends React.Component {
 		this.state = {
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.cancelSet = this.cancelSet.bind(this);
@@ -51,6 +53,7 @@ class NewAddressForm extends React.Component {
 			if (err) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(() => {
 						this.setState({ error: false, errorMessage: "", formLoading: false });
@@ -70,7 +73,7 @@ class NewAddressForm extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		return (
 			<Wrapper>
 				<SchemaForm schema={schema} showErrorList={false} onSubmit={this.handleSubmit}>
@@ -81,6 +84,7 @@ class NewAddressForm extends React.Component {
 						Cancel
 					</Button>
 				</SchemaForm>
+				{txHash && <TxHashContainer txHash={txHash} />}
 				{error && errorMessage && <Error>{errorMessage}</Error>}
 			</Wrapper>
 		);

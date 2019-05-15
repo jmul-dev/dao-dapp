@@ -51,6 +51,22 @@ export const Wrapper = styled.div`
 	&.small {
 		font-size: 0.875em;
 	}
+	&.tx-hash {
+		font-size: 0.75em;
+		margin-top: 10px;
+		width: 90%;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	&.tx-hash-small {
+		font-size: 0.7em;
+		margin-top: 3px;
+		width: 90%;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+	}
 `;
 
 export const Title = styled.div`

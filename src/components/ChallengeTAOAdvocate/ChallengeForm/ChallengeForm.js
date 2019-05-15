@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, FieldContainer, FieldName, FieldValue, Button, Error } from "components/";
 import { waitForTransactionReceipt } from "utils/web3";
 import { metamaskPopup } from "../../../utils/electron";
+import { TxHashContainer } from "widgets/TxHash/";
 
 const promisify = require("tiny-promisify");
 
@@ -13,7 +14,8 @@ class ChallengeForm extends React.Component {
 		this.state = {
 			error: false,
 			errorMessage: "",
-			formLoading: false
+			formLoading: false,
+			txHash: null
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -49,6 +51,7 @@ class ChallengeForm extends React.Component {
 			if (err && this._isMounted) {
 				this.setState({ error: true, errorMessage: err.message, formLoading: false });
 			} else {
+				this.setState({ txHash: transactionHash });
 				waitForTransactionReceipt(transactionHash)
 					.then(async () => {
 						if (this._isMounted) {
@@ -65,7 +68,7 @@ class ChallengeForm extends React.Component {
 	}
 
 	render() {
-		const { error, errorMessage, formLoading } = this.state;
+		const { error, errorMessage, formLoading, txHash } = this.state;
 		const { id, taoInfo, advocate, challenger, nameId } = this.props;
 		if (!id || !taoInfo || !advocate || !challenger || !nameId) {
 			return null;
@@ -99,6 +102,7 @@ class ChallengeForm extends React.Component {
 							<Wrapper>You don't have enough Logos to challenge this TAO's Advocate</Wrapper>
 						)}
 					</Wrapper>
+					{txHash && <TxHashContainer txHash={txHash} />}
 					{error && errorMessage && <Error>{errorMessage}</Error>}
 				</Wrapper>
 			);
