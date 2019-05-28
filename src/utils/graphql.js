@@ -1,4 +1,4 @@
-const graphql = (query, variables) => {
+const _graphql = (query, variables) => {
 	return new Promise((resolve, reject) => {
 		fetch(process.env.REACT_APP_GRAPHQL_ENDPOINT, {
 			method: "POST",
@@ -16,6 +16,27 @@ const graphql = (query, variables) => {
 			})
 			.then((resp) => {
 				resolve(resp);
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
+
+const _graphqlWithTimeout = (query, variables, timeout) => {
+	return Promise.race([
+		_graphql(query, variables),
+		new Promise((resolve, reject) => {
+			setTimeout(() => reject(new Error("timeout")), timeout);
+		})
+	]);
+};
+
+const graphql = (query, variables, timeout = 5000) => {
+	return new Promise((resolve, reject) => {
+		_graphqlWithTimeout(query, variables, timeout)
+			.then((result) => {
+				resolve(result);
 			})
 			.catch((err) => {
 				reject(err);

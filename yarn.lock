@@ -1512,12 +1512,14 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-"ao-contracts@git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.15":
-  version "1.0.10"
-  resolved "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#edd0bc7fe14674eb0459bc474d59885e6fd9afb3"
+"ao-contracts@git+ssh://git@git.y-designs.com:ao/ao-contracts.git#v1.0.18":
+  version "1.0.18"
+  resolved "git+ssh://git@git.y-designs.com:ao/ao-contracts.git#5222f82c08b94f5718ee5455662ee8174676b9e3"
   dependencies:
     bignumber.js "^7.2.1"
+    bn.js "^4.11.8"
     eth-crypto "^1.2.3"
+    web3 "^0.20.7"
 
 append-transform@^0.4.0:
   version "0.4.0"
@@ -2113,7 +2115,7 @@ bluebird@^3.5.1:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.2.tgz#1be0908e054a751754549c270489c1505d4ab15a"
   integrity sha512-dhHTWMI7kMx5whMQntl7Vr9C6BvV10lFXDAasnqnrMYhXVCzzk6IO9Fo2L75jXHT07WrOngL1WDXOp+yYS91Yg==
 
-bn.js@4.11.8, bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.11.0, bn.js@^4.11.1, bn.js@^4.11.3, bn.js@^4.11.6, bn.js@^4.4.0, bn.js@^4.6.4:
+bn.js@4.11.8, bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.11.0, bn.js@^4.11.1, bn.js@^4.11.3, bn.js@^4.11.6, bn.js@^4.11.8, bn.js@^4.4.0, bn.js@^4.6.4:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
