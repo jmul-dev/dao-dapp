@@ -45,7 +45,7 @@ class EnsureCreateName extends React.Component {
 		} else if (!pastEventsRetrieved) {
 			return <ProgressLoaderContainer />;
 		} else {
-			return <TAOPlotContainer taoData={taoTreeData} width={1200} height={800} />;
+			return <TAOPlotContainer taoData={taoTreeData} width={1100} height={800} />;
 		}
 	}
 }
