@@ -228,7 +228,11 @@ class AppRouter extends React.Component {
 	async getNetworkId() {
 		const networkIdString = await promisify(this._web3.version.getNetwork)();
 		const networkId = parseInt(networkIdString, 10);
-		if (networkId === 4 || networkId === 1985) {
+		if (
+			Object.keys(NameFactory.networks)
+				.map((_networkId) => parseInt(_networkId, 10))
+				.indexOf(networkId) !== -1
+		) {
 			return networkId;
 		} else {
 			throw new Error(web3Errors.UNSUPPORTED_NETWORK);
