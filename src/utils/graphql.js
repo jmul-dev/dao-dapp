@@ -27,12 +27,12 @@ const _graphqlWithTimeout = (query, variables, timeout) => {
 	return Promise.race([
 		_graphql(query, variables),
 		new Promise((resolve, reject) => {
-			setTimeout(() => reject(new Error("timeout")), timeout);
+			setTimeout(() => reject(new Error("Error: network congestion. Try again later.")), timeout);
 		})
 	]);
 };
 
-const graphql = (query, variables, timeout = 5000) => {
+const graphql = (query, variables, timeout = 20000) => {
 	return new Promise((resolve, reject) => {
 		_graphqlWithTimeout(query, variables, timeout)
 			.then((result) => {
