@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Ahref as Link, Icon, Badge } from "components/";
-import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage } from "./styledComponents";
+import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage, AvatarContainer } from "./styledComponents";
 import { getNameProfileImage as graphqlGetNameProfileImage } from "utils/graphql";
+import { toHighestDenomination } from "utils/";
 import "./style.css";
 
 const promisify = require("tiny-promisify");
@@ -138,30 +139,42 @@ class TopNavBar extends React.Component {
 						<div>
 							<Navbar.Text>
 								<CurrencyName className="ethos">Ethos</CurrencyName>
-								<CurrencyValue>{taoCurrencyBalances.ethos.toNumber()}</CurrencyValue>
+								<CurrencyValue>
+									{taoCurrencyBalances.ethos.gte(1000)
+										? toHighestDenomination(taoCurrencyBalances.ethos.toNumber())
+										: taoCurrencyBalances.ethos.toNumber()}
+								</CurrencyValue>
 							</Navbar.Text>
 							<Navbar.Text>
 								<CurrencyName className="pathos">Pathos</CurrencyName>
-								<CurrencyValue>{taoCurrencyBalances.pathos.toNumber()}</CurrencyValue>
+								<CurrencyValue>
+									{taoCurrencyBalances.pathos.gte(1000)
+										? toHighestDenomination(taoCurrencyBalances.pathos.toNumber())
+										: taoCurrencyBalances.pathos.toNumber()}
+								</CurrencyValue>
 							</Navbar.Text>
 							<Navbar.Text>
 								<CurrencyName className="logos">Logos</CurrencyName>
-								<CurrencyValue>{taoCurrencyBalances.logos.toNumber()}</CurrencyValue>
+								<CurrencyValue>
+									{taoCurrencyBalances.logos.gte(1000)
+										? toHighestDenomination(taoCurrencyBalances.logos.toNumber())
+										: taoCurrencyBalances.logos.toNumber()}
+								</CurrencyValue>
 							</Navbar.Text>
 						</div>
 					)}
 					<Navbar.Text>
 						<Ahref to={compromised === false ? `/profile/${nameId}` : "/"}>
 							{profileImage ? (
-								<div>
+								<AvatarContainer>
 									<BackgroundImage style={{ backgroundImage: `url(${profileImage})` }} />
 									{nameInfo.name}
-								</div>
+								</AvatarContainer>
 							) : (
-								<div>
+								<AvatarContainer>
 									<Avatar src={process.env.PUBLIC_URL + "/images/user_avatar.png"} alt={nameInfo.name + " Avatar"} />
 									{nameInfo.name}
-								</div>
+								</AvatarContainer>
 							)}
 						</Ahref>
 					</Navbar.Text>

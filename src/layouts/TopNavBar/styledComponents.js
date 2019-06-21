@@ -51,3 +51,10 @@ export const BackgroundImage = styled.div`
 	display: inline-block;
 	vertical-align: middle;
 `;
+
+export const AvatarContainer = styled.div`
+	max-width: 150px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+`;
