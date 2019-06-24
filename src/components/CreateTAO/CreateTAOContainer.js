@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { CreateTAO } from "./CreateTAO";
-import { setSuccess } from "widgets/Toast/actions";
+import { setSuccess, setInfo } from "widgets/Toast/actions";
 
 const mapStateToProps = (state) => {
 	return {
@@ -21,7 +21,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setSuccess: (headline, message) => dispatch(setSuccess(headline, message))
+		setSuccess: (headline, message) => dispatch(setSuccess(headline, message)),
+		setInfo: (headline, message) => dispatch(setInfo(headline, message))
 	};
 };
 

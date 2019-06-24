@@ -2,7 +2,11 @@ import * as React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Ahref as Link, Icon, Badge } from "components/";
 import { TAOLogo, CurrencyName, CurrencyValue, Avatar, Ahref, BackgroundImage, AvatarContainer } from "./styledComponents";
-import { getNameProfileImage as graphqlGetNameProfileImage } from "utils/graphql";
+import {
+	getNameProfileImage as graphqlGetNameProfileImage,
+	getNameLookup as graphqlGetNameLookup,
+	insertNameLookup as graphqlInsertNameLookup
+} from "utils/graphql";
 import { toHighestDenomination } from "utils/";
 import "./style.css";
 
@@ -44,6 +48,13 @@ class TopNavBar extends React.Component {
 			parentId: _nameInfo[4],
 			parentTypeId: _nameInfo[5]
 		};
+		try {
+			const response = await graphqlGetNameLookup(nameInfo.name);
+			if (!response.data.nameLookup.id) {
+				await graphqlInsertNameLookup(nameInfo.name, nameInfo.nameId);
+			}
+		} catch (e) {}
+
 		setNameInfo(nameInfo);
 	}
 

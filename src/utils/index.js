@@ -226,3 +226,12 @@ export const promiseWhile = (condition, body) => {
 	asap(loop);
 	return done.promise;
 };
+
+// Will remove special characters and whitespaces
+export const normalizeString = (value) => {
+	if (!value) {
+		return null;
+	} else {
+		return value.replace(/[\s`~!@#$%^&*()_|+\-=?;:'",.<>{}[\]\\/]/gi, "");
+	}
+};

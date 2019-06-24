@@ -1,3 +1,5 @@
+import { normalizeString } from "utils/";
+
 const _graphql = (query, variables) => {
 	return new Promise((resolve, reject) => {
 		fetch(process.env.REACT_APP_GRAPHQL_ENDPOINT, {
@@ -168,5 +170,31 @@ export const insertTAODescription = (taoId, description) => {
         }
     `;
 	const variables = { taoId, description };
+	return graphql(query, variables);
+};
+
+export const getNameLookup = (name) => {
+	const query = `
+		query($name: String!) {
+			nameLookup(name: $name) {
+				name
+				id
+			}
+		}
+	`;
+	const variables = { name: normalizeString(name.toLowerCase()) };
+	return graphql(query, variables);
+};
+
+export const insertNameLookup = (name, id) => {
+	const query = `
+		mutation($name: String!, $id: ID!) {
+			submitNameLookup(inputs: {name: $name, id: $id}) {
+				name
+				id
+			}
+		}
+	`;
+	const variables = { name: normalizeString(name.toLowerCase()), id };
 	return graphql(query, variables);
 };

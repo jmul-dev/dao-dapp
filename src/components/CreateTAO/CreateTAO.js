@@ -8,6 +8,7 @@ import { abi as TAOFactoryABI } from "ao-contracts/build/contracts/TAOFactory.js
 import { insertTAODescription as graphqlInsertTAODescription } from "utils/graphql";
 import { metamaskPopup } from "../../utils/electron";
 import { TxHashContainer } from "widgets/TxHash/";
+import { getNameLookup as graphqlGetNameLookup, insertNameLookup as graphqlInsertNameLookup } from "utils/graphql";
 
 const promisify = require("tiny-promisify");
 const abiDecoder = require("abi-decoder");
@@ -106,6 +107,15 @@ class CreateTAO extends React.Component {
 		this.setState({ formData });
 	}
 
+	validate(formData, errors) {
+		if (!formData.taoName.match(/^[A-Za-z0-9]+(?:[' _-][A-Za-z0-9]+)*$/)) {
+			errors.taoName.addError(
+				"TAO name can only contain alphanumeric characters (letters A-Z, numbers 0-9) with the exception of underscores, spaces, hyphens and single quotes."
+			);
+		}
+		return errors;
+	}
+
 	async handleSubmit(data) {
 		const { formData } = data;
 		const { taoFactory, nameFactory, nameTAOLookup, accounts } = this.props;
@@ -115,7 +125,13 @@ class CreateTAO extends React.Component {
 		}
 		this.setState({ formLoading: true });
 		const isExist = await promisify(nameTAOLookup.isExist)(formData.taoName);
-		if (isExist) {
+		let keyExist = false;
+		try {
+			const response = await graphqlGetNameLookup(formData.taoName);
+			keyExist = response.data.nameLookup.id ? true : false;
+		} catch (e) {}
+
+		if (isExist || keyExist) {
 			this.setState({ error: true, errorMessage: "TAO name has been taken", formLoading: false });
 			return;
 		}
@@ -149,8 +165,9 @@ class CreateTAO extends React.Component {
 							const taoId = taoIdArgs[0].value;
 
 							try {
-								const response = await graphqlInsertTAODescription(taoId, taoDescription);
-								if (!response.errors) {
+								await graphqlInsertNameLookup(formData.taoName, taoId);
+								setTimeout(async () => {
+									const response = await graphqlInsertTAODescription(taoId, taoDescription);
 									this.setState({
 										error: false,
 										errorMessage: "",
@@ -158,12 +175,40 @@ class CreateTAO extends React.Component {
 										formData: this.formData,
 										taoDescription: ""
 									});
-									this.props.setSuccess("Success!", `TAO # ${taoId} has been created`);
-								} else {
-									this.setState({ error: true, errorMessage: response.errors[0].message, formLoading: false });
-								}
+									if (!response.errors) {
+										this.props.setSuccess(
+											"Success!",
+											<div>
+												TAO # <Ahref to={`/tao/${taoId}`}>{taoId}</Ahref> was created successfully
+											</div>
+										);
+									} else {
+										this.props.setInfo(
+											"Success!",
+											<div>
+												TAO # <Ahref to={`/tao/${taoId}`}>{taoId}</Ahref> was created successfully but there was a
+												network congestion when inserting the TAO description. Click{" "}
+												<Ahref to={`/tao/${taoId}`}>here</Ahref> to update the description manually
+											</div>
+										);
+									}
+								}, 500);
 							} catch (e) {
-								this.setState({ error: true, errorMessage: e.message, formLoading: false });
+								this.setState({
+									error: false,
+									errorMessage: "",
+									formLoading: false,
+									formData: this.formData,
+									taoDescription: ""
+								});
+								this.props.setInfo(
+									"Success!",
+									<div>
+										TAO # <Ahref to={`/tao/${taoId}`}>{taoId}</Ahref> was created successfully but there was a network
+										congestion when inserting the TAO description. Click <Ahref to={`/tao/${taoId}`}>{taoId}</Ahref> to
+										update the description manually
+									</div>
+								);
 							}
 						})
 						.catch((err) => {
@@ -245,6 +290,7 @@ class CreateTAO extends React.Component {
 							formData={formData}
 							onChange={this.handleFormChange}
 							showErrorList={false}
+							validate={this.validate}
 							onSubmit={this.handleSubmit}
 						>
 							<Label>Describe the description for this TAO*</Label>

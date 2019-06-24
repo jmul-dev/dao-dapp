@@ -5,7 +5,6 @@ export const schema = {
 		taoName: {
 			title: "Describe the name for this TAO",
 			type: "string",
-			pattern: "^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$",
 			minLength: 5,
 			maxLength: 50
 		},
