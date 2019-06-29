@@ -108,9 +108,9 @@ class CreateTAO extends React.Component {
 	}
 
 	validate(formData, errors) {
-		if (!formData.taoName.match(/^[A-Za-z0-9]+(?:[' _-][A-Za-z0-9]+)*$/)) {
+		if (!formData.taoName.match(/^[a-zA-Z]+[a-zA-Z0-9-_ ]*[a-zA-Z0-9]$/)) {
 			errors.taoName.addError(
-				"TAO name can only contain alphanumeric characters (letters A-Z, numbers 0-9) with the exception of underscores, spaces, hyphens and single quotes."
+				"TAO name can only contain alphanumeric characters (letters A-Z, numbers 0-9) with the exception of underscores, spaces and hyphens."
 			);
 		}
 		return errors;

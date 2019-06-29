@@ -5,7 +5,7 @@ export const schema = {
 		taoName: {
 			title: "Describe the name for this TAO",
 			type: "string",
-			minLength: 5,
+			minLength: 3,
 			maxLength: 50
 		},
 		childMinLogos: {
