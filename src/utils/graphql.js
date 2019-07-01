@@ -1,6 +1,6 @@
 import { normalizeString } from "utils/";
 
-const _graphql = (query, variables) => {
+const graphql = (query, variables) => {
 	return new Promise((resolve, reject) => {
 		fetch(process.env.REACT_APP_GRAPHQL_ENDPOINT, {
 			method: "POST",
@@ -25,18 +25,18 @@ const _graphql = (query, variables) => {
 	});
 };
 
-const _graphqlWithTimeout = (query, variables, timeout) => {
+const _race = (query, variables, timeout) => {
 	return Promise.race([
-		_graphql(query, variables),
+		graphql(query, variables),
 		new Promise((resolve, reject) => {
 			setTimeout(() => reject(new Error("Error: network congestion. Try again later.")), timeout);
 		})
 	]);
 };
 
-const graphql = (query, variables, timeout = 20000) => {
+const graphqlWithTimeout = (query, variables, timeout = 30000) => {
 	return new Promise((resolve, reject) => {
-		_graphqlWithTimeout(query, variables, timeout)
+		_race(query, variables, timeout)
 			.then((result) => {
 				resolve(result);
 			})
@@ -53,7 +53,7 @@ export const getWriterKey = () => {
 		}
 	`;
 	const variables = {};
-	return graphql(query, variables);
+	return graphqlWithTimeout(query, variables);
 };
 
 export const getTAODescriptions = (taoId) => {
@@ -70,7 +70,7 @@ export const getTAODescriptions = (taoId) => {
 		}
 	`;
 	const variables = { taoId };
-	return graphql(query, variables);
+	return graphqlWithTimeout(query, variables);
 };
 
 export const getTAOThoughtsCount = (taoId) => {
@@ -80,7 +80,7 @@ export const getTAOThoughtsCount = (taoId) => {
 		}
 	`;
 	const variables = { taoId };
-	return graphql(query, variables);
+	return graphqlWithTimeout(query, variables);
 };
 
 export const getTAOThoughts = (taoId) => {
@@ -102,22 +102,7 @@ export const getTAOThoughts = (taoId) => {
 		}
 	`;
 	const variables = { taoId };
-	return graphql(query, variables);
-};
-
-export const insertTAOThought = (nameId, taoId, parentThoughtId, thought) => {
-	const query = `
-        mutation($nameId: ID!, $taoId: ID!, $parentThoughtId: ID, $thought: String!) {
-            submitTaoThought(inputs: {nameId: $nameId, taoId: $taoId, parentThoughtId: $parentThoughtId, thought: $thought}) {
-				thought
-				timestamp
-				nameId
-				parentThoughtId
-            }
-        }
-	`;
-	const variables = { nameId, taoId, parentThoughtId, thought };
-	return graphql(query, variables);
+	return graphqlWithTimeout(query, variables);
 };
 
 export const getWriterKeySignature = (nameId, nonce) => {
@@ -131,6 +116,48 @@ export const getWriterKeySignature = (nameId, nonce) => {
 		}
 	`;
 	const variables = { nameId, nonce };
+	return graphqlWithTimeout(query, variables);
+};
+
+export const getNameProfileImage = (nameId) => {
+	const query = `
+		query($nameId: ID!) {
+			nameProfile(nameId: $nameId) {
+				nameId
+				imageString
+			}
+		}
+	`;
+	const variables = { nameId };
+	return graphqlWithTimeout(query, variables);
+};
+
+export const getNameLookup = (name) => {
+	const query = `
+		query($name: String!) {
+			nameLookup(name: $name) {
+				name
+				id
+			}
+		}
+	`;
+	const variables = { name: normalizeString(name.toLowerCase()) };
+	return graphqlWithTimeout(query, variables);
+};
+
+// If mutation, we don't want to use timeout
+export const insertTAOThought = (nameId, taoId, parentThoughtId, thought) => {
+	const query = `
+        mutation($nameId: ID!, $taoId: ID!, $parentThoughtId: ID, $thought: String!) {
+            submitTaoThought(inputs: {nameId: $nameId, taoId: $taoId, parentThoughtId: $parentThoughtId, thought: $thought}) {
+				thought
+				timestamp
+				nameId
+				parentThoughtId
+            }
+        }
+	`;
+	const variables = { nameId, taoId, parentThoughtId, thought };
 	return graphql(query, variables);
 };
 
@@ -147,19 +174,6 @@ export const setNameProfileImage = (nameId, imageString) => {
 	return graphql(query, variables);
 };
 
-export const getNameProfileImage = (nameId) => {
-	const query = `
-		query($nameId: ID!) {
-			nameProfile(nameId: $nameId) {
-				nameId
-				imageString
-			}
-		}
-	`;
-	const variables = { nameId };
-	return graphql(query, variables);
-};
-
 export const insertTAODescription = (taoId, description) => {
 	const query = `
         mutation($taoId: ID!, $description: String!) {
@@ -170,19 +184,6 @@ export const insertTAODescription = (taoId, description) => {
         }
     `;
 	const variables = { taoId, description };
-	return graphql(query, variables);
-};
-
-export const getNameLookup = (name) => {
-	const query = `
-		query($name: String!) {
-			nameLookup(name: $name) {
-				name
-				id
-			}
-		}
-	`;
-	const variables = { name: normalizeString(name.toLowerCase()) };
 	return graphql(query, variables);
 };
 

@@ -226,11 +226,13 @@ class CreateTAO extends React.Component {
 			return <ProgressLoaderContainer />;
 		}
 		const { id } = this.props.params;
-		const taoOptions = taos.map((tao) => (
-			<option key={tao.taoId} value={tao.taoId}>
-				{tao.name} ({tao.taoId})
-			</option>
-		));
+		const taoOptions = taos.map((tao) => {
+			return tao.isChild ? (
+				<option key={tao.taoId} value={tao.taoId}>
+					{tao.name} ({tao.taoId})
+				</option>
+			) : null;
+		});
 
 		let selectedParent = null;
 		if (id) {

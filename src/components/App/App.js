@@ -83,7 +83,7 @@ class App extends React.Component {
 			(accounts && latestAccounts.length !== accounts.length) ||
 			(latestAccounts.length && !accounts)
 		) {
-			window.location = "/";
+			window.location.reload();
 		}
 	}
 
